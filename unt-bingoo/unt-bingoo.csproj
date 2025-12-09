@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF6A9013-E4D0-4D4F-8E14-958330659330}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>unt_bingoo</RootNamespace>
+    <AssemblyName>unt-bingoo</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>unt.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Export, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v19.1.UI, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraLayout.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.1.Extensions, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.16.11.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.11\lib\net48\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.11.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.11\lib\net48\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\BranchItem.cs" />
+    <Compile Include="Class\CategoryItem.cs" />
+    <Compile Include="Class\CurrencyItem.cs" />
+    <Compile Include="Class\MenuItemVM.cs" />
+    <Compile Include="Class\OrderItemVM.cs" />
+    <Compile Include="Class\OutletItem.cs" />
+    <Compile Include="Class\ProductItem.cs" />
+    <Compile Include="Class\RoleItem.cs" />
+    <Compile Include="Class\UserItem.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view\Branch\guiBranch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Branch\guiBranch.Designer.cs">
+      <DependentUpon>guiBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Category\guiCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Category\guiCategory.Designer.cs">
+      <DependentUpon>guiCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\currency\guiCurency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\currency\guiCurency.Designer.cs">
+      <DependentUpon>guiCurency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Customer\guiCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Customer\guiCustomer.Designer.cs">
+      <DependentUpon>guiCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\mainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\mainForm.Designer.cs">
+      <DependentUpon>mainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Outlet\guiOutlet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiOutlet.Designer.cs">
+      <DependentUpon>guiOutlet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Product\guiProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\guiProduct.Designer.cs">
+      <DependentUpon>guiProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\guiReportSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Report\guiReportSale.Designer.cs">
+      <DependentUpon>guiReportSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\loadingreportSale.cs" />
+    <Compile Include="view\Report\rptSale.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\Report\rptSale.Designer.cs">
+      <DependentUpon>rptSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\rtpBalance.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\Report\rtpBalance.Designer.cs">
+      <DependentUpon>rtpBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sales\frmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sales\frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sales\frmQRPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sales\frmQRPayment.Designer.cs">
+      <DependentUpon>frmQRPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sales\guiforSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sales\guiforSale.Designer.cs">
+      <DependentUpon>guiforSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sales\guiPaysuceess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sales\guiPaysuceess.Designer.cs">
+      <DependentUpon>guiPaysuceess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sales\guiSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sales\guiSale.Designer.cs">
+      <DependentUpon>guiSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\User\guiUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\User\guiUser.Designer.cs">
+      <DependentUpon>guiUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\User\guiUserrole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\User\guiUserrole.Designer.cs">
+      <DependentUpon>guiUserrole.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="view\Branch\guiBranch.resx">
+      <DependentUpon>guiBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Category\guiCategory.resx">
+      <DependentUpon>guiCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\currency\guiCurency.resx">
+      <DependentUpon>guiCurency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Customer\guiCustomer.resx">
+      <DependentUpon>guiCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\mainForm.resx">
+      <DependentUpon>mainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Outlet\guiOutlet.resx">
+      <DependentUpon>guiOutlet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\guiProduct.resx">
+      <DependentUpon>guiProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\guiReportSale.resx">
+      <DependentUpon>guiReportSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\rptSale.resx">
+      <DependentUpon>rptSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\rtpBalance.resx">
+      <DependentUpon>rtpBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sales\frmPayment.resx">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sales\frmQRPayment.resx">
+      <DependentUpon>frmQRPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sales\guiforSale.resx">
+      <DependentUpon>guiforSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sales\guiPaysuceess.resx">
+      <DependentUpon>guiPaysuceess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sales\guiSale.resx">
+      <DependentUpon>guiSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\User\guiUser.resx">
+      <DependentUpon>guiUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\User\guiUserrole.resx">
+      <DependentUpon>guiUserrole.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Add Cheque.png" />
+    <Content Include="Resources\Add New Bank Book.png" />
+    <Content Include="Resources\Add New Bank Book16.png" />
+    <Content Include="Resources\Add-User.png" />
+    <Content Include="Resources\add16.png" />
+    <Content Include="Resources\Addition16.png" />
+    <Content Include="Resources\advanced.png" />
+    <Content Include="Resources\Agreement.png" />
+    <Content Include="Resources\annualleave.png" />
+    <Content Include="Resources\Application.png" />
+    <Content Include="Resources\Arrival Transaction.png" />
+    <Content Include="Resources\arrow_circle_double.png" />
+    <Content Include="Resources\Bank Book.png" />
+    <Content Include="Resources\Bank Fee Voucher 1.png" />
+    <Content Include="Resources\Bank Fee Voucher.png" />
+    <Content Include="Resources\BankTT.png" />
+    <Content Include="Resources\bonus.png" />
+    <Content Include="Resources\bonus_16.png" />
+    <Content Include="Resources\bonus_circle.png" />
+    <Content Include="Resources\bonus_circle_16.png" />
+    <Content Include="Resources\Borrow.png" />
+    <None Include="Resources\brand.png" />
+    <Content Include="Resources\c8d40e9ec4ffd4f3af527eb40ba80462.gif" />
+    <Content Include="Resources\Cancel.png" />
+    <Content Include="Resources\Cancel16.png" />
+    <Content Include="Resources\cancel_16.png" />
+    <Content Include="Resources\category.png" />
+    <Content Include="Resources\chart_v2.png" />
+    <Content Include="Resources\Check Arrival.png" />
+    <Content Include="Resources\Check Arrival16.png" />
+    <Content Include="Resources\checklist16.png" />
+    <Content Include="Resources\Check_List.png" />
+    <Content Include="Resources\Clear.png" />
+    <Content Include="Resources\clock.png" />
+    <Content Include="Resources\clone.png" />
+    <Content Include="Resources\Close.png" />
+    <Content Include="Resources\Close16.png" />
+    <Content Include="Resources\Consignee.png" />
+    <Content Include="Resources\Contract.png" />
+    <Content Include="Resources\Currency.png" />
+    <Content Include="Resources\CurrencyAdd.png" />
+    <Content Include="Resources\Customer.png" />
+    <Content Include="Resources\Damage Goods.png" />
+    <Content Include="Resources\Database.png" />
+    <Content Include="Resources\DatabaseAdd.png" />
+    <Content Include="Resources\DatabaseRemove.png" />
+    <Content Include="Resources\DatabaseUpdate.png" />
+    <Content Include="Resources\Debit Note.png" />
+    <Content Include="Resources\Delete-User.png" />
+    <Content Include="Resources\Deleted16.png" />
+    <Content Include="Resources\Delivery.png" />
+    <Content Include="Resources\Discount.png" />
+    <Content Include="Resources\distribution_store.png" />
+    <Content Include="Resources\Document.png" />
+    <None Include="Resources\dollar.png" />
+    <Content Include="Resources\Download.png" />
+    <Content Include="Resources\emergency_.png" />
+    <Content Include="Resources\estimate.png" />
+    <Content Include="Resources\Excel.png" />
+    <Content Include="Resources\Excel16.png" />
+    <Content Include="Resources\Exchange Rate.png" />
+    <Content Include="Resources\export-to-excel-1.png" />
+    <Content Include="Resources\file.png" />
+    <Content Include="Resources\Fill_Form.png" />
+    <Content Include="Resources\FixedAssets.png" />
+    <Content Include="Resources\gainandlost.png" />
+    <Content Include="Resources\GRN.png" />
+    <Content Include="Resources\group-items.png" />
+    <Content Include="Resources\guarantee.png" />
+    <Content Include="Resources\hand-dollar.png" />
+    <Content Include="Resources\hand-grow-up-down.png" />
+    <Content Include="Resources\hand-grow-up.png" />
+    <None Include="Resources\hands1.png" />
+    <Content Include="Resources\ice.jpg" />
+    <Content Include="Resources\icons8-flag-filled-24.png" />
+    <Content Include="Resources\import_1_32.png" />
+    <Content Include="Resources\import_2_32.png" />
+    <Content Include="Resources\import_32.png" />
+    <Content Include="Resources\income.png" />
+    <Content Include="Resources\invoice-packing.png" />
+    <Content Include="Resources\Invoice.png" />
+    <Content Include="Resources\Invoices.png" />
+    <Content Include="Resources\Khmer Flag.png" />
+    <Content Include="Resources\link.png" />
+    <Content Include="Resources\listingfee.png" />
+    <Content Include="Resources\loading_1.gif" />
+    <Content Include="Resources\loan-a.png" />
+    <Content Include="Resources\loan-b.png" />
+    <Content Include="Resources\loan-c.png" />
+    <Content Include="Resources\loan.png" />
+    <Content Include="Resources\Lock_Printer.png" />
+    <Content Include="Resources\Logo.png" />
+    <Content Include="Resources\lst_customer_.png" />
+    <Content Include="Resources\metric.png" />
+    <Content Include="Resources\Minus.png" />
+    <None Include="Resources\Minus1.png" />
+    <Content Include="Resources\mobile_app.png" />
+    <Content Include="Resources\Modify.png" />
+    <Content Include="Resources\movement-v2.png" />
+    <Content Include="Resources\Nestle-Logo.png" />
+    <Content Include="Resources\next.png" />
+    <Content Include="Resources\next_red.png" />
+    <Content Include="Resources\Password.ico" />
+    <Content Include="Resources\Password.png" />
+    <Content Include="Resources\Password16.png" />
+    <Content Include="Resources\Payroll.png" />
+    <Content Include="Resources\Penalty-Red.png" />
+    <Content Include="Resources\Penalty-Yellow.png" />
+    <Content Include="Resources\penalty.png" />
+    <Content Include="Resources\pension-fund.png" />
+    <Content Include="Resources\percentage.png" />
+    <Content Include="Resources\Petty_Cash.png" />
+    <Content Include="Resources\Preview.png" />
+    <Content Include="Resources\Preview_32.png" />
+    <Content Include="Resources\Print Cheque.png" />
+    <Content Include="Resources\Print.png" />
+    <Content Include="Resources\Print16.png" />
+    <Content Include="Resources\Printer_icon_16.png" />
+    <Content Include="Resources\Printer_icon_32.png" />
+    <Content Include="Resources\product_counter.png" />
+    <Content Include="Resources\product_in_warehouse.png" />
+    <None Include="Resources\qr-code.png" />
+    <Content Include="Resources\question_mark.png" />
+    <Content Include="Resources\Rebate.png" />
+    <Content Include="Resources\Rebate1.png" />
+    <Content Include="Resources\received.png" />
+    <Content Include="Resources\received_1.png" />
+    <Content Include="Resources\redtick.png" />
+    <Content Include="Resources\Refresh.png" />
+    <Content Include="Resources\refresh_16.png" />
+    <None Include="Resources\retail.png" />
+    <None Include="Resources\reports.png" />
+    <Content Include="Resources\Retailers-Database.png" />
+    <Content Include="Resources\routing-basics.png" />
+    <Content Include="Resources\routing-interconnect.png" />
+    <Content Include="Resources\Salary.png" />
+    <Content Include="Resources\salary2.png" />
+    <Content Include="Resources\Salary_1.png" />
+    <None Include="Resources\sale.png" />
+    <Content Include="Resources\Save.png" />
+    <Content Include="Resources\Save_16.png" />
+    <Content Include="Resources\Search.png" />
+    <Content Include="Resources\Search16.png" />
+    <Content Include="Resources\sell-equation.png" />
+    <Content Include="Resources\sell-through.png" />
+    <Content Include="Resources\ShareHolder.png" />
+    <Content Include="Resources\sub_category.png" />
+    <Content Include="Resources\sunbean.png" />
+    <Content Include="Resources\Supplier.png" />
+    <Content Include="Resources\switch-brand.png" />
+    <Content Include="Resources\Tax Free.png" />
+    <Content Include="Resources\tools.png" />
+    <Content Include="Resources\Transfer.png" />
+    <Content Include="Resources\Transfers.png" />
+    <Content Include="Resources\uniform.png" />
+    <Content Include="Resources\Unlock_Printer.png" />
+    <Content Include="Resources\Unt Complete.ico" />
+    <Content Include="Resources\Unt Complete.png" />
+    <Content Include="Resources\Update-User.png" />
+    <Content Include="Resources\update_16.png" />
+    <Content Include="Resources\update_blue.png" />
+    <Content Include="Resources\Update_Text.png" />
+    <Content Include="Resources\Update_Text16.png" />
+    <Content Include="Resources\UserName.png" />
+    <Content Include="Resources\VAT.png" />
+    <Content Include="Resources\VAT_1.png" />
+    <Content Include="Resources\version.png" />
+    <Content Include="Resources\view_takeorder.png" />
+    <Content Include="Resources\Vinda-Logo.png" />
+    <Content Include="Resources\wait-green.png" />
+    <Content Include="Resources\waiting clock.png" />
+    <Content Include="Resources\waiting.png" />
+    <Content Include="Resources\waiting_1.png" />
+    <Content Include="Resources\_advancement.png" />
+    <Content Include="Resources\_bonus.png" />
+    <Content Include="Resources\_channel.png" />
+    <Content Include="Resources\_check_list_1.png" />
+    <Content Include="Resources\_check_list_2.png" />
+    <Content Include="Resources\_class-store.png" />
+    <Content Include="Resources\_close_.png" />
+    <Content Include="Resources\_cloud-server-vector.png" />
+    <Content Include="Resources\_daily.png" />
+    <Content Include="Resources\_date.png" />
+    <Content Include="Resources\_financial_.png" />
+    <Content Include="Resources\_fixed_asset.png" />
+    <Content Include="Resources\_history.png" />
+    <Content Include="Resources\_inventory_.png" />
+    <Content Include="Resources\_mobile_app.png" />
+    <Content Include="Resources\_monthly.png" />
+    <Content Include="Resources\_products_168.png" />
+    <Content Include="Resources\_sd-list.png" />
+    <Content Include="Resources\_sd.png" />
+    <Content Include="Resources\_summary.png" />
+    <Content Include="Resources\_supervisor.png" />
+    <Content Include="Resources\_uploading-1.png" />
+    <Content Include="Resources\_uploading.png" />
+    <Content Include="Resources\_verify.png" />
+    <Content Include="Resources\_wise-reports.png" />
+    <Content Include="Resources\_zero-icon.png" />
+    <Content Include="unt.ico" />
+    <Content Include="view\Sales\ice.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="view\NewFolder1\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
