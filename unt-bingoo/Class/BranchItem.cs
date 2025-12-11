@@ -8,6 +8,7 @@ namespace unt_bingoo.Class
 {
    public class BranchItem
     {
+        public int Id { get; set; }
         public string BranchCode { get; set; }
         public string BranchName { get; set; }
         public string Phone { get; set; }

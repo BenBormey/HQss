@@ -361,6 +361,7 @@ namespace unt_bingoo.view.currency
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Currency Code ";
+            this.gridColumn1.FieldName = "CurrencyCode";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -368,6 +369,7 @@ namespace unt_bingoo.view.currency
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Currency Name";
+            this.gridColumn2.FieldName = "CurrencyName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -375,6 +377,7 @@ namespace unt_bingoo.view.currency
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Buy Rate";
+            this.gridColumn3.FieldName = "BuyRate";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -382,6 +385,7 @@ namespace unt_bingoo.view.currency
             // gridColumn4
             // 
             this.gridColumn4.Caption = "SellRate";
+            this.gridColumn4.FieldName = "SellRate";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -390,6 +394,7 @@ namespace unt_bingoo.view.currency
             // 
             this.gridColumn5.Caption = "Update";
             this.gridColumn5.ColumnEdit = this.btnedit;
+            this.gridColumn5.FieldName = "IsBase";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -402,11 +407,13 @@ namespace unt_bingoo.view.currency
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnedit.Name = "btnedit";
             this.btnedit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnedit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnedit_ButtonClick);
             // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "Delete";
             this.gridColumn6.ColumnEdit = this.btnDelete;
+            this.gridColumn6.FieldName = "Active";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -419,6 +426,7 @@ namespace unt_bingoo.view.currency
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelete_ButtonClick);
             // 
             // panel1
             // 

@@ -61,6 +61,9 @@ namespace unt_bingoo.view.Customer
         private void InitializeComponent()
         {
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.picLogo = new DevExpress.XtraEditors.PictureEdit();
+            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.panelForm = new DevExpress.XtraEditors.PanelControl();
             this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.spnPoints = new DevExpress.XtraEditors.SpinEdit();
@@ -86,11 +89,11 @@ namespace unt_bingoo.view.Customer
             this.colEmail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPoints = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colActive = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.picLogo = new DevExpress.XtraEditors.PictureEdit();
-            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).BeginInit();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelForm)).BeginInit();
             this.panelForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
@@ -104,9 +107,6 @@ namespace unt_bingoo.view.Customer
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -119,6 +119,37 @@ namespace unt_bingoo.view.Customer
             this.panelHeader.Padding = new System.Windows.Forms.Padding(10);
             this.panelHeader.Size = new System.Drawing.Size(964, 84);
             this.panelHeader.TabIndex = 0;
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.picLogo);
+            this.panelControl1.Controls.Add(this.lblSystemName);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(10, 10);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(944, 80);
+            this.panelControl1.TabIndex = 5;
+            // 
+            // picLogo
+            // 
+            this.picLogo.EditValue = global::unt_bingoo.Properties.Resources.Logo;
+            this.picLogo.Location = new System.Drawing.Point(10, 8);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picLogo.Size = new System.Drawing.Size(60, 60);
+            this.picLogo.TabIndex = 0;
+            // 
+            // lblSystemName
+            // 
+            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSystemName.Appearance.Options.UseFont = true;
+            this.lblSystemName.Appearance.Options.UseForeColor = true;
+            this.lblSystemName.Location = new System.Drawing.Point(90, 25);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(429, 26);
+            this.lblSystemName.TabIndex = 1;
+            this.lblSystemName.Text = "Q\'s Customer MANAGEMENT SYSTEM";
             // 
             // panelForm
             // 
@@ -142,13 +173,15 @@ namespace unt_bingoo.view.Customer
             this.panelForm.Location = new System.Drawing.Point(10, 94);
             this.panelForm.Name = "panelForm";
             this.panelForm.Padding = new System.Windows.Forms.Padding(10);
-            this.panelForm.Size = new System.Drawing.Size(360, 373);
+            this.panelForm.Size = new System.Drawing.Size(396, 373);
             this.panelForm.TabIndex = 1;
             // 
             // chkActive
             // 
             this.chkActive.Location = new System.Drawing.Point(20, 270);
             this.chkActive.Name = "chkActive";
+            this.chkActive.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkActive.Properties.Appearance.Options.UseFont = true;
             this.chkActive.Properties.Caption = "Active";
             this.chkActive.Size = new System.Drawing.Size(75, 19);
             this.chkActive.TabIndex = 7;
@@ -162,20 +195,22 @@ namespace unt_bingoo.view.Customer
             0});
             this.spnPoints.Location = new System.Drawing.Point(122, 241);
             this.spnPoints.Name = "spnPoints";
+            this.spnPoints.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.spnPoints.Properties.Appearance.Options.UseFont = true;
             this.spnPoints.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spnPoints.Properties.IsFloatValue = false;
             this.spnPoints.Properties.Mask.EditMask = "N00";
-            this.spnPoints.Size = new System.Drawing.Size(200, 20);
+            this.spnPoints.Size = new System.Drawing.Size(239, 22);
             this.spnPoints.TabIndex = 6;
             // 
             // lblPoints
             // 
-            this.lblPoints.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPoints.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPoints.Appearance.Options.UseFont = true;
             this.lblPoints.Location = new System.Drawing.Point(20, 242);
             this.lblPoints.Name = "lblPoints";
-            this.lblPoints.Size = new System.Drawing.Size(36, 15);
+            this.lblPoints.Size = new System.Drawing.Size(37, 15);
             this.lblPoints.TabIndex = 13;
             this.lblPoints.Text = "Points:";
             // 
@@ -183,16 +218,18 @@ namespace unt_bingoo.view.Customer
             // 
             this.txtAddress.Location = new System.Drawing.Point(122, 151);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(200, 80);
+            this.txtAddress.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress.Properties.Appearance.Options.UseFont = true;
+            this.txtAddress.Size = new System.Drawing.Size(239, 80);
             this.txtAddress.TabIndex = 5;
             // 
             // lblAddress
             // 
-            this.lblAddress.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblAddress.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddress.Appearance.Options.UseFont = true;
             this.lblAddress.Location = new System.Drawing.Point(20, 152);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(96, 15);
+            this.lblAddress.Size = new System.Drawing.Size(98, 15);
             this.lblAddress.TabIndex = 11;
             this.lblAddress.Text = "Address (options):";
             // 
@@ -200,16 +237,18 @@ namespace unt_bingoo.view.Customer
             // 
             this.txtEmail.Location = new System.Drawing.Point(122, 121);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(200, 20);
+            this.txtEmail.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Properties.Appearance.Options.UseFont = true;
+            this.txtEmail.Size = new System.Drawing.Size(239, 22);
             this.txtEmail.TabIndex = 4;
             // 
             // lblEmail
             // 
-            this.lblEmail.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblEmail.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Appearance.Options.UseFont = true;
             this.lblEmail.Location = new System.Drawing.Point(20, 122);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(75, 15);
+            this.lblEmail.Size = new System.Drawing.Size(78, 15);
             this.lblEmail.TabIndex = 9;
             this.lblEmail.Text = "Email options:";
             // 
@@ -217,16 +256,18 @@ namespace unt_bingoo.view.Customer
             // 
             this.txtPhone.Location = new System.Drawing.Point(122, 91);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(200, 20);
+            this.txtPhone.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhone.Properties.Appearance.Options.UseFont = true;
+            this.txtPhone.Size = new System.Drawing.Size(239, 22);
             this.txtPhone.TabIndex = 3;
             // 
             // lblPhone
             // 
-            this.lblPhone.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPhone.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhone.Appearance.Options.UseFont = true;
             this.lblPhone.Location = new System.Drawing.Point(20, 92);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(40, 15);
+            this.lblPhone.Size = new System.Drawing.Size(42, 15);
             this.lblPhone.TabIndex = 7;
             this.lblPhone.Text = "Phone :";
             // 
@@ -234,16 +275,18 @@ namespace unt_bingoo.view.Customer
             // 
             this.txtName.Location = new System.Drawing.Point(122, 61);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Properties.Appearance.Options.UseFont = true;
+            this.txtName.Size = new System.Drawing.Size(239, 22);
             this.txtName.TabIndex = 2;
             // 
             // lblName
             // 
-            this.lblName.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblName.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Appearance.Options.UseFont = true;
             this.lblName.Location = new System.Drawing.Point(20, 62);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(38, 15);
+            this.lblName.Size = new System.Drawing.Size(40, 15);
             this.lblName.TabIndex = 5;
             this.lblName.Text = "Name :";
             // 
@@ -251,21 +294,24 @@ namespace unt_bingoo.view.Customer
             // 
             this.txtCode.Location = new System.Drawing.Point(122, 31);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(200, 20);
+            this.txtCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCode.Properties.Appearance.Options.UseFont = true;
+            this.txtCode.Size = new System.Drawing.Size(239, 22);
             this.txtCode.TabIndex = 1;
             // 
             // lblCode
             // 
-            this.lblCode.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblCode.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCode.Appearance.Options.UseFont = true;
             this.lblCode.Location = new System.Drawing.Point(20, 32);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(34, 15);
+            this.lblCode.Size = new System.Drawing.Size(35, 15);
             this.lblCode.TabIndex = 3;
             this.lblCode.Text = "Code :";
             // 
             // btnCancel
             // 
+            this.btnCancel.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Cancel16;
             this.btnCancel.Location = new System.Drawing.Point(247, 306);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
@@ -276,6 +322,7 @@ namespace unt_bingoo.view.Customer
             // 
             this.btnSave.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnSave.Appearance.Options.UseFont = true;
+            this.btnSave.ImageOptions.Image = global::unt_bingoo.Properties.Resources.add16;
             this.btnSave.Location = new System.Drawing.Point(162, 306);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 28);
@@ -287,10 +334,10 @@ namespace unt_bingoo.view.Customer
             this.panelGrid.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelGrid.Controls.Add(this.gridCustomer);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(370, 94);
+            this.panelGrid.Location = new System.Drawing.Point(406, 94);
             this.panelGrid.Name = "panelGrid";
             this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
-            this.panelGrid.Size = new System.Drawing.Size(604, 373);
+            this.panelGrid.Size = new System.Drawing.Size(568, 373);
             this.panelGrid.TabIndex = 2;
             // 
             // gridCustomer
@@ -299,7 +346,7 @@ namespace unt_bingoo.view.Customer
             this.gridCustomer.Location = new System.Drawing.Point(10, 10);
             this.gridCustomer.MainView = this.gvCustomer;
             this.gridCustomer.Name = "gridCustomer";
-            this.gridCustomer.Size = new System.Drawing.Size(584, 353);
+            this.gridCustomer.Size = new System.Drawing.Size(548, 353);
             this.gridCustomer.TabIndex = 0;
             this.gridCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCustomer});
@@ -365,37 +412,6 @@ namespace unt_bingoo.view.Customer
             this.colActive.Visible = true;
             this.colActive.VisibleIndex = 5;
             // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.picLogo);
-            this.panelControl1.Controls.Add(this.lblSystemName);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(10, 10);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(944, 80);
-            this.panelControl1.TabIndex = 5;
-            // 
-            // picLogo
-            // 
-            this.picLogo.EditValue = global::unt_bingoo.Properties.Resources.Logo;
-            this.picLogo.Location = new System.Drawing.Point(10, 8);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picLogo.Size = new System.Drawing.Size(60, 60);
-            this.picLogo.TabIndex = 0;
-            // 
-            // lblSystemName
-            // 
-            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblSystemName.Appearance.Options.UseFont = true;
-            this.lblSystemName.Appearance.Options.UseForeColor = true;
-            this.lblSystemName.Location = new System.Drawing.Point(90, 25);
-            this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(392, 26);
-            this.lblSystemName.TabIndex = 1;
-            this.lblSystemName.Text = "Q\'s USER MANAGEMENT SYSTEM";
-            // 
             // guiCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,6 +426,10 @@ namespace unt_bingoo.view.Customer
             this.Text = "Customer";
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).EndInit();
             this.panelHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelForm)).EndInit();
             this.panelForm.ResumeLayout(false);
             this.panelForm.PerformLayout();
@@ -424,10 +444,6 @@ namespace unt_bingoo.view.Customer
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

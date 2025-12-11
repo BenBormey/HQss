@@ -8,6 +8,7 @@ namespace unt_bingoo.Class
 {
     public class CategoryItem
     {
+        public int Id { get; set; }
         public string CategoryCode { get; set; }
         public string CategoryName { get; set; }
         public string Remark { get; set; }

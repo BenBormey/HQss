@@ -91,6 +91,7 @@
     <Compile Include="Class\ProductItem.cs" />
     <Compile Include="Class\RoleItem.cs" />
     <Compile Include="Class\UserItem.cs" />
+    <Compile Include="Controller\APIsController.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -482,6 +483,7 @@
     <Content Include="view\Sales\ice.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="NewFolder1\" />
     <Folder Include="view\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
