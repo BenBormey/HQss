@@ -1,262 +1,226 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using unt_bingoo.Class;
-using unt_bingoo.Controller;   // ⭐ IMPORTANT: add this
+using unt_bingoo.Controller;
 
 namespace unt_bingoo.view.Category
 {
-    public partial class guiCategory : DevExpress.XtraEditors.XtraForm
+    public partial class guiCategory : XtraForm
     {
-        private readonly BindingList<CategoryItem> _categoryList = new BindingList<CategoryItem>();
+        private APIsController _api; // Shared session
+        private BindingList<CategoryItem> _list =
+            new BindingList<CategoryItem>();
 
-        // ⭐ API controller for calling Web API
-        private readonly APIsController _apiController = new APIsController();
+        private int? _editingId = null;
 
         public guiCategory()
         {
             InitializeComponent();
 
-            // ចង datasource ម្តង
-            gridCategory.DataSource = _categoryList;
-
-            // (Optional) grid view setting – avoid edit direct in grid
-            // gvCategory.OptionsBehavior.Editable = false;
+            gridCategory.DataSource = _list;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            // បើបងចង់បិទ Form
-            this.Close();
-        }
-
-        // ⭐ Make load event async to call API
+        // ================= LOAD =================
         private async void guiCategory_Load(object sender, EventArgs e)
-        {
-            await LoadCategoryFromApiAsync();
-        }
-
-        // ⭐ Separate function to load category from API
-        private async System.Threading.Tasks.Task LoadCategoryFromApiAsync()
         {
             try
             {
-                // 1. Call API
-                List<CategoryItem> data = await _apiController.GetCategoryAsync();
+                _api = APIGlobals.Api;
 
-                // 2. Fill BindingList
-                _categoryList.Clear();
-                foreach (var item in data)
+                if (_api == null || !_api.HasToken())
                 {
-                    _categoryList.Add(item);
+                    XtraMessageBox.Show("Please login again!");
+                    Close();
+                    return;
                 }
 
-                // 3. Adjust column width
-                gvCategory.BestFitColumns();
+                await LoadData();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(
-                    $"Error while loading category from API:\n{ex.Message}",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
+        // ================= LOAD DATA =================
+        private async Task LoadData()
+        {
+            var data =
+                await _api.GetAsync<System.Collections.Generic.List<CategoryItem>>(
+                    "api/category");
+
+            _list.Clear();
+
+            foreach (var item in data)
+                _list.Add(item);
+
+            gvCategory.BestFitColumns();
+
+            lblCount.Text = $"Count : {_list.Count}";
+        }
+
+        // ================= ADD / UPDATE =================
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            var model = new CategoryItem
+            if (!ValidateForm()) return;
+
+            var model = GetFormData();
+
+            try
             {
+                bool ok;
+
+                // ============ ADD ============
+                if (_editingId == null)
+                {
+                    ok = await _api.PostAsync("api/category", model);
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Add failed!");
+                        return;
+                    }
+
+                    _list.Add(model);
+
+                    XtraMessageBox.Show("Added!");
+                }
+                // ============ UPDATE ============
+                else
+                {
+                    ok = await _api.PutAsync($"api/category/{_editingId}", model);
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Update failed!");
+                        return;
+                    }
+
+                    var item = _list.First(x => x.Id == _editingId);
+
+                    item.CategoryCode = model.CategoryCode;
+                    item.CategoryName = model.CategoryName;
+                    item.Remark = model.Remark;
+                    item.Active = model.Active;
+
+                    gvCategory.RefreshData();
+
+                    XtraMessageBox.Show("Updated!");
+                }
+
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        // ================= DELETE =================
+        private async void btnMainDelete_ButtonClick(
+            object sender,
+            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gvCategory.GetFocusedRow() as CategoryItem;
+
+            if (row == null) return;
+
+            if (XtraMessageBox.Show("Delete?",
+                "Confirm", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+
+            try
+            {
+                bool ok = await _api.DeleteAsync($"api/category/{row.Id}");
+
+                if (!ok)
+                {
+                    XtraMessageBox.Show("Delete failed!");
+                    return;
+                }
+
+                _list.Remove(row);
+
+                lblCount.Text = $"Count : {_list.Count}";
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        // ================= EDIT =================
+        private void btnMainupdate_ButtonClick(
+            object sender,
+            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gvCategory.GetFocusedRow() as CategoryItem;
+
+            if (row == null) return;
+
+            txtCode.Text = row.CategoryCode;
+            txtName.Text = row.CategoryName;
+            txtRemark.Text = row.Remark;
+
+            chkActive.Checked = row.Active;
+
+            _editingId = row.Id;
+
+            btnAdd.Text = "Update";
+        }
+
+        // ================= HELPER =================
+
+        private bool ValidateForm()
+        {
+            if (string.IsNullOrWhiteSpace(txtCode.Text))
+            {
+                XtraMessageBox.Show("Category Code required!");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                XtraMessageBox.Show("Category Name required!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private CategoryItem GetFormData()
+        {
+            return new CategoryItem
+            {
+                Id = _editingId ?? 0,
                 CategoryCode = txtCode.Text.Trim(),
                 CategoryName = txtName.Text.Trim(),
                 Remark = txtRemark.Text.Trim(),
                 Active = chkActive.Checked
             };
-
-            // 2. Simple validation
-            if (string.IsNullOrWhiteSpace(model.CategoryCode) || string.IsNullOrWhiteSpace(model.CategoryName))
-            {
-                XtraMessageBox.Show(
-                    "Category Code និង Category Name ត្រូវតែបំពេញ!",
-                    "Validation",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-                return;
-            }
-
-            try
-            {
-                // 3. Call API
-                var ok = await _apiController.AddCategoryAsync(model);
-
-                if (ok)
-                {
-                    XtraMessageBox.Show(
-                        "Add Category Successfully ✔",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-
-                    // 4. Reload list from API (or you can _categoryList.Add(model);)
-                    await LoadCategoryFromApiAsync();
-
-                    ClearCategoryForm();
-                }
-                else
-                {
-                    XtraMessageBox.Show(
-                        "Fail to add category!",
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(
-                    "Error while adding category:\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
         }
 
-        // Helper to clear textboxes after Add
-        private void ClearCategoryForm()
+        private void ClearForm()
         {
-            txtCode.Text = string.Empty;
-            txtName.Text = string.Empty;
-            txtRemark.Text = string.Empty;
+            txtCode.Text = "";
+            txtName.Text = "";
+            txtRemark.Text = "";
+
             chkActive.Checked = true;
+
+            _editingId = null;
+
+            btnAdd.Text = "Add";
         }
 
-        private async void btnMainDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            var view = gvCategory as GridView;
-            if (view == null) return;
-
-            int rowHandle = view.FocusedRowHandle;
-            if (rowHandle < 0) return;
-
-            var item = view.GetRow(rowHandle) as CategoryItem;
-            if (item == null) return;
-
-            // Confirm dialog
-            var confirm = XtraMessageBox.Show(
-                $"តើបងចង់លុប Category '{item.CategoryName}' មែនទេ?",
-                "Confirm Delete",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
-
-            if (confirm != DialogResult.Yes) return;
-
-            try
-            {
-                var ok = await _apiController.DeleteCategoryAsync(item.Id);
-
-                if (ok)
-                {
-                    // Remove from BindingList
-                    _categoryList.Remove(item);
-
-                    XtraMessageBox.Show(
-                        "Delete Successfully ✔",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-                }
-                else
-                {
-                    XtraMessageBox.Show(
-                        "Fail to delete category!",
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(
-                    "Error while deleting category:\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
+            Close();
         }
-
-        private async void btnMainupdate_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            var view = gvCategory as GridView;
-            if (view == null) return;
-
-            int rowHandle = view.FocusedRowHandle;
-            if (rowHandle < 0) return;
-
-
-            var item = view.GetRow(rowHandle) as CategoryItem;
-            if (item == null) return;
-
-            if (item.Id <= 0)
-            {
-                XtraMessageBox.Show(
-                    "Id of category is invalid!",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-                return;
-            }
-
-            try
-            {
-                var ok = await _apiController.UpdateCategoryAsync(item.Id, item);
-
-                if (ok)
-                {
-                    XtraMessageBox.Show(
-                        "Update Successfully ✔",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-
-                    await LoadCategoryFromApiAsync();
-                }
-                else
-                {
-                    XtraMessageBox.Show(
-                        "Fail to update category!",
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(
-                    "Error while updating category:\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
-        }
-     
-        
-
     }
 }

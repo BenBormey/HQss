@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using unt_bingoo.Class;
@@ -11,182 +11,241 @@ namespace unt_bingoo.view.currency
 {
     public partial class guiCurency : XtraForm
     {
-        private BindingList<CurrencyItem> _currencyList = new BindingList<CurrencyItem>();
-        private readonly APIsController _api;
+        private APIsController _api; // Shared session
+        private BindingList<CurrencyItem> _list =
+            new BindingList<CurrencyItem>();
+
         private int? _editingId = null;
 
         public guiCurency()
         {
             InitializeComponent();
-            _api = new APIsController();
         }
 
+        // ================= LOAD =================
         private async void guiCurency_Load(object sender, EventArgs e)
-        {
-            await LoadCurrencyAsync();
-        }
-
-        private async Task LoadCurrencyAsync()
         {
             try
             {
-                var list = await _api.GetCurrencyAsync();
-                if (list == null)
-                    _currencyList = new BindingList<CurrencyItem>();
-                else
-                    _currencyList = new BindingList<CurrencyItem>(list);
+                _api = APIGlobals.Api;
 
-                gridControl1.DataSource = _currencyList;
-                gridView1.BestFitColumns();
-                lblCountRow.Text = $"Count Row: {_currencyList.Count}";
+                if (_api == null || !_api.HasToken())
+                {
+                    XtraMessageBox.Show("Please login again!");
+                    Close();
+                    return;
+                }
+
+                await LoadData();
+                ClearForm();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
+        // ================= LOAD DATA =================
+        private async Task LoadData()
+        {
+            var data =
+                await _api.GetAsync<System.Collections.Generic.List<CurrencyItem>>(
+                    "api/currency");
+
+            _list = new BindingList<CurrencyItem>(data);
+
+            gridControl1.DataSource = _list;
+
+            gridView1.BestFitColumns();
+
+            lblCountRow.Text = $"Count : {_list.Count}";
+        }
+
+        // ================= SAVE =================
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateForm())
+            if (!ValidateForm()) return;
+
+            var model = GetFormData();
+
+            try
+            {
+                bool ok;
+
+                // ============ ADD ============
+                if (_editingId == null)
+                {
+                    ok = await _api.PostAsync("api/currency", model);
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Add failed!");
+                        return;
+                    }
+
+                    _list.Add(model);
+
+                    XtraMessageBox.Show("Added!");
+                }
+                // ============ UPDATE ============
+                else
+                {
+                    ok = await _api.PutAsync($"api/currency/{_editingId}", model);
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Update failed!");
+                        return;
+                    }
+
+                    var item = _list.FirstOrDefault(x => x.Id == _editingId);
+
+                    if (item != null)
+                    {
+                        item.CurrencyCode = model.CurrencyCode;
+                        item.CurrencyName = model.CurrencyName;
+                        item.BuyRate = model.BuyRate;
+                        item.SellRate = model.SellRate;
+                        item.IsBase = model.IsBase;
+                        item.Active = model.Active;
+                    }
+
+                    gridView1.RefreshData();
+
+                    XtraMessageBox.Show("Updated!");
+                }
+
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        // ================= DELETE =================
+        private async void btnDelete_ButtonClick(
+            object sender,
+            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gridView1.GetFocusedRow() as CurrencyItem;
+
+            if (row == null) return;
+
+            if (XtraMessageBox.Show("Delete?",
+                "Confirm", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             try
             {
-                var api = new APIsController();
+                bool ok = await _api.DeleteAsync($"api/currency/{row.Id}");
 
-                var model = new CurrencyItem
+                if (!ok)
                 {
-                    Id = _editingId ?? 0,
-                    CurrencyCode = txtCurrencyCode.Text.Trim(),
-                    CurrencyName = txtCurrencyName.Text.Trim(),
-                    BuyRate = decimal.Parse(txtBuyRate.Text.Trim()),
-                    SellRate = decimal.Parse(txtSellRate.Text.Trim()),
-                    IsBase = chkIsBase.Checked,
-                    Active = chkActive.Checked
-                };
-
-                bool success;
-                if (isUpdateMode)
-                    success = await _api.UpdateCurrencyAsync(model.Id, model);
-                else
-                    success = await _api.AddCurrencyAsync(model);
-
-                if (success)
-                {
-                    await LoadCurrencyAsync();
-                    ClearForm();
+                    XtraMessageBox.Show("Delete failed!");
+                    return;
                 }
+
+                _list.Remove(row);
+
+                lblCountRow.Text = $"Count : {_list.Count}";
+
+                ClearForm();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        // ================= EDIT =================
+        private void btnedit_ButtonClick(
+            object sender,
+            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            ClearForm();
+            var row = gridView1.GetFocusedRow() as CurrencyItem;
+
+            if (row == null) return;
+
+            _editingId = row.Id;
+
+            txtCurrencyCode.Text = row.CurrencyCode;
+            txtCurrencyName.Text = row.CurrencyName;
+            txtBuyRate.Text = row.BuyRate.ToString();
+            txtSellRate.Text = row.SellRate.ToString();
+
+            chkIsBase.Checked = row.IsBase;
+            chkActive.Checked = row.Active;
+
+            btnSave.Text = "Update";
         }
 
-        private void ClearForm()
+        // ================= HELPER =================
+
+        private CurrencyItem GetFormData()
         {
-            txtCurrencyCode.Text = string.Empty;
-            txtCurrencyName.Text = string.Empty;
-            txtBuyRate.Text = string.Empty;
-            txtSellRate.Text = string.Empty;
-            chkIsBase.Checked = false;
-            chkActive.Checked = true;
-            _editingId = null;
-            txtCurrencyCode.Focus();
+            return new CurrencyItem
+            {
+                Id = _editingId ?? 0,
+
+                CurrencyCode = txtCurrencyCode.Text.Trim(),
+                CurrencyName = txtCurrencyName.Text.Trim(),
+
+                BuyRate = decimal.Parse(txtBuyRate.Text.Trim()),
+                SellRate = decimal.Parse(txtSellRate.Text.Trim()),
+
+                IsBase = chkIsBase.Checked,
+                Active = chkActive.Checked
+            };
         }
 
         private bool ValidateForm()
         {
             if (string.IsNullOrWhiteSpace(txtCurrencyCode.Text))
             {
-                XtraMessageBox.Show("Currency code is required.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCurrencyCode.Focus();
+                XtraMessageBox.Show("Currency Code required!");
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txtCurrencyName.Text))
             {
-                XtraMessageBox.Show("Currency name is required.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCurrencyName.Focus();
+                XtraMessageBox.Show("Currency Name required!");
                 return false;
             }
 
-            if (!decimal.TryParse(txtBuyRate.Text.Trim(), out _))
+            if (!decimal.TryParse(txtBuyRate.Text, out _))
             {
-                XtraMessageBox.Show("Buy rate is invalid.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtBuyRate.Focus();
+                XtraMessageBox.Show("Invalid Buy Rate!");
                 return false;
             }
 
-            if (!decimal.TryParse(txtSellRate.Text.Trim(), out _))
+            if (!decimal.TryParse(txtSellRate.Text, out _))
             {
-                XtraMessageBox.Show("Sell rate is invalid.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtSellRate.Focus();
+                XtraMessageBox.Show("Invalid Sell Rate!");
                 return false;
             }
 
             return true;
         }
-        private bool isUpdateMode = false;
 
-        private void btnedit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void ClearForm()
         {
-            var row = gridView1.GetFocusedRow() as CurrencyItem;
-            if (row == null) return;
+            txtCurrencyCode.Text = "";
+            txtCurrencyName.Text = "";
+            txtBuyRate.Text = "";
+            txtSellRate.Text = "";
 
-            _editingId = row.Id;
-            txtCurrencyCode.Text = row.CurrencyCode;
-            txtCurrencyName.Text = row.CurrencyName;
-            txtBuyRate.Text = row.BuyRate.ToString();
-            txtSellRate.Text = row.SellRate.ToString();
-            chkIsBase.Checked = row.IsBase;
-            chkActive.Checked = row.Active;
+            chkIsBase.Checked = false;
+            chkActive.Checked = true;
 
-            isUpdateMode = true;
-            btnSave.Text = "Update";
-            //btnSave.Appearance.BackColor = Color.Orange;
+            _editingId = null;
 
-            txtCurrencyCode.Focus();
+            btnSave.Text = "Save";
         }
 
-        private async void btnDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            var row = gridView1.GetFocusedRow() as CurrencyItem;
-            if (row == null) return;
-
-            var confirm = XtraMessageBox.Show(
-                $"Delete currency {row.CurrencyCode} ?",
-                "Confirm",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirm != DialogResult.Yes) return;
-
-            try
-            {
-                var success = await _api.DeleteCurrencyAsync(row.Id);
-                if (success)
-                {
-                    XtraMessageBox.Show("Deleted successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await LoadCurrencyAsync();
-                    ClearForm();
-                }
-                else
-                {
-                    XtraMessageBox.Show("Delete failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ClearForm();
         }
     }
 }
-

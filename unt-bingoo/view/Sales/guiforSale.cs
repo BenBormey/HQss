@@ -37,19 +37,19 @@ namespace unt_bingoo.view.Sales
         {
             _menuList = new BindingList<MenuItemVM>()
             {
-                new MenuItemVM(){ Name="Chicken Steak",   Price=3.20M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\ice.jpg") },
-                new MenuItemVM(){ Name="Thai Milk Tea",  Price=2.00M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\1.jpg") },
-                new MenuItemVM(){ Name="Hot Latte",      Price=2.50M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\2.jpg") },
-                new MenuItemVM(){ Name="Ice Cappuccino", Price=2.30M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\3.jpg") },
-                new MenuItemVM(){ Name="Nasi Goreng",    Price=3.80M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\4.jpg") },
-                new MenuItemVM(){ Name="Green Tea",      Price=1.90M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\5.jpg") },
+                //new MenuItemVM(){ Name="Chicken Steak",   Price=3.20M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\ice.jpg") },
+                //new MenuItemVM(){ Name="Thai Milk Tea",  Price=2.00M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\1.jpg") },
+                //new MenuItemVM(){ Name="Hot Latte",      Price=2.50M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\2.jpg") },
+                //new MenuItemVM(){ Name="Ice Cappuccino", Price=2.30M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\3.jpg") },
+                //new MenuItemVM(){ Name="Nasi Goreng",    Price=3.80M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\4.jpg") },
+                //new MenuItemVM(){ Name="Green Tea",      Price=1.90M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\5.jpg") },
 
-                new MenuItemVM(){ Name="Chicken Steak 2",   Price=3.20M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\6.jpg") },
-                new MenuItemVM(){ Name="Thai Milk Teaw",    Price=2.00M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\7.jpg") },
-                new MenuItemVM(){ Name="Hot Lattew",        Price=2.50M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\5.jpg") },
-                new MenuItemVM(){ Name="Ice Cappuccinow",   Price=2.30M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\3.jpg") },
-                new MenuItemVM(){ Name="Nasi Gorengw",      Price=3.80M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\2.jpg") },
-                new MenuItemVM(){ Name="Green Teaw",        Price=1.90M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\1.jpg") }
+                //new MenuItemVM(){ Name="Chicken Steak 2",   Price=3.20M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\6.jpg") },
+                //new MenuItemVM(){ Name="Thai Milk Teaw",    Price=2.00M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\7.jpg") },
+                //new MenuItemVM(){ Name="Hot Lattew",        Price=2.50M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\5.jpg") },
+                //new MenuItemVM(){ Name="Ice Cappuccinow",   Price=2.30M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\3.jpg") },
+                //new MenuItemVM(){ Name="Nasi Gorengw",      Price=3.80M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\2.jpg") },
+                //new MenuItemVM(){ Name="Green Teaw",        Price=1.90M, Img=Image.FromFile(@"C:\Users\HQ\Downloads\1.jpg") }
             };
 
             gridMenu.DataSource = _menuList;

@@ -63,7 +63,7 @@ namespace unt_bingoo.view.Sales
 
             this.DialogResult = DialogResult.OK;
 
-            var form = new guiPaysuceess(_total);   // បើ constructor មិនមាន parameter គ្រាន់ new guiPaysuceess();
+            var form = new guiPaysuceess(_total);
             form.ShowDialog();
             this.Close();
         }
@@ -77,7 +77,7 @@ namespace unt_bingoo.view.Sales
                 return;
             }
 
-            // now _items exists ✅
+ 
             var qr = new frmQRPayment(_total, this._items);
             qr.ShowDialog();
         }

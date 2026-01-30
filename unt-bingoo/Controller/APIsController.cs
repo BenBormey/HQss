@@ -1,205 +1,212 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
-using unt_bingoo.Class;
 
 namespace unt_bingoo.Controller
 {
     public class APIsController
     {
         private readonly HttpClient _client;
+        private string _token;
 
         public APIsController()
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("https://localhost:7098/");
+            _client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:5189/"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
         }
 
-        public async Task<List<CurrencyItem>> GetCurrencyAsync()
-        {
-            var res = await _client.GetAsync("api/currency");
-            res.EnsureSuccessStatusCode();
+        // ================= TOKEN =================
 
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<List<CurrencyItem>>(json);
-            return data ?? new List<CurrencyItem>();
+        public bool HasToken()
+        {
+            return !string.IsNullOrEmpty(_token);
         }
 
-        public async Task<CurrencyItem> GetCurrencyByIdAsync(int id)
+        private void SetToken(string token)
         {
-            var res = await _client.GetAsync($"api/currency/{id}");
-            res.EnsureSuccessStatusCode();
+            _token = token;
 
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<CurrencyItem>(json);
-            return data;
+            _client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
         }
 
-        public async Task<bool> AddCurrencyAsync(CurrencyItem model)
+        public void Logout()
         {
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var res = await _client.PostAsync("api/currency", content);
-            return res.IsSuccessStatusCode;
+            _token = null;
+            _client.DefaultRequestHeaders.Authorization = null;
         }
 
-        public async Task<bool> UpdateCurrencyAsync(int id, CurrencyItem model)
+        // ================= LOGIN =================
+
+        private class LoginRequest
         {
-            if (id != model.Id) return false;
-
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var res = await _client.PutAsync($"api/currency/{id}", content);
-            return res.IsSuccessStatusCode;
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
 
-        public async Task<bool> DeleteCurrencyAsync(int id)
+        private class LoginResponse
         {
-            var res = await _client.DeleteAsync($"api/currency/{id}");
-            return res.IsSuccessStatusCode;
+            public string access_token { get; set; }
         }
 
-        public async Task<List<CategoryItem>> GetCategoryAsync()
+        public async Task<bool> LoginAsync(string user, string pass)
         {
-            var res = await _client.GetAsync("api/category");
-            res.EnsureSuccessStatusCode();
+            try
+            {
+                var req = new LoginRequest
+                {
+                    Username = user,
+                    Password = pass
+                };
 
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<List<CategoryItem>>(json);
-            return data ?? new List<CategoryItem>();
+                var res = await PostAsync<LoginResponse>(
+                    "api/auth/login", req);
+
+                if (res == null || string.IsNullOrEmpty(res.access_token))
+                    return false;
+
+                SetToken(res.access_token);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Login Error:\n" + ex.Message);
+                return false;
+            }
         }
 
-        public async Task<CategoryItem> GetCategoryByIdAsync(int id)
-        {
-            var res = await _client.GetAsync($"api/category/{id}");
-            res.EnsureSuccessStatusCode();
+        // ================= SAFE WRAPPER =================
 
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<CategoryItem>(json);
-            return data;
+        private async Task<T> SafeCall<T>(Func<Task<T>> action)
+        {
+            try
+            {
+                return await action();
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Request timeout!");
+                return default;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("API Error:\n" + ex.Message);
+                return default;
+            }
         }
 
-        public async Task<bool> AddCategoryAsync(CategoryItem model)
+        private async Task<bool> SafeCall(Func<Task<bool>> action)
         {
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var res = await _client.PostAsync("api/category", content);
-            return res.IsSuccessStatusCode;
+            try
+            {
+                return await action();
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Request timeout!");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("API Error:\n" + ex.Message);
+                return false;
+            }
         }
 
-        public async Task<bool> UpdateCategoryAsync(int id, CategoryItem model)
+        // ================= GENERIC =================
+
+        // GET
+        public Task<T> GetAsync<T>(string url)
         {
-            if (id != model.Id) return false;
+            return SafeCall(async () =>
+            {
+                var res = await _client.GetAsync(url);
 
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var json = await res.Content.ReadAsStringAsync();
 
-            var res = await _client.PutAsync($"api/category/{id}", content);
-            return res.IsSuccessStatusCode;
+                if (!res.IsSuccessStatusCode)
+                    throw new Exception(json);
+
+                return JsonConvert.DeserializeObject<T>(json);
+            });
         }
 
-        public async Task<bool> DeleteCategoryAsync(int id)
+        // POST (return data)
+        public Task<T> PostAsync<T>(string url, object body)
         {
-            var res = await _client.DeleteAsync($"api/category/{id}");
-            return res.IsSuccessStatusCode;
+            return SafeCall(async () =>
+            {
+                var json = JsonConvert.SerializeObject(body);
+
+                var content = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var res = await _client.PostAsync(url, content);
+
+                var rjson = await res.Content.ReadAsStringAsync();
+
+                if (!res.IsSuccessStatusCode)
+                    throw new Exception(rjson);
+
+                return JsonConvert.DeserializeObject<T>(rjson);
+            });
         }
 
-        public async Task<List<BranchItem>> GetBrandAsync()
+        // POST (bool)
+        public Task<bool> PostAsync(string url, object body)
         {
-            var res = await _client.GetAsync("api/Brand");
-            res.EnsureSuccessStatusCode();
+            return SafeCall(async () =>
+            {
+                var json = JsonConvert.SerializeObject(body);
 
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<List<BranchItem>>(json);
-            return data ?? new List<BranchItem>();
+                var content = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var res = await _client.PostAsync(url, content);
+
+                return res.IsSuccessStatusCode;
+            });
         }
 
-        public async Task<BranchItem> GetBrandByIdAsync(int id)
+        // PUT
+        public Task<bool> PutAsync(string url, object body)
         {
-            var res = await _client.GetAsync($"api/Brand/{id}");
-            res.EnsureSuccessStatusCode();
+            return SafeCall(async () =>
+            {
+                var json = JsonConvert.SerializeObject(body);
 
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<BranchItem>(json);
-            return data;
+                var content = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var res = await _client.PutAsync(url, content);
+
+                return res.IsSuccessStatusCode;
+            });
         }
 
-        public async Task<bool> AddBrandAsync(BranchItem model)
+        // DELETE
+        public Task<bool> DeleteAsync(string url)
         {
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return SafeCall(async () =>
+            {
+                var res = await _client.DeleteAsync(url);
 
-            var res = await _client.PostAsync("api/Brand", content);
-            return res.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> UpdateBrandAsync(int id, BranchItem model)
-        {
-            if (id != model.Id) return false;
-
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var res = await _client.PutAsync($"api/Brand/{id}", content);
-            return res.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> DeleteBrandAsync(int id)
-        {
-            var res = await _client.DeleteAsync($"api/Brand/{id}");
-            return res.IsSuccessStatusCode;
-        }
-
-        public async Task<List<BranchItem>> GetBranchAsync()
-        {
-            var res = await _client.GetAsync("api/Brand");
-            res.EnsureSuccessStatusCode();
-
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<List<BranchItem>>(json);
-            return data ?? new List<BranchItem>();
-        }
-
-        public async Task<BranchItem> GetBranchByIdAsync(int id)
-        {
-            var res = await _client.GetAsync($"api/Brand/{id}");
-            res.EnsureSuccessStatusCode();
-
-            var json = await res.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<BranchItem>(json);
-            return data;
-        }
-
-        public async Task<bool> AddBranchAsync(BranchItem model)
-        {
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var res = await _client.PostAsync("api/Brand", content);
-            return res.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> UpdateBranchAsync(int id, BranchItem model)
-        {
-            if (id != model.Id) return false;
-
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var res = await _client.PutAsync($"api/Brand/{id}", content);
-            return res.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> DeleteBranchAsync(int id)
-        {
-            var res = await _client.DeleteAsync($"api/Brand/{id}");
-            return res.IsSuccessStatusCode;
+                return res.IsSuccessStatusCode;
+            });
         }
     }
 }

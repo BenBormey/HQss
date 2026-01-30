@@ -1,7 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,96 +11,110 @@ namespace unt_bingoo.view.Branch
 {
     public partial class guiBranch : XtraForm
     {
-        private BindingList<BranchItem> _branchList = new BindingList<BranchItem>();
-        private readonly APIsController _api;
+        private APIsController _api;
+
+        private BindingList<BranchItem> _branchList =
+            new BindingList<BranchItem>();
+
         private int? _editingId = null;
 
         public guiBranch()
         {
             InitializeComponent();
-            _api = new APIsController();
 
-            // Optional: some grid settings
-            var view = gvBranch as GridView;
-            if (view != null)
+            // Grid setting (IMPORTANT)
+            if (gridViewRole is GridView view)
             {
-                view.OptionsBehavior.Editable = false;
+                view.OptionsBehavior.Editable = true;
+                view.OptionsBehavior.ReadOnly = false;
                 view.OptionsView.ShowGroupPanel = false;
+                view.OptionsBehavior.EditorShowMode =
+                    DevExpress.Utils.EditorShowMode.Click;
             }
         }
 
-        #region Form / Load
-
+        // ================= LOAD =================
         private async void guiBranch_Load(object sender, EventArgs e)
         {
             try
             {
-                await LoadBranchesAsync();
+                _api = APIGlobals.Api;
+
+                if (_api == null || !_api.HasToken())
+                {
+                    XtraMessageBox.Show("Please login again!");
+                    Close();
+                    return;
+                }
+
+                await LoadData();
                 ClearForm();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
-        private async Task LoadBranchesAsync()
+        // ================= LOAD DATA =================
+        private async Task LoadData()
         {
-            List<BranchItem> list = await _api.GetBranchAsync();
+            var list = await _api.GetAsync<
+                System.Collections.Generic.List<BranchItem>>("api/Brand");
 
-            if (list == null)
-                _branchList = new BindingList<BranchItem>();
-            else
-                _branchList = new BindingList<BranchItem>(list);
+            _branchList = new BindingList<BranchItem>(list);
 
             gridBranch.DataSource = _branchList;
-            gvBranch.BestFitColumns();
 
+            gridViewRole.BestFitColumns();
+
+            UpdateRowCount();
+        }
+
+        private void UpdateRowCount()
+        {
             lblCountRow.Text = $"Count Row : {_branchList.Count}";
         }
 
-        #endregion
-
-        #region Helper
-
+        // ================= HELPER =================
         private void ClearForm()
         {
-            txtBranchCode.Text = string.Empty;
-            txtBranchName.Text = string.Empty;
-            txtRemark.Text = string.Empty;
+            txtBranchCode.Text = "";
+            txtBranchName.Text = "";
             chkActive.Checked = true;
 
             _editingId = null;
-            btnAdd.Text = "Add";           // back to Add mode
+
+            btnAdd.Text = "Add";
         }
 
+        // ================= GET FORM DATA =================
         private BranchItem GetFormData()
         {
             return new BranchItem
             {
                 Id = _editingId ?? 0,
+
                 BranchCode = txtBranchCode.Text.Trim(),
                 BranchName = txtBranchName.Text.Trim(),
-                Remark = txtRemark.Text.Trim(),
+
                 Active = chkActive.Checked
             };
         }
 
+        // ================= VALIDATION =================
         private bool ValidateForm()
         {
             if (string.IsNullOrWhiteSpace(txtBranchCode.Text))
             {
-                XtraMessageBox.Show("Please input Branch Code.",
-                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Branch Code required!");
                 txtBranchCode.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txtBranchName.Text))
             {
-                XtraMessageBox.Show("Please input Branch Name.",
-                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Branch Name required!");
                 txtBranchName.Focus();
                 return false;
             }
@@ -109,122 +122,202 @@ namespace unt_bingoo.view.Branch
             return true;
         }
 
-        #endregion
-
-        #region Buttons
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
-        /// Add or Update
-        /// </summary>
+        // ================= ADD / UPDATE =================
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!ValidateForm())
-                return;
+            if (!ValidateForm()) return;
 
             var model = GetFormData();
-            bool ok;
 
             try
             {
+                Cursor = Cursors.WaitCursor;
+
+                bool ok;
+
+                // ============ ADD ============
                 if (_editingId == null)
                 {
-                    // ADD
-                    ok = await _api.AddBranchAsync(model);
-                    if (ok)
+                    ok = await _api.PostAsync("api/Brand", model);
+
+                    if (!ok)
                     {
-                        XtraMessageBox.Show("Branch added successfully.",
-                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show("Add failed!");
+                        return;
                     }
+
+                    XtraMessageBox.Show("Added successfully!");
                 }
+                // ============ UPDATE ============
                 else
                 {
-                    // UPDATE
-                    ok = await _api.UpdateBranchAsync(_editingId.Value, model);
-                    if (ok)
+                    ok = await _api.PutAsync($"api/Brand/{_editingId}", model);
+
+                    if (!ok)
                     {
-                        XtraMessageBox.Show("Branch updated successfully.",
-                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show("Update failed!");
+                        return;
                     }
+
+                    XtraMessageBox.Show("Updated successfully!");
                 }
 
-                if (ok)
-                {
-                    await LoadBranchesAsync();
-                    ClearForm();
-                }
-                else
-                {
-                    XtraMessageBox.Show("Request failed.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                await LoadData();
+
+                ClearForm();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 
-        #endregion
-
-        #region Grid Button Columns
-
-   
-        private async void btnmainDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        // ================= UPDATE (GRID BUTTON) =================
+        private void repositoryItemButtonEdit1_ButtonClick(
+            object sender,
+            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row = gvBranch.GetFocusedRow() as BranchItem;
-            if (row == null) return;
+            var row = gridViewRole.GetFocusedRow() as BranchItem;
 
-            var confirm = XtraMessageBox.Show(
-                $"Delete branch: {row.BranchName} ?",
-                "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm != DialogResult.Yes)
-                return;
-
-            try
-            {
-                bool ok = await _api.DeleteBranchAsync(row.Id);
-                if (ok)
-                {
-                    _branchList.Remove(row);
-                    lblCountRow.Text = $"Count Row : {_branchList.Count}";
-                }
-                else
-                {
-                    XtraMessageBox.Show("Delete failed.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Click Update button inside grid
-        /// </summary>
-        private void btnmainUpdate_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            var row = gvBranch.GetFocusedRow() as BranchItem;
             if (row == null) return;
 
             txtBranchCode.Text = row.BranchCode;
             txtBranchName.Text = row.BranchName;
-            txtRemark.Text = row.Remark;
             chkActive.Checked = row.Active;
 
             _editingId = row.Id;
+
             btnAdd.Text = "Update";
         }
 
-        #endregion
+        // ================= DELETE (GRID BUTTON) =================
+        private async void btnmainDelete_ButtonClick_1(
+            object sender,
+            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gridViewRole.GetFocusedRow() as BranchItem;
+
+            if (row == null) return;
+
+            if (XtraMessageBox.Show(
+                "Delete this branch?",
+                "Confirm",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                bool ok = await _api.DeleteAsync($"api/Brand/{row.Id}");
+
+                if (!ok)
+                {
+                    XtraMessageBox.Show("Delete failed!");
+                    return;
+                }
+
+                await LoadData();
+
+                ClearForm();
+
+                XtraMessageBox.Show("Deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private async void btnDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+           
+                // Get selected row
+                var row = gridViewRole.GetFocusedRow() as BranchItem;
+
+                if (row == null)
+                {
+                    XtraMessageBox.Show("Please select a row first!");
+                    return;
+                }
+
+                // Confirm delete
+                if (XtraMessageBox.Show(
+                    "Do you want to delete this branch?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) != DialogResult.Yes)
+                    return;
+
+                try
+                {
+                    Cursor = Cursors.WaitCursor;
+
+                    // Call API delete
+                    bool ok = await _api.DeleteAsync($"api/Brand/{row.Id}");
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Delete failed!");
+                        return;
+                    }
+
+                    // Reload data
+                    await LoadData();
+
+                    ClearForm();
+
+                    XtraMessageBox.Show("Deleted successfully!");
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    Cursor = Cursors.Default;
+                }
+            
+
+        }
+
+        private void btnupdate_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gridViewRole.GetFocusedRow() as BranchItem;
+
+            if (row == null)
+            {
+                XtraMessageBox.Show("Please select a row first!");
+                return;
+            }
+
+            // Load data to form
+            txtBranchCode.Text = row.BranchCode;
+            txtBranchName.Text = row.BranchName;
+            chkActive.Checked = row.Active;
+
+            // Set edit mode
+            _editingId = row.Id;
+
+            btnAdd.Text = "Update";
+
+            // Focus first textbox
+            txtBranchCode.Focus();
+
+        }
     }
 }

@@ -163,7 +163,7 @@ namespace unt_bingoo.view.Product
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1141, 84);
+            this.panelHeader.Size = new System.Drawing.Size(1149, 84);
             this.panelHeader.TabIndex = 3;
             // 
             // panelControl1
@@ -173,7 +173,7 @@ namespace unt_bingoo.view.Product
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(2, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1137, 82);
+            this.panelControl1.Size = new System.Drawing.Size(1145, 82);
             this.panelControl1.TabIndex = 4;
             // 
             // picLogo
@@ -230,7 +230,7 @@ namespace unt_bingoo.view.Product
             this.panelForm.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelForm.Location = new System.Drawing.Point(0, 84);
             this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(1141, 205);
+            this.panelForm.Size = new System.Drawing.Size(1149, 205);
             this.panelForm.TabIndex = 2;
             // 
             // btnaddBrand
@@ -519,7 +519,7 @@ namespace unt_bingoo.view.Product
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrid.Location = new System.Drawing.Point(0, 289);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(1141, 231);
+            this.panelGrid.Size = new System.Drawing.Size(1149, 309);
             this.panelGrid.TabIndex = 0;
             // 
             // gridProduct
@@ -528,7 +528,7 @@ namespace unt_bingoo.view.Product
             this.gridProduct.Location = new System.Drawing.Point(2, 2);
             this.gridProduct.MainView = this.gvProduct;
             this.gridProduct.Name = "gridProduct";
-            this.gridProduct.Size = new System.Drawing.Size(1137, 227);
+            this.gridProduct.Size = new System.Drawing.Size(1145, 305);
             this.gridProduct.TabIndex = 0;
             this.gridProduct.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProduct});
@@ -646,9 +646,9 @@ namespace unt_bingoo.view.Product
             this.panelBottom.Controls.Add(this.btnExport);
             this.panelBottom.Controls.Add(this.btnClose);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 520);
+            this.panelBottom.Location = new System.Drawing.Point(0, 598);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1141, 37);
+            this.panelBottom.Size = new System.Drawing.Size(1149, 37);
             this.panelBottom.TabIndex = 1;
             // 
             // lblCount
@@ -662,7 +662,7 @@ namespace unt_bingoo.view.Product
             // btnExport
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExport.Location = new System.Drawing.Point(1001, 2);
+            this.btnExport.Location = new System.Drawing.Point(1009, 2);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(69, 33);
             this.btnExport.TabIndex = 1;
@@ -671,7 +671,7 @@ namespace unt_bingoo.view.Product
             // btnClose
             // 
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.Location = new System.Drawing.Point(1070, 2);
+            this.btnClose.Location = new System.Drawing.Point(1078, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(69, 33);
             this.btnClose.TabIndex = 2;
@@ -681,7 +681,7 @@ namespace unt_bingoo.view.Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 557);
+            this.ClientSize = new System.Drawing.Size(1149, 635);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelForm);

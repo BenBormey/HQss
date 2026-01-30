@@ -283,13 +283,12 @@ namespace unt_bingoo.view.Category
             this.gvCategory.DetailHeight = 325;
             this.gvCategory.GridControl = this.gridCategory;
             this.gvCategory.Name = "gvCategory";
-            this.gvCategory.OptionsBehavior.Editable = false;
             this.gvCategory.OptionsView.ShowGroupPanel = false;
             // 
             // CategoryCode
             // 
             this.CategoryCode.Caption = "Category Code";
-            this.CategoryCode.FieldName = "Code";
+            this.CategoryCode.FieldName = "CategoryCode";
             this.CategoryCode.MinWidth = 17;
             this.CategoryCode.Name = "CategoryCode";
             this.CategoryCode.Visible = true;
@@ -299,7 +298,7 @@ namespace unt_bingoo.view.Category
             // CategoryName
             // 
             this.CategoryName.Caption = "Category Name";
-            this.CategoryName.FieldName = "Name";
+            this.CategoryName.FieldName = "CategoryName";
             this.CategoryName.MinWidth = 17;
             this.CategoryName.Name = "CategoryName";
             this.CategoryName.Visible = true;

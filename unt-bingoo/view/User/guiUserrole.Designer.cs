@@ -26,15 +26,13 @@ namespace unt_bingoo.view.User
         private MemoEdit txtDescription;
 
         private CheckEdit chkSystemRole;
-        private CheckEdit chkActive;
+        private CheckEdit chkIsActive;
 
         private SimpleButton btnAdd;
         private SimpleButton btnCancel;
 
         // Grid panel
         private PanelControl panelGrid;
-        private GridControl gridControlRole;
-        private GridView gridViewRole;
 
         // Bottom panel
         private PanelControl panelBottom;
@@ -58,10 +56,22 @@ namespace unt_bingoo.view.User
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
             this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.panelDetail = new DevExpress.XtraEditors.PanelControl();
+            this.txtId = new DevExpress.XtraEditors.TextEdit();
             this.lblRoleCode = new DevExpress.XtraEditors.LabelControl();
             this.lblRoleName = new DevExpress.XtraEditors.LabelControl();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
@@ -69,37 +79,48 @@ namespace unt_bingoo.view.User
             this.txtRoleName = new DevExpress.XtraEditors.TextEdit();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.chkSystemRole = new DevExpress.XtraEditors.CheckEdit();
-            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
+            this.chkIsActive = new DevExpress.XtraEditors.CheckEdit();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
-            this.gridControlRole = new DevExpress.XtraGrid.GridControl();
-            this.gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelBottom = new DevExpress.XtraEditors.PanelControl();
             this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.LoadingRole = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.btnmainEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.btnmainDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RoleCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Edit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Delete = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControlRole = new DevExpress.XtraGrid.GridControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).BeginInit();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).BeginInit();
             this.panelDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkSystemRole.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIsActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
             this.panelGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
             this.panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -135,6 +156,7 @@ namespace unt_bingoo.view.User
             // 
             // panelDetail
             // 
+            this.panelDetail.Controls.Add(this.txtId);
             this.panelDetail.Controls.Add(this.lblRoleCode);
             this.panelDetail.Controls.Add(this.lblRoleName);
             this.panelDetail.Controls.Add(this.lblDescription);
@@ -142,7 +164,7 @@ namespace unt_bingoo.view.User
             this.panelDetail.Controls.Add(this.txtRoleName);
             this.panelDetail.Controls.Add(this.txtDescription);
             this.panelDetail.Controls.Add(this.chkSystemRole);
-            this.panelDetail.Controls.Add(this.chkActive);
+            this.panelDetail.Controls.Add(this.chkIsActive);
             this.panelDetail.Controls.Add(this.btnAdd);
             this.panelDetail.Controls.Add(this.btnCancel);
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Top;
@@ -150,6 +172,16 @@ namespace unt_bingoo.view.User
             this.panelDetail.Name = "panelDetail";
             this.panelDetail.Size = new System.Drawing.Size(900, 180);
             this.panelDetail.TabIndex = 2;
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(562, 73);
+            this.txtId.Name = "txtId";
+            this.txtId.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtId.Properties.Appearance.Options.UseFont = true;
+            this.txtId.Size = new System.Drawing.Size(35, 20);
+            this.txtId.TabIndex = 10;
+            this.txtId.Visible = false;
             // 
             // lblRoleCode
             // 
@@ -218,16 +250,16 @@ namespace unt_bingoo.view.User
             this.chkSystemRole.Size = new System.Drawing.Size(146, 19);
             this.chkSystemRole.TabIndex = 6;
             // 
-            // chkActive
+            // chkIsActive
             // 
-            this.chkActive.EditValue = true;
-            this.chkActive.Location = new System.Drawing.Point(562, 48);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkActive.Properties.Appearance.Options.UseFont = true;
-            this.chkActive.Properties.Caption = "Active";
-            this.chkActive.Size = new System.Drawing.Size(75, 19);
-            this.chkActive.TabIndex = 7;
+            this.chkIsActive.EditValue = true;
+            this.chkIsActive.Location = new System.Drawing.Point(562, 48);
+            this.chkIsActive.Name = "chkIsActive";
+            this.chkIsActive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIsActive.Properties.Appearance.Options.UseFont = true;
+            this.chkIsActive.Properties.Caption = "Active";
+            this.chkIsActive.Size = new System.Drawing.Size(75, 19);
+            this.chkIsActive.TabIndex = 7;
             // 
             // btnAdd
             // 
@@ -238,6 +270,7 @@ namespace unt_bingoo.view.User
             this.btnAdd.Size = new System.Drawing.Size(80, 25);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCancel
             // 
@@ -248,6 +281,7 @@ namespace unt_bingoo.view.User
             this.btnCancel.Size = new System.Drawing.Size(80, 25);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // panelGrid
             // 
@@ -257,70 +291,6 @@ namespace unt_bingoo.view.User
             this.panelGrid.Name = "panelGrid";
             this.panelGrid.Size = new System.Drawing.Size(900, 250);
             this.panelGrid.TabIndex = 0;
-            // 
-            // gridControlRole
-            // 
-            this.gridControlRole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlRole.Location = new System.Drawing.Point(2, 2);
-            this.gridControlRole.MainView = this.gridViewRole;
-            this.gridControlRole.Name = "gridControlRole";
-            this.gridControlRole.Size = new System.Drawing.Size(896, 246);
-            this.gridControlRole.TabIndex = 0;
-            this.gridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewRole});
-            // 
-            // gridViewRole
-            // 
-            this.gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5});
-            this.gridViewRole.GridControl = this.gridControlRole;
-            this.gridViewRole.Name = "gridViewRole";
-            this.gridViewRole.OptionsBehavior.Editable = false;
-            this.gridViewRole.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Role Code";
-            this.gridColumn1.FieldName = "RoleCode";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Role Name";
-            this.gridColumn2.FieldName = "RoleName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Description";
-            this.gridColumn3.FieldName = "Description";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "System Role";
-            this.gridColumn4.FieldName = "IsSystemRole";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Active";
-            this.gridColumn5.FieldName = "IsActive";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
             // 
             // panelBottom
             // 
@@ -357,6 +327,116 @@ namespace unt_bingoo.view.User
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
             // 
+            // btnmainEdit
+            // 
+            this.btnmainEdit.AutoHeight = false;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
+            this.btnmainEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainEdit.Name = "btnmainEdit";
+            this.btnmainEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainEdit_ButtonClick);
+            // 
+            // btnmainDelete
+            // 
+            this.btnmainDelete.AutoHeight = false;
+            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            this.btnmainDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainDelete.Name = "btnmainDelete";
+            this.btnmainDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDelete_ButtonClick);
+            // 
+            // gridViewRole
+            // 
+            this.gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Id,
+            this.RoleCode,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.Edit,
+            this.Delete});
+            this.gridViewRole.GridControl = this.gridControlRole;
+            this.gridViewRole.Name = "gridViewRole";
+            this.gridViewRole.OptionsView.ShowGroupPanel = false;
+            // 
+            // Id
+            // 
+            this.Id.Caption = "Id";
+            this.Id.Name = "Id";
+            // 
+            // RoleCode
+            // 
+            this.RoleCode.Caption = "Role Code";
+            this.RoleCode.FieldName = "RoleCode";
+            this.RoleCode.Name = "RoleCode";
+            this.RoleCode.Visible = true;
+            this.RoleCode.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Role Name";
+            this.gridColumn2.FieldName = "RoleName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Description";
+            this.gridColumn3.FieldName = "Description";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "System Role";
+            this.gridColumn4.FieldName = "IsSystemRole";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Active";
+            this.gridColumn5.FieldName = "IsActive";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            // 
+            // Edit
+            // 
+            this.Edit.Caption = "gridColumn1";
+            this.Edit.ColumnEdit = this.btnmainEdit;
+            this.Edit.Name = "Edit";
+            this.Edit.Visible = true;
+            this.Edit.VisibleIndex = 5;
+            // 
+            // Delete
+            // 
+            this.Delete.Caption = "Delete";
+            this.Delete.ColumnEdit = this.btnmainDelete;
+            this.Delete.Name = "Delete";
+            this.Delete.Visible = true;
+            this.Delete.VisibleIndex = 6;
+            // 
+            // gridControlRole
+            // 
+            this.gridControlRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRole.Location = new System.Drawing.Point(2, 2);
+            this.gridControlRole.MainView = this.gridViewRole;
+            this.gridControlRole.Name = "gridControlRole";
+            this.gridControlRole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnmainEdit,
+            this.btnmainDelete});
+            this.gridControlRole.Size = new System.Drawing.Size(896, 246);
+            this.gridControlRole.TabIndex = 0;
+            this.gridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRole});
+            // 
             // guiUserrole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,28 +457,41 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkSystemRole.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIsActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
             this.panelGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private Timer LoadingRole;
+        private Timer timer2;
+        private Timer timer3;
+        private TextEdit txtId;
+        private GridControl gridControlRole;
+        private GridView gridViewRole;
+        private DevExpress.XtraGrid.Columns.GridColumn Id;
+        private DevExpress.XtraGrid.Columns.GridColumn RoleCode;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn Edit;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainEdit;
+        private DevExpress.XtraGrid.Columns.GridColumn Delete;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainDelete;
     }
 }

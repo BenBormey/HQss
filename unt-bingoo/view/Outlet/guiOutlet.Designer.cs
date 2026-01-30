@@ -59,6 +59,16 @@ namespace unt_bingoo.view.Outlet
 
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelDetail = new DevExpress.XtraEditors.PanelControl();
             this.lblOutletCode = new DevExpress.XtraEditors.LabelControl();
             this.lblOutletName = new DevExpress.XtraEditors.LabelControl();
@@ -87,6 +97,10 @@ namespace unt_bingoo.view.Outlet
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Update = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnmainDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.Delete = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnUpdate = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelBottom = new DevExpress.XtraEditors.PanelControl();
             this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
@@ -108,6 +122,8 @@ namespace unt_bingoo.view.Outlet
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlOutlet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewOutlet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUpdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
@@ -295,6 +311,7 @@ namespace unt_bingoo.view.Outlet
             this.btnAdd.Size = new System.Drawing.Size(80, 25);
             this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCancel
             // 
@@ -322,6 +339,9 @@ namespace unt_bingoo.view.Outlet
             this.gridControlOutlet.Location = new System.Drawing.Point(2, 2);
             this.gridControlOutlet.MainView = this.gridViewOutlet;
             this.gridControlOutlet.Name = "gridControlOutlet";
+            this.gridControlOutlet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnUpdate,
+            this.btnmainDelete});
             this.gridControlOutlet.Size = new System.Drawing.Size(946, 266);
             this.gridControlOutlet.TabIndex = 0;
             this.gridControlOutlet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -337,7 +357,9 @@ namespace unt_bingoo.view.Outlet
             this.gridColumn5,
             this.gridColumn6,
             this.gridColumn7,
-            this.gridColumn8});
+            this.gridColumn8,
+            this.Update,
+            this.Delete});
             this.gridViewOutlet.GridControl = this.gridControlOutlet;
             this.gridViewOutlet.Name = "gridViewOutlet";
             this.gridViewOutlet.OptionsBehavior.Editable = false;
@@ -407,6 +429,42 @@ namespace unt_bingoo.view.Outlet
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
             // 
+            // Update
+            // 
+            this.Update.Caption = "Update";
+            this.Update.ColumnEdit = this.btnUpdate;
+            this.Update.Name = "Update";
+            this.Update.Visible = true;
+            this.Update.VisibleIndex = 8;
+            // 
+            // btnmainDelete
+            // 
+            this.btnmainDelete.AutoHeight = false;
+            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Deleted16;
+            this.btnmainDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainDelete.Name = "btnmainDelete";
+            this.btnmainDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDelete_ButtonClick);
+            // 
+            // Delete
+            // 
+            this.Delete.Caption = "Delete";
+            this.Delete.ColumnEdit = this.btnmainDelete;
+            this.Delete.Name = "Delete";
+            this.Delete.Visible = true;
+            this.Delete.VisibleIndex = 9;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AutoHeight = false;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_blue;
+            this.btnUpdate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnUpdate.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnUpdate_ButtonClick);
+            // 
             // panelBottom
             // 
             this.panelBottom.Controls.Add(this.lblCountRow);
@@ -435,6 +493,7 @@ namespace unt_bingoo.view.Outlet
             this.btnExport.Size = new System.Drawing.Size(80, 36);
             this.btnExport.TabIndex = 1;
             this.btnExport.Text = "Export";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClose
             // 
@@ -505,6 +564,8 @@ namespace unt_bingoo.view.Outlet
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlOutlet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewOutlet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUpdate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
@@ -529,5 +590,9 @@ namespace unt_bingoo.view.Outlet
         private LabelControl lblSystemName;
         private PictureEdit picLogo;
         private PanelControl panelHeader;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnUpdate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainDelete;
+        private DevExpress.XtraGrid.Columns.GridColumn Update;
+        private DevExpress.XtraGrid.Columns.GridColumn Delete;
     }
 }

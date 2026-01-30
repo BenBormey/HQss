@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Images.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Office.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Pdf.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.PivotGrid.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -91,6 +92,7 @@
     <Compile Include="Class\ProductItem.cs" />
     <Compile Include="Class\RoleItem.cs" />
     <Compile Include="Class\UserItem.cs" />
+    <Compile Include="Controller\APIGlobals.cs" />
     <Compile Include="Controller\APIsController.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -123,6 +125,12 @@
     </Compile>
     <Compile Include="view\Customer\guiCustomer.Designer.cs">
       <DependentUpon>guiCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\guiLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\guiLogin.Designer.cs">
+      <DependentUpon>guiLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="view\mainForm.cs">
       <SubType>Form</SubType>
@@ -225,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Customer\guiCustomer.resx">
       <DependentUpon>guiCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\guiLogin.resx">
+      <DependentUpon>guiLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>
