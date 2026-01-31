@@ -305,7 +305,7 @@ namespace unt_bingoo.view.Branch
                 return;
             }
 
-            // Load data to form
+      
             txtBranchCode.Text = row.BranchCode;
             txtBranchName.Text = row.BranchName;
             chkActive.Checked = row.Active;
