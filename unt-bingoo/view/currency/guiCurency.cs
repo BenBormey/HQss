@@ -11,7 +11,7 @@ namespace unt_bingoo.view.currency
 {
     public partial class guiCurency : XtraForm
     {
-        private APIsController _api; // Shared session
+        private APIsController _api; 
         private BindingList<CurrencyItem> _list =
             new BindingList<CurrencyItem>();
 
@@ -22,7 +22,7 @@ namespace unt_bingoo.view.currency
             InitializeComponent();
         }
 
-        // ================= LOAD =================
+
         private async void guiCurency_Load(object sender, EventArgs e)
         {
             try
@@ -45,7 +45,7 @@ namespace unt_bingoo.view.currency
             }
         }
 
-        // ================= LOAD DATA =================
+        
         private async Task LoadData()
         {
             var data =
@@ -56,12 +56,14 @@ namespace unt_bingoo.view.currency
 
             gridControl1.DataSource = _list;
 
+
+               
             gridView1.BestFitColumns();
 
             lblCountRow.Text = $"Count : {_list.Count}";
         }
 
-        // ================= SAVE =================
+       
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
@@ -72,7 +74,7 @@ namespace unt_bingoo.view.currency
             {
                 bool ok;
 
-                // ============ ADD ============
+            
                 if (_editingId == null)
                 {
                     ok = await _api.PostAsync("api/currency", model);
@@ -87,7 +89,7 @@ namespace unt_bingoo.view.currency
 
                     XtraMessageBox.Show("Added!");
                 }
-                // ============ UPDATE ============
+               
                 else
                 {
                     ok = await _api.PutAsync($"api/currency/{_editingId}", model);
@@ -123,7 +125,7 @@ namespace unt_bingoo.view.currency
             }
         }
 
-        // ================= DELETE =================
+    
         private async void btnDelete_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -158,7 +160,7 @@ namespace unt_bingoo.view.currency
             }
         }
 
-        // ================= EDIT =================
+   
         private void btnedit_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -180,7 +182,7 @@ namespace unt_bingoo.view.currency
             btnSave.Text = "Update";
         }
 
-        // ================= HELPER =================
+        
 
         private CurrencyItem GetFormData()
         {
@@ -246,6 +248,42 @@ namespace unt_bingoo.view.currency
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearForm();
+        }
+
+        private void btnExportToExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Title = "Export Currency to Excel";
+                dialog.Filter = "Excel File (*.xlsx)|*.xlsx";
+                dialog.FileName = "Currency_List.xlsx";
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+         
+                var options = new DevExpress.XtraPrinting.XlsxExportOptionsEx();
+                options.ExportType = DevExpress.Export.ExportType.WYSIWYG;
+                options.SheetName = "Currency";
+
+                gridControl1.ExportToXlsx(dialog.FileName, options);
+
+         
+                System.Diagnostics.Process.Start(dialog.FileName);
+
+                XtraMessageBox.Show("Export successful!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Export failed: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

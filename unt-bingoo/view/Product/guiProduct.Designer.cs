@@ -29,39 +29,24 @@ namespace unt_bingoo.view.Product
         private TextEdit txtName;
         private TextEdit txtCost;
         private TextEdit txtPrice;
-        private ComboBoxEdit cboSupplier;
         private TextEdit txtQty;
         private MemoEdit txtRemark;
         private CheckEdit chkActive;
-        private ComboBoxEdit cboSize;
+        private ComboBoxEdit txt;
         private TextEdit txtVAT;              // <- NEW
 
         private SimpleButton btnAdd;
         private SimpleButton btnCancel;
 
         private PanelControl panelGrid;
-        private GridControl gridProduct;
-        private GridView gvProduct;
-
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVAT; // <- NEW
 
         private PanelControl panelBottom;
         private LabelControl lblCount;
         private SimpleButton btnExport;
         private SimpleButton btnClose;
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.ComboBox cboBrand;
 
         private PanelControl panelControl1;
         private PictureEdit picLogo;
@@ -80,16 +65,30 @@ namespace unt_bingoo.view.Product
 
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
+            this.txt = new DevExpress.XtraEditors.ComboBoxEdit();
             this.panelForm = new DevExpress.XtraEditors.PanelControl();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtDiscound = new DevExpress.XtraEditors.TextEdit();
+            this.cbosupplier = new System.Windows.Forms.ComboBox();
             this.btnaddBrand = new System.Windows.Forms.Button();
             this.btnaddCategory = new System.Windows.Forms.Button();
             this.picCustomer = new System.Windows.Forms.PictureBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboBrand = new System.Windows.Forms.ComboBox();
+            this.cboCategory = new System.Windows.Forms.ComboBox();
             this.lblCode = new DevExpress.XtraEditors.LabelControl();
             this.lblName = new DevExpress.XtraEditors.LabelControl();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
@@ -104,9 +103,7 @@ namespace unt_bingoo.view.Product
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtCost = new DevExpress.XtraEditors.TextEdit();
-            this.cboSupplier = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtQty = new DevExpress.XtraEditors.TextEdit();
-            this.cboSize = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtPrice = new DevExpress.XtraEditors.TextEdit();
             this.txtVAT = new DevExpress.XtraEditors.TextEdit();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
@@ -116,17 +113,24 @@ namespace unt_bingoo.view.Product
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
             this.gridProduct = new DevExpress.XtraGrid.GridControl();
             this.gvProduct = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ProductID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.No = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ProductCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ProductName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.CategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.BrandName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.CostPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SellingPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TaxPercent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DiscountPercent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Status = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ImageUrl = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ProductImage = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnmainupdate = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnVAT = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnmaindelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelBottom = new DevExpress.XtraEditors.PanelControl();
             this.lblCount = new DevExpress.XtraEditors.LabelControl();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
@@ -136,15 +140,15 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelForm)).BeginInit();
             this.panelForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDiscound.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCost.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboSize.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVAT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
@@ -153,6 +157,8 @@ namespace unt_bingoo.view.Product
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainupdate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmaindelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
@@ -170,6 +176,7 @@ namespace unt_bingoo.view.Product
             // 
             this.panelControl1.Controls.Add(this.picLogo);
             this.panelControl1.Controls.Add(this.lblSystemName);
+            this.panelControl1.Controls.Add(this.txt);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(2, 2);
             this.panelControl1.Name = "panelControl1";
@@ -197,13 +204,27 @@ namespace unt_bingoo.view.Product
             this.lblSystemName.TabIndex = 1;
             this.lblSystemName.Text = "Q\'s OUTLET MANAGEMENT SYSTEM";
             // 
+            // txt
+            // 
+            this.txt.Location = new System.Drawing.Point(570, 27);
+            this.txt.Name = "txt";
+            this.txt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt.Properties.Appearance.Options.UseFont = true;
+            this.txt.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txt.Size = new System.Drawing.Size(293, 20);
+            this.txt.TabIndex = 160;
+            this.txt.Visible = false;
+            // 
             // panelForm
             // 
+            this.panelForm.Controls.Add(this.button1);
+            this.panelForm.Controls.Add(this.txtDiscound);
+            this.panelForm.Controls.Add(this.cbosupplier);
             this.panelForm.Controls.Add(this.btnaddBrand);
             this.panelForm.Controls.Add(this.btnaddCategory);
             this.panelForm.Controls.Add(this.picCustomer);
-            this.panelForm.Controls.Add(this.comboBox2);
-            this.panelForm.Controls.Add(this.comboBox1);
+            this.panelForm.Controls.Add(this.cboBrand);
+            this.panelForm.Controls.Add(this.cboCategory);
             this.panelForm.Controls.Add(this.lblCode);
             this.panelForm.Controls.Add(this.lblName);
             this.panelForm.Controls.Add(this.lblCategory);
@@ -218,9 +239,7 @@ namespace unt_bingoo.view.Product
             this.panelForm.Controls.Add(this.txtCode);
             this.panelForm.Controls.Add(this.txtName);
             this.panelForm.Controls.Add(this.txtCost);
-            this.panelForm.Controls.Add(this.cboSupplier);
             this.panelForm.Controls.Add(this.txtQty);
-            this.panelForm.Controls.Add(this.cboSize);
             this.panelForm.Controls.Add(this.txtPrice);
             this.panelForm.Controls.Add(this.txtVAT);
             this.panelForm.Controls.Add(this.txtRemark);
@@ -232,6 +251,35 @@ namespace unt_bingoo.view.Product
             this.panelForm.Name = "panelForm";
             this.panelForm.Size = new System.Drawing.Size(1149, 205);
             this.panelForm.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button1.Image = global::unt_bingoo.Properties.Resources.add16;
+            this.button1.Location = new System.Drawing.Point(876, 43);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(27, 26);
+            this.button1.TabIndex = 171;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtDiscound
+            // 
+            this.txtDiscound.Location = new System.Drawing.Point(610, 128);
+            this.txtDiscound.Name = "txtDiscound";
+            this.txtDiscound.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiscound.Properties.Appearance.Options.UseFont = true;
+            this.txtDiscound.Size = new System.Drawing.Size(293, 20);
+            this.txtDiscound.TabIndex = 170;
+            // 
+            // cbosupplier
+            // 
+            this.cbosupplier.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbosupplier.FormattingEnabled = true;
+            this.cbosupplier.Location = new System.Drawing.Point(610, 44);
+            this.cbosupplier.Name = "cbosupplier";
+            this.cbosupplier.Size = new System.Drawing.Size(255, 22);
+            this.cbosupplier.TabIndex = 169;
             // 
             // btnaddBrand
             // 
@@ -267,23 +315,23 @@ namespace unt_bingoo.view.Product
             this.picCustomer.TabStop = false;
             this.picCustomer.DoubleClick += new System.EventHandler(this.picCustomer_DoubleClick);
             // 
-            // comboBox2
+            // cboBrand
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(610, 16);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(255, 22);
-            this.comboBox2.TabIndex = 24;
+            this.cboBrand.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboBrand.FormattingEnabled = true;
+            this.cboBrand.Location = new System.Drawing.Point(610, 16);
+            this.cboBrand.Name = "cboBrand";
+            this.cboBrand.Size = new System.Drawing.Size(255, 22);
+            this.cboBrand.TabIndex = 24;
             // 
-            // comboBox1
+            // cboCategory
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(103, 70);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(277, 22);
-            this.comboBox1.TabIndex = 23;
+            this.cboCategory.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.Location = new System.Drawing.Point(103, 70);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(277, 22);
+            this.cboCategory.TabIndex = 23;
             // 
             // lblCode
             // 
@@ -381,9 +429,9 @@ namespace unt_bingoo.view.Product
             this.lblSize.Appearance.Options.UseFont = true;
             this.lblSize.Location = new System.Drawing.Point(516, 134);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(25, 14);
+            this.lblSize.Size = new System.Drawing.Size(77, 14);
             this.lblSize.TabIndex = 153;
-            this.lblSize.Text = "Size:";
+            this.lblSize.Text = "Discount (%):";
             // 
             // lblVAT
             // 
@@ -422,16 +470,6 @@ namespace unt_bingoo.view.Product
             this.txtCost.Size = new System.Drawing.Size(312, 20);
             this.txtCost.TabIndex = 157;
             // 
-            // cboSupplier
-            // 
-            this.cboSupplier.Location = new System.Drawing.Point(610, 48);
-            this.cboSupplier.Name = "cboSupplier";
-            this.cboSupplier.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSupplier.Properties.Appearance.Options.UseFont = true;
-            this.cboSupplier.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboSupplier.Size = new System.Drawing.Size(293, 20);
-            this.cboSupplier.TabIndex = 158;
-            // 
             // txtQty
             // 
             this.txtQty.Location = new System.Drawing.Point(610, 75);
@@ -440,16 +478,6 @@ namespace unt_bingoo.view.Product
             this.txtQty.Properties.Appearance.Options.UseFont = true;
             this.txtQty.Size = new System.Drawing.Size(293, 20);
             this.txtQty.TabIndex = 159;
-            // 
-            // cboSize
-            // 
-            this.cboSize.Location = new System.Drawing.Point(610, 131);
-            this.cboSize.Name = "cboSize";
-            this.cboSize.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSize.Properties.Appearance.Options.UseFont = true;
-            this.cboSize.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboSize.Size = new System.Drawing.Size(293, 20);
-            this.cboSize.TabIndex = 160;
             // 
             // txtPrice
             // 
@@ -512,6 +540,7 @@ namespace unt_bingoo.view.Product
             this.btnCancel.Size = new System.Drawing.Size(77, 23);
             this.btnCancel.TabIndex = 166;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // panelGrid
             // 
@@ -528,6 +557,9 @@ namespace unt_bingoo.view.Product
             this.gridProduct.Location = new System.Drawing.Point(2, 2);
             this.gridProduct.MainView = this.gvProduct;
             this.gridProduct.Name = "gridProduct";
+            this.gridProduct.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnmainupdate,
+            this.btnmaindelete});
             this.gridProduct.Size = new System.Drawing.Size(1145, 305);
             this.gridProduct.TabIndex = 0;
             this.gridProduct.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -536,109 +568,170 @@ namespace unt_bingoo.view.Product
             // gvProduct
             // 
             this.gvProduct.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.ProductID,
+            this.No,
+            this.ProductCode,
+            this.ProductName,
+            this.CategoryName,
+            this.BrandName,
+            this.CostPrice,
+            this.SellingPrice,
+            this.TaxPercent,
+            this.DiscountPercent,
+            this.SupplierName,
+            this.Status,
+            this.ImageUrl,
+            this.ProductImage,
             this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn10,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumnVAT,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn9});
+            this.gridColumn2});
             this.gvProduct.GridControl = this.gridProduct;
             this.gvProduct.Name = "gvProduct";
-            this.gvProduct.OptionsBehavior.Editable = false;
             this.gvProduct.OptionsView.ShowGroupPanel = false;
+            this.gvProduct.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvProduct_RowCellStyle);
+            this.gvProduct.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvProduct_CustomColumnDisplayText);
+            // 
+            // ProductID
+            // 
+            this.ProductID.Caption = "ProductID ";
+            this.ProductID.Name = "ProductID";
+            // 
+            // No
+            // 
+            this.No.Caption = "No";
+            this.No.FieldName = "No";
+            this.No.Name = "No";
+            this.No.Visible = true;
+            this.No.VisibleIndex = 0;
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.Caption = "ProductCode";
+            this.ProductCode.FieldName = "ProductCode";
+            this.ProductCode.Name = "ProductCode";
+            this.ProductCode.Visible = true;
+            this.ProductCode.VisibleIndex = 1;
+            // 
+            // ProductName
+            // 
+            this.ProductName.Caption = "Product Name";
+            this.ProductName.FieldName = "ProductName";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.Visible = true;
+            this.ProductName.VisibleIndex = 2;
+            // 
+            // CategoryName
+            // 
+            this.CategoryName.Caption = "Category";
+            this.CategoryName.FieldName = "CategoryName";
+            this.CategoryName.Name = "CategoryName";
+            this.CategoryName.Visible = true;
+            this.CategoryName.VisibleIndex = 3;
+            // 
+            // BrandName
+            // 
+            this.BrandName.Caption = "Brand";
+            this.BrandName.FieldName = "BrandName";
+            this.BrandName.Name = "BrandName";
+            this.BrandName.Visible = true;
+            this.BrandName.VisibleIndex = 4;
+            // 
+            // CostPrice
+            // 
+            this.CostPrice.Caption = "Cost";
+            this.CostPrice.FieldName = "CostPrice";
+            this.CostPrice.Name = "CostPrice";
+            this.CostPrice.Visible = true;
+            this.CostPrice.VisibleIndex = 5;
+            // 
+            // SellingPrice
+            // 
+            this.SellingPrice.Caption = "Price";
+            this.SellingPrice.FieldName = "SellingPrice";
+            this.SellingPrice.Name = "SellingPrice";
+            this.SellingPrice.Visible = true;
+            this.SellingPrice.VisibleIndex = 6;
+            // 
+            // TaxPercent
+            // 
+            this.TaxPercent.Caption = "VAT (%)";
+            this.TaxPercent.FieldName = "TaxPercent";
+            this.TaxPercent.Name = "TaxPercent";
+            this.TaxPercent.Visible = true;
+            this.TaxPercent.VisibleIndex = 7;
+            // 
+            // DiscountPercent
+            // 
+            this.DiscountPercent.Caption = "DiscountPercent";
+            this.DiscountPercent.FieldName = "DiscountPercent";
+            this.DiscountPercent.Name = "DiscountPercent";
+            this.DiscountPercent.Visible = true;
+            this.DiscountPercent.VisibleIndex = 8;
+            // 
+            // SupplierName
+            // 
+            this.SupplierName.Caption = "Supplier";
+            this.SupplierName.FieldName = "SupplierName";
+            this.SupplierName.Name = "SupplierName";
+            this.SupplierName.Visible = true;
+            this.SupplierName.VisibleIndex = 9;
+            // 
+            // Status
+            // 
+            this.Status.Caption = "Active";
+            this.Status.FieldName = "Status";
+            this.Status.Name = "Status";
+            this.Status.Visible = true;
+            this.Status.VisibleIndex = 10;
+            // 
+            // ImageUrl
+            // 
+            this.ImageUrl.Caption = "Image";
+            this.ImageUrl.FieldName = "ImageUrl";
+            this.ImageUrl.Name = "ImageUrl";
+            // 
+            // ProductImage
+            // 
+            this.ProductImage.Caption = "ProductImage";
+            this.ProductImage.FieldName = "ProductImage";
+            this.ProductImage.Name = "ProductImage";
+            this.ProductImage.Visible = true;
+            this.ProductImage.VisibleIndex = 11;
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "Product Code";
-            this.gridColumn1.FieldName = "Code";
+            this.gridColumn1.Caption = "gridColumn1";
+            this.gridColumn1.ColumnEdit = this.btnmainupdate;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 12;
+            // 
+            // btnmainupdate
+            // 
+            this.btnmainupdate.AutoHeight = false;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
+            this.btnmainupdate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainupdate.Name = "btnmainupdate";
+            this.btnmainupdate.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainupdate.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainupdate_ButtonClick);
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "Product Name";
-            this.gridColumn2.FieldName = "Name";
+            this.gridColumn2.Caption = "gridColumn2";
+            this.gridColumn2.ColumnEdit = this.btnmaindelete;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 13;
             // 
-            // gridColumn3
+            // btnmaindelete
             // 
-            this.gridColumn3.Caption = "Category";
-            this.gridColumn3.FieldName = "Category";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "Brand";
-            this.gridColumn4.FieldName = "Brand";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "Size";
-            this.gridColumn10.FieldName = "Size";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Cost";
-            this.gridColumn5.FieldName = "Cost";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "Price";
-            this.gridColumn6.FieldName = "Price";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
-            // 
-            // gridColumnVAT
-            // 
-            this.gridColumnVAT.Caption = "VAT (%)";
-            this.gridColumnVAT.FieldName = "VAT";
-            this.gridColumnVAT.Name = "gridColumnVAT";
-            this.gridColumnVAT.Visible = true;
-            this.gridColumnVAT.VisibleIndex = 7;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "Qty";
-            this.gridColumn7.FieldName = "Qty";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 8;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "Supplier";
-            this.gridColumn8.FieldName = "Supplier";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 9;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "Active";
-            this.gridColumn9.FieldName = "Active";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 10;
+            this.btnmaindelete.AutoHeight = false;
+            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            this.btnmaindelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmaindelete.Name = "btnmaindelete";
+            this.btnmaindelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmaindelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmaindelete_ButtonClick);
             // 
             // panelBottom
             // 
@@ -667,6 +760,7 @@ namespace unt_bingoo.view.Product
             this.btnExport.Size = new System.Drawing.Size(69, 33);
             this.btnExport.TabIndex = 1;
             this.btnExport.Text = "Export";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClose
             // 
@@ -676,6 +770,7 @@ namespace unt_bingoo.view.Product
             this.btnClose.Size = new System.Drawing.Size(69, 33);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // guiProduct
             // 
@@ -696,16 +791,16 @@ namespace unt_bingoo.view.Product
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelForm)).EndInit();
             this.panelForm.ResumeLayout(false);
             this.panelForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDiscound.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCost.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboSize.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVAT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
@@ -714,6 +809,8 @@ namespace unt_bingoo.view.Product
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainupdate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmaindelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
@@ -725,5 +822,28 @@ namespace unt_bingoo.view.Product
 
         private Button btnaddBrand;
         private Button btnaddCategory;
+        private GridControl gridProduct;
+        private GridView gvProduct;
+        private DevExpress.XtraGrid.Columns.GridColumn ProductCode;
+        private DevExpress.XtraGrid.Columns.GridColumn ProductName;
+        private DevExpress.XtraGrid.Columns.GridColumn CategoryName;
+        private DevExpress.XtraGrid.Columns.GridColumn BrandName;
+        private DevExpress.XtraGrid.Columns.GridColumn CostPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn SellingPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn TaxPercent;
+        private DevExpress.XtraGrid.Columns.GridColumn DiscountPercent;
+        private DevExpress.XtraGrid.Columns.GridColumn SupplierName;
+        private DevExpress.XtraGrid.Columns.GridColumn Status;
+        private DevExpress.XtraGrid.Columns.GridColumn ProductID;
+        private DevExpress.XtraGrid.Columns.GridColumn No;
+        private DevExpress.XtraGrid.Columns.GridColumn ImageUrl;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn ProductImage;
+        private System.Windows.Forms.ComboBox cbosupplier;
+        private TextEdit txtDiscound;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainupdate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmaindelete;
+        private Button button1;
     }
 }

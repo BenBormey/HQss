@@ -461,6 +461,7 @@ namespace unt_bingoo.view.currency
             this.btnExportToExcel.Text = "&Export";
             this.btnExportToExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportToExcel.UseVisualStyleBackColor = true;
+            this.btnExportToExcel.Click += new System.EventHandler(this.btnExportToExcel_Click);
             // 
             // btnClose
             // 

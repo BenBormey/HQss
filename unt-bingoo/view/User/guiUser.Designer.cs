@@ -23,6 +23,26 @@ namespace unt_bingoo.view.User
 
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions5 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject17 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject18 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject19 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject20 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions6 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject21 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject22 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject23 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject24 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions7 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject25 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject26 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject27 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject28 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions8 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject29 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject30 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject31 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject32 = new DevExpress.Utils.SerializableAppearanceObject();
             this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
@@ -50,6 +70,8 @@ namespace unt_bingoo.view.User
             this.lblUserName = new DevExpress.XtraEditors.LabelControl();
             this.cboRole = new System.Windows.Forms.ComboBox();
             this.panelDetail = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtaddress = new DevExpress.XtraEditors.MemoEdit();
             this.btnaddOutlet = new System.Windows.Forms.Button();
             this.btnaddRole = new System.Windows.Forms.Button();
             this.cboOutlet = new System.Windows.Forms.ComboBox();
@@ -59,20 +81,28 @@ namespace unt_bingoo.view.User
             this.panelBottom = new DevExpress.XtraEditors.PanelControl();
             this.gridControlUser = new DevExpress.XtraGrid.GridControl();
             this.gridViewUser = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.No = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.address = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnmainUpdate = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnResetPassword = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnmaindelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.btnmainChangepassword = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtaddress = new DevExpress.XtraEditors.MemoEdit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).BeginInit();
             this.panelHeader.SuspendLayout();
@@ -88,14 +118,18 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).BeginInit();
             this.panelDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtaddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainUpdate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnResetPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmaindelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainChangepassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
             this.panelGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtaddress.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSystemName
@@ -126,7 +160,7 @@ namespace unt_bingoo.view.User
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(980, 80);
+            this.panelHeader.Size = new System.Drawing.Size(1034, 80);
             this.panelHeader.TabIndex = 3;
             // 
             // btnCancel
@@ -137,6 +171,7 @@ namespace unt_bingoo.view.User
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAdd
             // 
@@ -385,200 +420,8 @@ namespace unt_bingoo.view.User
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDetail.Location = new System.Drawing.Point(0, 80);
             this.panelDetail.Name = "panelDetail";
-            this.panelDetail.Size = new System.Drawing.Size(980, 260);
+            this.panelDetail.Size = new System.Drawing.Size(1034, 260);
             this.panelDetail.TabIndex = 2;
-            // 
-            // btnaddOutlet
-            // 
-            this.btnaddOutlet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnaddOutlet.Image = global::unt_bingoo.Properties.Resources.add16;
-            this.btnaddOutlet.Location = new System.Drawing.Point(910, 19);
-            this.btnaddOutlet.Name = "btnaddOutlet";
-            this.btnaddOutlet.Size = new System.Drawing.Size(27, 26);
-            this.btnaddOutlet.TabIndex = 169;
-            this.btnaddOutlet.UseVisualStyleBackColor = false;
-            // 
-            // btnaddRole
-            // 
-            this.btnaddRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnaddRole.Image = global::unt_bingoo.Properties.Resources.add16;
-            this.btnaddRole.Location = new System.Drawing.Point(406, 197);
-            this.btnaddRole.Name = "btnaddRole";
-            this.btnaddRole.Size = new System.Drawing.Size(27, 26);
-            this.btnaddRole.TabIndex = 168;
-            this.btnaddRole.UseVisualStyleBackColor = false;
-            // 
-            // cboOutlet
-            // 
-            this.cboOutlet.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.cboOutlet.FormattingEnabled = true;
-            this.cboOutlet.Location = new System.Drawing.Point(593, 22);
-            this.cboOutlet.Name = "cboOutlet";
-            this.cboOutlet.Size = new System.Drawing.Size(305, 22);
-            this.cboOutlet.TabIndex = 24;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Cancel16;
-            this.btnClose.Location = new System.Drawing.Point(898, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 36);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "Close";
-            // 
-            // btnExport
-            // 
-            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExport.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Excel;
-            this.btnExport.Location = new System.Drawing.Point(818, 2);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(80, 36);
-            this.btnExport.TabIndex = 1;
-            this.btnExport.Text = "Export";
-            // 
-            // lblCountRow
-            // 
-            this.lblCountRow.Location = new System.Drawing.Point(10, 12);
-            this.lblCountRow.Name = "lblCountRow";
-            this.lblCountRow.Size = new System.Drawing.Size(53, 13);
-            this.lblCountRow.TabIndex = 0;
-            this.lblCountRow.Text = "Count Row";
-            // 
-            // panelBottom
-            // 
-            this.panelBottom.Controls.Add(this.lblCountRow);
-            this.panelBottom.Controls.Add(this.btnExport);
-            this.panelBottom.Controls.Add(this.btnClose);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 580);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(980, 40);
-            this.panelBottom.TabIndex = 1;
-            // 
-            // gridControlUser
-            // 
-            this.gridControlUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlUser.Location = new System.Drawing.Point(2, 2);
-            this.gridControlUser.MainView = this.gridViewUser;
-            this.gridControlUser.Name = "gridControlUser";
-            this.gridControlUser.Size = new System.Drawing.Size(976, 236);
-            this.gridControlUser.TabIndex = 0;
-            this.gridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewUser,
-            this.gridView1});
-            // 
-            // gridViewUser
-            // 
-            this.gridViewUser.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn9,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn10,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8});
-            this.gridViewUser.GridControl = this.gridControlUser;
-            this.gridViewUser.Name = "gridViewUser";
-            this.gridViewUser.OptionsBehavior.Editable = false;
-            this.gridViewUser.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "User Name";
-            this.gridColumn1.FieldName = "UserName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Full Name";
-            this.gridColumn2.FieldName = "FullName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "Full Name (Kh)";
-            this.gridColumn9.FieldName = "FullNameKh";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 2;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Role";
-            this.gridColumn3.FieldName = "RoleName";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "Outlet";
-            this.gridColumn4.FieldName = "OutletName";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "Address (Kh)";
-            this.gridColumn10.FieldName = "AddressKh";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 5;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Phone";
-            this.gridColumn5.FieldName = "Phone";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 6;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "Email";
-            this.gridColumn6.FieldName = "Email";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "Active";
-            this.gridColumn7.FieldName = "IsActive";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 8;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "Locked";
-            this.gridColumn8.FieldName = "IsLocked";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 9;
-            // 
-            // gridView1
-            // 
-            this.gridView1.GridControl = this.gridControlUser;
-            this.gridView1.Name = "gridView1";
-            // 
-            // panelGrid
-            // 
-            this.panelGrid.Controls.Add(this.gridControlUser);
-            this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 340);
-            this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(980, 240);
-            this.panelGrid.TabIndex = 0;
             // 
             // labelControl1
             // 
@@ -599,11 +442,303 @@ namespace unt_bingoo.view.User
             this.txtaddress.Size = new System.Drawing.Size(344, 36);
             this.txtaddress.TabIndex = 171;
             // 
+            // btnaddOutlet
+            // 
+            this.btnaddOutlet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnaddOutlet.Image = global::unt_bingoo.Properties.Resources.add16;
+            this.btnaddOutlet.Location = new System.Drawing.Point(910, 19);
+            this.btnaddOutlet.Name = "btnaddOutlet";
+            this.btnaddOutlet.Size = new System.Drawing.Size(27, 26);
+            this.btnaddOutlet.TabIndex = 169;
+            this.btnaddOutlet.UseVisualStyleBackColor = false;
+            this.btnaddOutlet.Click += new System.EventHandler(this.btnaddOutlet_Click);
+            // 
+            // btnaddRole
+            // 
+            this.btnaddRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnaddRole.Image = global::unt_bingoo.Properties.Resources.add16;
+            this.btnaddRole.Location = new System.Drawing.Point(406, 197);
+            this.btnaddRole.Name = "btnaddRole";
+            this.btnaddRole.Size = new System.Drawing.Size(27, 26);
+            this.btnaddRole.TabIndex = 168;
+            this.btnaddRole.UseVisualStyleBackColor = false;
+            this.btnaddRole.Click += new System.EventHandler(this.btnaddRole_Click);
+            // 
+            // cboOutlet
+            // 
+            this.cboOutlet.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.cboOutlet.FormattingEnabled = true;
+            this.cboOutlet.Location = new System.Drawing.Point(593, 22);
+            this.cboOutlet.Name = "cboOutlet";
+            this.cboOutlet.Size = new System.Drawing.Size(305, 22);
+            this.cboOutlet.TabIndex = 24;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Cancel16;
+            this.btnClose.Location = new System.Drawing.Point(952, 2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(80, 36);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Close";
+            // 
+            // btnExport
+            // 
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Excel;
+            this.btnExport.Location = new System.Drawing.Point(872, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(80, 36);
+            this.btnExport.TabIndex = 1;
+            this.btnExport.Text = "Export";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // lblCountRow
+            // 
+            this.lblCountRow.Location = new System.Drawing.Point(10, 12);
+            this.lblCountRow.Name = "lblCountRow";
+            this.lblCountRow.Size = new System.Drawing.Size(53, 13);
+            this.lblCountRow.TabIndex = 0;
+            this.lblCountRow.Text = "Count Row";
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.lblCountRow);
+            this.panelBottom.Controls.Add(this.btnExport);
+            this.panelBottom.Controls.Add(this.btnClose);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 580);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(1034, 40);
+            this.panelBottom.TabIndex = 1;
+            // 
+            // gridControlUser
+            // 
+            this.gridControlUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlUser.Location = new System.Drawing.Point(2, 2);
+            this.gridControlUser.MainView = this.gridViewUser;
+            this.gridControlUser.Name = "gridControlUser";
+            this.gridControlUser.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnmainUpdate,
+            this.btnmaindelete,
+            this.btnmainChangepassword,
+            this.btnResetPassword});
+            this.gridControlUser.Size = new System.Drawing.Size(1030, 236);
+            this.gridControlUser.TabIndex = 0;
+            this.gridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewUser,
+            this.gridView1});
+            // 
+            // gridViewUser
+            // 
+            this.gridViewUser.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.id,
+            this.No,
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn9,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.address,
+            this.gridColumn10,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn11,
+            this.gridColumn13,
+            this.gridColumn14});
+            this.gridViewUser.GridControl = this.gridControlUser;
+            this.gridViewUser.Name = "gridViewUser";
+            this.gridViewUser.OptionsView.ShowGroupPanel = false;
+            this.gridViewUser.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewUser_RowCellStyle);
+            this.gridViewUser.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridViewUser_CustomColumnDisplayText);
+            // 
+            // id
+            // 
+            this.id.Caption = "Id";
+            this.id.FieldName = "Id";
+            this.id.Name = "id";
+            // 
+            // No
+            // 
+            this.No.Caption = "No";
+            this.No.FieldName = "No";
+            this.No.Name = "No";
+            this.No.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+            this.No.Visible = true;
+            this.No.VisibleIndex = 0;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "User Name";
+            this.gridColumn1.FieldName = "Username";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Full Name";
+            this.gridColumn2.FieldName = "FullName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 2;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Full Name (Kh)";
+            this.gridColumn9.FieldName = "FullNameKh";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 3;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Role";
+            this.gridColumn3.FieldName = "RoleName";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 4;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "Outlet";
+            this.gridColumn4.FieldName = "outLetName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 5;
+            // 
+            // address
+            // 
+            this.address.Caption = "address ";
+            this.address.FieldName = "address";
+            this.address.Name = "address";
+            this.address.Visible = true;
+            this.address.VisibleIndex = 7;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "Address (Kh)";
+            this.gridColumn10.FieldName = "addressKh";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 6;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Phone";
+            this.gridColumn5.FieldName = "Phone";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 8;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "Email";
+            this.gridColumn6.FieldName = "Email";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 9;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "Active";
+            this.gridColumn7.FieldName = "IsActive";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 10;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "Update";
+            this.gridColumn11.ColumnEdit = this.btnmainUpdate;
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 11;
+            // 
+            // btnmainUpdate
+            // 
+            this.btnmainUpdate.AutoHeight = false;
+            editorButtonImageOptions5.Image = global::unt_bingoo.Properties.Resources.update_blue;
+            this.btnmainUpdate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions5, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject17, serializableAppearanceObject18, serializableAppearanceObject19, serializableAppearanceObject20, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainUpdate.Name = "btnmainUpdate";
+            this.btnmainUpdate.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainUpdate.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainUpdate_ButtonClick);
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "Reset Password";
+            this.gridColumn13.ColumnEdit = this.btnResetPassword;
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 12;
+            // 
+            // btnResetPassword
+            // 
+            this.btnResetPassword.AutoHeight = false;
+            editorButtonImageOptions6.Image = global::unt_bingoo.Properties.Resources.reset_password;
+            this.btnResetPassword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions6, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject21, serializableAppearanceObject22, serializableAppearanceObject23, serializableAppearanceObject24, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnResetPassword.Name = "btnResetPassword";
+            this.btnResetPassword.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "Delete";
+            this.gridColumn14.ColumnEdit = this.btnmaindelete;
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 13;
+            // 
+            // btnmaindelete
+            // 
+            this.btnmaindelete.AutoHeight = false;
+            editorButtonImageOptions7.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            this.btnmaindelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions7, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject25, serializableAppearanceObject26, serializableAppearanceObject27, serializableAppearanceObject28, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmaindelete.Name = "btnmaindelete";
+            this.btnmaindelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmaindelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmaindelete_ButtonClick);
+            // 
+            // btnmainChangepassword
+            // 
+            this.btnmainChangepassword.AutoHeight = false;
+            editorButtonImageOptions8.Image = global::unt_bingoo.Properties.Resources.reset_password__1_;
+            this.btnmainChangepassword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions8, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject29, serializableAppearanceObject30, serializableAppearanceObject31, serializableAppearanceObject32, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainChangepassword.Name = "btnmainChangepassword";
+            this.btnmainChangepassword.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainChangepassword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainChangepassword_ButtonClick);
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gridControlUser;
+            this.gridView1.Name = "gridView1";
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "Locked";
+            this.gridColumn8.FieldName = "IsLocked";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 10;
+            // 
+            // panelGrid
+            // 
+            this.panelGrid.Controls.Add(this.gridControlUser);
+            this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelGrid.Location = new System.Drawing.Point(0, 340);
+            this.panelGrid.Name = "panelGrid";
+            this.panelGrid.Size = new System.Drawing.Size(1034, 240);
+            this.panelGrid.TabIndex = 0;
+            // 
             // guiUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 620);
+            this.ClientSize = new System.Drawing.Size(1034, 620);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelDetail);
@@ -629,15 +764,19 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtaddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainUpdate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnResetPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmaindelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainChangepassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
             this.panelGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtaddress.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -694,5 +833,15 @@ namespace unt_bingoo.view.User
         private Button btnaddRole;
         private LabelControl labelControl1;
         private MemoEdit txtaddress;
+        private DevExpress.XtraGrid.Columns.GridColumn id;
+        private DevExpress.XtraGrid.Columns.GridColumn No;
+        private DevExpress.XtraGrid.Columns.GridColumn address;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainUpdate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmaindelete;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainChangepassword;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnResetPassword;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
     }
 }

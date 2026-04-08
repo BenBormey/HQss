@@ -1,24 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace unt_bingoo.Class
 {
     public class UserItem
     {
-        public string UserName { get; set; }
-        public string FullName { get; set; }
-        public string FullNameKh { get; set; }
-        public string Role { get; set; }
-        public string Outlet { get; set; }
-        public string Address { get; set; }
-        public string AddressKh { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public bool Active { get; set; }
-        public bool Locked { get; set; }
-    }
 
+        public int Id { get; set; }
+
+        public string Username { get; set; } 
+        public string PasswordHash { get; set; }
+
+        public string FullName { get; set; }
+        public string FullNameKh { get; set; } 
+
+        public int RoleId { get; set; }
+        public string RoleName { get; set; } 
+        public string Phone { get; set; }
+        public string address { get; set; }
+        public string addressKh { get; set; }
+        public string Email { get; set; }
+
+        public bool IsActive { get; set; } = true;
+
+        public int outLetId { get; set; }
+        public string outLetName { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastLoginAt { get; set; }
+    }
 }

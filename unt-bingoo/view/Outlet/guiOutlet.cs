@@ -22,7 +22,7 @@ namespace unt_bingoo.view.Outlet
         {
             InitializeComponent();
 
-            // Grid setting
+     
             if (gridViewOutlet is GridView view)
             {
                 view.OptionsBehavior.Editable = true;
@@ -33,7 +33,7 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
-        // ================= LOAD =================
+   
         private async void guiOutlet_Load(object sender, EventArgs e)
         {
             try
@@ -56,7 +56,7 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
-        // ================= LOAD DATA =================
+
         private async Task LoadData()
         {
             var list = await _api.GetAsync<
@@ -71,7 +71,7 @@ namespace unt_bingoo.view.Outlet
             lblCountRow.Text = $"Count Row: {_outletList.Count}";
         }
 
-        // ================= EXPORT =================
+      
         private void btnExport_Click(object sender, EventArgs e)
         {
             try
@@ -91,7 +91,7 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
-        // ================= ADD / UPDATE =================
+
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
@@ -104,7 +104,6 @@ namespace unt_bingoo.view.Outlet
 
                 bool ok;
 
-                // ========== ADD ==========
                 if (_editingId == null)
                 {
                     ok = await _api.PostAsync("api/Outlet", model);
@@ -117,7 +116,6 @@ namespace unt_bingoo.view.Outlet
 
                     XtraMessageBox.Show("Added successfully!");
                 }
-                // ========== UPDATE ==========
                 else
                 {
                     ok = await _api.PutAsync($"api/Outlet/{_editingId}", model);
@@ -144,7 +142,7 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
-        // ================= UPDATE BUTTON (GRID) =================
+
         private void btnUpdate_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -167,7 +165,7 @@ namespace unt_bingoo.view.Outlet
             btnAdd.Text = "Update";
         }
 
-        // ================= DELETE BUTTON (GRID) =================
+  
         private async void btnmainDelete_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -210,7 +208,6 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
-        // ================= HELPER =================
 
         private OutletItem GetFormData()
         {
@@ -261,6 +258,16 @@ namespace unt_bingoo.view.Outlet
 
             _editingId = null;
             btnAdd.Text = "Add";
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        private void cboProvince_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

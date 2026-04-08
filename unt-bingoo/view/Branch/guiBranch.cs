@@ -1,5 +1,7 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Export;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -22,8 +24,8 @@ namespace unt_bingoo.view.Branch
         {
             InitializeComponent();
 
-            // Grid setting (IMPORTANT)
-            if (gridViewRole is GridView view)
+     
+            if (gridViewBranch is GridView view)
             {
                 view.OptionsBehavior.Editable = true;
                 view.OptionsBehavior.ReadOnly = false;
@@ -33,7 +35,7 @@ namespace unt_bingoo.view.Branch
             }
         }
 
-        // ================= LOAD =================
+
         private async void guiBranch_Load(object sender, EventArgs e)
         {
             try
@@ -56,7 +58,7 @@ namespace unt_bingoo.view.Branch
             }
         }
 
-        // ================= LOAD DATA =================
+
         private async Task LoadData()
         {
             var list = await _api.GetAsync<
@@ -66,7 +68,7 @@ namespace unt_bingoo.view.Branch
 
             gridBranch.DataSource = _branchList;
 
-            gridViewRole.BestFitColumns();
+            gridViewBranch.BestFitColumns();
 
             UpdateRowCount();
         }
@@ -76,33 +78,35 @@ namespace unt_bingoo.view.Branch
             lblCountRow.Text = $"Count Row : {_branchList.Count}";
         }
 
-        // ================= HELPER =================
+
         private void ClearForm()
         {
             txtBranchCode.Text = "";
             txtBranchName.Text = "";
             chkActive.Checked = true;
+            txtRemark.Text = "";
 
             _editingId = null;
 
             btnAdd.Text = "Add";
         }
 
-        // ================= GET FORM DATA =================
         private BranchItem GetFormData()
         {
             return new BranchItem
             {
                 Id = _editingId ?? 0,
+                Remark = txtRemark.Text.Trim(),
 
                 BranchCode = txtBranchCode.Text.Trim(),
                 BranchName = txtBranchName.Text.Trim(),
+
+                
 
                 Active = chkActive.Checked
             };
         }
 
-        // ================= VALIDATION =================
         private bool ValidateForm()
         {
             if (string.IsNullOrWhiteSpace(txtBranchCode.Text))
@@ -122,7 +126,7 @@ namespace unt_bingoo.view.Branch
             return true;
         }
 
-        // ================= ADD / UPDATE =================
+      
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
@@ -135,7 +139,7 @@ namespace unt_bingoo.view.Branch
 
                 bool ok;
 
-                // ============ ADD ============
+        
                 if (_editingId == null)
                 {
                     ok = await _api.PostAsync("api/Brand", model);
@@ -148,7 +152,7 @@ namespace unt_bingoo.view.Branch
 
                     XtraMessageBox.Show("Added successfully!");
                 }
-                // ============ UPDATE ============
+              
                 else
                 {
                     ok = await _api.PutAsync($"api/Brand/{_editingId}", model);
@@ -176,12 +180,12 @@ namespace unt_bingoo.view.Branch
             }
         }
 
-        // ================= UPDATE (GRID BUTTON) =================
+
         private void repositoryItemButtonEdit1_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row = gridViewRole.GetFocusedRow() as BranchItem;
+            var row = gridViewBranch.GetFocusedRow() as BranchItem;
 
             if (row == null) return;
 
@@ -194,12 +198,11 @@ namespace unt_bingoo.view.Branch
             btnAdd.Text = "Update";
         }
 
-        // ================= DELETE (GRID BUTTON) =================
         private async void btnmainDelete_ButtonClick_1(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row = gridViewRole.GetFocusedRow() as BranchItem;
+            var row = gridViewBranch.GetFocusedRow() as BranchItem;
 
             if (row == null) return;
 
@@ -246,8 +249,8 @@ namespace unt_bingoo.view.Branch
         private async void btnDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
            
-                // Get selected row
-                var row = gridViewRole.GetFocusedRow() as BranchItem;
+            
+                var row = gridViewBranch.GetFocusedRow() as BranchItem;
 
                 if (row == null)
                 {
@@ -255,7 +258,7 @@ namespace unt_bingoo.view.Branch
                     return;
                 }
 
-                // Confirm delete
+             
                 if (XtraMessageBox.Show(
                     "Do you want to delete this branch?",
                     "Confirm Delete",
@@ -267,7 +270,7 @@ namespace unt_bingoo.view.Branch
                 {
                     Cursor = Cursors.WaitCursor;
 
-                    // Call API delete
+                    
                     bool ok = await _api.DeleteAsync($"api/Brand/{row.Id}");
 
                     if (!ok)
@@ -276,7 +279,6 @@ namespace unt_bingoo.view.Branch
                         return;
                     }
 
-                    // Reload data
                     await LoadData();
 
                     ClearForm();
@@ -297,7 +299,7 @@ namespace unt_bingoo.view.Branch
 
         private void btnupdate_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row = gridViewRole.GetFocusedRow() as BranchItem;
+            var row = gridViewBranch.GetFocusedRow() as BranchItem;
 
             if (row == null)
             {
@@ -309,15 +311,68 @@ namespace unt_bingoo.view.Branch
             txtBranchCode.Text = row.BranchCode;
             txtBranchName.Text = row.BranchName;
             chkActive.Checked = row.Active;
+            txtRemark.Text = row.Remark;
 
-            // Set edit mode
+       
             _editingId = row.Id;
 
             btnAdd.Text = "Update";
 
-            // Focus first textbox
+           
             txtBranchCode.Focus();
 
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Title = "Export Branch";
+                dialog.Filter = "Excel File (*.xlsx)|*.xlsx";
+                dialog.FileName = "Branch_List.xlsx";
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+       
+                gridViewBranch.Columns["Edit"].Visible = false;
+                gridViewBranch.Columns["Delete"].Visible = false;
+
+        
+                XlsxExportOptionsEx options = new XlsxExportOptionsEx();
+                options.ExportType = ExportType.WYSIWYG;
+                options.SheetName = "Branch List";
+                options.AllowGrouping = DevExpress.Utils.DefaultBoolean.False;
+
+       
+                gridViewBranch.ExportToXlsx(dialog.FileName, options);
+
+ 
+                gridViewBranch.Columns["Edit"].Visible = true;
+                gridViewBranch.Columns["Delete"].Visible = true;
+
+                System.Diagnostics.Process.Start(dialog.FileName);
+
+                XtraMessageBox.Show(
+                    "Export successful!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(
+                    "Export failed: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.ClearForm();
         }
     }
 }

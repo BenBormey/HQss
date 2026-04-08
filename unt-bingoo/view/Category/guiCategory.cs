@@ -12,7 +12,7 @@ namespace unt_bingoo.view.Category
 {
     public partial class guiCategory : XtraForm
     {
-        private APIsController _api; // Shared session
+        private APIsController _api; 
         private BindingList<CategoryItem> _list =
             new BindingList<CategoryItem>();
 
@@ -25,7 +25,6 @@ namespace unt_bingoo.view.Category
             gridCategory.DataSource = _list;
         }
 
-        // ================= LOAD =================
         private async void guiCategory_Load(object sender, EventArgs e)
         {
             try
@@ -47,7 +46,6 @@ namespace unt_bingoo.view.Category
             }
         }
 
-        // ================= LOAD DATA =================
         private async Task LoadData()
         {
             var data =
@@ -64,7 +62,6 @@ namespace unt_bingoo.view.Category
             lblCount.Text = $"Count : {_list.Count}";
         }
 
-        // ================= ADD / UPDATE =================
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
@@ -75,7 +72,7 @@ namespace unt_bingoo.view.Category
             {
                 bool ok;
 
-                // ============ ADD ============
+
                 if (_editingId == null)
                 {
                     ok = await _api.PostAsync("api/category", model);
@@ -90,7 +87,7 @@ namespace unt_bingoo.view.Category
 
                     XtraMessageBox.Show("Added!");
                 }
-                // ============ UPDATE ============
+
                 else
                 {
                     ok = await _api.PutAsync($"api/category/{_editingId}", model);
@@ -121,7 +118,7 @@ namespace unt_bingoo.view.Category
             }
         }
 
-        // ================= DELETE =================
+
         private async void btnMainDelete_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -154,7 +151,7 @@ namespace unt_bingoo.view.Category
             }
         }
 
-        // ================= EDIT =================
+
         private void btnMainupdate_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -174,7 +171,6 @@ namespace unt_bingoo.view.Category
             btnAdd.Text = "Update";
         }
 
-        // ================= HELPER =================
 
         private bool ValidateForm()
         {
@@ -220,7 +216,38 @@ namespace unt_bingoo.view.Category
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            ClearForm();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Title = "Export Category";
+                dialog.Filter = "Excel File (*.xlsx)|*.xlsx";
+                dialog.FileName = "Category_List.xlsx";
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+      
+                gridCategory.ExportToXlsx(dialog.FileName);
+
+                XtraMessageBox.Show(
+                    "Export successful!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(
+                    "Export failed: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

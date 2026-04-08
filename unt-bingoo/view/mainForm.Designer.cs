@@ -42,29 +42,33 @@ namespace unt_bingoo.view
             this.mnuexit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnufile = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.Customer = new System.Windows.Forms.ToolStripMenuItem();
-            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.customerFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuchangepassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.userRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.salerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.outLetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.currencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.guiBranchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockProductToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportSaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Customer = new System.Windows.Forms.ToolStripMenuItem();
+            this.customerFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.status.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -133,6 +137,7 @@ namespace unt_bingoo.view
             this.mnuexit.Name = "mnuexit";
             this.mnuexit.Size = new System.Drawing.Size(202, 22);
             this.mnuexit.Text = "E&xit";
+            this.mnuexit.Click += new System.EventHandler(this.mnuexit_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -151,6 +156,14 @@ namespace unt_bingoo.view
             this.mnufile.Size = new System.Drawing.Size(63, 22);
             this.mnufile.Text = "&File     ";
             // 
+            // mnuchangepassword
+            // 
+            this.mnuchangepassword.Image = ((System.Drawing.Image)(resources.GetObject("mnuchangepassword.Image")));
+            this.mnuchangepassword.Name = "mnuchangepassword";
+            this.mnuchangepassword.Size = new System.Drawing.Size(202, 22);
+            this.mnuchangepassword.Text = "&Change Password";
+            this.mnuchangepassword.Click += new System.EventHandler(this.mnuchangepassword_Click);
+            // 
             // menuStrip
             // 
             this.menuStrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,70 +181,6 @@ namespace unt_bingoo.view
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "MenuStrip";
             // 
-            // settingToolStripMenuItem
-            // 
-            this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.toolStripMenuItem4,
-            this.toolStripSeparator1,
-            this.outLetToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.currencyToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.guiBranchToolStripMenuItem});
-            this.settingToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.Logo;
-            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.settingToolStripMenuItem.Text = "Bingooo";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
-            // 
-            // Customer
-            // 
-            this.Customer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customerFormToolStripMenuItem});
-            this.Customer.Image = global::unt_bingoo.Properties.Resources.Customer;
-            this.Customer.Name = "Customer";
-            this.Customer.Size = new System.Drawing.Size(102, 22);
-            this.Customer.Text = "&Customer";
-            // 
-            // xtraTabbedMdiManager1
-            // 
-            this.xtraTabbedMdiManager1.MdiParent = this;
-            // 
-            // customerFormToolStripMenuItem
-            // 
-            this.customerFormToolStripMenuItem.Name = "customerFormToolStripMenuItem";
-            this.customerFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.customerFormToolStripMenuItem.Text = "&Customer";
-            this.customerFormToolStripMenuItem.Click += new System.EventHandler(this.customerFormToolStripMenuItem_Click);
-            // 
-            // mnuchangepassword
-            // 
-            this.mnuchangepassword.Image = ((System.Drawing.Image)(resources.GetObject("mnuchangepassword.Image")));
-            this.mnuchangepassword.Name = "mnuchangepassword";
-            this.mnuchangepassword.Size = new System.Drawing.Size(202, 22);
-            this.mnuchangepassword.Text = "&Change Password";
-            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -242,30 +191,32 @@ namespace unt_bingoo.view
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(68, 22);
             this.toolStripMenuItem2.Text = "User";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // userToolStripMenuItem
             // 
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.userToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.userToolStripMenuItem.Text = "User";
             this.userToolStripMenuItem.Click += new System.EventHandler(this.userToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // userRoleToolStripMenuItem
             // 
             this.userRoleToolStripMenuItem.Name = "userRoleToolStripMenuItem";
-            this.userRoleToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.userRoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.userRoleToolStripMenuItem.Text = "UserRole";
             this.userRoleToolStripMenuItem.Click += new System.EventHandler(this.userRoleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salerToolStripMenuItem});
+            this.salerToolStripMenuItem,
+            this.saleToolStripMenuItem});
             this.toolStripMenuItem5.Image = global::unt_bingoo.Properties.Resources.sale;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(65, 22);
@@ -278,6 +229,34 @@ namespace unt_bingoo.view
             this.salerToolStripMenuItem.Text = "Saler";
             this.salerToolStripMenuItem.Click += new System.EventHandler(this.salerToolStripMenuItem_Click);
             // 
+            // saleToolStripMenuItem
+            // 
+            this.saleToolStripMenuItem.Enabled = false;
+            this.saleToolStripMenuItem.Name = "saleToolStripMenuItem";
+            this.saleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saleToolStripMenuItem.Text = "Sale";
+            this.saleToolStripMenuItem.Click += new System.EventHandler(this.saleToolStripMenuItem_Click);
+            // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.toolStripMenuItem4,
+            this.toolStripSeparator1,
+            this.outLetToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.currencyToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.guiBranchToolStripMenuItem,
+            this.stockProductToolStripMenuItem,
+            this.suppliersToolStripMenuItem});
+            this.settingToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.Logo;
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.settingToolStripMenuItem.Text = "Bingooo";
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
             // productToolStripMenuItem
             // 
             this.productToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.product_in_warehouse;
@@ -285,6 +264,11 @@ namespace unt_bingoo.view
             this.productToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.productToolStripMenuItem.Text = "&product";
             this.productToolStripMenuItem.Click += new System.EventHandler(this.productToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItem4
             // 
@@ -294,6 +278,11 @@ namespace unt_bingoo.view
             this.toolStripMenuItem4.Text = "Category";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
             // outLetToolStripMenuItem
             // 
             this.outLetToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.retail;
@@ -301,6 +290,11 @@ namespace unt_bingoo.view
             this.outLetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.outLetToolStripMenuItem.Text = "OutLet";
             this.outLetToolStripMenuItem.Click += new System.EventHandler(this.outLetToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // currencyToolStripMenuItem
             // 
@@ -310,6 +304,11 @@ namespace unt_bingoo.view
             this.currencyToolStripMenuItem.Text = "Currency";
             this.currencyToolStripMenuItem.Click += new System.EventHandler(this.currencyToolStripMenuItem_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
             // guiBranchToolStripMenuItem
             // 
             this.guiBranchToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.brand;
@@ -318,10 +317,27 @@ namespace unt_bingoo.view
             this.guiBranchToolStripMenuItem.Text = "&Brand";
             this.guiBranchToolStripMenuItem.Click += new System.EventHandler(this.guiBranchToolStripMenuItem_Click);
             // 
+            // stockProductToolStripMenuItem
+            // 
+            this.stockProductToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.in_stock;
+            this.stockProductToolStripMenuItem.Name = "stockProductToolStripMenuItem";
+            this.stockProductToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stockProductToolStripMenuItem.Text = "StockProduct";
+            this.stockProductToolStripMenuItem.Click += new System.EventHandler(this.stockProductToolStripMenuItem_Click);
+            // 
+            // suppliersToolStripMenuItem
+            // 
+            this.suppliersToolStripMenuItem.Image = global::unt_bingoo.Properties.Resources.Supplier1;
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.suppliersToolStripMenuItem.Text = "Suppliers";
+            this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reportSaleToolStripMenuItem});
+            this.reportSaleToolStripMenuItem,
+            this.reportListToolStripMenuItem});
             this.toolStripMenuItem3.Image = global::unt_bingoo.Properties.Resources.reports;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(81, 22);
@@ -334,6 +350,33 @@ namespace unt_bingoo.view
             this.reportSaleToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.reportSaleToolStripMenuItem.Text = "Report Sale";
             this.reportSaleToolStripMenuItem.Click += new System.EventHandler(this.reportSaleToolStripMenuItem_Click);
+            // 
+            // reportListToolStripMenuItem
+            // 
+            this.reportListToolStripMenuItem.Name = "reportListToolStripMenuItem";
+            this.reportListToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.reportListToolStripMenuItem.Text = "ReportList";
+            this.reportListToolStripMenuItem.Click += new System.EventHandler(this.reportListToolStripMenuItem_Click);
+            // 
+            // Customer
+            // 
+            this.Customer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.customerFormToolStripMenuItem});
+            this.Customer.Image = global::unt_bingoo.Properties.Resources.Customer;
+            this.Customer.Name = "Customer";
+            this.Customer.Size = new System.Drawing.Size(102, 22);
+            this.Customer.Text = "&Customer";
+            // 
+            // customerFormToolStripMenuItem
+            // 
+            this.customerFormToolStripMenuItem.Name = "customerFormToolStripMenuItem";
+            this.customerFormToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.customerFormToolStripMenuItem.Text = "&Customer";
+            this.customerFormToolStripMenuItem.Click += new System.EventHandler(this.customerFormToolStripMenuItem_Click);
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.MdiParent = this;
             // 
             // mainForm
             // 
@@ -393,6 +436,10 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem salerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Customer;
         private System.Windows.Forms.ToolStripMenuItem customerFormToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockProductToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
     }
 }
 

@@ -41,7 +41,6 @@
         private void InitializeComponent()
         {
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblHeader = new System.Windows.Forms.Label();
             this.grpFilter = new System.Windows.Forms.GroupBox();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -51,9 +50,10 @@
             this.lblEndDate = new System.Windows.Forms.Label();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.lblTitleBox = new System.Windows.Forms.Label();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.grpFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -66,16 +66,6 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(763, 69);
             this.panelHeader.TabIndex = 0;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Image = global::unt_bingoo.Properties.Resources.Logo;
-            this.picLogo.Location = new System.Drawing.Point(9, 4);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(60, 61);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLogo.TabIndex = 1;
-            this.picLogo.TabStop = false;
             // 
             // lblHeader
             // 
@@ -129,6 +119,7 @@
             this.btnPreview.TabIndex = 7;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = false;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // dtpEnd
             // 
@@ -174,6 +165,16 @@
             this.lblTitleBox.TabIndex = 0;
             this.lblTitleBox.Text = "SALE REPORTS";
             // 
+            // picLogo
+            // 
+            this.picLogo.Image = global::unt_bingoo.Properties.Resources.Logo;
+            this.picLogo.Location = new System.Drawing.Point(9, 4);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(60, 61);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.TabIndex = 1;
+            this.picLogo.TabStop = false;
+            // 
             // guiReportSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,9 +187,9 @@
             this.Text = "Sale Reports";
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.grpFilter.ResumeLayout(false);
             this.grpFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }

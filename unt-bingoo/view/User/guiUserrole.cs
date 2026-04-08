@@ -11,7 +11,7 @@ namespace unt_bingoo.view.User
 {
     public partial class guiUserrole : XtraForm
     {
-        private APIsController _api; // Shared session
+        private APIsController _api; 
         private BindingList<RoleItem> _roles =
             new BindingList<RoleItem>();
 
@@ -22,7 +22,7 @@ namespace unt_bingoo.view.User
             InitializeComponent();
         }
 
-        // ================= LOAD =================
+
         private async void guiUserrole_Load(object sender, EventArgs e)
         {
             try
@@ -63,7 +63,7 @@ namespace unt_bingoo.view.User
             lblCountRow.Text = $"Count : {_roles.Count}";
         }
 
-        // ================= ADD / UPDATE =================
+   
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
@@ -126,7 +126,7 @@ namespace unt_bingoo.view.User
             }
         }
 
-        // ================= DELETE =================
+
         private async void btnmainDelete_ButtonClick(
             object sender,
             DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

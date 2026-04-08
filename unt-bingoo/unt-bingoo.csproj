@@ -37,7 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Dashboard.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Images.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Office.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Pdf.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -57,12 +59,15 @@
     <Reference Include="DevExpress.XtraPrinting.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v19.1.Extensions, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExtreme.AspNet.Mvc">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 19.1\DevExtreme\System\DevExtreme\Bin\AspNet\DevExtreme.AspNet.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -84,13 +89,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\BranchItem.cs" />
+    <Compile Include="Class\CartItemVM.cs" />
+    <Compile Include="Class\CartResponseVM.cs" />
+    <Compile Include="Class\CartVM.cs" />
+    <Compile Include="Class\CashPaymentDto.cs" />
     <Compile Include="Class\CategoryItem.cs" />
+    <Compile Include="Class\CheckoutResponse.cs" />
+    <Compile Include="Class\KHQRRequestDto.cs" />
+    <Compile Include="Class\LoginResponse.cs" />
     <Compile Include="Class\CurrencyItem.cs" />
     <Compile Include="Class\MenuItemVM.cs" />
     <Compile Include="Class\OrderItemVM.cs" />
     <Compile Include="Class\OutletItem.cs" />
+    <Compile Include="Class\PnLDto.cs" />
     <Compile Include="Class\ProductItem.cs" />
+    <Compile Include="Class\ProductPosDto.cs" />
+    <Compile Include="Class\ProductStockModel.cs" />
+    <Compile Include="Class\QrConfirmDto.cs" />
+    <Compile Include="Class\QrResponse.cs" />
+    <Compile Include="Class\Report\SalesReportDto.cs" />
     <Compile Include="Class\RoleItem.cs" />
+    <Compile Include="Class\SaleItem.cs" />
+    <Compile Include="Class\SaleReportVM.cs" />
+    <Compile Include="Class\Session.cs" />
+    <Compile Include="Class\SupplierItem.cs" />
+    <Compile Include="Class\UploadResult.cs" />
     <Compile Include="Class\UserItem.cs" />
     <Compile Include="Controller\APIGlobals.cs" />
     <Compile Include="Controller\APIsController.cs" />
@@ -102,6 +125,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Text\Json.cs" />
     <Compile Include="view\Branch\guiBranch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +156,12 @@
     <Compile Include="view\guiLogin.Designer.cs">
       <DependentUpon>guiLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\gui_loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\gui_loading.Designer.cs">
+      <DependentUpon>gui_loading.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\mainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,18 +180,61 @@
     <Compile Include="view\Product\guiProduct.Designer.cs">
       <DependentUpon>guiProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\Product\guiProductStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\guiProductStock.Designer.cs">
+      <DependentUpon>guiProductStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Report\guiReportSale.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\Report\guiReportSale.Designer.cs">
       <DependentUpon>guiReportSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\Report\guiSalereportlist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Report\guiSalereportlist.Designer.cs">
+      <DependentUpon>guiSalereportlist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\gui_preview_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Report\gui_preview_report.designer.cs">
+      <DependentUpon>gui_preview_report.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Report\loadingreportSale.cs" />
+    <Compile Include="view\Report\plloading.cs" />
+    <Compile Include="view\Report\rptBS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\Report\rptBS.Designer.cs">
+      <DependentUpon>rptBS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\rptPL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\Report\rptPL.Designer.cs">
+      <DependentUpon>rptPL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\rptReceipt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\Report\rptReceipt.Designer.cs">
+      <DependentUpon>rptReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Report\rptSale.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="view\Report\rptSale.Designer.cs">
       <DependentUpon>rptSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\rptSalereport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\Report\rptSalereport.Designer.cs">
+      <DependentUpon>rptSalereport.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Report\rtpBalance.cs">
       <SubType>Component</SubType>
@@ -169,11 +242,23 @@
     <Compile Include="view\Report\rtpBalance.Designer.cs">
       <DependentUpon>rtpBalance.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\Sale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sale.Designer.cs">
+      <DependentUpon>Sale.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Sales\frmPayment.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\Sales\frmPayment.Designer.cs">
       <DependentUpon>frmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sales\frmQR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sales\frmQR.Designer.cs">
+      <DependentUpon>frmQR.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Sales\frmQRPayment.cs">
       <SubType>Form</SubType>
@@ -198,6 +283,18 @@
     </Compile>
     <Compile Include="view\Sales\guiSale.Designer.cs">
       <DependentUpon>guiSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Supplier\guiSuppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Supplier\guiSuppliers.Designer.cs">
+      <DependentUpon>guiSuppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\User\guiChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\User\guiChangePassword.Designer.cs">
+      <DependentUpon>guiChangePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="view\User\guiUser.cs">
       <SubType>Form</SubType>
@@ -237,6 +334,9 @@
     <EmbeddedResource Include="view\guiLogin.resx">
       <DependentUpon>guiLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\gui_loading.resx">
+      <DependentUpon>gui_loading.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,17 +346,44 @@
     <EmbeddedResource Include="view\Product\guiProduct.resx">
       <DependentUpon>guiProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\guiProductStock.resx">
+      <DependentUpon>guiProductStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\Report\guiReportSale.resx">
       <DependentUpon>guiReportSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\guiSalereportlist.resx">
+      <DependentUpon>guiSalereportlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\gui_preview_report.resx">
+      <DependentUpon>gui_preview_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\rptBS.resx">
+      <DependentUpon>rptBS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\rptPL.resx">
+      <DependentUpon>rptPL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\rptReceipt.resx">
+      <DependentUpon>rptReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Report\rptSale.resx">
       <DependentUpon>rptSale.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\Report\rptSalereport.resx">
+      <DependentUpon>rptSalereport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\Report\rtpBalance.resx">
       <DependentUpon>rtpBalance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\Sale.resx">
+      <DependentUpon>Sale.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\Sales\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sales\frmQR.resx">
+      <DependentUpon>frmQR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Sales\frmQRPayment.resx">
       <DependentUpon>frmQRPayment.cs</DependentUpon>
@@ -269,6 +396,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Sales\guiSale.resx">
       <DependentUpon>guiSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Supplier\guiSuppliers.resx">
+      <DependentUpon>guiSuppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\User\guiChangePassword.resx">
+      <DependentUpon>guiChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\User\guiUser.resx">
       <DependentUpon>guiUser.cs</DependentUpon>
@@ -369,6 +502,7 @@
     <Content Include="Resources\import_1_32.png" />
     <Content Include="Resources\import_2_32.png" />
     <Content Include="Resources\import_32.png" />
+    <None Include="Resources\in-stock.png" />
     <Content Include="Resources\income.png" />
     <Content Include="Resources\invoice-packing.png" />
     <Content Include="Resources\Invoice.png" />
@@ -423,6 +557,8 @@
     <Content Include="Resources\refresh_16.png" />
     <None Include="Resources\retail.png" />
     <None Include="Resources\reports.png" />
+    <None Include="Resources\reset-password.png" />
+    <None Include="Resources\reset-password %281%29.png" />
     <Content Include="Resources\Retailers-Database.png" />
     <Content Include="Resources\routing-basics.png" />
     <Content Include="Resources\routing-interconnect.png" />

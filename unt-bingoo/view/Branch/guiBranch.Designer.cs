@@ -39,6 +39,8 @@
             this.btnmainEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.btnmainDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelTop = new DevExpress.XtraEditors.PanelControl();
+            this.txtRemark = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.lblTitle = new DevExpress.XtraEditors.LabelControl();
             this.lblCode = new DevExpress.XtraEditors.LabelControl();
             this.txtBranchCode = new DevExpress.XtraEditors.TextEdit();
@@ -49,7 +51,7 @@
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
             this.gridBranch = new DevExpress.XtraGrid.GridControl();
-            this.gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewBranch = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BranchCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BranchName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,19 +61,21 @@
             this.Delete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelBottom = new DevExpress.XtraEditors.PanelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.btnmainEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelTop)).BeginInit();
             this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBranchCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBranchName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBranch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewBranch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnupdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
@@ -98,6 +102,8 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.txtRemark);
+            this.panelTop.Controls.Add(this.labelControl1);
             this.panelTop.Controls.Add(this.lblTitle);
             this.panelTop.Controls.Add(this.lblCode);
             this.panelTop.Controls.Add(this.txtBranchCode);
@@ -111,6 +117,21 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(950, 120);
             this.panelTop.TabIndex = 2;
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(110, 78);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(200, 20);
+            this.txtRemark.TabIndex = 9;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(20, 81);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(40, 13);
+            this.labelControl1.TabIndex = 8;
+            this.labelControl1.Text = "Remark:";
             // 
             // lblTitle
             // 
@@ -177,6 +198,7 @@
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // panelGrid
             // 
@@ -191,7 +213,7 @@
             // 
             this.gridBranch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridBranch.Location = new System.Drawing.Point(2, 2);
-            this.gridBranch.MainView = this.gridViewRole;
+            this.gridBranch.MainView = this.gridViewBranch;
             this.gridBranch.Name = "gridBranch";
             this.gridBranch.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnupdate,
@@ -199,20 +221,20 @@
             this.gridBranch.Size = new System.Drawing.Size(946, 386);
             this.gridBranch.TabIndex = 1;
             this.gridBranch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewRole});
+            this.gridViewBranch});
             // 
-            // gridViewRole
+            // gridViewBranch
             // 
-            this.gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewBranch.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.Id,
             this.BranchCode,
             this.BranchName,
             this.Active,
             this.Edit,
             this.Delete});
-            this.gridViewRole.GridControl = this.gridBranch;
-            this.gridViewRole.Name = "gridViewRole";
-            this.gridViewRole.OptionsView.ShowGroupPanel = false;
+            this.gridViewBranch.GridControl = this.gridBranch;
+            this.gridViewBranch.Name = "gridViewBranch";
+            this.gridViewBranch.OptionsView.ShowGroupPanel = false;
             // 
             // Id
             // 
@@ -265,8 +287,8 @@
             // 
             // Delete
             // 
-            this.Delete.Caption = "Delete";
             this.Delete.ColumnEdit = this.btnDelete;
+            this.Delete.FieldName = "Delete";
             this.Delete.Name = "Delete";
             this.Delete.Visible = true;
             this.Delete.VisibleIndex = 4;
@@ -284,6 +306,7 @@
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnExport);
             this.panelBottom.Controls.Add(this.lblCountRow);
             this.panelBottom.Controls.Add(this.btnClose);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -291,6 +314,17 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(950, 40);
             this.panelBottom.TabIndex = 1;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Excel;
+            this.btnExport.Location = new System.Drawing.Point(790, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(83, 36);
+            this.btnExport.TabIndex = 2;
+            this.btnExport.Text = "Export";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // lblCountRow
             // 
@@ -325,13 +359,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelTop)).EndInit();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBranchCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBranchName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBranch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewBranch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnupdate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
@@ -364,7 +399,7 @@
         private DevExpress.XtraEditors.LabelControl lblCountRow;
         private DevExpress.XtraEditors.SimpleButton btnClose;
         private DevExpress.XtraGrid.GridControl gridBranch;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRole;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewBranch;
         private DevExpress.XtraGrid.Columns.GridColumn Id;
         private DevExpress.XtraGrid.Columns.GridColumn BranchCode;
         private DevExpress.XtraGrid.Columns.GridColumn BranchName;
@@ -375,5 +410,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraGrid.Columns.GridColumn Delete;
         private DevExpress.XtraGrid.Columns.GridColumn Edit;
+        private DevExpress.XtraEditors.TextEdit txtRemark;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
     }
 }

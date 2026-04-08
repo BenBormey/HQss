@@ -83,15 +83,7 @@ namespace unt_bingoo.view.User
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
-            this.panelBottom = new DevExpress.XtraEditors.PanelControl();
-            this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
-            this.btnClose = new DevExpress.XtraEditors.SimpleButton();
-            this.LoadingRole = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.btnmainEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.btnmainDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridControlRole = new DevExpress.XtraGrid.GridControl();
             this.gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RoleCode = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -100,8 +92,16 @@ namespace unt_bingoo.view.User
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Edit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnmainEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.Delete = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControlRole = new DevExpress.XtraGrid.GridControl();
+            this.btnmainDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.panelBottom = new DevExpress.XtraEditors.PanelControl();
+            this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.LoadingRole = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).BeginInit();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
@@ -115,12 +115,12 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.chkIsActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
             this.panelGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
-            this.panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmainEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -292,60 +292,19 @@ namespace unt_bingoo.view.User
             this.panelGrid.Size = new System.Drawing.Size(900, 250);
             this.panelGrid.TabIndex = 0;
             // 
-            // panelBottom
+            // gridControlRole
             // 
-            this.panelBottom.Controls.Add(this.lblCountRow);
-            this.panelBottom.Controls.Add(this.btnExport);
-            this.panelBottom.Controls.Add(this.btnClose);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 510);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(900, 40);
-            this.panelBottom.TabIndex = 1;
-            // 
-            // lblCountRow
-            // 
-            this.lblCountRow.Location = new System.Drawing.Point(10, 12);
-            this.lblCountRow.Name = "lblCountRow";
-            this.lblCountRow.Size = new System.Drawing.Size(53, 13);
-            this.lblCountRow.TabIndex = 0;
-            this.lblCountRow.Text = "Count Row";
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(700, 8);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(80, 25);
-            this.btnExport.TabIndex = 1;
-            this.btnExport.Text = "Export";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(790, 8);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 25);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "Close";
-            // 
-            // btnmainEdit
-            // 
-            this.btnmainEdit.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
-            this.btnmainEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.btnmainEdit.Name = "btnmainEdit";
-            this.btnmainEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            this.btnmainEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainEdit_ButtonClick);
-            // 
-            // btnmainDelete
-            // 
-            this.btnmainDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
-            this.btnmainDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.btnmainDelete.Name = "btnmainDelete";
-            this.btnmainDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            this.btnmainDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDelete_ButtonClick);
+            this.gridControlRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRole.Location = new System.Drawing.Point(2, 2);
+            this.gridControlRole.MainView = this.gridViewRole;
+            this.gridControlRole.Name = "gridControlRole";
+            this.gridControlRole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnmainEdit,
+            this.btnmainDelete});
+            this.gridControlRole.Size = new System.Drawing.Size(896, 246);
+            this.gridControlRole.TabIndex = 0;
+            this.gridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRole});
             // 
             // gridViewRole
             // 
@@ -415,6 +374,16 @@ namespace unt_bingoo.view.User
             this.Edit.Visible = true;
             this.Edit.VisibleIndex = 5;
             // 
+            // btnmainEdit
+            // 
+            this.btnmainEdit.AutoHeight = false;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
+            this.btnmainEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainEdit.Name = "btnmainEdit";
+            this.btnmainEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainEdit_ButtonClick);
+            // 
             // Delete
             // 
             this.Delete.Caption = "Delete";
@@ -423,19 +392,50 @@ namespace unt_bingoo.view.User
             this.Delete.Visible = true;
             this.Delete.VisibleIndex = 6;
             // 
-            // gridControlRole
+            // btnmainDelete
             // 
-            this.gridControlRole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlRole.Location = new System.Drawing.Point(2, 2);
-            this.gridControlRole.MainView = this.gridViewRole;
-            this.gridControlRole.Name = "gridControlRole";
-            this.gridControlRole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnmainEdit,
-            this.btnmainDelete});
-            this.gridControlRole.Size = new System.Drawing.Size(896, 246);
-            this.gridControlRole.TabIndex = 0;
-            this.gridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewRole});
+            this.btnmainDelete.AutoHeight = false;
+            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            this.btnmainDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnmainDelete.Name = "btnmainDelete";
+            this.btnmainDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmainDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDelete_ButtonClick);
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.lblCountRow);
+            this.panelBottom.Controls.Add(this.btnExport);
+            this.panelBottom.Controls.Add(this.btnClose);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 510);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(900, 40);
+            this.panelBottom.TabIndex = 1;
+            // 
+            // lblCountRow
+            // 
+            this.lblCountRow.Location = new System.Drawing.Point(10, 12);
+            this.lblCountRow.Name = "lblCountRow";
+            this.lblCountRow.Size = new System.Drawing.Size(53, 13);
+            this.lblCountRow.TabIndex = 0;
+            this.lblCountRow.Text = "Count Row";
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(700, 8);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(80, 25);
+            this.btnExport.TabIndex = 1;
+            this.btnExport.Text = "Export";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(790, 8);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(80, 25);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Close";
             // 
             // guiUserrole
             // 
@@ -465,13 +465,13 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.chkIsActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
             this.panelGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnmainEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnmainDelete)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRole)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRole)).EndInit();
             this.ResumeLayout(false);
 
         }

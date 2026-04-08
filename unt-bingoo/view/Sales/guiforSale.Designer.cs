@@ -23,9 +23,9 @@ namespace unt_bingoo.view.Sales
         private LabelControl lblAllMenu;
         private GridControl gridMenu;
         private TileView tileMenu;
-        private TileViewColumn colImg;
-        private TileViewColumn colName;
-        private TileViewColumn colPrice;
+        private TileViewColumn ProductImage;
+        private TileViewColumn ProductName;
+        private TileViewColumn SellingPrice;
 
         private PanelControl panelRight;
         private PanelControl panelOrderHeader;
@@ -70,9 +70,8 @@ namespace unt_bingoo.view.Sales
 
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.TableLayout.TableColumnDefinition tableColumnDefinition1 = new DevExpress.XtraEditors.TableLayout.TableColumnDefinition();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement1 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
-            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement2 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
-            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement3 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -83,13 +82,17 @@ namespace unt_bingoo.view.Sales
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
-            this.colImg = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.colName = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.colPrice = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.ProductImage = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.ProductName = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.SellingPrice = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.DiscountPercent = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.TaxPercent = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.ProductCode = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.panelLeft = new DevExpress.XtraEditors.PanelControl();
             this.panelMenu = new DevExpress.XtraEditors.PanelControl();
             this.gridMenu = new DevExpress.XtraGrid.GridControl();
             this.tileMenu = new DevExpress.XtraGrid.Views.Tile.TileView();
+            this.ProductID = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.lblAllMenu = new DevExpress.XtraEditors.LabelControl();
             this.panelCategory = new DevExpress.XtraEditors.PanelControl();
             this.categoryButtonsPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -106,6 +109,7 @@ namespace unt_bingoo.view.Sales
             this.btnmainDecrease = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnCancel = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.CartID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelOrderFooter = new DevExpress.XtraEditors.PanelControl();
             this.lbldis = new DevExpress.XtraEditors.LabelControl();
             this.lbltotals = new DevExpress.XtraEditors.LabelControl();
@@ -145,29 +149,53 @@ namespace unt_bingoo.view.Sales
             ((System.ComponentModel.ISupportInitialize)(this.rdoOrderType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
-            // colImg
+            // ProductImage
             // 
-            this.colImg.Caption = "Img";
-            this.colImg.FieldName = "Img";
-            this.colImg.Name = "colImg";
-            this.colImg.Visible = true;
-            this.colImg.VisibleIndex = 0;
+            this.ProductImage.Caption = "ProductImage";
+            this.ProductImage.FieldName = "ProductImage";
+            this.ProductImage.Name = "ProductImage";
+            this.ProductImage.Visible = true;
+            this.ProductImage.VisibleIndex = 1;
             // 
-            // colName
+            // ProductName
             // 
-            this.colName.Caption = "Name";
-            this.colName.FieldName = "Name";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 1;
+            this.ProductName.Caption = "ProductName";
+            this.ProductName.FieldName = "ProductName";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.Visible = true;
+            this.ProductName.VisibleIndex = 2;
             // 
-            // colPrice
+            // SellingPrice
             // 
-            this.colPrice.Caption = "Price";
-            this.colPrice.FieldName = "Price";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 2;
+            this.SellingPrice.Caption = "SellingPrice";
+            this.SellingPrice.FieldName = "SellingPrice";
+            this.SellingPrice.Name = "SellingPrice";
+            this.SellingPrice.Visible = true;
+            this.SellingPrice.VisibleIndex = 3;
+            // 
+            // DiscountPercent
+            // 
+            this.DiscountPercent.Caption = "DiscountPercent";
+            this.DiscountPercent.FieldName = "DiscountPercent";
+            this.DiscountPercent.Name = "DiscountPercent";
+            this.DiscountPercent.Visible = true;
+            this.DiscountPercent.VisibleIndex = 4;
+            // 
+            // TaxPercent
+            // 
+            this.TaxPercent.Caption = "TaxPercent";
+            this.TaxPercent.FieldName = "TaxPercent";
+            this.TaxPercent.Name = "TaxPercent";
+            this.TaxPercent.Visible = true;
+            this.TaxPercent.VisibleIndex = 5;
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.Caption = "ProductCode";
+            this.ProductCode.FieldName = "ProductCode";
+            this.ProductCode.Name = "ProductCode";
+            this.ProductCode.Visible = true;
+            this.ProductCode.VisibleIndex = 0;
             // 
             // panelLeft
             // 
@@ -207,33 +235,34 @@ namespace unt_bingoo.view.Sales
             // tileMenu
             // 
             this.tileMenu.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colImg,
-            this.colName,
-            this.colPrice});
+            this.ProductID,
+            this.ProductCode,
+            this.ProductImage,
+            this.ProductName,
+            this.SellingPrice,
+            this.DiscountPercent,
+            this.TaxPercent});
             this.tileMenu.GridControl = this.gridMenu;
             this.tileMenu.Name = "tileMenu";
-            this.tileMenu.OptionsTiles.ItemSize = new System.Drawing.Size(220, 160);
+            this.tileMenu.OptionsTiles.IndentBetweenGroups = 50;
+            this.tileMenu.OptionsTiles.IndentBetweenItems = 9;
+            this.tileMenu.OptionsTiles.ItemPadding = new System.Windows.Forms.Padding(0);
             this.tileMenu.OptionsTiles.Orientation = System.Windows.Forms.Orientation.Vertical;
-            tileViewItemElement1.Column = this.colImg;
-            tileViewItemElement1.Text = "";
+            this.tileMenu.OptionsTiles.Padding = new System.Windows.Forms.Padding(15);
+            this.tileMenu.OptionsTiles.RowCount = 4;
+            this.tileMenu.TileColumns.Add(tableColumnDefinition1);
+            tileViewItemElement1.Column = this.ProductImage;
+            tileViewItemElement1.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
+            tileViewItemElement1.Text = "ProductImage";
             tileViewItemElement1.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement2.Appearance.Normal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            tileViewItemElement2.Appearance.Normal.Options.UseFont = true;
-            tileViewItemElement2.Column = this.colName;
-            tileViewItemElement2.RowIndex = 1;
-            tileViewItemElement2.Text = "colName";
-            tileViewItemElement2.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement3.Appearance.Normal.Font = new System.Drawing.Font("Segoe UI", 9F);
-            tileViewItemElement3.Appearance.Normal.Options.UseFont = true;
-            tileViewItemElement3.Column = this.colPrice;
-            tileViewItemElement3.RowIndex = 2;
-            tileViewItemElement3.Text = "colPrice";
-            tileViewItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             this.tileMenu.TileTemplate.Add(tileViewItemElement1);
-            this.tileMenu.TileTemplate.Add(tileViewItemElement2);
-            this.tileMenu.TileTemplate.Add(tileViewItemElement3);
             this.tileMenu.ItemClick += new DevExpress.XtraGrid.Views.Tile.TileViewItemClickEventHandler(this.tileMenu_ItemClick);
-            this.tileMenu.Click += new System.EventHandler(this.tileMenu_Click);
+            // 
+            // ProductID
+            // 
+            this.ProductID.Caption = "ProductID";
+            this.ProductID.FieldName = "ProductID";
+            this.ProductID.Name = "ProductID";
             // 
             // lblAllMenu
             // 
@@ -326,7 +355,8 @@ namespace unt_bingoo.view.Sales
             this.colUnitPrice,
             this.colAmount,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.CartID});
             this.gvOrder.GridControl = this.gridOrder;
             this.gvOrder.Name = "gvOrder";
             this.gvOrder.OptionsView.ShowGroupPanel = false;
@@ -399,6 +429,12 @@ namespace unt_bingoo.view.Sales
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnCancel.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnCancel_ButtonClick);
+            // 
+            // CartID
+            // 
+            this.CartID.Caption = "CartID";
+            this.CartID.FieldName = "CartID";
+            this.CartID.Name = "CartID";
             // 
             // panelOrderFooter
             // 
@@ -552,9 +588,9 @@ namespace unt_bingoo.view.Sales
             this.lblOrderTitle.Appearance.Options.UseFont = true;
             this.lblOrderTitle.Location = new System.Drawing.Point(10, 10);
             this.lblOrderTitle.Name = "lblOrderTitle";
-            this.lblOrderTitle.Size = new System.Drawing.Size(62, 20);
+            this.lblOrderTitle.Size = new System.Drawing.Size(44, 20);
             this.lblOrderTitle.TabIndex = 0;
-            this.lblOrderTitle.Text = "Order #1";
+            this.lblOrderTitle.Text = "Order ";
             // 
             // lblOrderNo
             // 
@@ -576,6 +612,7 @@ namespace unt_bingoo.view.Sales
             new DevExpress.XtraEditors.Controls.RadioGroupItem("TakeAway", "Take away")});
             this.rdoOrderType.Size = new System.Drawing.Size(198, 60);
             this.rdoOrderType.TabIndex = 2;
+            this.rdoOrderType.Visible = false;
             // 
             // guiforSale
             // 
@@ -620,5 +657,11 @@ namespace unt_bingoo.view.Sales
         }
 
         #endregion
+
+        private TileViewColumn ProductID;
+        private TileViewColumn ProductCode;
+        private TileViewColumn DiscountPercent;
+        private TileViewColumn TaxPercent;
+        private GridColumn CartID;
     }
 }
