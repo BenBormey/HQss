@@ -69,7 +69,7 @@
             // 
             // gridControlSuppliers
             // 
-            this.gridControlSuppliers.Location = new System.Drawing.Point(12, 250);
+            this.gridControlSuppliers.Location = new System.Drawing.Point(23, 239);
             this.gridControlSuppliers.MainView = this.gridViewSuppliers;
             this.gridControlSuppliers.Name = "gridControlSuppliers";
             this.gridControlSuppliers.Size = new System.Drawing.Size(950, 350);
@@ -88,55 +88,63 @@
             // 
             // txtSupplierCode
             // 
+            this.txtSupplierCode.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSupplierCode.Location = new System.Drawing.Point(140, 20);
             this.txtSupplierCode.Name = "txtSupplierCode";
-            this.txtSupplierCode.Size = new System.Drawing.Size(200, 21);
+            this.txtSupplierCode.Size = new System.Drawing.Size(200, 23);
             this.txtSupplierCode.TabIndex = 1;
             // 
             // txtSupplierName
             // 
+            this.txtSupplierName.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSupplierName.Location = new System.Drawing.Point(140, 50);
             this.txtSupplierName.Name = "txtSupplierName";
-            this.txtSupplierName.Size = new System.Drawing.Size(200, 21);
+            this.txtSupplierName.Size = new System.Drawing.Size(200, 23);
             this.txtSupplierName.TabIndex = 2;
             // 
             // txtContactName
             // 
+            this.txtContactName.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContactName.Location = new System.Drawing.Point(140, 80);
             this.txtContactName.Name = "txtContactName";
-            this.txtContactName.Size = new System.Drawing.Size(200, 21);
+            this.txtContactName.Size = new System.Drawing.Size(200, 23);
             this.txtContactName.TabIndex = 3;
             // 
             // txtPhone
             // 
+            this.txtPhone.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhone.Location = new System.Drawing.Point(140, 110);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(200, 21);
+            this.txtPhone.Size = new System.Drawing.Size(200, 23);
             this.txtPhone.TabIndex = 4;
             // 
             // txtEmail
             // 
+            this.txtEmail.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(140, 140);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(200, 21);
+            this.txtEmail.Size = new System.Drawing.Size(200, 27);
             this.txtEmail.TabIndex = 5;
             // 
             // txtAddress
             // 
+            this.txtAddress.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddress.Location = new System.Drawing.Point(520, 20);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(250, 21);
+            this.txtAddress.Size = new System.Drawing.Size(250, 23);
             this.txtAddress.TabIndex = 6;
             // 
             // txtTaxNumber
             // 
+            this.txtTaxNumber.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTaxNumber.Location = new System.Drawing.Point(520, 50);
             this.txtTaxNumber.Name = "txtTaxNumber";
-            this.txtTaxNumber.Size = new System.Drawing.Size(250, 21);
+            this.txtTaxNumber.Size = new System.Drawing.Size(250, 23);
             this.txtTaxNumber.TabIndex = 7;
             // 
             // chkStatus
             // 
+            this.chkStatus.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStatus.Location = new System.Drawing.Point(520, 80);
             this.chkStatus.Name = "chkStatus";
             this.chkStatus.Size = new System.Drawing.Size(104, 24);
@@ -145,7 +153,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(140, 180);
+            this.btnAdd.Location = new System.Drawing.Point(572, 198);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 35);
             this.btnAdd.TabIndex = 9;
@@ -154,7 +162,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(240, 180);
+            this.btnUpdate.Location = new System.Drawing.Point(672, 198);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(90, 35);
             this.btnUpdate.TabIndex = 10;
@@ -163,7 +171,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(340, 180);
+            this.btnDelete.Location = new System.Drawing.Point(772, 198);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(90, 35);
             this.btnDelete.TabIndex = 11;
@@ -172,7 +180,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(440, 180);
+            this.btnRefresh.Location = new System.Drawing.Point(872, 198);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(90, 35);
             this.btnRefresh.TabIndex = 12;
@@ -181,6 +189,7 @@
             // 
             // lblSupplierCode
             // 
+            this.lblSupplierCode.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSupplierCode.Location = new System.Drawing.Point(20, 20);
             this.lblSupplierCode.Name = "lblSupplierCode";
             this.lblSupplierCode.Size = new System.Drawing.Size(100, 23);
@@ -189,6 +198,7 @@
             // 
             // lblSupplierName
             // 
+            this.lblSupplierName.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSupplierName.Location = new System.Drawing.Point(20, 50);
             this.lblSupplierName.Name = "lblSupplierName";
             this.lblSupplierName.Size = new System.Drawing.Size(100, 23);
@@ -197,6 +207,7 @@
             // 
             // lblContactName
             // 
+            this.lblContactName.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblContactName.Location = new System.Drawing.Point(20, 80);
             this.lblContactName.Name = "lblContactName";
             this.lblContactName.Size = new System.Drawing.Size(100, 23);
@@ -205,6 +216,7 @@
             // 
             // lblPhone
             // 
+            this.lblPhone.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhone.Location = new System.Drawing.Point(20, 110);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(100, 23);
@@ -213,6 +225,7 @@
             // 
             // lblEmail
             // 
+            this.lblEmail.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Location = new System.Drawing.Point(20, 140);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(100, 23);
@@ -221,6 +234,7 @@
             // 
             // lblAddress
             // 
+            this.lblAddress.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddress.Location = new System.Drawing.Point(400, 20);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(100, 23);
@@ -229,6 +243,7 @@
             // 
             // lblTaxNumber
             // 
+            this.lblTaxNumber.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaxNumber.Location = new System.Drawing.Point(400, 50);
             this.lblTaxNumber.Name = "lblTaxNumber";
             this.lblTaxNumber.Size = new System.Drawing.Size(100, 23);
@@ -237,6 +252,7 @@
             // 
             // lblStatus
             // 
+            this.lblStatus.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Location = new System.Drawing.Point(400, 80);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(100, 23);

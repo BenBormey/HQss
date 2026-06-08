@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using unt_bingoo.Class;
 using unt_bingoo.Controller;
+using unt_bingoo.view.Outlet;
 
 namespace unt_bingoo.view.Product
 {
@@ -22,6 +23,13 @@ namespace unt_bingoo.view.Product
             InitializeComponent();
             this._api = new APIsController();
             _product = new BindingList<ProductStockModel>();
+            gvProduct.Appearance.HeaderPanel.BackColor = Color.Black;
+
+            gvProduct.Appearance.HeaderPanel.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            gvProduct.Appearance.HeaderPanel.Options.UseBackColor = true;
+            gvProduct.Appearance.HeaderPanel.Options.UseForeColor = true;
+            gvProduct.Appearance.HeaderPanel.Options.UseFont = true;
 
         }
 
@@ -60,6 +68,7 @@ namespace unt_bingoo.view.Product
             _product = new BindingList<ProductStockModel>(list);
 
             gridProduct.DataSource = _product;
+            this.lblCountRow.Text = $"CoutRow \t:{_product.Count}";
 
       
 
@@ -69,13 +78,13 @@ namespace unt_bingoo.view.Product
         {
             this.Close();
         }
-
+        private List<OutletItem> _allOutletsList = new List<OutletItem>();
         private async Task LoadingOutlet()
         {
             try
             {
                 var outlets = await _api.GetAsync<List<OutletItem>>("api/Outlet");
-
+                _allOutletsList = outlets;
                 cboOutlet.DataSource = outlets;
                 cboOutlet.DisplayMember = "OutletName";
                 cboOutlet.ValueMember = "Id";
@@ -91,7 +100,7 @@ namespace unt_bingoo.view.Product
             try
             {
                 var outlets = await _api.GetAsync<List<ProductItem>>("api/Product");
-
+           
                 cboProduct.DataSource = outlets;
                 cboProduct.DisplayMember = "ProductName";
                 cboProduct.ValueMember = "ProductID";
@@ -237,22 +246,45 @@ namespace unt_bingoo.view.Product
         {
       
         }
-
+        private bool _isLoadingEdit = false;
         private void btnmainUpdate_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             var row = gvProduct.GetFocusedRow() as ProductStockModel;
 
             if (row == null) return;
 
-            _editingId = row.StockID;
+            _isLoadingEdit = true;
 
-            cboProduct.SelectedValue = row.ProductID;
-            //cboBranch.SelectedValue = row.BranchId;
-            cboOutlet.SelectedValue = row.OutletId;
+            try
+            {
+                _editingId = row.StockID;
 
-            txtQty.Text = row.StockQty.ToString();
+                cboProduct.SelectedValue = row.ProductID;
 
-            btnAdd.Text = "Update";
+                var existingOutletIds = _product
+                    .Where(x => x.ProductID == row.ProductID
+                             && x.StockID != row.StockID)
+                    .Select(x => x.OutletId)
+                    .ToList();
+
+                var availableOutlets = _allOutletsList
+                    .Where(x => !existingOutletIds.Contains(x.Id))
+                    .ToList();
+
+                cboOutlet.DataSource = availableOutlets;
+                cboOutlet.DisplayMember = "OutletName";
+                cboOutlet.ValueMember = "Id";
+
+                cboOutlet.SelectedValue = row.OutletId;
+
+                txtQty.Text = row.StockQty.ToString();
+
+                btnAdd.Text = "Update";
+            }
+            finally
+            {
+                _isLoadingEdit = false;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -324,6 +356,118 @@ namespace unt_bingoo.view.Product
                 }
             }
            
+        }
+
+        private void btnmaindelete_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+
+        }
+
+        private async void btnmaindelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gvProduct.GetFocusedRow() as ProductStockModel;
+
+            if (row == null) return;
+
+
+
+            if (MessageBox.Show("Are you sure you want to delete this record?", "Confirm",
+              MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+
+
+
+                    bool result = await _api.DeleteAsync("api/ProductStock/" + row.StockID);
+
+                    if (result)
+                    {
+                        MessageBox.Show("Deleted successfully!");
+                        await LoadData(); // Refresh the grid
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete record.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                finally
+                {
+
+                }
+            }
+
+        }
+
+        private void cboProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_isLoadingEdit)
+                    return;
+
+                if (_allOutletsList == null || !_allOutletsList.Any())
+                    return;
+
+                if (cboProduct.SelectedItem == null)
+                {
+                    cboOutlet.DataSource = _allOutletsList;
+                    cboOutlet.DisplayMember = "OutletName";
+                    cboOutlet.ValueMember = "Id";
+                    cboOutlet.SelectedIndex = -1;
+                    return;
+                }
+
+                var selectedProduct = cboProduct.SelectedItem as ProductItem;
+
+                if (selectedProduct == null)
+                    return;
+
+                int selectedProductId = selectedProduct.ProductID;
+
+                var existingOutletIds = _product
+                    .Where(x => x.ProductID == selectedProductId)
+                    .Select(x => x.OutletId)
+                    .ToList();
+
+                var availableOutlets = _allOutletsList
+                    .Where(x => !existingOutletIds.Contains(x.Id))
+                    .ToList();
+
+                cboOutlet.DataSource = availableOutlets;
+                cboOutlet.DisplayMember = "OutletName";
+                cboOutlet.ValueMember = "Id";
+                cboOutlet.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+        private void cboProduct_SelectedValueChanged(object sender, EventArgs e)
+        {
+            // 1. Check if SelectedItem is valid
+        
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            guiOutlet gui = new guiOutlet();
+            gui.ShowDialog();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -148,9 +148,6 @@
   <data name="Printer_icon_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Printer_icon_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="update_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\update_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Preview_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Preview_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,8 +190,8 @@
   <data name="import_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\import_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waiting_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\waiting_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="import_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\import_2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dollar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dollar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,9 +235,6 @@
   <data name="loan-b" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loan-b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lst_customer_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lst_customer_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="penalty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\penalty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -252,6 +246,9 @@
   </data>
   <data name="Arrival Transaction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Arrival Transaction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="waiting_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\waiting_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Print Cheque" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Print Cheque.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -292,14 +289,14 @@
   <data name="reset-password" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reset-password.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="in-stock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\in-stock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Petty_Cash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Petty_Cash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="waiting clock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waiting clock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Supplier1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Supplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="switch-brand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\switch-brand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -331,8 +328,8 @@
   <data name="cancel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gainandlost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gainandlost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="hand-grow-up-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hand-grow-up-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DatabaseAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DatabaseAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -379,6 +376,9 @@
   <data name="Delivery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delivery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bonus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bonus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -394,8 +394,8 @@
   <data name="Deleted16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deleted16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_inventory_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\_inventory_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lst_customer_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lst_customer_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loading_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loading_1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -424,6 +424,9 @@
   <data name="Password" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Password.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ChatGPT Image Jun 3, 2026, 04_25_20 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChatGPT Image Jun 3, 2026, 04_25_20 PM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Unt Complete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Unt Complete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -441,6 +444,9 @@
   </data>
   <data name="update_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\update_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WeChat Image_20260603152313" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeChat Image_20260603152313.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_mobile_app" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_mobile_app.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -469,17 +475,20 @@
   <data name="Minus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Minus1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hand-grow-up-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hand-grow-up-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gainandlost" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gainandlost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="import_1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\import_1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pension-fund" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pension-fund.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="in-stock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\in-stock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Print" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lock_Printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lock_Printer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_wise-reports" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_wise-reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -510,6 +519,9 @@
   </data>
   <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="question_mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\question_mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -570,6 +582,9 @@
   </data>
   <data name="version" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\version.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pension-fund" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pension-fund.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_bonus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_bonus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -637,6 +652,9 @@
   <data name="_uploading" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_uploading.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="login" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Retailers-Database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Retailers-Database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -658,8 +676,8 @@
   <data name="Fill_Form" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fill_Form.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lock_Printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lock_Printer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ChatGPT Image Jun 3, 2026, 04_25_20 PM1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChatGPT Image Jun 3, 2026, 04_25_20 PM1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VAT_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VAT_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -682,8 +700,8 @@
   <data name="_daily" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_daily.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="import_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\import_2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="update_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\update_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="refresh_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -693,6 +711,9 @@
   </data>
   <data name="Salary" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Salary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_inventory_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_inventory_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Bank Book" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bank Book.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -706,6 +727,9 @@
   <data name="Update-User" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Update-User.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="JuJuBi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\JuJuBi.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_check_list_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_check_list_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -715,7 +739,7 @@
   <data name="metric" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\metric.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Supplier1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Supplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ChatGPT Image Jun 3, 2026, 04_25_20 PM2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChatGPT Image Jun 3, 2026, 04_25_20 PM2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

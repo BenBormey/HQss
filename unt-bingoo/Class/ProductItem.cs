@@ -41,6 +41,9 @@ namespace unt_bingoo.Class
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+        public int outletId { get; set; }
+        public string outletName { get; set; }
+        public int stockQty { get; set; }
     }
 
 }

@@ -31,6 +31,7 @@ namespace unt_bingoo.view.User
 
         private async void guiUser_Load(object sender, EventArgs e)
         {
+        
             try
             {
                 _api = APIGlobals.Api;
@@ -48,7 +49,7 @@ namespace unt_bingoo.view.User
             {
                 XtraMessageBox.Show(ex.Message);
             }
-
+            ApplyModernUI();
 
         }
         public async Task LoadData()
@@ -350,6 +351,7 @@ namespace unt_bingoo.view.User
         {
             guiOutlet gui_ = new guiOutlet();
             gui_.ShowDialog();
+            this.LoadingOutlet();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -386,6 +388,85 @@ namespace unt_bingoo.view.User
             {
                 XtraMessageBox.Show("Export failed: " + ex.Message);
             }
+        }
+        private void ApplyModernUI()
+        {
+            // Form
+            //this.BackColor = Color.FromArgb(245, 247, 250);
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //this.MaximizeBox = false;
+
+            // Header
+            panelHeader.Appearance.BackColor = Color.FromArgb(144, 238, 144);
+            panelHeader.Appearance.Options.UseBackColor = true;
+            panelHeader.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+
+            lblSystemName.Appearance.ForeColor = Color.White;
+            lblSystemName.Appearance.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+
+            // Detail Panel
+            panelDetail.Appearance.BackColor = Color.White;
+            panelDetail.Appearance.Options.UseBackColor = true;
+            panelDetail.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+
+            // Bottom
+            panelBottom.Appearance.BackColor = Color.WhiteSmoke;
+            panelBottom.Appearance.Options.UseBackColor = true;
+
+            // Buttons
+            StyleButton(btnAdd, Color.FromArgb(76, 175, 80));
+            StyleButton(btnCancel, Color.FromArgb(244, 67, 54));
+            StyleButton(btnExport, Color.FromArgb(255, 152, 0));
+            StyleButton(btnClose, Color.FromArgb(96, 125, 139));
+
+            // Grid
+            //gridViewUser.Appearance.HeaderPanel.BackColor = Color.FromArgb(63, 81, 181);
+            //gridViewUser.Appearance.HeaderPanel.ForeColor = Color.White;
+            //gridViewUser.Appearance.HeaderPanel.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            //gridViewUser.Appearance.Row.Font = new Font("Segoe UI", 9);
+            //gridViewUser.RowHeight = 35;
+
+            //gridViewUser.OptionsView.EnableAppearanceEvenRow = true;
+            //gridViewUser.Appearance.EvenRow.BackColor = Color.FromArgb(248, 249, 252);
+
+            // TextEdit style
+            StyleEditors();
+        }
+
+        private void StyleButton(SimpleButton btn, Color color)
+        {
+            btn.Appearance.BackColor = color;
+            btn.Appearance.ForeColor = Color.White;
+            btn.Appearance.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            btn.Appearance.Options.UseBackColor = true;
+            btn.Appearance.Options.UseForeColor = true;
+            btn.Appearance.Options.UseFont = true;
+            btn.LookAndFeel.UseDefaultLookAndFeel = false;
+        }
+
+        private void StyleEditors()
+        {
+            TextEdit[] edits =
+            {
+        txtUserName, txtFullName, txtFullNameKh,
+        txtPassword, txtConfirmPassword,
+        txtPhone, txtEmail
+    };
+
+            foreach (var txt in edits)
+            {
+                txt.Properties.Appearance.Font = new Font("Segoe UI", 10);
+                txt.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            }
+
+            txtAddressKh.Properties.Appearance.Font = new Font("Segoe UI", 10);
+            txtaddress.Properties.Appearance.Font = new Font("Segoe UI", 10);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

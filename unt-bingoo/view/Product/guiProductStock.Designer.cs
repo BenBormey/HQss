@@ -4,9 +4,6 @@
     {
         private System.ComponentModel.IContainer components = null;
 
-        private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Label lblTitle;
-
         private System.Windows.Forms.Label lblProduct;
         private System.Windows.Forms.Label lblQty;
 
@@ -43,10 +40,6 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.lblProduct = new System.Windows.Forms.Label();
             this.lblQty = new System.Windows.Forms.Label();
             this.lblOutlet = new System.Windows.Forms.Label();
@@ -74,10 +67,10 @@
             this.btnmainUpdate = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnmaindelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panelTop.SuspendLayout();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -91,47 +84,9 @@
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelTop
-            // 
-            this.panelTop.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelTop.Controls.Add(this.panel2);
-            this.panelTop.Controls.Add(this.lblTitle);
-            this.panelTop.Controls.Add(this.panel3);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1000, 60);
-            this.panelTop.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(1, 59);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(998, 231);
-            this.panel2.TabIndex = 1;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblTitle.Location = new System.Drawing.Point(20, 18);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(307, 25);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "PRODUCT STOCK MANAGEMENT";
-            // 
-            // panel3
-            // 
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1000, 60);
-            this.panel3.TabIndex = 0;
-            // 
             // lblProduct
             // 
-            this.lblProduct.Location = new System.Drawing.Point(31, 107);
+            this.lblProduct.Location = new System.Drawing.Point(31, 32);
             this.lblProduct.Name = "lblProduct";
             this.lblProduct.Size = new System.Drawing.Size(100, 23);
             this.lblProduct.TabIndex = 1;
@@ -139,7 +94,7 @@
             // 
             // lblQty
             // 
-            this.lblQty.Location = new System.Drawing.Point(31, 157);
+            this.lblQty.Location = new System.Drawing.Point(31, 63);
             this.lblQty.Name = "lblQty";
             this.lblQty.Size = new System.Drawing.Size(100, 23);
             this.lblQty.TabIndex = 5;
@@ -147,7 +102,7 @@
             // 
             // lblOutlet
             // 
-            this.lblOutlet.Location = new System.Drawing.Point(521, 107);
+            this.lblOutlet.Location = new System.Drawing.Point(31, 90);
             this.lblOutlet.Name = "lblOutlet";
             this.lblOutlet.Size = new System.Drawing.Size(100, 23);
             this.lblOutlet.TabIndex = 7;
@@ -155,7 +110,7 @@
             // 
             // lblRemark
             // 
-            this.lblRemark.Location = new System.Drawing.Point(521, 157);
+            this.lblRemark.Location = new System.Drawing.Point(31, 120);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(100, 23);
             this.lblRemark.TabIndex = 9;
@@ -163,31 +118,33 @@
             // 
             // cboProduct
             // 
-            this.cboProduct.Location = new System.Drawing.Point(131, 102);
+            this.cboProduct.Location = new System.Drawing.Point(131, 27);
             this.cboProduct.Name = "cboProduct";
-            this.cboProduct.Size = new System.Drawing.Size(250, 21);
+            this.cboProduct.Size = new System.Drawing.Size(369, 21);
             this.cboProduct.TabIndex = 2;
+            this.cboProduct.SelectedIndexChanged += new System.EventHandler(this.cboProduct_SelectedIndexChanged);
+            this.cboProduct.SelectedValueChanged += new System.EventHandler(this.cboProduct_SelectedValueChanged);
             // 
             // cboOutlet
             // 
-            this.cboOutlet.Location = new System.Drawing.Point(621, 102);
+            this.cboOutlet.Location = new System.Drawing.Point(131, 85);
             this.cboOutlet.Name = "cboOutlet";
-            this.cboOutlet.Size = new System.Drawing.Size(250, 21);
+            this.cboOutlet.Size = new System.Drawing.Size(369, 21);
             this.cboOutlet.TabIndex = 8;
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(131, 152);
+            this.txtQty.Location = new System.Drawing.Point(131, 58);
             this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(250, 21);
+            this.txtQty.Size = new System.Drawing.Size(369, 21);
             this.txtQty.TabIndex = 6;
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(621, 152);
+            this.txtRemark.Location = new System.Drawing.Point(131, 115);
             this.txtRemark.Multiline = true;
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(250, 80);
+            this.txtRemark.Size = new System.Drawing.Size(369, 60);
             this.txtRemark.TabIndex = 10;
             // 
             // panelBottom
@@ -197,7 +154,7 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 644);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1000, 50);
+            this.panelBottom.Size = new System.Drawing.Size(851, 50);
             this.panelBottom.TabIndex = 14;
             // 
             // panelControl1
@@ -208,7 +165,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1000, 50);
+            this.panelControl1.Size = new System.Drawing.Size(851, 50);
             this.panelControl1.TabIndex = 2;
             // 
             // lblCountRow
@@ -222,7 +179,7 @@
             // simpleButton1
             // 
             this.simpleButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.simpleButton1.Location = new System.Drawing.Point(838, 2);
+            this.simpleButton1.Location = new System.Drawing.Point(689, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(80, 46);
             this.simpleButton1.TabIndex = 1;
@@ -232,11 +189,12 @@
             // simpleButton2
             // 
             this.simpleButton2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.simpleButton2.Location = new System.Drawing.Point(918, 2);
+            this.simpleButton2.Location = new System.Drawing.Point(769, 2);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(80, 46);
             this.simpleButton2.TabIndex = 2;
             this.simpleButton2.Text = "Close";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // panel1
             // 
@@ -245,16 +203,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 644);
+            this.panel1.Size = new System.Drawing.Size(851, 644);
             this.panel1.TabIndex = 15;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 284);
+            this.panel5.Location = new System.Drawing.Point(0, 208);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1000, 360);
+            this.panel5.Size = new System.Drawing.Size(851, 436);
             this.panel5.TabIndex = 1;
             // 
             // panel6
@@ -264,7 +222,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1000, 360);
+            this.panel6.Size = new System.Drawing.Size(851, 436);
             this.panel6.TabIndex = 14;
             // 
             // gridProduct
@@ -276,7 +234,7 @@
             this.gridProduct.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnmaindelete,
             this.btnmainUpdate});
-            this.gridProduct.Size = new System.Drawing.Size(1000, 360);
+            this.gridProduct.Size = new System.Drawing.Size(851, 436);
             this.gridProduct.TabIndex = 1;
             this.gridProduct.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProduct});
@@ -311,6 +269,7 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 0;
+            this.gridColumn8.Width = 45;
             // 
             // ProductName
             // 
@@ -319,6 +278,7 @@
             this.ProductName.Name = "ProductName";
             this.ProductName.Visible = true;
             this.ProductName.VisibleIndex = 1;
+            this.ProductName.Width = 156;
             // 
             // OutletName
             // 
@@ -327,6 +287,7 @@
             this.OutletName.Name = "OutletName";
             this.OutletName.Visible = true;
             this.OutletName.VisibleIndex = 2;
+            this.OutletName.Width = 156;
             // 
             // StockQty
             // 
@@ -335,6 +296,7 @@
             this.StockQty.Name = "StockQty";
             this.StockQty.Visible = true;
             this.StockQty.VisibleIndex = 3;
+            this.StockQty.Width = 156;
             // 
             // gridColumn2
             // 
@@ -343,6 +305,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 4;
+            this.gridColumn2.Width = 156;
             // 
             // btnmainUpdate
             // 
@@ -361,6 +324,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 5;
+            this.gridColumn3.Width = 164;
             // 
             // btnmaindelete
             // 
@@ -370,57 +334,68 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmaindelete.Name = "btnmaindelete";
             this.btnmaindelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnmaindelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmaindelete_ButtonClick);
+            this.btnmaindelete.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmaindelete_ButtonPressed);
             // 
-            // btnCancel
+            // panel4
             // 
-            this.btnCancel.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Cancel16;
-            this.btnCancel.Location = new System.Drawing.Point(723, 251);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 27);
-            this.btnCancel.TabIndex = 21;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.lblProduct);
+            this.panel4.Controls.Add(this.btnAdd);
+            this.panel4.Controls.Add(this.cboProduct);
+            this.panel4.Controls.Add(this.btnCancel);
+            this.panel4.Controls.Add(this.lblOutlet);
+            this.panel4.Controls.Add(this.txtQty);
+            this.panel4.Controls.Add(this.cboOutlet);
+            this.panel4.Controls.Add(this.lblQty);
+            this.panel4.Controls.Add(this.lblRemark);
+            this.panel4.Controls.Add(this.txtRemark);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(851, 208);
+            this.panel4.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.Image = global::unt_bingoo.Properties.Resources.add16;
+            this.button2.Location = new System.Drawing.Point(516, 83);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(27, 24);
+            this.button2.TabIndex = 171;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnAdd
             // 
             this.btnAdd.ImageOptions.Image = global::unt_bingoo.Properties.Resources.add16;
-            this.btnAdd.Location = new System.Drawing.Point(621, 251);
+            this.btnAdd.Location = new System.Drawing.Point(516, 148);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 27);
             this.btnAdd.TabIndex = 20;
             this.btnAdd.Text = "Add";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // panel4
+            // btnCancel
             // 
-            this.panel4.Controls.Add(this.btnAdd);
-            this.panel4.Controls.Add(this.btnCancel);
-            this.panel4.Controls.Add(this.txtQty);
-            this.panel4.Controls.Add(this.lblQty);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1000, 284);
-            this.panel4.TabIndex = 0;
+            this.btnCancel.ImageOptions.Image = global::unt_bingoo.Properties.Resources.Cancel16;
+            this.btnCancel.Location = new System.Drawing.Point(618, 148);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(90, 27);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // guiProductStock
             // 
-            this.ClientSize = new System.Drawing.Size(1000, 694);
-            this.Controls.Add(this.panelTop);
-            this.Controls.Add(this.lblProduct);
-            this.Controls.Add(this.cboProduct);
-            this.Controls.Add(this.lblOutlet);
-            this.Controls.Add(this.cboOutlet);
-            this.Controls.Add(this.lblRemark);
-            this.Controls.Add(this.txtRemark);
+            this.ClientSize = new System.Drawing.Size(851, 694);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelBottom);
             this.Name = "guiProductStock";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product Stock Management";
             this.Load += new System.EventHandler(this.guiProductStock_Load);
-            this.panelTop.ResumeLayout(false);
-            this.panelTop.PerformLayout();
             this.panelBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -435,15 +410,11 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private DevExpress.XtraGrid.GridControl gridProduct;
@@ -464,5 +435,6 @@
         private System.Windows.Forms.Panel panel4;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private System.Windows.Forms.Button button2;
     }
 }

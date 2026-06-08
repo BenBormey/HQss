@@ -11,22 +11,24 @@ using unt_bingoo.view.Product;
 using unt_bingoo.view.Outlet;
 using unt_bingoo.view.currency;
 using unt_bingoo.view.User;
-using unt_bingoo.view.Report;
+
 using unt_bingoo.view.Category;
 using unt_bingoo.view.Branch;
-using unt_bingoo.view.Sales;
 using unt_bingoo.view.Customer;
 using unt_bingoo.view.Supplier;
+using unt_bingoo.Controller;
+using DevExpress.XtraEditors;
 
 namespace unt_bingoo.view
 {
     public partial class mainForm : Form
     {
         private int childFormNumber = 0;
-
+        private readonly APIsController _api;
         public mainForm()
         {
             InitializeComponent();
+            this._api = new APIsController();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -122,7 +124,7 @@ namespace unt_bingoo.view
 
         private void outLetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new guiOutlet() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new Outlet.guiOutlet() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
             
         }
@@ -130,7 +132,7 @@ namespace unt_bingoo.view
         private void currencyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-           var frm = new guiCurency() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+           var frm = new guiExchange() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
         }
 
@@ -150,13 +152,12 @@ namespace unt_bingoo.view
         {
             
 
-                  var frm = new guiReportSale() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
-            frm.Show();
+          
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            var frm = new guiCategory() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new guiUser() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
         }
 
@@ -170,8 +171,6 @@ namespace unt_bingoo.view
         {
             
 
-                var frm = new guiforSale() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
-            frm.Show();
         }
 
         private void customerFormToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,8 +218,7 @@ namespace unt_bingoo.view
 
         private void reportListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new guiSalereportlist() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
-            frm.Show();
+      
             
         }
 
@@ -230,6 +228,34 @@ namespace unt_bingoo.view
                   var frm = new guiSuppliers() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
 
+        }
+
+        private async void mainForm_Load(object sender, EventArgs e)
+        {
+       
+        bool login_=    await _api.LoginAsync("admin", "123");
+            if (!login_)
+            {
+                await _api.LoginAsync("bormey", "12345678");
+            }
+
+       
+
+
+            APIGlobals.Api = _api;
+        }
+
+        private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void guiFranchiseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+                     var frm = new guiFranchise() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
         }
     }
 }

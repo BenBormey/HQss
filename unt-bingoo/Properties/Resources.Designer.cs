@@ -603,6 +603,36 @@ namespace unt_bingoo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_Jun_3__2026__04_25_20_PM {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image Jun 3, 2026, 04_25_20 PM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_Jun_3__2026__04_25_20_PM1 {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image Jun 3, 2026, 04_25_20 PM1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_Jun_3__2026__04_25_20_PM2 {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image Jun 3, 2026, 04_25_20 PM2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Check_Arrival {
             get {
                 object obj = ResourceManager.GetObject("Check Arrival", resourceCulture);
@@ -706,6 +736,16 @@ namespace unt_bingoo.Properties {
         internal static System.Drawing.Bitmap Contract {
             get {
                 object obj = ResourceManager.GetObject("Contract", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy {
+            get {
+                object obj = ResourceManager.GetObject("copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -876,6 +916,16 @@ namespace unt_bingoo.Properties {
         internal static System.Drawing.Bitmap Download {
             get {
                 object obj = ResourceManager.GetObject("Download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit__1_ {
+            get {
+                object obj = ResourceManager.GetObject("edit (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1143,6 +1193,16 @@ namespace unt_bingoo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap JuJuBi {
+            get {
+                object obj = ResourceManager.GetObject("JuJuBi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Khmer_Flag {
             get {
                 object obj = ResourceManager.GetObject("Khmer Flag", resourceCulture);
@@ -1226,6 +1286,16 @@ namespace unt_bingoo.Properties {
         internal static System.Drawing.Bitmap Lock_Printer {
             get {
                 object obj = ResourceManager.GetObject("Lock_Printer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap login {
+            get {
+                object obj = ResourceManager.GetObject("login", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2056,6 +2126,16 @@ namespace unt_bingoo.Properties {
         internal static System.Drawing.Bitmap waiting_clock {
             get {
                 object obj = ResourceManager.GetObject("waiting clock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeChat_Image_20260603152313 {
+            get {
+                object obj = ResourceManager.GetObject("WeChat Image_20260603152313", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

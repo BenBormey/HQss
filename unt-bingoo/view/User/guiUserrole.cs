@@ -239,5 +239,32 @@ namespace unt_bingoo.view.User
         {
             ClearForm();
         }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog save = new SaveFileDialog();
+                save.Filter = "Excel File (*.xlsx)|*.xlsx";
+                save.FileName = "Roles.xlsx";
+
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    gridViewRole.ExportToXlsx(save.FileName);
+
+                    XtraMessageBox.Show("Export successful!");
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        public void Export()
+        {
+
+            SaveFileDialog save = new SaveFileDialog();
+        }
     }
 }

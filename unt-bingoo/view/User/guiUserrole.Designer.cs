@@ -428,6 +428,7 @@ namespace unt_bingoo.view.User
             this.btnExport.Size = new System.Drawing.Size(80, 25);
             this.btnExport.TabIndex = 1;
             this.btnExport.Text = "Export";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClose
             // 

@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using unt_bingoo.Class;
+using System.Xml.Linq;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace unt_bingoo.Controller
 {
@@ -17,8 +21,13 @@ namespace unt_bingoo.Controller
         {
             _client = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:5189/"),
-                Timeout = TimeSpan.FromMinutes(2)
+                //BaseAddress = new Uri("http://localhost:5189/"),
+                //BaseAddress = new Uri("http://localhost:8085/"),
+                // BaseAddress = new Uri("http://192.168.2.26:8085/"),
+                 BaseAddress = new Uri("http://192.168.1.99:8099/"),
+               // BaseAddress = new Uri("http://localhost:5189/"),
+       
+          
             };
         }
 
@@ -247,7 +256,117 @@ namespace unt_bingoo.Controller
         {
             return !string.IsNullOrEmpty(_token);
         }
+        public async Task<ExchangeRateResponse> GetNBCExchange()
+        {
+            return await SafeCall(async () =>
+            {
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "https://www.nbc.gov.kh/api/exRate.php"
+                );
 
-   
+                request.Headers.Add("User-Agent", "Mozilla/5.0");
+
+                var res = await _client.SendAsync(request);
+                res.EnsureSuccessStatusCode();
+
+                var xml = await res.Content.ReadAsStringAsync();
+                var doc = XDocument.Parse(xml);
+
+                var items = doc.Descendants("ex")
+                    .Select(x => new ExchangeRateItem
+                    {
+                        Date = x.Element("date")?.Value,
+                        Key = x.Element("key")?.Value,
+                        Unit = int.TryParse(x.Element("unit")?.Value, out var u) ? u : 0,
+                        Bid = decimal.TryParse(x.Element("bid")?.Value, out var bid) ? bid : 0,
+                        Ask = decimal.TryParse(x.Element("ask")?.Value, out var ask) ? ask : 0,
+                        Average = decimal.TryParse(x.Element("average")?.Value, out var avg) ? avg : 0,
+                    })
+                    .ToList();
+
+                return new ExchangeRateResponse
+                {
+                    ExternalSystemName = "NBC",
+                    Items = items
+                };
+            });
+        }
+
+//public async Task<ExchangeRateResponse> GetMEFExchange()
+//    {
+//        return await SafeCall(async () =>
+//        {
+//            var request = new HttpRequestMessage(HttpMethod.Get, "https://data.mef.gov.kh/api/v1/realtime-api/exchange-rate?currency_id=USD");
+//            var res = await _client.SendAsync(request);
+//            res.EnsureSuccessStatusCode();
+
+//            var json = await res.Content.ReadAsStringAsync();
+
+//            // ប្រើ JsonDocument ដើម្បីអានទិន្នន័យ
+//            using (JsonDocument doc = JsonDocument.Parse(json))
+//            {
+//                var root = doc.RootElement.GetProperty("data");
+
+//                var item = new ExchangeRateItem
+//                {
+//                    Date = root.GetProperty("valid_date").GetString(),
+//                    Key = root.GetProperty("symbol").GetString(),
+//                    Unit = root.GetProperty("unit").GetInt32(),
+//                    Bid = root.GetProperty("bid").GetDecimal(),
+//                    Ask = root.GetProperty("ask").GetDecimal(),
+//                    Average = root.GetProperty("average").GetDecimal()
+//                };
+
+//                return new ExchangeRateResponse
+//                {
+//                    ExternalSystemName = "MEF",
+//                    Items = new List<ExchangeRateItem> { item }
+//                };
+//            }
+//        });
+//    }
+    public async Task<MefExchangeResponse> GetListByDate(DateTime date)
+        {
+            return await SafeCall(async () =>
+            {
+           
+                string dateStr = date.ToString("yyyy-MM-dd");
+             string url = $"https://data.mef.gov.kh/api/v1/realtime-api/exchange-rate?currency_id=USD&date={dateStr}";
+
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+
+                var res = await _client.SendAsync(request);
+                var json = await res.Content.ReadAsStringAsync();
+
+                if (!res.IsSuccessStatusCode)
+                    throw new Exception($"MEF API Error: {json}");
+
+                return JsonConvert.DeserializeObject<MefExchangeResponse>(json);
+            });
+        }
+
+
+        public async Task<ProvinceResponse> GetProvincesAsync(int page = 1, int pageSize = 10)
+        {
+            return await SafeCall(async () =>
+            {
+                string url =
+                    $"https://data.mef.gov.kh/api/v1/public-datasets/pd_66a8603700604c000123e144/json?page={page}&page_size={pageSize}";
+
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+
+                var res = await _client.SendAsync(request);
+                var json = await res.Content.ReadAsStringAsync();
+
+                if (!res.IsSuccessStatusCode)
+                    throw new Exception($"MEF Province API Error: {json}");
+
+                return JsonConvert.DeserializeObject<ProvinceResponse>(json);
+            });
+        }
     }
+
 }

@@ -1,0 +1,543 @@
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.ComponentModel;
+using unt_bingoo.Class;
+using unt_bingoo.Controller;
+using System.Drawing;
+using System.Collections.Generic;
+
+namespace unt_bingoo.view.currency
+{
+    public partial class guiExchange : Form
+    {
+        private APIsController _api;
+
+
+        private BindingList<ExchangeRateModel> _list =
+            new BindingList<ExchangeRateModel>();
+
+        public guiExchange()
+        {
+            InitializeComponent();
+
+            _api = new APIsController();
+
+
+            gridControl1.DataSource = _list;
+
+            this.Load += guiExchange_Load;
+        }
+
+
+
+        private async Task LoadGrid()
+        {
+            try
+            {
+                var data = await _api.GetAsync<List<ExchangeRateModel>>("api/ExchangeRate");
+
+                _list.Clear();
+
+                foreach (var item in data.OrderByDescending(x => x.createdDate))
+                    _list.Add(item);
+
+                gridView1.BestFitColumns();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Grid Load Error: " + ex.Message);
+            }
+        }
+
+        private async void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. Validate currency
+                if (string.IsNullOrWhiteSpace(cboCurrency.Text))
+                {
+                    MessageBox.Show("Please select currency");
+                    return;
+                }
+
+                // 2. Validate numbers
+                if (!decimal.TryParse(txtAsk.Text, out decimal ask) ||
+                    !decimal.TryParse(txtBid.Text, out decimal bid) ||
+                    !decimal.TryParse(txtAvg.Text, out decimal avg))
+                {
+                    MessageBox.Show("Invalid number format");
+                    return;
+                }
+      
+             
+                var selectedDate = dtDate.Value.Date;
+                DateTime filter_ = DateTime.Now.Date;
+
+        
+                if (selectedDate > filter_)
+                {
+                    MessageBox.Show("Insertion of future dates is not allowed. Please select today’s date or a past date.",
+                                    "Invalid Date",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    return; 
+                }
+                
+
+            
+                if (_list.Count > 0)
+                {
+                    var lastDate = _list.Max(x => x.rateDate.Date);
+                    var expectedDate = lastDate.AddDays(1);
+                    //var lastDate = _list.Max(x => x.rateDate.Date);
+                    if (lastDate == DateTime.Today)
+                    {
+                    
+                        MessageBox.Show("The exchange rate for today has already been entered.",
+                                        "Information",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                        return;
+                    }
+                    else
+                    {
+                       
+                    }
+                  
+
+                    if (selectedDate != expectedDate)
+                    {
+                        var result = MessageBox.Show(
+                            $"Missing exchange rate date: {expectedDate:dd-MM-yyyy}\n\nDo you want to use this date?",
+                            "Missing Date",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning
+                        );
+
+                        if (result == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                dtpDate.Value = expectedDate;
+
+                                selectedDate = expectedDate;
+                                return;
+
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // Professional English message
+                                MessageBox.Show("The selected date is outside the valid range. Future dates are not allowed.",
+                                                "Validation Error",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Information);
+
+                                // Reset to current date to keep the UI stable
+                                dtDate.Value = DateTime.Today;
+                                return;
+                            }
+
+                          
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                // 4. Build model
+                var model = new ExchangeRateModel
+                {
+                    currencyCode = cboCurrency.Text,
+                    rate = nExchangRate.Value,
+                    ask = ask,
+                    bid = bid,
+                    average = avg,
+                    rateDate = selectedDate,
+                    note = txtRemark.Text,
+                    createdDate = DateTime.Now,
+                    createdBy = Environment.MachineName
+                };
+
+                // 5. Call API
+                var ok = await _api.PostAsync("api/ExchangeRate", model);
+
+                if (!ok)
+                {
+                    MessageBox.Show("Add failed!");
+                    return;
+                }
+
+                _list.Add(model);
+
+                MessageBox.Show("Added successfully ✅");
+
+                ClearForm();
+                await LoadGrid();
+
+                try
+                {
+                    dtpDate.Value = selectedDate.AddDays(1);
+                }
+                catch(Exception ex)
+                {
+                  
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                await LoadGrid();
+            }
+        }
+
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtAvg.Text, out decimal avg))
+            {
+                nExchangRate.Value = avg;
+                cboCurrency.Text = "USD";
+                dtDate.Value = DateTime.Now;
+            }
+            else
+            {
+                MessageBox.Show("Invalid Avg value!");
+            }
+        }
+
+        private void ClearForm()
+        {
+            txtRemark.Clear();
+            nExchangRate.Value = 0;
+        }
+        private async void LoadExchangerate()
+        {
+            txtAsk.Text = "";
+            txtAvg.Text = "";
+            txtBid.Text = "";
+            txtAsk.ForeColor = Color.Green;
+            try
+            {
+                var result = await _api.GetNBCExchange();
+                var usdKhr = result.Items
+                .FirstOrDefault(x => x.Key == "USD/KHR");
+
+                txtBid.Text = usdKhr.Bid.ToString();
+                txtAsk.Text = usdKhr.Ask.ToString();
+                txtAvg.Text = usdKhr.Average.ToString();
+                DateTime dt = DateTime.ParseExact(usdKhr.Date, "MM/dd/yyyy",
+                                  System.Globalization.CultureInfo.InvariantCulture);
+                dtpDate.Text = dt.ToString("dd-MM-yyyy");
+                dtpDate.Value = dt;
+           //     txtDate.Text = usdKhr.Key;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void guiExchange_Load(object sender, EventArgs e)
+        {
+            DateTime now_ = DateTime.Now;
+            await LoadGrid();
+            this.LoadRateByDate(now_);
+            cboCurrency.SelectedItem = "KHR";
+            dtDate.MaxDate = DateTime.Today;
+            dtpDate.MaxDate = DateTime.Today;
+        }
+
+        private void guiExchange_Load_1(object sender, EventArgs e)
+        {
+        }
+   
+
+
+
+
+
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            nExchangRate.Value = 0;
+
+            //cboCurrency.SelectedIndex = -1;
+        //    dtDate.Value = DateTime.Now;
+
+        }
+
+        private void btnAddService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                dtDate.Value =   dtpDate.Value;
+       
+                  
+        
+
+                var rate = Convert.ToDecimal(txtAsk.Text);
+
+                if (rate > 3000 && rate < 5000)
+                {
+                    nExchangRate.Value = rate;
+                    cboCurrency.SelectedItem = "KHR";
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid date format. Use dd-MM-yyyy");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exchange Error: " + ex.Message);
+            }
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void repositoryItemButtonEdit1_ButtonClick(
+    object sender,
+    DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                var row = gridView1.GetFocusedRow() as ExchangeRateModel;
+
+                if (row == null)
+                {
+                    MessageBox.Show("No row selected!");
+                    return;
+                }
+
+                //cboCurrency.Text = row.currencyCode;
+                //nExchangRate.Value = row.rate;
+                //txtAsk.Text = row.ask.ToString();
+                //txtBid.Text = row.bid.ToString();
+                //txtAvg.Text = row.average.ToString();
+                //dtDate.Value = row.rateDate;
+                txtRemark.Text = row.note;
+
+                dtpDate.Value = row.rateDate;
+                dtpDate.Format = DateTimePickerFormat.Custom;
+                dtpDate.CustomFormat = "dd-MM-yyyy";
+
+
+    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Edit Load Error: " + ex.Message);
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var frm = new guiListExchange())
+            {
+           
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+
+                    nExchangRate.Value = frm.SelectedRate;
+                    dtDate.Value = frm.SelectedDate;
+
+
+                    txtAsk.Text = frm.SelectedRate.ToString("N0");
+                    txtBid.Text = frm.SelectedRate.ToString("N0");
+                    txtAvg.Text = frm.SelectedRate.ToString("N2");
+
+
+                    cboCurrency.Text = "KHR";
+
+                }
+            }
+        }
+
+        private async void btnRemoveTemp_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+             
+                var row = gridView1.GetFocusedRow() as ExchangeRateModel;
+
+                if (row == null)
+                {
+                    MessageBox.Show("No row selected!");
+                    return;
+                }
+
+        
+                var confirm = MessageBox.Show(
+                    $"Are you sure to delete rate: {row.currencyCode} ({row.rateDate:dd/MM/yyyy}) ?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+         
+                var result = await _api.DeleteAsync($"api/ExchangeRate/{row.id}");
+
+                if (!result)
+                {
+                    MessageBox.Show("Delete failed!");
+                    return;
+                }
+
+      
+                _list.Remove(row);
+
+                MessageBox.Show("Deleted successfully ✅");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private async void repositoryItemButtonEdit2_ButtonClick(
+         object sender,
+         DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                var row = gridView1.GetFocusedRow() as ExchangeRateModel;
+
+                if (row == null)
+                {
+                    MessageBox.Show("No row selected!");
+                    return;
+                }
+
+                // Find latest date in list
+                var lastDate = _list.Max(x => x.rateDate.Date);
+
+                // Allow delete only latest date
+                if (row.rateDate.Date != lastDate)
+                {
+                    MessageBox.Show(
+                        $"You can only delete the latest exchange rate entry.\n\n" +
+                        $"Latest Date: {lastDate:dd-MM-yyyy}",
+                        "Delete Not Allowed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+
+                var confirm = MessageBox.Show(
+                    $"Are you sure to delete rate: {row.currencyCode} ({row.rateDate:dd/MM/yyyy}) ?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                var result = await _api.DeleteAsync($"api/ExchangeRate/{row.id}");
+
+                if (!result)
+                {
+                    MessageBox.Show("Delete failed!");
+                    return;
+                }
+
+                _list.Remove(row);
+
+                MessageBox.Show("Deleted successfully ✅");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+        private async Task LoadRateByDate(DateTime selectedDate)
+        {
+            try
+            {
+        
+
+                APIsController api = new APIsController();
+
+                var result = await api.GetListByDate(selectedDate);
+
+                if (result?.data != null)
+                {
+               
+               
+
+                    // fill textbox
+                  
+                    txtBid.Text = result.data.bid.ToString("N0");
+                    txtAvg.Text = result.data.average.ToString("N0");
+                    txtAsk.Text = result.data.Ask.ToString("N0");
+                    dtDate.Value = dtpDate.Value;
+            
+                       var rate = Convert.ToDecimal(txtAsk.Text);
+                    nExchangRate.Value = rate;
+
+                }
+                else
+                {
+                    MessageBox.Show("No data found for selected date.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("API Error: " + ex.Message);
+            }
+            finally
+            {
+               // btnView.Enabled = true;
+            }
+        }
+        private async void txtDate_TextChanged(object sender, EventArgs e)
+        {
+            DateTime datefilter =Convert.ToDateTime(txtDate.Text);
+          
+                await LoadRateByDate(datefilter);
+            
+        }
+
+        private async void txtDate_Validated(object sender, EventArgs e)
+        {
+            if (DateTime.TryParse(txtDate.Text, out DateTime selectedDate))
+            {
+                await LoadRateByDate(selectedDate);
+            }
+        }
+
+        private async void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+     
+
+            await LoadRateByDate(dtpDate.Value);
+        }
+
+        private void dtpDate_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "RowNum")
+            {
+                // Display the row handle + 1 (so it starts at 1 instead of 0)
+                e.DisplayText = (e.ListSourceRowIndex + 1).ToString();
+            }
+        }
+    }
+}

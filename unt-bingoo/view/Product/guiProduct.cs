@@ -33,7 +33,38 @@ namespace unt_bingoo.view.Product
             InitializeComponent();
             _api = APIGlobals.Api;
         }
+        //private async void LoadingOutlet()
+        //{
+        //    try
+        //    {
+        //        //var outlets = await _api.GetAsync<List<OutletItem>>("api/Outlet");
 
+        //        //cboOutlet.DataSource = outlets;
+        //        //cboOutlet.DisplayMember = "OutletName";
+        //        //cboOutlet.ValueMember = "Id";
+        //        cboOutlet.SelectedIndex = -1;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show("Load Outlet Error: " + ex.Message);
+        //    }
+        //}
+        private async Task LoadingOutlet()
+        {
+            try
+            {
+                var outlets = await _api.GetAsync<List<OutletItem>>("api/Outlet");
+
+                cboOutlet.DataSource = outlets;
+                cboOutlet.DisplayMember = "OutletName";
+                cboOutlet.ValueMember = "Id";
+                cboOutlet.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Load Outlet Error: " + ex.Message);
+            }
+        }
         private async void guiProduct_Load_1(object sender, EventArgs e)
         {
             try
@@ -64,11 +95,13 @@ namespace unt_bingoo.view.Product
                 gvProduct.FocusedRowChanged +=
                     gvProduct_FocusedRowChanged;
 
-                await LoadData();
 
                 await LoadingBrand();
                 await LoadingCategory();
                 await LoadingSupplier();
+                 LoadingOutlet();
+
+                await LoadData();
             }
             catch (Exception ex)
             {
@@ -107,13 +140,14 @@ namespace unt_bingoo.view.Product
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    byte[] data =
-                        await client.GetByteArrayAsync(url);
+                    byte[] data = await client.GetByteArrayAsync(url);
 
-                    using (MemoryStream ms =
-                        new MemoryStream(data))
+                    using (MemoryStream ms = new MemoryStream(data))
                     {
-                        return Image.FromStream(ms);
+                        using (Image temp = Image.FromStream(ms))
+                        {
+                            return new Bitmap(temp); // ✅ CLONE IMAGE (IMPORTANT)
+                        }
                     }
                 }
             }
@@ -151,7 +185,7 @@ namespace unt_bingoo.view.Product
                         Path.GetFileName(filePath));
 
                     var res = await client.PostAsync(
-                        "http://localhost:5189/api/Product/upload",
+                        "http://192.168.1.99:8099/api/Product/upload",
                         form);
 
                     if (!res.IsSuccessStatusCode)
@@ -216,6 +250,15 @@ namespace unt_bingoo.view.Product
         {
             try
             {
+                int brandId = int.TryParse(cboBrand.SelectedValue?.ToString(), out int b) ? b : 0;
+                int categoryId = int.TryParse(cboCategory.SelectedValue?.ToString(), out int c) ? c : 0;
+                int supplierId = int.TryParse(cbosupplier.SelectedValue?.ToString(), out int s) ? s : 0;
+
+                decimal costPrice = decimal.TryParse(txtCost.Text, out decimal cp) ? cp : 0;
+                decimal sellingPrice = decimal.TryParse(txtPrice.Text, out decimal sp) ? sp : 0;
+                decimal vat = decimal.TryParse(txtVAT.Text, out decimal v) ? v : 0;
+                decimal discount = decimal.TryParse(txtDiscound.Text, out decimal d) ? d : 0;
+
                 ProductItem model = new ProductItem()
                 {
                     ProductID = _selectedProductId,
@@ -223,40 +266,26 @@ namespace unt_bingoo.view.Product
                     ProductCode = txtCode.Text.Trim(),
                     ProductName = txtName.Text.Trim(),
 
-                    BrandID =
-                        Convert.ToInt32(cboBrand.SelectedValue), 
+                    BrandID = brandId,
+                    CategoryId = categoryId,
+                    SupplierId = supplierId,
 
-                    CategoryId =
-                        Convert.ToInt32(cboCategory.SelectedValue),
-
-                    SupplierId =
-                        Convert.ToInt32(cbosupplier.SelectedValue),
-
-                    CostPrice =
-                        Convert.ToDecimal(txtCost.Text),
-
-                    SellingPrice =
-                        Convert.ToDecimal(txtPrice.Text),
-
-                    TaxPercent =
-                        Convert.ToDecimal(txtVAT.Text),
+                    CostPrice = costPrice,
+                    SellingPrice = sellingPrice,
+                    TaxPercent = vat,
 
                     ImageUrl = _uploadedImageUrl,
 
                     Status = chkActive.Checked,
-                    DiscountPercent = 
-                        Convert.ToDecimal(txtDiscound.Text)
+                    DiscountPercent = discount
                 };
 
-
-        
                 if (_selectedProductId == 0)
                 {
                     await _api.PostAsync("api/Product", model);
 
                     XtraMessageBox.Show("Added successfully!");
                 }
-             
                 else
                 {
                     await _api.PutAsync(
@@ -266,10 +295,10 @@ namespace unt_bingoo.view.Product
                     XtraMessageBox.Show("Updated successfully!");
                 }
 
-
                 ClearForm();
 
                 await LoadData();
+                cboOutlet.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -286,14 +315,22 @@ namespace unt_bingoo.view.Product
             txtCost.Text = "";
             txtPrice.Text = "";
             txtVAT.Text = "";
+            txtDiscound.Text = "";
+
 
             cboBrand.SelectedIndex = -1;
             cboCategory.SelectedIndex = -1;
             cbosupplier.SelectedIndex = -1;
+            cboOutlet.SelectedIndex = -1;
+            txtQty.Text = "";
+            
+            
+
 
             chkActive.Checked = true;
 
             picCustomer.Image = null;
+         
             btnAdd.Text = "Add";
         }
 
@@ -390,6 +427,9 @@ namespace unt_bingoo.view.Product
             cboCategory.SelectedValue = row.CategoryId;
             cbosupplier.SelectedValue = row.SupplierId;
             txtDiscound.Text = row.DiscountPercent.ToString();
+
+            cboOutlet.SelectedValue = row.outletId;
+            txtQty.Text = row.stockQty.ToString();
             chkActive.Checked = row.Status;
             _uploadedImageUrl = row.ImageUrl;
             if (row.ProductImage != null)
@@ -487,6 +527,22 @@ namespace unt_bingoo.view.Product
             {
                 XtraMessageBox.Show(ex.Message);
             }
+        }
+
+        private void picCustomer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+           
+        }
+
+        private void productStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            guiProductStock frm = new guiProductStock();
+            frm.ShowDialog();
         }
     }
 }

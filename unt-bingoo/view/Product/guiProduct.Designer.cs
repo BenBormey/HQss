@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -49,8 +50,6 @@ namespace unt_bingoo.view.Product
         private System.Windows.Forms.ComboBox cboBrand;
 
         private PanelControl panelControl1;
-        private PictureEdit picLogo;
-        private LabelControl lblSystemName;
 
         internal PictureBox picCustomer;
 
@@ -65,22 +64,32 @@ namespace unt_bingoo.view.Product
 
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.picLogo = new DevExpress.XtraEditors.PictureEdit();
+            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
             this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.txt = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtQty = new DevExpress.XtraEditors.TextEdit();
+            this.lblQty = new DevExpress.XtraEditors.LabelControl();
+            this.btnFirst = new DevExpress.XtraEditors.SimpleButton();
+            this.btnPrev = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNext = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLast = new DevExpress.XtraEditors.SimpleButton();
+            this.lblPageInfo = new DevExpress.XtraEditors.LabelControl();
             this.panelForm = new DevExpress.XtraEditors.PanelControl();
+            this.lblOutlet = new System.Windows.Forms.Label();
+            this.cboOutlet = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.txtDiscound = new DevExpress.XtraEditors.TextEdit();
             this.cbosupplier = new System.Windows.Forms.ComboBox();
@@ -95,7 +104,6 @@ namespace unt_bingoo.view.Product
             this.lblCost = new DevExpress.XtraEditors.LabelControl();
             this.lblBrand = new DevExpress.XtraEditors.LabelControl();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
-            this.lblQty = new DevExpress.XtraEditors.LabelControl();
             this.lblPrice = new DevExpress.XtraEditors.LabelControl();
             this.lblRemark = new DevExpress.XtraEditors.LabelControl();
             this.lblSize = new DevExpress.XtraEditors.LabelControl();
@@ -103,7 +111,6 @@ namespace unt_bingoo.view.Product
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtCost = new DevExpress.XtraEditors.TextEdit();
-            this.txtQty = new DevExpress.XtraEditors.TextEdit();
             this.txtPrice = new DevExpress.XtraEditors.TextEdit();
             this.txtVAT = new DevExpress.XtraEditors.TextEdit();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
@@ -112,6 +119,8 @@ namespace unt_bingoo.view.Product
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
             this.gridProduct = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.productStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gvProduct = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ProductID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.No = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -139,8 +148,9 @@ namespace unt_bingoo.view.Product
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelForm)).BeginInit();
             this.panelForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDiscound.Properties)).BeginInit();
@@ -148,7 +158,6 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCost.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVAT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
@@ -156,6 +165,7 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmainupdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmaindelete)).BeginInit();
@@ -174,23 +184,26 @@ namespace unt_bingoo.view.Product
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.picLogo);
+            this.panelControl1.Controls.Add(this.PicSectionIcon);
             this.panelControl1.Controls.Add(this.lblSystemName);
             this.panelControl1.Controls.Add(this.txt);
+            this.panelControl1.Controls.Add(this.txtQty);
+            this.panelControl1.Controls.Add(this.lblQty);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(2, 2);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1145, 82);
             this.panelControl1.TabIndex = 4;
             // 
-            // picLogo
+            // PicSectionIcon
             // 
-            this.picLogo.EditValue = global::unt_bingoo.Properties.Resources.Logo;
-            this.picLogo.Location = new System.Drawing.Point(10, 10);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picLogo.Size = new System.Drawing.Size(70, 70);
-            this.picLogo.TabIndex = 0;
+            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
+            this.PicSectionIcon.Location = new System.Drawing.Point(6, 0);
+            this.PicSectionIcon.Name = "PicSectionIcon";
+            this.PicSectionIcon.Size = new System.Drawing.Size(89, 78);
+            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicSectionIcon.TabIndex = 162;
+            this.PicSectionIcon.TabStop = false;
             // 
             // lblSystemName
             // 
@@ -198,11 +211,11 @@ namespace unt_bingoo.view.Product
             this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblSystemName.Appearance.Options.UseFont = true;
             this.lblSystemName.Appearance.Options.UseForeColor = true;
-            this.lblSystemName.Location = new System.Drawing.Point(100, 30);
+            this.lblSystemName.Location = new System.Drawing.Point(101, 36);
             this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(427, 26);
-            this.lblSystemName.TabIndex = 1;
-            this.lblSystemName.Text = "Q\'s OUTLET MANAGEMENT SYSTEM";
+            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
+            this.lblSystemName.TabIndex = 161;
+            this.lblSystemName.Text = "JuJuBi Management System";
             // 
             // txt
             // 
@@ -215,8 +228,76 @@ namespace unt_bingoo.view.Product
             this.txt.TabIndex = 160;
             this.txt.Visible = false;
             // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(608, 53);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQty.Properties.Appearance.Options.UseFont = true;
+            this.txtQty.Size = new System.Drawing.Size(293, 20);
+            this.txtQty.TabIndex = 159;
+            this.txtQty.Visible = false;
+            // 
+            // lblQty
+            // 
+            this.lblQty.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQty.Appearance.Options.UseFont = true;
+            this.lblQty.Location = new System.Drawing.Point(514, 56);
+            this.lblQty.Name = "lblQty";
+            this.lblQty.Size = new System.Drawing.Size(24, 14);
+            this.lblQty.TabIndex = 150;
+            this.lblQty.Text = "Qty:";
+            this.lblQty.Visible = false;
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Location = new System.Drawing.Point(650, 6);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(40, 25);
+            this.btnFirst.TabIndex = 0;
+            this.btnFirst.Text = "<<";
+            this.btnFirst.Visible = false;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Location = new System.Drawing.Point(695, 6);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(40, 25);
+            this.btnPrev.TabIndex = 1;
+            this.btnPrev.Text = "<";
+            this.btnPrev.Visible = false;
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(840, 6);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(40, 25);
+            this.btnNext.TabIndex = 3;
+            this.btnNext.Text = ">";
+            this.btnNext.Visible = false;
+            // 
+            // btnLast
+            // 
+            this.btnLast.Location = new System.Drawing.Point(885, 6);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(40, 25);
+            this.btnLast.TabIndex = 4;
+            this.btnLast.Text = ">>";
+            this.btnLast.Visible = false;
+            // 
+            // lblPageInfo
+            // 
+            this.lblPageInfo.Location = new System.Drawing.Point(745, 11);
+            this.lblPageInfo.Name = "lblPageInfo";
+            this.lblPageInfo.Size = new System.Drawing.Size(55, 13);
+            this.lblPageInfo.TabIndex = 2;
+            this.lblPageInfo.Text = "Page 1 of 1";
+            this.lblPageInfo.Visible = false;
+            // 
             // panelForm
             // 
+            this.panelForm.Controls.Add(this.lblOutlet);
+            this.panelForm.Controls.Add(this.cboOutlet);
             this.panelForm.Controls.Add(this.button1);
             this.panelForm.Controls.Add(this.txtDiscound);
             this.panelForm.Controls.Add(this.cbosupplier);
@@ -231,7 +312,6 @@ namespace unt_bingoo.view.Product
             this.panelForm.Controls.Add(this.lblCost);
             this.panelForm.Controls.Add(this.lblBrand);
             this.panelForm.Controls.Add(this.lblSupplier);
-            this.panelForm.Controls.Add(this.lblQty);
             this.panelForm.Controls.Add(this.lblPrice);
             this.panelForm.Controls.Add(this.lblRemark);
             this.panelForm.Controls.Add(this.lblSize);
@@ -239,7 +319,6 @@ namespace unt_bingoo.view.Product
             this.panelForm.Controls.Add(this.txtCode);
             this.panelForm.Controls.Add(this.txtName);
             this.panelForm.Controls.Add(this.txtCost);
-            this.panelForm.Controls.Add(this.txtQty);
             this.panelForm.Controls.Add(this.txtPrice);
             this.panelForm.Controls.Add(this.txtVAT);
             this.panelForm.Controls.Add(this.txtRemark);
@@ -249,8 +328,25 @@ namespace unt_bingoo.view.Product
             this.panelForm.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelForm.Location = new System.Drawing.Point(0, 84);
             this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(1149, 205);
+            this.panelForm.Size = new System.Drawing.Size(1149, 210);
             this.panelForm.TabIndex = 2;
+            // 
+            // lblOutlet
+            // 
+            this.lblOutlet.Location = new System.Drawing.Point(14, 176);
+            this.lblOutlet.Name = "lblOutlet";
+            this.lblOutlet.Size = new System.Drawing.Size(83, 23);
+            this.lblOutlet.TabIndex = 173;
+            this.lblOutlet.Text = "Outlet:";
+            this.lblOutlet.Visible = false;
+            // 
+            // cboOutlet
+            // 
+            this.cboOutlet.Location = new System.Drawing.Point(103, 176);
+            this.cboOutlet.Name = "cboOutlet";
+            this.cboOutlet.Size = new System.Drawing.Size(312, 21);
+            this.cboOutlet.TabIndex = 172;
+            this.cboOutlet.Visible = false;
             // 
             // button1
             // 
@@ -265,7 +361,7 @@ namespace unt_bingoo.view.Product
             // 
             // txtDiscound
             // 
-            this.txtDiscound.Location = new System.Drawing.Point(610, 128);
+            this.txtDiscound.Location = new System.Drawing.Point(610, 97);
             this.txtDiscound.Name = "txtDiscound";
             this.txtDiscound.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiscound.Properties.Appearance.Options.UseFont = true;
@@ -313,6 +409,7 @@ namespace unt_bingoo.view.Product
             this.picCustomer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCustomer.TabIndex = 143;
             this.picCustomer.TabStop = false;
+            this.picCustomer.Click += new System.EventHandler(this.picCustomer_Click);
             this.picCustomer.DoubleClick += new System.EventHandler(this.picCustomer_DoubleClick);
             // 
             // cboBrand
@@ -393,21 +490,11 @@ namespace unt_bingoo.view.Product
             this.lblSupplier.TabIndex = 149;
             this.lblSupplier.Text = "Supplier:";
             // 
-            // lblQty
-            // 
-            this.lblQty.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQty.Appearance.Options.UseFont = true;
-            this.lblQty.Location = new System.Drawing.Point(516, 78);
-            this.lblQty.Name = "lblQty";
-            this.lblQty.Size = new System.Drawing.Size(24, 14);
-            this.lblQty.TabIndex = 150;
-            this.lblQty.Text = "Qty:";
-            // 
             // lblPrice
             // 
             this.lblPrice.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrice.Appearance.Options.UseFont = true;
-            this.lblPrice.Location = new System.Drawing.Point(516, 106);
+            this.lblPrice.Location = new System.Drawing.Point(516, 75);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(68, 14);
             this.lblPrice.TabIndex = 151;
@@ -427,7 +514,7 @@ namespace unt_bingoo.view.Product
             // 
             this.lblSize.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSize.Appearance.Options.UseFont = true;
-            this.lblSize.Location = new System.Drawing.Point(516, 134);
+            this.lblSize.Location = new System.Drawing.Point(516, 103);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(77, 14);
             this.lblSize.TabIndex = 153;
@@ -437,7 +524,7 @@ namespace unt_bingoo.view.Product
             // 
             this.lblVAT.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVAT.Appearance.Options.UseFont = true;
-            this.lblVAT.Location = new System.Drawing.Point(516, 160);
+            this.lblVAT.Location = new System.Drawing.Point(516, 129);
             this.lblVAT.Name = "lblVAT";
             this.lblVAT.Size = new System.Drawing.Size(54, 14);
             this.lblVAT.TabIndex = 154;
@@ -470,18 +557,9 @@ namespace unt_bingoo.view.Product
             this.txtCost.Size = new System.Drawing.Size(312, 20);
             this.txtCost.TabIndex = 157;
             // 
-            // txtQty
-            // 
-            this.txtQty.Location = new System.Drawing.Point(610, 75);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQty.Properties.Appearance.Options.UseFont = true;
-            this.txtQty.Size = new System.Drawing.Size(293, 20);
-            this.txtQty.TabIndex = 159;
-            // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(610, 103);
+            this.txtPrice.Location = new System.Drawing.Point(610, 72);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrice.Properties.Appearance.Options.UseFont = true;
@@ -490,7 +568,7 @@ namespace unt_bingoo.view.Product
             // 
             // txtVAT
             // 
-            this.txtVAT.Location = new System.Drawing.Point(610, 157);
+            this.txtVAT.Location = new System.Drawing.Point(610, 126);
             this.txtVAT.Name = "txtVAT";
             this.txtVAT.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVAT.Properties.Appearance.Options.UseFont = true;
@@ -510,7 +588,7 @@ namespace unt_bingoo.view.Product
             // chkActive
             // 
             this.chkActive.EditValue = true;
-            this.chkActive.Location = new System.Drawing.Point(710, 157);
+            this.chkActive.Location = new System.Drawing.Point(710, 126);
             this.chkActive.Name = "chkActive";
             this.chkActive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkActive.Properties.Appearance.Options.UseFont = true;
@@ -546,13 +624,14 @@ namespace unt_bingoo.view.Product
             // 
             this.panelGrid.Controls.Add(this.gridProduct);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 289);
+            this.panelGrid.Location = new System.Drawing.Point(0, 294);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(1149, 309);
+            this.panelGrid.Size = new System.Drawing.Size(1149, 304);
             this.panelGrid.TabIndex = 0;
             // 
             // gridProduct
             // 
+            this.gridProduct.ContextMenuStrip = this.contextMenuStrip1;
             this.gridProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProduct.Location = new System.Drawing.Point(2, 2);
             this.gridProduct.MainView = this.gvProduct;
@@ -560,10 +639,25 @@ namespace unt_bingoo.view.Product
             this.gridProduct.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnmainupdate,
             this.btnmaindelete});
-            this.gridProduct.Size = new System.Drawing.Size(1145, 305);
+            this.gridProduct.Size = new System.Drawing.Size(1145, 300);
             this.gridProduct.TabIndex = 0;
             this.gridProduct.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProduct});
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productStockToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(146, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // productStockToolStripMenuItem
+            // 
+            this.productStockToolStripMenuItem.Name = "productStockToolStripMenuItem";
+            this.productStockToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.productStockToolStripMenuItem.Text = "ProductStock";
+            this.productStockToolStripMenuItem.Click += new System.EventHandler(this.productStockToolStripMenuItem_Click);
             // 
             // gvProduct
             // 
@@ -708,9 +802,9 @@ namespace unt_bingoo.view.Product
             // btnmainupdate
             // 
             this.btnmainupdate.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
+            editorButtonImageOptions3.Image = global::unt_bingoo.Properties.Resources.update_16;
             this.btnmainupdate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainupdate.Name = "btnmainupdate";
             this.btnmainupdate.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainupdate.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainupdate_ButtonClick);
@@ -726,15 +820,20 @@ namespace unt_bingoo.view.Product
             // btnmaindelete
             // 
             this.btnmaindelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            editorButtonImageOptions4.Image = global::unt_bingoo.Properties.Resources.Delete_User;
             this.btnmaindelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmaindelete.Name = "btnmaindelete";
             this.btnmaindelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmaindelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmaindelete_ButtonClick);
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnFirst);
+            this.panelBottom.Controls.Add(this.btnPrev);
+            this.panelBottom.Controls.Add(this.lblPageInfo);
+            this.panelBottom.Controls.Add(this.btnNext);
+            this.panelBottom.Controls.Add(this.btnLast);
             this.panelBottom.Controls.Add(this.lblCount);
             this.panelBottom.Controls.Add(this.btnExport);
             this.panelBottom.Controls.Add(this.btnClose);
@@ -790,8 +889,9 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelForm)).EndInit();
             this.panelForm.ResumeLayout(false);
             this.panelForm.PerformLayout();
@@ -800,7 +900,6 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCost.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVAT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
@@ -808,6 +907,7 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmainupdate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnmaindelete)).EndInit();
@@ -845,5 +945,16 @@ namespace unt_bingoo.view.Product
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainupdate;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmaindelete;
         private Button button1;
+        private System.Windows.Forms.ComboBox cboOutlet;
+        private Label lblOutlet;
+        private LabelControl lblSystemName;
+        private PictureBox PicSectionIcon;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem productStockToolStripMenuItem;
+        private SimpleButton btnFirst;
+        private SimpleButton btnPrev;
+        private SimpleButton btnNext;
+        private SimpleButton btnLast;
+        private LabelControl lblPageInfo;
     }
 }

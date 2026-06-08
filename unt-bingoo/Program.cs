@@ -6,8 +6,7 @@ using System.Windows.Forms;
 using unt_bingoo.view.User;
 using unt_bingoo.view.Outlet;
 using unt_bingoo.view.Product;
-using unt_bingoo.view.Report;
-using unt_bingoo.view.Sales;
+
 using unt_bingoo.view;
 using unt_bingoo.view.Branch;
 
