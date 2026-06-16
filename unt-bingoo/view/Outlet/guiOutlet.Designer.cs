@@ -111,12 +111,13 @@ namespace unt_bingoo.view.Outlet
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.Delete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelDetail = new DevExpress.XtraEditors.PanelControl();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.txtfrandtype = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.dtpOpening = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flpPhotos = new System.Windows.Forms.FlowLayoutPanel();
@@ -144,6 +145,7 @@ namespace unt_bingoo.view.Outlet
             this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtvatNumber = new DevExpress.XtraEditors.TextEdit();
             this.btnaddCategory = new System.Windows.Forms.Button();
@@ -171,6 +173,7 @@ namespace unt_bingoo.view.Outlet
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).BeginInit();
             this.panelDetail.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtfrandtype.Properties)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
@@ -234,7 +237,7 @@ namespace unt_bingoo.view.Outlet
             this.repositoryItemButtonEdit1,
             this.repositoryItemButtonEdit2,
             this.repositoryItemButtonEdit3});
-            this.gridControlOutlet.Size = new System.Drawing.Size(1417, 292);
+            this.gridControlOutlet.Size = new System.Drawing.Size(1584, 292);
             this.gridControlOutlet.TabIndex = 0;
             this.gridControlOutlet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewOutlet,
@@ -254,8 +257,7 @@ namespace unt_bingoo.view.Outlet
             this.position,
             this.grandOpeningDate,
             this.Update,
-            this.Delete,
-            this.gridColumn1});
+            this.Delete});
             this.gridViewOutlet.GridControl = this.gridControlOutlet;
             this.gridViewOutlet.Name = "gridViewOutlet";
             this.gridViewOutlet.OptionsBehavior.Editable = false;
@@ -343,7 +345,7 @@ namespace unt_bingoo.view.Outlet
             // 
             // Update
             // 
-            this.Update.Caption = "Action";
+            this.Update.Caption = "Edit";
             this.Update.ColumnEdit = this.repositoryItemButtonEdit1;
             this.Update.Name = "Update";
             this.Update.Visible = true;
@@ -362,7 +364,7 @@ namespace unt_bingoo.view.Outlet
             // 
             // Delete
             // 
-            this.Delete.Caption = " ";
+            this.Delete.Caption = " Delete";
             this.Delete.ColumnEdit = this.repositoryItemButtonEdit2;
             this.Delete.Name = "Delete";
             this.Delete.Visible = true;
@@ -379,14 +381,6 @@ namespace unt_bingoo.view.Outlet
             this.repositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButtonEdit2.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDelete_ButtonClick);
             // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Details";
-            this.gridColumn1.ColumnEdit = this.repositoryItemButtonEdit3;
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 10;
-            // 
             // repositoryItemButtonEdit3
             // 
             this.repositoryItemButtonEdit3.AutoHeight = false;
@@ -399,6 +393,7 @@ namespace unt_bingoo.view.Outlet
             // 
             // panelDetail
             // 
+            this.panelDetail.Controls.Add(this.panel2);
             this.panelDetail.Controls.Add(this.txtfrandtype);
             this.panelDetail.Controls.Add(this.labelControl5);
             this.panelDetail.Controls.Add(this.dtpOpening);
@@ -429,8 +424,37 @@ namespace unt_bingoo.view.Outlet
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDetail.Location = new System.Drawing.Point(0, 90);
             this.panelDetail.Name = "panelDetail";
-            this.panelDetail.Size = new System.Drawing.Size(1421, 209);
+            this.panelDetail.Size = new System.Drawing.Size(1588, 209);
             this.panelDetail.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.flowLayoutPanel1);
+            this.panel2.Controls.Add(this.simpleButton2);
+            this.panel2.Location = new System.Drawing.Point(1285, 6);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(283, 148);
+            this.panel2.TabIndex = 183;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(283, 131);
+            this.flowLayoutPanel1.TabIndex = 144;
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.simpleButton2.Location = new System.Drawing.Point(0, 129);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(283, 19);
+            this.simpleButton2.TabIndex = 145;
+            this.simpleButton2.Text = "Add Photo\r\n\r\n";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // txtfrandtype
             // 
@@ -447,16 +471,6 @@ namespace unt_bingoo.view.Outlet
             this.labelControl5.Size = new System.Drawing.Size(77, 13);
             this.labelControl5.TabIndex = 181;
             this.labelControl5.Text = "Franchise Type:";
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(1190, 55);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(80, 25);
-            this.simpleButton1.TabIndex = 180;
-            this.simpleButton1.Text = "Refresh ";
-            this.simpleButton1.Visible = false;
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // dtpOpening
             // 
@@ -509,7 +523,7 @@ namespace unt_bingoo.view.Outlet
             // 
             this.checkEdit1.Location = new System.Drawing.Point(210, 7);
             this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "DiActive";
+            this.checkEdit1.Properties.Caption = "Deactive";
             this.checkEdit1.Size = new System.Drawing.Size(75, 19);
             this.checkEdit1.TabIndex = 175;
             // 
@@ -684,6 +698,16 @@ namespace unt_bingoo.view.Outlet
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(1190, 55);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(80, 25);
+            this.simpleButton1.TabIndex = 180;
+            this.simpleButton1.Text = "Refresh ";
+            this.simpleButton1.Visible = false;
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(729, 42);
@@ -723,7 +747,7 @@ namespace unt_bingoo.view.Outlet
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrid.Location = new System.Drawing.Point(0, 299);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(1421, 296);
+            this.panelGrid.Size = new System.Drawing.Size(1588, 296);
             this.panelGrid.TabIndex = 0;
             // 
             // panelHeader
@@ -738,7 +762,7 @@ namespace unt_bingoo.view.Outlet
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1421, 90);
+            this.panelHeader.Size = new System.Drawing.Size(1588, 90);
             this.panelHeader.TabIndex = 3;
             this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
@@ -783,7 +807,7 @@ namespace unt_bingoo.view.Outlet
             // btnClose
             // 
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.Location = new System.Drawing.Point(1339, 2);
+            this.btnClose.Location = new System.Drawing.Point(1506, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(80, 36);
             this.btnClose.TabIndex = 2;
@@ -793,7 +817,7 @@ namespace unt_bingoo.view.Outlet
             // btnExport
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExport.Location = new System.Drawing.Point(1239, 2);
+            this.btnExport.Location = new System.Drawing.Point(1406, 2);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(100, 36);
             this.btnExport.TabIndex = 1;
@@ -816,7 +840,7 @@ namespace unt_bingoo.view.Outlet
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 595);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1421, 40);
+            this.panelBottom.Size = new System.Drawing.Size(1588, 40);
             this.panelBottom.TabIndex = 4;
             // 
             // btnUpdate
@@ -843,7 +867,7 @@ namespace unt_bingoo.view.Outlet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1421, 635);
+            this.ClientSize = new System.Drawing.Size(1588, 635);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelDetail);
             this.Controls.Add(this.panelHeader);
@@ -862,6 +886,7 @@ namespace unt_bingoo.view.Outlet
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtfrandtype.Properties)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
@@ -896,7 +921,6 @@ namespace unt_bingoo.view.Outlet
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
         private DevExpress.XtraGrid.Columns.GridColumn ProductImage;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit3;
         private Button button1;
         private System.Windows.Forms.ComboBox cmbFranchise;
@@ -922,5 +946,8 @@ namespace unt_bingoo.view.Outlet
         private TextEdit txtfrandtype;
         private LabelControl labelControl5;
         private DevExpress.XtraGrid.Columns.GridColumn typeName;
+        private Panel panel2;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private SimpleButton simpleButton2;
     }
 }

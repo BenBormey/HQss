@@ -23,7 +23,7 @@ namespace unt_bingoo.Declares
 
         public static string R_CompanyName { get; set; }
         public static string R_CompanyAddress { get; set; }
-
+        public static string R_Barcode { get; set; }
         public static string R_PrefixDatabase { get; set; } = "DB";
         public static string R_PublicIPAddress { get; set; }
         public static string R_IPAddress { get; set; } = "192.168.1.111";
@@ -32,6 +32,8 @@ namespace unt_bingoo.Declares
         public static string R_PasswordConnection { get; set; } = "123";
         public static string R_DatabaseName { get; set; }
 
+        public static int RProId { get; set; }
+        public static string RCurrentBarcode { get; set; }
         public static string R_MainDatabaseName { get; set; } = "Company Setup";
         public static string R_PortConnection { get; set; }
         public static string RJounalDatabaseName { get; set; } = "Journal";

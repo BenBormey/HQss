@@ -427,7 +427,7 @@ namespace unt_bingoo.view.Product
                 if (selectedProduct == null)
                     return;
 
-                int selectedProductId = selectedProduct.ProductID;
+                int selectedProductId = 1;
 
                 var existingOutletIds = _product
                     .Where(x => x.ProductID == selectedProductId)

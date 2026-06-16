@@ -86,3 +86,14 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.pdb
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.test.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.Form1.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiTerm.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.XtraForm1.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProducts.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsSearch.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBarcode.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsPackNumber.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsCaseNumber.resources

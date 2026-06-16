@@ -116,16 +116,16 @@ namespace unt_bingoo.view.Product
             var list =
                 await _api.GetAsync<List<ProductItem>>("api/Product");
 
-            foreach (var item in list)
-            {
-                if (!string.IsNullOrEmpty(item.ImageUrl) &&
-                    Uri.IsWellFormedUriString(item.ImageUrl,
-                    UriKind.Absolute))
-                {
-                    item.ProductImage =
-                        await LoadImageFromUrl(item.ImageUrl);
-                }
-            }
+            //foreach (var item in list)
+            //{
+            //    if (!string.IsNullOrEmpty(item.ImageUrl) &&
+            //        Uri.IsWellFormedUriString(item.ImageUrl,
+            //        UriKind.Absolute))
+            //    {
+            //        item.ProductImage =
+            //            await LoadImageFromUrl(item.ImageUrl);
+            //    }
+            //}
 
             _productList =
                 new BindingList<ProductItem>(list);
@@ -261,23 +261,23 @@ namespace unt_bingoo.view.Product
 
                 ProductItem model = new ProductItem()
                 {
-                    ProductID = _selectedProductId,
+                    //ProductID = _selectedProductId,
 
-                    ProductCode = txtCode.Text.Trim(),
-                    ProductName = txtName.Text.Trim(),
+                    //ProductCode = txtCode.Text.Trim(),
+                    //ProductName = txtName.Text.Trim(),
 
-                    BrandID = brandId,
-                    CategoryId = categoryId,
-                    SupplierId = supplierId,
+                    //BrandID = brandId,
+                    //CategoryId = categoryId,
+                    //SupplierId = supplierId,
 
-                    CostPrice = costPrice,
-                    SellingPrice = sellingPrice,
-                    TaxPercent = vat,
+                    //CostPrice = costPrice,
+                    //SellingPrice = sellingPrice,
+                    //TaxPercent = vat,
 
-                    ImageUrl = _uploadedImageUrl,
+                    //ImageUrl = _uploadedImageUrl,
 
-                    Status = chkActive.Checked,
-                    DiscountPercent = discount
+                    //Status = chkActive.Checked,
+                    //DiscountPercent = discount
                 };
 
                 if (_selectedProductId == 0)
@@ -411,30 +411,30 @@ namespace unt_bingoo.view.Product
 
         private void btnmainupdate_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row =
-                gvProduct.GetFocusedRow() as ProductItem;
+            //var row =
+            //    gvProduct.GetFocusedRow() as ProductItem;
 
-            if (row == null) return;
+            //if (row == null) return;
 
-            _selectedProductId = row.ProductID;
+            //_selectedProductId = row.ProductID;
 
-            txtCode.Text = row.ProductCode;
-            txtName.Text = row.ProductName;
-            txtCost.Text = row.CostPrice.ToString();
-            txtPrice.Text = row.SellingPrice.ToString();
-            txtVAT.Text = row.TaxPercent.ToString();
-            cboBrand.SelectedValue = row.BrandID;
-            cboCategory.SelectedValue = row.CategoryId;
-            cbosupplier.SelectedValue = row.SupplierId;
-            txtDiscound.Text = row.DiscountPercent.ToString();
+            //txtCode.Text = row.ProductCode;
+            //txtName.Text = row.ProductName;
+            //txtCost.Text = row.CostPrice.ToString();
+            //txtPrice.Text = row.SellingPrice.ToString();
+            //txtVAT.Text = row.TaxPercent.ToString();
+            //cboBrand.SelectedValue = row.BrandID;
+            //cboCategory.SelectedValue = row.CategoryId;
+            //cbosupplier.SelectedValue = row.SupplierId;
+            //txtDiscound.Text = row.DiscountPercent.ToString();
 
-            cboOutlet.SelectedValue = row.outletId;
-            txtQty.Text = row.stockQty.ToString();
-            chkActive.Checked = row.Status;
-            _uploadedImageUrl = row.ImageUrl;
-            if (row.ProductImage != null)
-                picCustomer.Image = row.ProductImage;
-            btnAdd.Text = "Update";
+            //cboOutlet.SelectedValue = row.outletId;
+            //txtQty.Text = row.stockQty.ToString();
+            //chkActive.Checked = row.Status;
+            //_uploadedImageUrl = row.ImageUrl;
+            //if (row.ProductImage != null)
+            //    picCustomer.Image = row.ProductImage;
+            //btnAdd.Text = "Update";
         }
        
         private void btnaddBrand_Click(object sender, EventArgs e)
@@ -486,47 +486,47 @@ namespace unt_bingoo.view.Product
 
         private async void btnmaindelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
        
-                var row = gvProduct.GetFocusedRow() as ProductItem;
+            //    var row = gvProduct.GetFocusedRow() as ProductItem;
 
-                if (row == null)
-                {
-                    XtraMessageBox.Show("Please select a product!");
-                    return;
-                }
+            //    if (row == null)
+            //    {
+            //        XtraMessageBox.Show("Please select a product!");
+            //        return;
+            //    }
 
           
-                DialogResult result = XtraMessageBox.Show(
-                    $"Are you sure you want to delete [{row.ProductName}]?",
-                    "Confirm Delete",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
+            //    DialogResult result = XtraMessageBox.Show(
+            //        $"Are you sure you want to delete [{row.ProductName}]?",
+            //        "Confirm Delete",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Warning
+            //    );
 
-                if (result != DialogResult.Yes)
-                    return;
+            //    if (result != DialogResult.Yes)
+            //        return;
 
        
-                var response = await _api.DeleteAsync($"api/Product/{row.ProductID}");
+            //    var response = await _api.DeleteAsync($"api/Product/{row.ProductID}");
 
               
-                if (response == null)
-                {
-                    XtraMessageBox.Show("Delete failed!");
-                    return;
-                }
+            //    if (response == null)
+            //    {
+            //        XtraMessageBox.Show("Delete failed!");
+            //        return;
+            //    }
 
              
-                _productList.Remove(row);
+            //    _productList.Remove(row);
 
-                XtraMessageBox.Show("Deleted successfully!");
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
+            //    XtraMessageBox.Show("Deleted successfully!");
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message);
+            //}
         }
 
         private void picCustomer_Click(object sender, EventArgs e)
@@ -543,6 +543,11 @@ namespace unt_bingoo.view.Product
         {
             guiProductStock frm = new guiProductStock();
             frm.ShowDialog();
+        }
+
+        private void panelHeader_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

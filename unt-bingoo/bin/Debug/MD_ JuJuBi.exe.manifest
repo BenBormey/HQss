@@ -307,14 +307,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MD_ JuJuBi.exe" size="15117776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MD_ JuJuBi.exe" size="15462352">
       <assemblyIdentity name="MD_ JuJuBi" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>t7EkMWAj41ntE1JfyCX70S/RzE5LkKppACj69BG6t1s=</dsig:DigestValue>
+        <dsig:DigestValue>v9Y9APgdgFk3XTzzcUdNRgKl49c/YcUantzq5qY69MA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

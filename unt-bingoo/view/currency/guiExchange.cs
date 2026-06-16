@@ -7,6 +7,7 @@ using unt_bingoo.Class;
 using unt_bingoo.Controller;
 using System.Drawing;
 using System.Collections.Generic;
+using System.IO;
 
 namespace unt_bingoo.view.currency
 {
@@ -537,6 +538,76 @@ namespace unt_bingoo.view.currency
             {
                 // Display the row handle + 1 (so it starts at 1 instead of 0)
                 e.DisplayText = (e.ListSourceRowIndex + 1).ToString();
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+        private void BtnExportToExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (gridView1.RowCount <= 0)
+                {
+                    MessageBox.Show("No data to export.",
+                                    "Information",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    return;
+                }
+
+                Cursor = Cursors.WaitCursor;
+
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                excelApp.Visible = true;
+
+                Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel.Worksheet worksheet =
+                    (Microsoft.Office.Interop.Excel.Worksheet)workbook.ActiveSheet;
+
+                // Header
+                for (int col = 0; col < gridView1.Columns.Count; col++)
+                {
+                    worksheet.Cells[1, col + 1] =
+                        gridView1.Columns[col].Caption;
+
+                    ((Microsoft.Office.Interop.Excel.Range)worksheet.Cells[1, col + 1]).Font.Bold = true;
+                }
+
+                // Data
+                for (int row = 0; row < gridView1.RowCount; row++)
+                {
+                    for (int col = 0; col < gridView1.Columns.Count; col++)
+                    {
+                        object value =
+                            gridView1.GetRowCellValue(row, gridView1.Columns[col]);
+
+                        worksheet.Cells[row + 2, col + 1] =
+                            value?.ToString() ?? "";
+                    }
+                }
+
+                worksheet.Columns.AutoFit();
+
+                Cursor = Cursors.Default;
+
+                MessageBox.Show(
+                    "Data exported to Excel successfully.\n\nYou can choose Save or Don't Save when closing Excel.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }

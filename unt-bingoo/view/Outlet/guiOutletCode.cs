@@ -38,9 +38,19 @@ namespace unt_bingoo.view.Outlet
                 using (SqlConnection conn = new SqlConnection(Data.ConnectionString(Initialized.GetConnectionType(Data, App))))
                 {
                     conn.Open();
-                    string query = @"SELECT Id, OutletCode FROM [DBJuJuBi].[dbo].[OutletCode] ORDER BY Id DESC";
+                    string query = @"SELECT 
+    o.Id,
+    o.OutletCode,
+    CASE 
+        WHEN f.outlet IS NOT NULL THEN 'Already Used'
+        ELSE 'Available'
+    END AS Status
+FROM [DBJuJuBi].[dbo].[OutletCode] o
+LEFT JOIN [DBJuJuBi].[dbo].[franchise] f
+    ON f.outlet = o.OutletCode
+ORDER BY o.OutletCode DESC;";
 
-                    // ប្រើ SqlCommand ដើម្បីអានទិន្នន័យ
+ 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -51,11 +61,11 @@ namespace unt_bingoo.view.Outlet
                                 list.Add(new OutletcodeClas
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
-                                    OutletCode = reader["OutletCode"].ToString()
+                                    OutletCode = reader["OutletCode"].ToString(),
+                                    Status =reader["Status"].ToString() 
                                 });
                             }
 
-                            // ភ្ជាប់ List ទៅកាន់ GridControl
                             grdOutlet.DataSource = list;
                         }
                     }
@@ -79,6 +89,35 @@ namespace unt_bingoo.view.Outlet
             string cleanInput = txtOutletCode.Text.Replace("UNT - ", "").Trim();
             string finalOutletCode = txtOutletCode.Text;
 
+
+            using (SqlConnection conn = new SqlConnection(
+      Data.ConnectionString(Initialized.GetConnectionType(Data, App))))
+            {
+                conn.Open();
+
+                string query = @"
+        SELECT TOP 1 Id, OutletCode
+        FROM [DBJuJuBi].[dbo].[OutletCode]
+        WHERE OutletCode = @OutletCode
+        ORDER BY Id DESC;";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@OutletCode",
+                        txtOutletCode.Text.Trim());
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            MessageBox.Show("Outlet Code already exists.");
+
+                            txtOutletCode.Focus();
+                            return;
+                        }
+                    }
+                }
+            }
             if (string.IsNullOrEmpty(editid))
             {
            

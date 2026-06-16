@@ -27,9 +27,9 @@ namespace unt_bingoo.view.Supplier
                 view.OptionsBehavior.Editable = false;
                 view.OptionsView.ShowGroupPanel = false;
             }
+            gridViewSuppliers.OptionsView.ColumnAutoWidth = true;
         }
 
-        // ================= LOAD =================
 
         private async void guiSuppliers_Load(object sender, EventArgs e)
         {
@@ -68,7 +68,6 @@ namespace unt_bingoo.view.Supplier
             gridViewSuppliers.BestFitColumns();
         }
 
-        // ================= ADD / UPDATE =================
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
@@ -127,44 +126,7 @@ namespace unt_bingoo.view.Supplier
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            var row = gridViewSuppliers.GetFocusedRow()
-                as SupplierItem;
-
-            if (row == null) return;
-
-            if (XtraMessageBox.Show(
-                "Delete this supplier?",
-                "Confirm",
-                MessageBoxButtons.YesNo)
-                != DialogResult.Yes)
-                return;
-
-            try
-            {
-                Cursor = Cursors.WaitCursor;
-
-                bool ok = await _api.DeleteAsync(
-                    $"api/Supplier/{row.SupplierID}");
-
-                if (!ok)
-                {
-                    XtraMessageBox.Show("Delete failed!");
-                    return;
-                }
-
-                await LoadData();
-                ClearForm();
-
-                XtraMessageBox.Show("Deleted successfully!");
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
+      
         }
 
         // ================= GRID CLICK =================
@@ -173,24 +135,7 @@ namespace unt_bingoo.view.Supplier
             object sender,
             DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            var row = gridViewSuppliers.GetFocusedRow()
-                as SupplierItem;
-
-            if (row == null) return;
-
-            txtSupplierCode.Text = row.SupplierCode;
-            txtSupplierName.Text = row.SupplierName;
-            txtContactName.Text = row.ContactName;
-            txtPhone.Text = row.Phone;
-            txtEmail.Text = row.Email;
-            txtAddress.Text = row.Address;
-            txtTaxNumber.Text = row.TaxNumber;
-
-            chkStatus.Checked = row.Status;
-
-            _editingId = row.SupplierID;
-
-            btnAdd.Text = "Update";
+          
         }
 
 
@@ -290,6 +235,71 @@ namespace unt_bingoo.view.Supplier
             {
                 Cursor = Cursors.Default;
             }
+        }
+
+        private async void btnmainDeletebutton_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+
+            var row = gridViewSuppliers.GetFocusedRow()
+           as SupplierItem;
+
+            if (row == null) return;
+
+            if (XtraMessageBox.Show(
+                "Delete this supplier?",
+                "Confirm",
+                MessageBoxButtons.YesNo)
+                != DialogResult.Yes)
+                return;
+
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                bool ok = await _api.DeleteAsync(
+                    $"api/Supplier/{row.SupplierID}");
+
+                if (!ok)
+                {
+                    XtraMessageBox.Show("Delete failed!");
+                    return;
+                }
+
+                await LoadData();
+                ClearForm();
+
+                XtraMessageBox.Show("Deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void btnmainUpdateButton_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gridViewSuppliers.GetFocusedRow()
+              as SupplierItem;
+
+            if (row == null) return;
+
+            txtSupplierCode.Text = row.SupplierCode;
+            txtSupplierName.Text = row.SupplierName;
+            txtContactName.Text = row.ContactName;
+            txtPhone.Text = row.Phone;
+            txtEmail.Text = row.Email;
+            txtAddress.Text = row.Address;
+            txtTaxNumber.Text = row.TaxNumber;
+
+            chkStatus.Checked = row.Status;
+
+            _editingId = row.SupplierID;
+
+            btnAdd.Text = "Update";
         }
     }
 }

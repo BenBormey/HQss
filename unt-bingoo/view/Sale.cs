@@ -85,23 +85,23 @@ namespace unt_bingoo.view
 
         private void AddToCart(ProductItem p)
         {
-            var item =
-                _cart.FirstOrDefault(x => x.ProductID == p.ProductID);
+            //var item =
+            //    _cart.FirstOrDefault(x => x.ProductID == p.ProductID);
 
-            if (item != null)
-            {
-                item.Qty++;
-            }
-            else
-            {
-                _cart.Add(new SaleItem()
-                {
-                    ProductID = p.ProductID,
-                    ProductName = p.ProductName,
-                    Price = p.SellingPrice,
-                    Qty = 1
-                });
-            }
+            //if (item != null)
+            //{
+            //    item.Qty++;
+            //}
+            //else
+            //{
+            //    _cart.Add(new SaleItem()
+            //    {
+            //        //ProductID = p.ProductID,
+            //        //ProductName = p.ProductName,
+            //        //Price = p.SellingPrice,
+            //        //Qty = 1
+            //    });
+            //}
 
             gridCart.RefreshDataSource();
 

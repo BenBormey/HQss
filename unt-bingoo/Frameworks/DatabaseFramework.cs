@@ -16,6 +16,7 @@ namespace unt_bingoo.Frameworks
         private SqlConnection Connection;
         private SqlCommand Command;
         private bool disposedValue;
+        public string strConnection = $"Server=192.168.1.111;Database=DBUNTWHOLESALECOLTD;User Id=UserConnection;Password=123;Connection Timeout=60;Max Pool Size=200;";
 
         public DatabaseFramework()
         {

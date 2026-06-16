@@ -160,25 +160,25 @@ namespace unt_bingoo.view.Category
 
             if (row == null) return;
 
-            txtCode.Text = row.CategoryCode;
+            //txtCode.Text = row.CategoryCode;
             txtName.Text = row.CategoryName;
             txtRemark.Text = row.Remark;
 
-            chkActive.Checked = row.Active;
+            //chkActive.Checked = row.Active;
 
             _editingId = row.Id;
 
-            btnAdd.Text = "Update";
+            //btnAdd.Text = "Update";
         }
 
 
         private bool ValidateForm()
         {
-            if (string.IsNullOrWhiteSpace(txtCode.Text))
-            {
-                XtraMessageBox.Show("Category Code required!");
-                return false;
-            }
+            //if (string.IsNullOrWhiteSpace(txtCode.Text))
+            //{
+            //    XtraMessageBox.Show("Category Code required!");
+            //    return false;
+            //}
 
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
@@ -194,24 +194,25 @@ namespace unt_bingoo.view.Category
             return new CategoryItem
             {
                 Id = _editingId ?? 0,
-                CategoryCode = txtCode.Text.Trim(),
+                CategoryCode ="",
                 CategoryName = txtName.Text.Trim(),
                 Remark = txtRemark.Text.Trim(),
-                Active = chkActive.Checked
+                khmerCategoryName = TxtKhmerName.Text.Trim()
+                //Active = chkActive.Checked
             };
         }
 
         private void ClearForm()
         {
-            txtCode.Text = "";
+            //txtCode.Text = "";
             txtName.Text = "";
             txtRemark.Text = "";
 
-            chkActive.Checked = true;
+            //chkActive.Checked = true;
 
             _editingId = null;
 
-            btnAdd.Text = "Add";
+            //btnAdd.Text = "Add";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -248,6 +249,12 @@ namespace unt_bingoo.view.Category
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
         }
     }
 }

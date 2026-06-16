@@ -10,5 +10,6 @@ namespace unt_bingoo.view.Outlet
     {
         public int Id { get; set; }
         public string OutletCode { get; set; }
+        public string Status { get; set; }
     }
 }

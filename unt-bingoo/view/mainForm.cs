@@ -118,7 +118,7 @@ namespace unt_bingoo.view
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new guiProduct() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new FrmProductsSearch(this) { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
         }
 
@@ -256,6 +256,26 @@ namespace unt_bingoo.view
 
                      var frm = new guiFranchise() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
+        }
+
+        private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var frm = new guiCategory() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+
+
+        }
+
+        private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.Supplier.Form1() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void createUserProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

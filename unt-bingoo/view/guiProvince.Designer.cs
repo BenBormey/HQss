@@ -10,8 +10,6 @@ namespace unt_bingoo.view
 
         // បញ្ជីសមាសភាគ (Components)
         private PanelControl panelHeader;
-        private LabelControl lblSystemName;
-        private PictureEdit picLogo;
 
         private PanelControl panelDetail;
         private LabelControl lblProvinceId;
@@ -47,9 +45,17 @@ namespace unt_bingoo.view
 
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
-            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
-            this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.panelDetail = new DevExpress.XtraEditors.PanelControl();
             this.lblProvinceId = new DevExpress.XtraEditors.LabelControl();
             this.txtProvinceId = new DevExpress.XtraEditors.TextEdit();
@@ -64,13 +70,22 @@ namespace unt_bingoo.view
             this.panelGrid = new DevExpress.XtraEditors.PanelControl();
             this.gridControlProvince = new DevExpress.XtraGrid.GridControl();
             this.gridViewProvince = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.provinceId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.provinceNameKH = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.provinceNameEN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.code = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelBottom = new DevExpress.XtraEditors.PanelControl();
             this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
+            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).BeginInit();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).BeginInit();
             this.panelDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProvinceId.Properties)).BeginInit();
@@ -81,40 +96,22 @@ namespace unt_bingoo.view
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProvince)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewProvince)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
             this.panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
             // 
+            this.panelHeader.Controls.Add(this.PicSectionIcon);
             this.panelHeader.Controls.Add(this.lblSystemName);
-            this.panelHeader.Controls.Add(this.picLogo);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1000, 70);
+            this.panelHeader.Size = new System.Drawing.Size(1000, 91);
             this.panelHeader.TabIndex = 3;
-            // 
-            // lblSystemName
-            // 
-            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lblSystemName.Appearance.Options.UseFont = true;
-            this.lblSystemName.Appearance.Options.UseForeColor = true;
-            this.lblSystemName.Location = new System.Drawing.Point(99, 30);
-            this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(390, 30);
-            this.lblSystemName.TabIndex = 0;
-            this.lblSystemName.Text = "Q\'S PROVINCE MANAGEMENT SYSTEM";
-            // 
-            // picLogo
-            // 
-            this.picLogo.EditValue = global::unt_bingoo.Properties.Resources.Logo;
-            this.picLogo.Location = new System.Drawing.Point(10, 10);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picLogo.Size = new System.Drawing.Size(50, 50);
-            this.picLogo.TabIndex = 1;
             // 
             // panelDetail
             // 
@@ -129,7 +126,7 @@ namespace unt_bingoo.view
             this.panelDetail.Controls.Add(this.btnAdd);
             this.panelDetail.Controls.Add(this.btnCancel);
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDetail.Location = new System.Drawing.Point(0, 70);
+            this.panelDetail.Location = new System.Drawing.Point(0, 91);
             this.panelDetail.Name = "panelDetail";
             this.panelDetail.Size = new System.Drawing.Size(1000, 160);
             this.panelDetail.TabIndex = 2;
@@ -219,9 +216,9 @@ namespace unt_bingoo.view
             // 
             this.panelGrid.Controls.Add(this.gridControlProvince);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 230);
+            this.panelGrid.Location = new System.Drawing.Point(0, 251);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(1000, 330);
+            this.panelGrid.Size = new System.Drawing.Size(1000, 309);
             this.panelGrid.TabIndex = 0;
             // 
             // gridControlProvince
@@ -230,16 +227,88 @@ namespace unt_bingoo.view
             this.gridControlProvince.Location = new System.Drawing.Point(2, 2);
             this.gridControlProvince.MainView = this.gridViewProvince;
             this.gridControlProvince.Name = "gridControlProvince";
-            this.gridControlProvince.Size = new System.Drawing.Size(996, 326);
+            this.gridControlProvince.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemButtonEdit1,
+            this.repositoryItemButtonEdit2});
+            this.gridControlProvince.Size = new System.Drawing.Size(996, 305);
             this.gridControlProvince.TabIndex = 0;
             this.gridControlProvince.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewProvince});
             // 
             // gridViewProvince
             // 
+            this.gridViewProvince.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.provinceId,
+            this.provinceNameKH,
+            this.provinceNameEN,
+            this.code,
+            this.gridColumn1,
+            this.gridColumn2});
             this.gridViewProvince.GridControl = this.gridControlProvince;
             this.gridViewProvince.Name = "gridViewProvince";
             this.gridViewProvince.OptionsView.ShowGroupPanel = false;
+            // 
+            // provinceId
+            // 
+            this.provinceId.Caption = "provinceId";
+            this.provinceId.FieldName = "provinceId";
+            this.provinceId.Name = "provinceId";
+            // 
+            // provinceNameKH
+            // 
+            this.provinceNameKH.Caption = "provinceNameKH";
+            this.provinceNameKH.FieldName = "provinceNameKH";
+            this.provinceNameKH.Name = "provinceNameKH";
+            this.provinceNameKH.Visible = true;
+            this.provinceNameKH.VisibleIndex = 0;
+            // 
+            // provinceNameEN
+            // 
+            this.provinceNameEN.Caption = "provinceNameEN";
+            this.provinceNameEN.FieldName = "provinceNameEN";
+            this.provinceNameEN.Name = "provinceNameEN";
+            this.provinceNameEN.Visible = true;
+            this.provinceNameEN.VisibleIndex = 1;
+            // 
+            // code
+            // 
+            this.code.Caption = "code";
+            this.code.FieldName = "code";
+            this.code.Name = "code";
+            this.code.Visible = true;
+            this.code.VisibleIndex = 2;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "gridColumn1";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 3;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "gridColumn2";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 4;
+            // 
+            // repositoryItemButtonEdit1
+            // 
+            this.repositoryItemButtonEdit1.AutoHeight = false;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.edit__1_;
+            this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
+            this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            // 
+            // repositoryItemButtonEdit2
+            // 
+            this.repositoryItemButtonEdit2.AutoHeight = false;
+            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            this.repositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
             // panelBottom
             // 
@@ -281,6 +350,28 @@ namespace unt_bingoo.view
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // PicSectionIcon
+            // 
+            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
+            this.PicSectionIcon.Location = new System.Drawing.Point(3, 2);
+            this.PicSectionIcon.Name = "PicSectionIcon";
+            this.PicSectionIcon.Size = new System.Drawing.Size(89, 78);
+            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicSectionIcon.TabIndex = 4;
+            this.PicSectionIcon.TabStop = false;
+            // 
+            // lblSystemName
+            // 
+            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSystemName.Appearance.Options.UseFont = true;
+            this.lblSystemName.Appearance.Options.UseForeColor = true;
+            this.lblSystemName.Location = new System.Drawing.Point(98, 38);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
+            this.lblSystemName.TabIndex = 3;
+            this.lblSystemName.Text = "JuJuBi Management System";
+            // 
             // guiProvince
             // 
             this.ClientSize = new System.Drawing.Size(1000, 600);
@@ -295,7 +386,6 @@ namespace unt_bingoo.view
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).EndInit();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
@@ -307,11 +397,25 @@ namespace unt_bingoo.view
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProvince)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewProvince)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
+
+        private DevExpress.XtraGrid.Columns.GridColumn provinceId;
+        private DevExpress.XtraGrid.Columns.GridColumn provinceNameKH;
+        private DevExpress.XtraGrid.Columns.GridColumn provinceNameEN;
+        private DevExpress.XtraGrid.Columns.GridColumn code;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
+        private System.Windows.Forms.PictureBox PicSectionIcon;
+        private LabelControl lblSystemName;
     }
 }

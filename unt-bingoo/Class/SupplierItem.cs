@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace unt_bingoo.Class
 {
-   public class SupplierItem
+    public class SupplierItem
     {
         public int SupplierID { get; set; }
 
@@ -27,5 +23,29 @@ namespace unt_bingoo.Class
         public bool Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public string KhmerSupAddress { get; set; }
+
+        public string Country { get; set; }
+
+        public string FaxLine2 { get; set; }
+
+        public string Website { get; set; }
+
+        public string LeaoTime { get; set; }
+
+        public string Note { get; set; }
+
+        public string ChequeName { get; set; }
+
+        public int Term { get; set; }
+
+        public int DayOrder { get; set; }
+
+        public string CountryOfPurchase { get; set; }
+
+        public decimal SetPercentOrderLevel { get; set; }
+
+        public decimal VatTemp { get; set; }
     }
 }

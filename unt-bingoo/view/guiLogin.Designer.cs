@@ -39,14 +39,13 @@
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.SystemColors.Control;
-            this.panelHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelHeader.Controls.Add(this.lblSystemName);
             this.panelHeader.Controls.Add(this.PicSectionIcon);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Padding = new System.Windows.Forms.Padding(8);
-            this.panelHeader.Size = new System.Drawing.Size(452, 74);
+            this.panelHeader.Size = new System.Drawing.Size(397, 74);
             this.panelHeader.TabIndex = 0;
             // 
             // lblSystemName
@@ -80,7 +79,7 @@
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBody.Location = new System.Drawing.Point(0, 74);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(452, 234);
+            this.panelBody.Size = new System.Drawing.Size(397, 182);
             this.panelBody.TabIndex = 1;
             // 
             // BtnLogIn
@@ -89,9 +88,8 @@
             this.BtnLogIn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnLogIn.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnLogIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BtnLogIn.Image = global::unt_bingoo.Properties.Resources.login;
             this.BtnLogIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnLogIn.Location = new System.Drawing.Point(97, 115);
+            this.BtnLogIn.Location = new System.Drawing.Point(59, 89);
             this.BtnLogIn.Name = "BtnLogIn";
             this.BtnLogIn.Size = new System.Drawing.Size(144, 34);
             this.BtnLogIn.TabIndex = 110;
@@ -106,9 +104,8 @@
             this.BtnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnExit.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BtnExit.Image = global::unt_bingoo.Properties.Resources.Cancel16;
             this.BtnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnExit.Location = new System.Drawing.Point(247, 115);
+            this.BtnExit.Location = new System.Drawing.Point(209, 89);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Size = new System.Drawing.Size(122, 34);
             this.BtnExit.TabIndex = 111;
@@ -123,7 +120,7 @@
             this.Panel2.Controls.Add(this.Label5);
             this.Panel2.Controls.Add(this.PictureBox2);
             this.Panel2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Panel2.Location = new System.Drawing.Point(81, 69);
+            this.Panel2.Location = new System.Drawing.Point(43, 43);
             this.Panel2.Name = "Panel2";
             this.Panel2.Padding = new System.Windows.Forms.Padding(2);
             this.Panel2.Size = new System.Drawing.Size(290, 40);
@@ -148,9 +145,9 @@
             this.Label5.ForeColor = System.Drawing.Color.Black;
             this.Label5.Location = new System.Drawing.Point(16, 2);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(167, 13);
+            this.Label5.Size = new System.Drawing.Size(140, 13);
             this.Label5.TabIndex = 12;
-            this.Label5.Text = "Please enter the password :";
+            this.Label5.Text = "Please enter password ";
             // 
             // PictureBox2
             // 
@@ -166,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 308);
+            this.ClientSize = new System.Drawing.Size(397, 256);
             this.Controls.Add(this.panelBody);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

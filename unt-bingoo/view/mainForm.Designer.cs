@@ -40,14 +40,16 @@ namespace unt_bingoo.view
             this.mnuexit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnufile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.supplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,6 +106,7 @@ namespace unt_bingoo.view
             this.createUserProfileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.createUserProfileToolStripMenuItem.Text = "Create User Profile";
             this.createUserProfileToolStripMenuItem.Visible = false;
+            this.createUserProfileToolStripMenuItem.Click += new System.EventHandler(this.createUserProfileToolStripMenuItem_Click);
             // 
             // mnuexit
             // 
@@ -120,14 +123,16 @@ namespace unt_bingoo.view
             // mnufile
             // 
             this.mnufile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6,
+            this.toolStripSeparator8,
+            this.toolStripMenuItem5,
+            this.toolStripSeparator7,
+            this.supplierToolStripMenuItem,
+            this.toolStripSeparator1,
             this.toolStripMenuItem2,
             this.toolStripSeparator3,
             this.toolStripMenuItem3,
             this.toolStripSeparator6,
-            this.toolStripMenuItem5,
-            this.toolStripSeparator7,
-            this.toolStripMenuItem6,
-            this.toolStripSeparator8,
             this.toolStripMenuItem7,
             this.toolStripMenuItem8,
             this.toolStripMenuItem9,
@@ -139,6 +144,44 @@ namespace unt_bingoo.view
             this.mnufile.Name = "mnufile";
             this.mnufile.Size = new System.Drawing.Size(63, 22);
             this.mnufile.Text = "&File     ";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Image = global::unt_bingoo.Properties.Resources.Currency;
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(202, 22);
+            this.toolStripMenuItem6.Text = "Currency";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.currencyToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(199, 6);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Image = global::unt_bingoo.Properties.Resources.retail;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(202, 22);
+            this.toolStripMenuItem5.Text = "&Create OutLet";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.outLetToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(199, 6);
+            // 
+            // supplierToolStripMenuItem
+            // 
+            this.supplierToolStripMenuItem.Name = "supplierToolStripMenuItem";
+            this.supplierToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.supplierToolStripMenuItem.Text = "Create Supplier";
+            this.supplierToolStripMenuItem.Click += new System.EventHandler(this.supplierToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
             // 
             // toolStripMenuItem2
             // 
@@ -166,32 +209,6 @@ namespace unt_bingoo.view
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(199, 6);
             this.toolStripSeparator6.Visible = false;
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Image = global::unt_bingoo.Properties.Resources.retail;
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItem5.Text = "&Create OutLet";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.outLetToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(199, 6);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Image = global::unt_bingoo.Properties.Resources.Currency;
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItem6.Text = "Currency";
-            this.toolStripMenuItem6.Click += new System.EventHandler(this.currencyToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(199, 6);
             // 
             // toolStripMenuItem7
             // 
@@ -243,8 +260,9 @@ namespace unt_bingoo.view
             // paymentToolStripMenuItem
             // 
             this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
-            this.paymentToolStripMenuItem.Size = new System.Drawing.Size(78, 22);
-            this.paymentToolStripMenuItem.Text = "Payment";
+            this.paymentToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.paymentToolStripMenuItem.Text = "Product &Category";
+            this.paymentToolStripMenuItem.Click += new System.EventHandler(this.paymentToolStripMenuItem_Click);
             // 
             // reportToolStripMenuItem
             // 
@@ -307,6 +325,8 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supplierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

@@ -13,6 +13,7 @@ namespace unt_bingoo.Class
         public string CategoryName { get; set; }
         public string Remark { get; set; }
         public bool Active { get; set; }
+        public string khmerCategoryName { get; set; }
     }
 
 }

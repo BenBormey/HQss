@@ -444,7 +444,28 @@ namespace unt_bingoo.view.Outlet
                 }
             }
         }
+            private void AddImageToGallerycititenship(string localFilePath, string remoteUrl)
+        {
+            try
+            {
+                Panel pnl = new Panel { Size = new Size(100, 100), Margin = new Padding(5), BorderStyle = BorderStyle.FixedSingle, Tag = remoteUrl };
+                PictureBox pb = new PictureBox { SizeMode = PictureBoxSizeMode.StretchImage, Dock = DockStyle.Fill };
 
+                using (var img = Image.FromFile(localFilePath))
+                {
+                    pb.Image = new Bitmap(img);
+                }
+
+                SimpleButton btnDel = new SimpleButton { Text = "X", Size = new Size(20, 20), Location = new Point(75, 0), ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat, Appearance = { ForeColor = Color.Red } };
+                btnDel.Click += (s, e) => { flpPhotos.Controls.Remove(pnl); pnl.Dispose(); };
+
+                pnl.Controls.Add(btnDel);
+                pnl.Controls.Add(pb);
+                btnDel.BringToFront();
+                flowLayoutPanel1.Controls.Add(pnl);
+            }
+            catch (Exception ex) { XtraMessageBox.Show("Photo Notfound Gallery: " + ex.Message); }
+        }
         private void AddImageToGallery(string localFilePath, string remoteUrl)
         {
             try
@@ -755,6 +776,75 @@ namespace unt_bingoo.view.Outlet
         private void panelHeader_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private async void simpleButton2_Click(object sender, EventArgs e)
+        {
+            const int MAX_PHOTOS = 8;
+
+            using (OpenFileDialog ofd = new OpenFileDialog
+            {
+                Multiselect = true,
+                Filter = "Images|*.jpg;*.png"
+            })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    // Check total photos after selection
+                    if (flowLayoutPanel1.Controls.Count + ofd.FileNames.Length > MAX_PHOTOS)
+                    {
+                        XtraMessageBox.Show(
+                            $"You can upload a maximum of {MAX_PHOTOS} photos.",
+                            "Warning",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+
+                        return;
+                    }
+
+                    try
+                    {
+                        foreach (string file in ofd.FileNames)
+                        {
+                            string url = await UploadImage(file);
+
+                            if (!string.IsNullOrEmpty(url))
+                            {
+                                AddImageToGallerycititenship(file, url);
+
+                                using (var tempImg = Image.FromFile(file))
+                                {
+                                    picCustomer.Image = new Bitmap(tempImg);
+                                }
+
+                                _uploadedImageUrl = url;
+                            }
+                            else
+                            {
+                                XtraMessageBox.Show(
+                                    $"Upload Photo {Path.GetFileName(file)} Sucess!",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                            }
+                        }
+
+                        XtraMessageBox.Show(
+                            "Add Photo!",
+                            "Success",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(
+                            "Error " + ex.Message,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

@@ -65,16 +65,16 @@ namespace unt_bingoo.view.Product
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.PicSectionIcon = new System.Windows.Forms.PictureBox();
@@ -90,7 +90,6 @@ namespace unt_bingoo.view.Product
             this.panelForm = new DevExpress.XtraEditors.PanelControl();
             this.lblOutlet = new System.Windows.Forms.Label();
             this.cboOutlet = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.txtDiscound = new DevExpress.XtraEditors.TextEdit();
             this.cbosupplier = new System.Windows.Forms.ComboBox();
             this.btnaddBrand = new System.Windows.Forms.Button();
@@ -181,6 +180,7 @@ namespace unt_bingoo.view.Product
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(1149, 84);
             this.panelHeader.TabIndex = 3;
+            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
             // panelControl1
             // 
@@ -298,7 +298,6 @@ namespace unt_bingoo.view.Product
             // 
             this.panelForm.Controls.Add(this.lblOutlet);
             this.panelForm.Controls.Add(this.cboOutlet);
-            this.panelForm.Controls.Add(this.button1);
             this.panelForm.Controls.Add(this.txtDiscound);
             this.panelForm.Controls.Add(this.cbosupplier);
             this.panelForm.Controls.Add(this.btnaddBrand);
@@ -348,17 +347,6 @@ namespace unt_bingoo.view.Product
             this.cboOutlet.TabIndex = 172;
             this.cboOutlet.Visible = false;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button1.Image = global::unt_bingoo.Properties.Resources.add16;
-            this.button1.Location = new System.Drawing.Point(876, 43);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(27, 26);
-            this.button1.TabIndex = 171;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // txtDiscound
             // 
             this.txtDiscound.Location = new System.Drawing.Point(610, 97);
@@ -374,7 +362,7 @@ namespace unt_bingoo.view.Product
             this.cbosupplier.FormattingEnabled = true;
             this.cbosupplier.Location = new System.Drawing.Point(610, 44);
             this.cbosupplier.Name = "cbosupplier";
-            this.cbosupplier.Size = new System.Drawing.Size(255, 22);
+            this.cbosupplier.Size = new System.Drawing.Size(293, 22);
             this.cbosupplier.TabIndex = 169;
             // 
             // btnaddBrand
@@ -802,9 +790,9 @@ namespace unt_bingoo.view.Product
             // btnmainupdate
             // 
             this.btnmainupdate.AutoHeight = false;
-            editorButtonImageOptions3.Image = global::unt_bingoo.Properties.Resources.update_16;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
             this.btnmainupdate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainupdate.Name = "btnmainupdate";
             this.btnmainupdate.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainupdate.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainupdate_ButtonClick);
@@ -820,9 +808,9 @@ namespace unt_bingoo.view.Product
             // btnmaindelete
             // 
             this.btnmaindelete.AutoHeight = false;
-            editorButtonImageOptions4.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
             this.btnmaindelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmaindelete.Name = "btnmaindelete";
             this.btnmaindelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmaindelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmaindelete_ButtonClick);
@@ -944,7 +932,6 @@ namespace unt_bingoo.view.Product
         private TextEdit txtDiscound;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainupdate;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmaindelete;
-        private Button button1;
         private System.Windows.Forms.ComboBox cboOutlet;
         private Label lblOutlet;
         private LabelControl lblSystemName;

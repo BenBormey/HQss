@@ -26,16 +26,6 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.txtDate = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.nExchangRate = new System.Windows.Forms.NumericUpDown();
-            this.btnAddService = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.txtRemark = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,9 +38,20 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtAsk = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboCurrency = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cboCurrency = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.nExchangRate = new System.Windows.Forms.NumericUpDown();
+            this.btnAddService = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.txtRemark = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.Panel14 = new System.Windows.Forms.Panel();
             this.lblCountRow = new System.Windows.Forms.Label();
             this.BtnExportToExcel = new System.Windows.Forms.Button();
@@ -71,19 +72,19 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nExchangRate)).BeginInit();
-            this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nExchangRate)).BeginInit();
+            this.panel8.SuspendLayout();
             this.Panel14.SuspendLayout();
             this.Panel1.SuspendLayout();
             this.Panel6.SuspendLayout();
@@ -108,119 +109,14 @@
             this.txtDate.TextChanged += new System.EventHandler(this.txtDate_TextChanged);
             this.txtDate.Validated += new System.EventHandler(this.txtDate_Validated);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 11);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 14);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Currency : ";
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.nExchangRate);
-            this.panel7.Controls.Add(this.btnAddService);
-            this.panel7.Controls.Add(this.label4);
-            this.panel7.Location = new System.Drawing.Point(6, 96);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(366, 36);
-            this.panel7.TabIndex = 161;
-            // 
-            // nExchangRate
-            // 
-            this.nExchangRate.DecimalPlaces = 2;
-            this.nExchangRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.nExchangRate.Location = new System.Drawing.Point(88, 8);
-            this.nExchangRate.Maximum = new decimal(new int[] {
-            200000,
-            0,
-            0,
-            0});
-            this.nExchangRate.Name = "nExchangRate";
-            this.nExchangRate.Size = new System.Drawing.Size(104, 22);
-            this.nExchangRate.TabIndex = 4;
-            // 
-            // btnAddService
-            // 
-            this.btnAddService.Image = global::unt_bingoo.Properties.Resources.copy;
-            this.btnAddService.Location = new System.Drawing.Point(210, 5);
-            this.btnAddService.Name = "btnAddService";
-            this.btnAddService.Size = new System.Drawing.Size(30, 25);
-            this.btnAddService.TabIndex = 160;
-            this.btnAddService.UseVisualStyleBackColor = true;
-            this.btnAddService.Click += new System.EventHandler(this.btnAddService_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(35, 11);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 14);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Rate : ";
-            // 
-            // btnClear
-            // 
-            this.btnClear.Image = global::unt_bingoo.Properties.Resources.Cancel16;
-            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClear.Location = new System.Drawing.Point(284, 192);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(85, 28);
-            this.btnClear.TabIndex = 164;
-            this.btnClear.Text = "&Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::unt_bingoo.Properties.Resources.Add_New_Bank_Book;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(180, 192);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 28);
-            this.btnSave.TabIndex = 163;
-            this.btnSave.Text = "&Add";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.txtRemark);
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Location = new System.Drawing.Point(6, 132);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(366, 52);
-            this.panel8.TabIndex = 165;
-            // 
-            // txtRemark
-            // 
-            this.txtRemark.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRemark.Location = new System.Drawing.Point(88, 5);
-            this.txtRemark.Multiline = true;
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(275, 41);
-            this.txtRemark.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(23, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 14);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Remark : ";
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dtDate);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(6, 25);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(366, 36);
+            this.panel2.Size = new System.Drawing.Size(436, 36);
             this.panel2.TabIndex = 166;
             // 
             // dtDate
@@ -252,20 +148,19 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtAsk);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(403, 18);
+            this.groupBox2.Location = new System.Drawing.Point(6, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(385, 160);
+            this.groupBox2.Size = new System.Drawing.Size(368, 194);
             this.groupBox2.TabIndex = 167;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "National Bank Exchange Rate :";
             // 
             // dtpDate
             // 
             this.dtpDate.CustomFormat = "dd-MM-yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(60, 32);
+            this.dtpDate.Location = new System.Drawing.Point(60, 13);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpDate.Size = new System.Drawing.Size(270, 20);
             this.dtpDate.TabIndex = 161;
             this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             this.dtpDate.VisibleChanged += new System.EventHandler(this.dtpDate_VisibleChanged);
@@ -273,7 +168,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(21, 121);
+            this.label10.Location = new System.Drawing.Point(21, 135);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 13);
             this.label10.TabIndex = 11;
@@ -282,16 +177,16 @@
             // txtAvg
             // 
             this.txtAvg.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAvg.Location = new System.Drawing.Point(60, 115);
+            this.txtAvg.Location = new System.Drawing.Point(60, 129);
             this.txtAvg.Name = "txtAvg";
             this.txtAvg.ReadOnly = true;
-            this.txtAvg.Size = new System.Drawing.Size(200, 23);
+            this.txtAvg.Size = new System.Drawing.Size(270, 23);
             this.txtAvg.TabIndex = 10;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 92);
+            this.label9.Location = new System.Drawing.Point(25, 99);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(28, 13);
             this.label9.TabIndex = 9;
@@ -300,17 +195,17 @@
             // txtBid
             // 
             this.txtBid.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBid.Location = new System.Drawing.Point(60, 86);
+            this.txtBid.Location = new System.Drawing.Point(60, 93);
             this.txtBid.Name = "txtBid";
             this.txtBid.ReadOnly = true;
-            this.txtBid.Size = new System.Drawing.Size(200, 23);
+            this.txtBid.Size = new System.Drawing.Size(270, 23);
             this.txtBid.TabIndex = 8;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(22, 64);
+            this.label8.Location = new System.Drawing.Point(18, 55);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 7;
@@ -320,21 +215,80 @@
             // 
             this.txtAsk.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAsk.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.txtAsk.Location = new System.Drawing.Point(60, 58);
+            this.txtAsk.Location = new System.Drawing.Point(60, 50);
             this.txtAsk.Name = "txtAsk";
             this.txtAsk.ReadOnly = true;
-            this.txtAsk.Size = new System.Drawing.Size(200, 23);
+            this.txtAsk.Size = new System.Drawing.Size(270, 23);
             this.txtAsk.TabIndex = 6;
             this.txtAsk.Text = "xx";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 35);
+            this.label3.Location = new System.Drawing.Point(18, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Date :";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.panel3);
+            this.groupBox1.Location = new System.Drawing.Point(13, 60);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(817, 231);
+            this.groupBox1.TabIndex = 151;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Entry Daily Exchange Rate:";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnClear);
+            this.panel3.Controls.Add(this.btnSave);
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Controls.Add(this.panel7);
+            this.panel3.Controls.Add(this.panel8);
+            this.panel3.Controls.Add(this.panel2);
+            this.panel3.Location = new System.Drawing.Point(380, 21);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(436, 198);
+            this.panel3.TabIndex = 167;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClear.Image = global::unt_bingoo.Properties.Resources.Cancel16;
+            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClear.Location = new System.Drawing.Point(253, 160);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(85, 38);
+            this.btnClear.TabIndex = 171;
+            this.btnClear.Text = "&Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Image = global::unt_bingoo.Properties.Resources.Add_New_Bank_Book;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(338, 160);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(98, 38);
+            this.btnSave.TabIndex = 170;
+            this.btnSave.Text = "&Add";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.cboCurrency);
+            this.panel5.Controls.Add(this.label6);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 124);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(436, 36);
+            this.panel5.TabIndex = 169;
             // 
             // cboCurrency
             // 
@@ -347,30 +301,88 @@
             this.cboCurrency.Size = new System.Drawing.Size(104, 24);
             this.cboCurrency.TabIndex = 6;
             // 
-            // groupBox1
+            // label6
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.panel2);
-            this.groupBox1.Controls.Add(this.panel8);
-            this.groupBox1.Controls.Add(this.panel7);
-            this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.btnSave);
-            this.groupBox1.Controls.Add(this.panel5);
-            this.groupBox1.Location = new System.Drawing.Point(13, 60);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(817, 231);
-            this.groupBox1.TabIndex = 151;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Entry Daily Exchange Rate:";
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(12, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 14);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Currency : ";
             // 
-            // panel5
+            // panel7
             // 
-            this.panel5.Controls.Add(this.cboCurrency);
-            this.panel5.Controls.Add(this.label6);
-            this.panel5.Location = new System.Drawing.Point(6, 60);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(366, 36);
-            this.panel5.TabIndex = 160;
+            this.panel7.Controls.Add(this.nExchangRate);
+            this.panel7.Controls.Add(this.btnAddService);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 88);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(436, 36);
+            this.panel7.TabIndex = 168;
+            // 
+            // nExchangRate
+            // 
+            this.nExchangRate.DecimalPlaces = 2;
+            this.nExchangRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.nExchangRate.Location = new System.Drawing.Point(88, 8);
+            this.nExchangRate.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
+            this.nExchangRate.Name = "nExchangRate";
+            this.nExchangRate.Size = new System.Drawing.Size(104, 22);
+            this.nExchangRate.TabIndex = 4;
+            // 
+            // btnAddService
+            // 
+            this.btnAddService.Image = global::unt_bingoo.Properties.Resources.copy;
+            this.btnAddService.Location = new System.Drawing.Point(210, 5);
+            this.btnAddService.Name = "btnAddService";
+            this.btnAddService.Size = new System.Drawing.Size(30, 25);
+            this.btnAddService.TabIndex = 160;
+            this.btnAddService.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(35, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 14);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Rate : ";
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.txtRemark);
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 36);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(436, 52);
+            this.panel8.TabIndex = 167;
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRemark.Location = new System.Drawing.Point(88, 5);
+            this.txtRemark.Multiline = true;
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(275, 41);
+            this.txtRemark.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(23, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 14);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Remark : ";
             // 
             // Panel14
             // 
@@ -413,6 +425,7 @@
             this.BtnExportToExcel.TabIndex = 130;
             this.BtnExportToExcel.Text = "&Export To Excel";
             this.BtnExportToExcel.UseVisualStyleBackColor = true;
+            this.BtnExportToExcel.Click += new System.EventHandler(this.BtnExportToExcel_Click);
             // 
             // BtnClose
             // 
@@ -559,7 +572,6 @@
             this.gridColumn1,
             this.gridColumn16,
             this.gridColumn4,
-            this.gridColumn5,
             this.rateDate,
             this.gridColumn7,
             this.gridColumn6,
@@ -596,19 +608,11 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.ColumnEdit = this.repositoryItemButtonEdit1;
+            this.gridColumn4.ColumnEdit = this.repositoryItemButtonEdit2;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 6;
             this.gridColumn4.Width = 61;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.ColumnEdit = this.repositoryItemButtonEdit2;
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 7;
-            this.gridColumn5.Width = 61;
             // 
             // rateDate
             // 
@@ -669,7 +673,7 @@
             this.btnUpdateTemp,
             this.repositoryItemButtonEdit1,
             this.repositoryItemButtonEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(829, 349);
+            this.gridControl1.Size = new System.Drawing.Size(829, 279);
             this.gridControl1.TabIndex = 153;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -685,18 +689,19 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exchange Rate Management";
             this.Load += new System.EventHandler(this.guiExchange_Load);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nExchangRate)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nExchangRate)).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.Panel14.ResumeLayout(false);
             this.Panel14.PerformLayout();
             this.Panel1.ResumeLayout(false);
@@ -714,20 +719,10 @@
         }
 
         private System.Windows.Forms.TextBox txtDate;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.NumericUpDown nExchangRate;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TextBox txtRemark;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dtDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnAddService;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtAvg;
         private System.Windows.Forms.Label label9;
@@ -735,9 +730,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtAsk;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboCurrency;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel5;
         internal System.Windows.Forms.Panel Panel14;
         internal System.Windows.Forms.Label lblCountRow;
         internal System.Windows.Forms.Button BtnExportToExcel;
@@ -758,12 +751,24 @@
         internal DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn rateDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         internal DevExpress.XtraGrid.GridControl gridControl1;
         private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ComboBox cboCurrency;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.NumericUpDown nExchangRate;
+        private System.Windows.Forms.Button btnAddService;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.TextBox txtRemark;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnSave;
     }
 }
