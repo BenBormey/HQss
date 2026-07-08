@@ -2,13 +2,8 @@
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using unt_bingoo.Class;
 using unt_bingoo.Controller;
@@ -45,6 +40,7 @@ namespace unt_bingoo.view.Product
 
         private APIsController _api;
         public mainForm mdi_ { get; set; }
+
         public FrmProductsSearch(mainForm mdi)
         {
             InitializeComponent();
@@ -52,17 +48,19 @@ namespace unt_bingoo.view.Product
             this.LoadingInitialized();
             _api = APIGlobals.Api;
         }
+
         private void DataSources(
-   System.Windows.Forms.ComboBox comboBoxName,
-   DataTable dTable,
-   string displayMember,
-   string valueMember)
+            System.Windows.Forms.ComboBox comboBoxName,
+            DataTable dTable,
+            string displayMember,
+            string valueMember)
         {
             comboBoxName.DataSource = dTable;
             comboBoxName.DisplayMember = displayMember;
             comboBoxName.ValueMember = valueMember;
             comboBoxName.SelectedIndex = -1;
         }
+
         private void LoadingInitialized()
         {
             Initialized.LoadingInitialized(Data, App);
@@ -70,7 +68,7 @@ namespace unt_bingoo.view.Product
                 Data.PrefixDatabase,
                 Data.DatabaseName);
         }
-    
+
         private void BtnAddNew_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -79,11 +77,8 @@ namespace unt_bingoo.view.Product
 
             guiProductOutlet frm = new guiProductOutlet(this.mdi_, lIsMainProducts)
             {
-                //RWord_Searching = string.Empty,
-                //RProductList = null,
                 MdiParent = this.mdi_,
                 WindowState = FormWindowState.Maximized
-                //RNewPriceEffective = 0
             };
 
             frm.PanelAccept.Visible = false;
@@ -92,26 +87,38 @@ namespace unt_bingoo.view.Product
 
         private async void BtnSearch_Click(object sender, EventArgs e)
         {
+            List<ProductItem> products;
+            string keyword;
+
             if (string.IsNullOrWhiteSpace(TxtSearch.Text))
             {
-                XtraMessageBox.Show(
-                    LblDescription.Text,
-                    "Need Value To Search",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
 
-                TxtSearch.Focus();
-                return;
+                var answer = XtraMessageBox.Show(
+                    "Do you want to search all products?",
+                    "Confirm Search",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (answer == DialogResult.No)
+                {
+                    TxtSearch.Focus();
+                    return;
+                }
+
+            
+                keyword = string.Empty;
+
+                products = await _api.GetAsync<List<ProductItem>>(
+                    "api/Product");
             }
-
-            string keyword = TxtSearch.Text.Trim();
-
-            if (RdbBarcode.Checked)
+            else
             {
-                if (keyword.Length <= 13)
+                keyword = TxtSearch.Text.Trim();
+
+                // Format barcode: pad number part to 13 digits (e.g. 34 -> 0000000000034)
+                if (RdbBarcode.Checked && keyword.Length <= 13)
                 {
                     char firstChar = keyword[0];
-
                     string prefix = "";
                     long numberPart = 0;
 
@@ -122,7 +129,6 @@ namespace unt_bingoo.view.Product
                     else
                     {
                         prefix = firstChar.ToString();
-
                         long.TryParse(
                             keyword.Substring(1),
                             out numberPart);
@@ -130,26 +136,26 @@ namespace unt_bingoo.view.Product
 
                     keyword = $"{prefix}{numberPart:0000000000000}";
                 }
-            }
 
-            List<ProductItem> products;
+                if (RdbBarcode.Checked)
+                {
+                    var product = await _api.GetAsync<ProductItem>(
+                        $"api/Product/barcode/{keyword}");
 
-            if (RdbBarcode.Checked)
-            {
-                products = await _api.GetAsync<List<ProductItem>>(
-                    $"api/Product");
-
-
-            }
-            else if (RdbItemcodes.Checked)
-            {
-                products = await _api.GetAsync<List<ProductItem>>(
-                    $"api/Product/search-sku/{keyword}");
-            }
-            else
-            {
-                products = await _api.GetAsync<List<ProductItem>>(
-                    $"api/Product/search-name/{keyword}");
+                    products = product != null
+                        ? new List<ProductItem> { product }
+                        : new List<ProductItem>();
+                }
+                else if (RdbItemcodes.Checked)
+                {
+                    products = await _api.GetAsync<List<ProductItem>>(
+                        $"api/Product/search-sku/{keyword}");
+                }
+                else
+                {
+                    products = await _api.GetAsync<List<ProductItem>>(
+                        $"api/Product/search-name/{keyword}");
+                }
             }
 
             if (products == null || products.Count == 0)
@@ -162,7 +168,6 @@ namespace unt_bingoo.view.Product
 
                 TxtSearch.SelectAll();
                 TxtSearch.Focus();
-
                 return;
             }
 
@@ -178,6 +183,19 @@ namespace unt_bingoo.view.Product
             frm.WindowState = FormWindowState.Maximized;
 
             frm.Show();
+        }
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TxtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;                 // បិទសំឡេង "ding" របស់ Windows
+                BtnSearch_Click(sender, e);       // ហៅ search ដូចចុច button
+            }
         }
     }
 }

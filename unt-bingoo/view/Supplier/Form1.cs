@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -45,6 +46,15 @@ namespace unt_bingoo.view.Supplier
 
 
             gridViewSuppliers.OptionsView.ColumnAutoWidth = true;
+
+            gridViewSuppliers.Appearance.HeaderPanel.BackColor = Color.DimGray;
+            gridViewSuppliers.Appearance.HeaderPanel.ForeColor = Color.Black;
+            gridViewSuppliers.Appearance.HeaderPanel.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            gridViewSuppliers.Appearance.HeaderPanel.Options.UseBackColor = true;
+            gridViewSuppliers.Appearance.HeaderPanel.Options.UseForeColor = true;
+            gridViewSuppliers.Appearance.HeaderPanel.Options.UseFont = true;
+
 
 
 
@@ -137,6 +147,9 @@ namespace unt_bingoo.view.Supplier
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+
+            button2.Visible = false;
+            chkActive.Checked = true;
             try
             {
                 _api = APIGlobals.Api;
@@ -194,10 +207,13 @@ namespace unt_bingoo.view.Supplier
 
             CmbTerms.SelectedIndex = -1;
             CmbCountryOfPurchase.SelectedIndex = -1;
-            CmbStatus.SelectedIndex = 0;
+            
 
             chkrequiredsetallitems.Checked = false;
- 
+
+            BtnAddNew.Text = "&Add New";
+
+
 
             _editingId = null;
         }
@@ -387,20 +403,38 @@ namespace unt_bingoo.view.Supplier
 
                 if (row == null)
                     return;
-                string urls = $"api/Supplier/{row.SupplierID}";
-               bool statsus= await _api.DeleteAsync(urls);
 
-                if (statsus)
+                var result = MessageBox.Show(
+                    $"Are you sure you want to delete supplier '{row.SupplierName}'?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                string url = $"api/Supplier/{row.SupplierID}";
+
+                bool status = await _api.DeleteAsync(url);
+
+                if (status)
                 {
-                    MessageBox.Show("Delete Success");
+                    MessageBox.Show(
+                        "Supplier deleted successfully.",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
                     await LoadData();
                 }
-            
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(
+                    ex.Message,
+                    "Delete Failed",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
 
@@ -428,13 +462,27 @@ namespace unt_bingoo.view.Supplier
                 TxtLEAOTime.Text = row.LeaoTime;
                 TxtNote.Text = row.Note;
                 TxtChequeName.Text = row.ChequeName;
-
-                CmbTerms.Text = row.Term.ToString();
+                txtkhmername.Text = row.SupplierNamekh;
+                //CmbTerms.Text = row.Term.ToString();
+                CmbTerms.SelectedValue = row.TermId;
                 TxtSetDaysOrder.Text = row.DayOrder.ToString();
                 CmbCountryOfPurchase.Text = row.CountryOfPurchase;
 
+                if (row.Status)
+                {
+                    chkActive.Checked = true;
+                    chkDeactive.Checked = false;
+                }
+                else
+                {
+                    chkActive.Checked = false;
+                    chkDeactive.Checked = true;
+                }
                 BtnAddNew.Text = "&Update";
                 _editingId =row.SupplierID;
+                gridControlSuppliers.Enabled = false;
+                button2.Visible = true;
+
 
             }
             catch (Exception ex)
@@ -446,6 +494,21 @@ namespace unt_bingoo.view.Supplier
         private void BtnUpdate_Click_1(object sender, EventArgs e)
         {
 
+        }
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                var addr = new MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private async void BtnAddNew_Click_1(object sender, EventArgs e)
@@ -479,6 +542,15 @@ namespace unt_bingoo.view.Supplier
                     CmbTerms.Focus();
                     return;
                 }
+                if (!IsValidEmail(TxtEmail.Text.Trim()))
+                {
+                    MessageBox.Show("Please enter a valid email address.",
+                        "Validation",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    TxtEmail.Focus();
+                    return ;
+                }
 
                 //if (string.IsNullOrWhiteSpace(TxtSetDaysOrder.Text))
                 //{
@@ -509,21 +581,13 @@ namespace unt_bingoo.view.Supplier
                     TxtTelLine1.Focus();
                     return;
                 }
-                if (CmbStatus.SelectedIndex == -1)
-                {
-                    MessageBox.Show("Please choose status");
-                    return;
-                }
 
-                bool status_ = false;
 
-                if (CmbStatus.SelectedItem.ToString() == "Active")
-                {
-                    status_ = true;
-                }
+
                 var supplier = new SupplierItem
                 {
-                    SupplierID = Convert.ToInt32(TxtId.Text),
+                    //SupplierID = Convert.ToInt32(TxtId.Text),
+                    TermId = (int)CmbTerms.SelectedValue,
                     SupplierCode = TxtSupId.Text.Trim(),
                     SupplierName = TxtSupName.Text.Trim(),
                     ContactName = TxtContactName.Text.Trim(),
@@ -533,46 +597,54 @@ namespace unt_bingoo.view.Supplier
                     TaxNumber = TxtVATNumber.Text.Trim(),
                     KhmerSupAddress = txtkhmeraddress.Text.Trim(),
                     Country = TxtCountry.Text.Trim(),
-                    FaxLine2 = TxtFaxLine2.Text.Trim(),
+                    FaxLine2 = TxtFaxLine1.Text.Trim(),
                     Website = TxtWebsite.Text.Trim(),
                     LeaoTime = TxtLEAOTime.Text.Trim(),
                     Note = TxtNote.Text.Trim(),
                     ChequeName = TxtChequeName.Text.Trim(),
                     Term = int.TryParse(CmbTerms.Text, out int term) ? term : 45,
-                    DayOrder = int.TryParse(TxtSetDaysOrder.Text, out int dayOrder) ? dayOrder : 45,
+                    SupplierNamekh = txtkhmername.Text.Trim(),
+                   // DayOrder = int.TryParse(TxtSetDaysOrder.Text, out int dayOrder) ? dayOrder : 45,
                     CountryOfPurchase = CmbCountryOfPurchase.Text.Trim(),
                     SetPercentOrderLevel = 20.5m,
                     VatTemp = 10,
-                    Status = status_
+                    Status = chkActive.Checked
                 };
-
+                bool sucess = false; 
 
                 if (_editingId == null)
                 {
-                    await _api.PostAsync("api/Supplier", supplier);
-                    XtraMessageBox.Show(
-                 "The Supplier has been Save!",
-                 "Success",
-                 MessageBoxButtons.OK,
-                 MessageBoxIcon.Information);
+                       sucess=      await _api.PostAsync("api/Supplier", supplier);
+                            XtraMessageBox.Show(
+                         "The Supplier has been Save!",
+                         "Success",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+          
                 }
                 else 
                 {
-                    await _api.PutAsync(
-                  $"api/Supplier/{supplier.SupplierID}",
-                  supplier);
-                    XtraMessageBox.Show(
-                 "The Supplier has been updated!",
-                 "Success",
-                 MessageBoxButtons.OK,
-                 MessageBoxIcon.Information);
+                    sucess = await _api.PutAsync(
+                              $"api/Supplier/{TxtId.Text.Trim()}",
+                              supplier);
+                                XtraMessageBox.Show(
+                             "The Supplier has been updated!",
+                             "Success",
+                             MessageBoxButtons.OK,
+                             MessageBoxIcon.Information);
                 }
 
 
 
+                if (sucess)
+                {
+                    await LoadData();
+                    ClearForm();
+                    gridControlSuppliers.Enabled = true;
 
-                await LoadData();
-                ClearForm();
+
+                }
+            
             }
             catch (Exception ex)
             {
@@ -636,50 +708,50 @@ namespace unt_bingoo.view.Supplier
 
         private void TxtTelLine1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            app.KeyPress(sender, e,
-    ApplicationFramework.TypeKeyPress.Format_Float,
-    null,
-    25);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void TxtTelLine2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            app.KeyPress(sender, e,
-    ApplicationFramework.TypeKeyPress.Format_Float,
-    null,
-    25);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void TxtFaxLine1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            app.KeyPress(sender, e,
- ApplicationFramework.TypeKeyPress.Format_Float,
- null,
- 25);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void TxtFaxLine2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            app.KeyPress(sender, e,
- ApplicationFramework.TypeKeyPress.Format_Float,
- null,
- 25);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void TxtHPLine1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            app.KeyPress(sender, e,
- ApplicationFramework.TypeKeyPress.Format_Float,
- null,
- 25);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void TxtHPLine2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            app.KeyPress(sender, e,
- ApplicationFramework.TypeKeyPress.Format_Float,
- null,
- 25);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtkhmeraddress_Enter(object sender, EventArgs e)
@@ -704,6 +776,53 @@ namespace unt_bingoo.view.Supplier
                     break;
                 }
             }
+        }
+
+        private void chkActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkActive.Checked)
+            {
+                chkDeactive.Checked = false;
+            }
+            else
+            {
+                // មិនអនុញ្ញាតឱ្យ Uncheck ទាំងអស់
+                if (!chkDeactive.Checked)
+                {
+                    chkActive.Checked = true;
+                }
+            }
+        }
+
+        private void chkDeactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDeactive.Checked)
+            {
+                chkActive.Checked = false;
+            }
+            else
+            {
+                // មិនអនុញ្ញាតឱ្យ Uncheck ទាំងអស់
+                if (!chkActive.Checked)
+                {
+                    chkDeactive.Checked = true;
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.ClearForm();
+            button2.Visible = false;
+            chkActive.Checked = true;
+            gridControlSuppliers.Enabled = true;
+            
+           
+        }
+
+        private void TxtHPLine2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

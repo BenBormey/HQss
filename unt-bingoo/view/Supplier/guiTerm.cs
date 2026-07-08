@@ -237,6 +237,11 @@ delete from  [DBJuJuBi].[dbo].[tblTermDay] where Id ={id}
         {
             this.Close();
         }
+
+        private void txtCountDay_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number);
+        }
     }
 
     public class TermDayClass

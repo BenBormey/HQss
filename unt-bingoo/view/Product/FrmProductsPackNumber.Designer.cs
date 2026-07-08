@@ -123,7 +123,7 @@ namespace unt_bingoo.view.Product
             this.BtnChange.Name = "BtnChange";
             this.BtnChange.Size = new System.Drawing.Size(89, 38);
             this.BtnChange.TabIndex = 129;
-            this.BtnChange.Text = "&Change";
+            this.BtnChange.Text = "&Ok";
             this.BtnChange.UseVisualStyleBackColor = false;
             this.BtnChange.Click += new System.EventHandler(this.BtnChange_Click);
             // 

@@ -10,16 +10,18 @@ namespace unt_bingoo.Class.ProductScal
 
         public double? CTNPerPallet { get; set; }
 
-        public string UOM { get; set; }
+        //public string UOM { get; set; }
 
         public double? Width { get; set; }
+        public string ProNumY { get; set; }
 
         public double? Length { get; set; }
 
         public double? Height { get; set; }
 
         public double? CBMPerCTN { get; set; }
-
+        public string UOMCode { get; set; }
+        public string UOMName { get; set; }
         public double? NetWeight { get; set; }
 
         public double? GrossWeight { get; set; }
@@ -30,7 +32,7 @@ namespace unt_bingoo.Class.ProductScal
 
         public ProductScal()
         {
-            UOM = string.Empty;
+            UOMCode = string.Empty;
             CreatedDate = DateTime.Now;
             Status = true;
         }

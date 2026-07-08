@@ -90,7 +90,7 @@ namespace unt_bingoo.view.Product
             }
             else
             {
-                BtnChange.Text = "&Change";
+                BtnChange.Text = "&Ok";
             }
         }
 

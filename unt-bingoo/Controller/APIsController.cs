@@ -1,40 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Windows.Forms;
-using unt_bingoo.Class;
 using System.Xml.Linq;
-using System.Linq;
-using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using unt_bingoo.Class;
 
 namespace unt_bingoo.Controller
 {
     public class APIsController
     {
+ 
+       private const string ApiBaseUrl = "http://192.168.1.99:8099/";
+                // private const string ApiBaseUrl = "http://localhost:5189/"; 
+
+
+        //   "http://localhost:5189/"
+        //   "http://localhost:8085/"
+        //   "http://192.168.2.26:8085/"
+
+   
+        private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(30);
+   
+      
         private readonly HttpClient _client;
+        private readonly HttpClient _externalClient;
+
         private string _token;
 
         public APIsController()
         {
             _client = new HttpClient
             {
-                //BaseAddress = new Uri("http://localhost:5189/"),
-                //BaseAddress = new Uri("http://localhost:8085/"),
-                // BaseAddress = new Uri("http://192.168.2.26:8085/"),
-                 BaseAddress = new Uri("http://192.168.1.99:8099/"),
-               // BaseAddress = new Uri("http://localhost:5189/"),
-       
-          
+                BaseAddress = new Uri(ApiBaseUrl),
+                Timeout = RequestTimeout
             };
+
+            _externalClient = new HttpClient
+            {
+                Timeout = RequestTimeout
+            };
+            _externalClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
         }
+
 
         private void SetToken(string token)
         {
             _token = token;
 
+       
             _client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
 
@@ -52,8 +72,14 @@ namespace unt_bingoo.Controller
             APIGlobals.Token = null;
         }
 
-    
+        public bool HasToken()
+        {
+            return !string.IsNullOrEmpty(_token);
+        }
 
+        // ---------------------------------------------------------
+        //  LOGIN MODELS
+        // ---------------------------------------------------------
         private class LoginRequest
         {
             public string Username { get; set; }
@@ -65,11 +91,11 @@ namespace unt_bingoo.Controller
             public string access_token { get; set; }
             public UserInfo user { get; set; }
         }
+
         private class UserInfo
         {
             public int id { get; set; }
             public int outletId { get; set; }
-
             public string username { get; set; }
             public string fullName { get; set; }
             public string roleName { get; set; }
@@ -104,8 +130,9 @@ namespace unt_bingoo.Controller
             }
         }
 
-
-
+        // ---------------------------------------------------------
+        //  SAFE CALL WRAPPERS
+        // ---------------------------------------------------------
         private async Task<T> SafeCall<T>(Func<Task<T>> action)
         {
             try
@@ -137,19 +164,23 @@ namespace unt_bingoo.Controller
             }
             catch (Exception ex)
             {
-                MessageBox.Show("API Error:\n" + ex.Message);
+                MessageBox.Show(
+                    ex.Message,
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 return false;
             }
         }
 
-      
-
+        // ---------------------------------------------------------
+        //  GENERIC HTTP METHODS (internal API)
+        // ---------------------------------------------------------
         public Task<T> GetAsync<T>(string url)
         {
             return SafeCall(async () =>
             {
                 var res = await _client.GetAsync(url);
-
                 var json = await res.Content.ReadAsStringAsync();
 
                 if (!res.IsSuccessStatusCode)
@@ -159,27 +190,22 @@ namespace unt_bingoo.Controller
             });
         }
 
-
-
         public Task<T> PostAsync<T>(string url, object body)
         {
             return SafeCall(async () =>
             {
                 var json = JsonConvert.SerializeObject(body);
 
-                var content = new StringContent(
-                    json,
-                    Encoding.UTF8,
-                    "application/json");
+                using (var content = new StringContent(json, Encoding.UTF8, "application/json"))
+                {
+                    var res = await _client.PostAsync(url, content);
+                    var rjson = await res.Content.ReadAsStringAsync();
 
-                var res = await _client.PostAsync(url, content);
+                    if (!res.IsSuccessStatusCode)
+                        throw new Exception(rjson);
 
-                var rjson = await res.Content.ReadAsStringAsync();
-
-                if (!res.IsSuccessStatusCode)
-                    throw new Exception(rjson);
-
-                return JsonConvert.DeserializeObject<T>(rjson);
+                    return JsonConvert.DeserializeObject<T>(rjson);
+                }
             });
         }
 
@@ -189,85 +215,90 @@ namespace unt_bingoo.Controller
             {
                 var json = JsonConvert.SerializeObject(body);
 
-                var content = new StringContent(
-                    json,
-                    Encoding.UTF8,
-                    "application/json");
-
-                var res = await _client.PostAsync(url, content);
-
-                if (!res.IsSuccessStatusCode)
+                using (var content = new StringContent(json, Encoding.UTF8, "application/json"))
                 {
-                    var err = await res.Content.ReadAsStringAsync();
-                    MessageBox.Show(err);
+                    var res = await _client.PostAsync(url, content);
+
+                    if (!res.IsSuccessStatusCode)
+                    {
+                        var err = await res.Content.ReadAsStringAsync();
+                        MessageBox.Show(err);
+                    }
+
+                    return res.IsSuccessStatusCode;
+                }
+            });
+        }
+
+        public async Task<bool> PutAsync(string url, object body)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(body);
+
+                using (var content = new StringContent(json, Encoding.UTF8, "application/json"))
+                {
+                    var res = await _client.PutAsync(url, content);
+
+                    if (!res.IsSuccessStatusCode)
+                    {
+                        var error = await res.Content.ReadAsStringAsync();
+                        throw new Exception($"API Error: {error}");
+                    }
+
+                    return true;
+                }
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception("Request timeout or canceled. Please check API server.", ex);
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Network error while calling API.", ex);
+            }
+        }
+
+        public async Task<bool> DeleteAsync(string url)
+        {
+            return await SafeCall(async () =>
+            {
+                var response = await _client.DeleteAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
                 }
 
-                return res.IsSuccessStatusCode;
+                var content = await response.Content.ReadAsStringAsync();
+
+                string message = "Delete failed.";
+
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    try
+                    {
+                        var json = JObject.Parse(content);
+
+                        message = json["Message"]?.ToString()
+                               ?? json["message"]?.ToString()
+                               ?? message;
+                    }
+                    catch
+                    {
+                        message = content;
+                    }
+                }
+
+                throw new Exception(message);
             });
         }
 
-
-
-     public async Task<bool> PutAsync(string url, object body)
-{
-    try
-    {
-        var json = JsonConvert.SerializeObject(body);
-
-        using (var content = new StringContent(
-            json,
-            Encoding.UTF8,
-            "application/json"))
-        {
-
-        
-
-            var res = await _client.PutAsync(url, content);
-
-            if (!res.IsSuccessStatusCode)
-            {
-                var error = await res.Content.ReadAsStringAsync();
-                throw new Exception($"API Error: {error}");
-            }
-
-            return true;
-        }
-    }
-    catch (TaskCanceledException ex)
-    {
-        throw new Exception("Request timeout or canceled. Please check API server.", ex);
-    }
-    catch (HttpRequestException ex)
-    {
-        throw new Exception("Network error while calling API.", ex);
-    }
-}
-      
-
-        public Task<bool> DeleteAsync(string url)
-        {
-            return SafeCall(async () =>
-            {
-                var res = await _client.DeleteAsync(url);
-                return res.IsSuccessStatusCode;
-            });
-        }
-        public bool HasToken()
-        {
-            return !string.IsNullOrEmpty(_token);
-        }
         public async Task<ExchangeRateResponse> GetNBCExchange()
         {
             return await SafeCall(async () =>
             {
-                var request = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    "https://www.nbc.gov.kh/api/exRate.php"
-                );
-
-                request.Headers.Add("User-Agent", "Mozilla/5.0");
-
-                var res = await _client.SendAsync(request);
+                var res = await _externalClient.GetAsync("https://www.nbc.gov.kh/api/exRate.php");
                 res.EnsureSuccessStatusCode();
 
                 var xml = await res.Content.ReadAsStringAsync();
@@ -293,51 +324,18 @@ namespace unt_bingoo.Controller
             });
         }
 
-//public async Task<ExchangeRateResponse> GetMEFExchange()
-//    {
-//        return await SafeCall(async () =>
-//        {
-//            var request = new HttpRequestMessage(HttpMethod.Get, "https://data.mef.gov.kh/api/v1/realtime-api/exchange-rate?currency_id=USD");
-//            var res = await _client.SendAsync(request);
-//            res.EnsureSuccessStatusCode();
-
-//            var json = await res.Content.ReadAsStringAsync();
-
-//            // ប្រើ JsonDocument ដើម្បីអានទិន្នន័យ
-//            using (JsonDocument doc = JsonDocument.Parse(json))
-//            {
-//                var root = doc.RootElement.GetProperty("data");
-
-//                var item = new ExchangeRateItem
-//                {
-//                    Date = root.GetProperty("valid_date").GetString(),
-//                    Key = root.GetProperty("symbol").GetString(),
-//                    Unit = root.GetProperty("unit").GetInt32(),
-//                    Bid = root.GetProperty("bid").GetDecimal(),
-//                    Ask = root.GetProperty("ask").GetDecimal(),
-//                    Average = root.GetProperty("average").GetDecimal()
-//                };
-
-//                return new ExchangeRateResponse
-//                {
-//                    ExternalSystemName = "MEF",
-//                    Items = new List<ExchangeRateItem> { item }
-//                };
-//            }
-//        });
-//    }
-    public async Task<MefExchangeResponse> GetListByDate(DateTime date)
+        public async Task<MefExchangeResponse> GetListByDate(DateTime date)
         {
             return await SafeCall(async () =>
             {
-           
                 string dateStr = date.ToString("yyyy-MM-dd");
-             string url = $"https://data.mef.gov.kh/api/v1/realtime-api/exchange-rate?currency_id=USD&date={dateStr}";
+                string url =
+                    $"https://data.mef.gov.kh/api/v1/realtime-api/exchange-rate?currency_id=USD&date={dateStr}";
 
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
 
-                var res = await _client.SendAsync(request);
+                var res = await _externalClient.SendAsync(request);
                 var json = await res.Content.ReadAsStringAsync();
 
                 if (!res.IsSuccessStatusCode)
@@ -346,7 +344,6 @@ namespace unt_bingoo.Controller
                 return JsonConvert.DeserializeObject<MefExchangeResponse>(json);
             });
         }
-
 
         public async Task<ProvinceResponse> GetProvincesAsync(int page = 1, int pageSize = 10)
         {
@@ -358,7 +355,7 @@ namespace unt_bingoo.Controller
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
 
-                var res = await _client.SendAsync(request);
+                var res = await _externalClient.SendAsync(request);
                 var json = await res.Content.ReadAsStringAsync();
 
                 if (!res.IsSuccessStatusCode)
@@ -367,6 +364,63 @@ namespace unt_bingoo.Controller
                 return JsonConvert.DeserializeObject<ProvinceResponse>(json);
             });
         }
-    }
+        public Task<string> UploadFileAsync(
+       string url, byte[] fileBytes, string fileName, string formField = "file")
+        {
+            return SafeCall(async () =>
+            {
+                using (var content = new MultipartFormDataContent())
+                {
+                    var fileContent = new ByteArrayContent(fileBytes);
+                    fileContent.Headers.ContentType =
+                        new MediaTypeHeaderValue(GuessContentType(fileName));
 
+                    content.Add(fileContent, formField, fileName);
+
+                    var res = await _client.PostAsync(url, content);
+
+                    if (!res.IsSuccessStatusCode)
+                    {
+                        var err = await res.Content.ReadAsStringAsync();
+                        MessageBox.Show(err);
+                        return null;
+                    }
+
+                    var json = await res.Content.ReadAsStringAsync();
+
+                    // Newtonsoft.Json
+                    var result = JsonConvert.DeserializeObject<UploadResponse>(json);
+
+                    return result?.ImageUrl;
+                }
+            });
+        }
+        private static string GuessContentType(string fileName)
+        {
+            switch (Path.GetExtension(fileName).ToLowerInvariant())
+            {
+                case ".png": return "image/png";
+                case ".gif": return "image/gif";
+                case ".bmp": return "image/bmp";
+                default: return "image/jpeg";
+            }
+        }
+        
+        // For loading a saved image back into the form
+        public Task<byte[]> GetBytesAsync(string url)
+        {
+            return SafeCall(async () =>
+            {
+                var res = await _client.GetAsync(url);
+                return res.IsSuccessStatusCode
+                    ? await res.Content.ReadAsByteArrayAsync()
+                    : null;
+            });
+        }
+
+    }
+    public class UploadResponse
+    {
+        public string ImageUrl { get; set; }
+    }
 }

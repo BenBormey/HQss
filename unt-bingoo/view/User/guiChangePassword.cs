@@ -30,12 +30,12 @@ namespace unt_bingoo.view.User
         {
             try
             {
-                string oldPass = txtOldPassword.Text.Trim();
+                //string oldPass = txtOldPassword.Text.Trim();
                 string newPass = txtNewPassword.Text.Trim();
                 string confirm = txtConfirmPassword.Text.Trim();
 
             
-                if (string.IsNullOrEmpty(oldPass) ||
+                if (
                     string.IsNullOrEmpty(newPass) ||
                     string.IsNullOrEmpty(confirm))
                 {
@@ -58,7 +58,6 @@ namespace unt_bingoo.view.User
               
                 var data = new
                 {
-                    oldPassword = oldPass,
                     newPassword = newPass
                 };
 

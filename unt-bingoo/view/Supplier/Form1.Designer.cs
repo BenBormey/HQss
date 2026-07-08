@@ -29,21 +29,21 @@ namespace unt_bingoo.view.Supplier
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions5 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject17 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject18 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject19 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject20 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions6 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject21 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject22 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject23 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject24 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gridControlSuppliers = new DevExpress.XtraGrid.GridControl();
             this.gridViewSuppliers = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -55,6 +55,7 @@ namespace unt_bingoo.view.Supplier
             this.Email = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Address = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TaxNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SupplierNamekh = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Status = new DevExpress.XtraGrid.Columns.GridColumn();
             this.KhmerSupAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Country = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,8 +76,6 @@ namespace unt_bingoo.view.Supplier
             this.btnmainUpdateButton = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.tabDetail = new DevExpress.XtraTab.XtraTabPage();
             this.Panel28 = new System.Windows.Forms.Panel();
-            this.Panel31 = new System.Windows.Forms.Panel();
-            this.BtnAddNew = new System.Windows.Forms.Button();
             this.panel13 = new System.Windows.Forms.Panel();
             this.panel22 = new System.Windows.Forms.Panel();
             this.CmbCountryOfPurchase = new System.Windows.Forms.ComboBox();
@@ -111,14 +110,18 @@ namespace unt_bingoo.view.Supplier
             this.btngeneratevat = new DevExpress.XtraEditors.SimpleButton();
             this.Label11 = new System.Windows.Forms.Label();
             this.Panel3 = new System.Windows.Forms.Panel();
-            this.CmbStatus = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.chkDeactive = new DevExpress.XtraEditors.CheckEdit();
+            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.Label6 = new System.Windows.Forms.Label();
             this.Panel17 = new System.Windows.Forms.Panel();
             this.TxtId = new System.Windows.Forms.TextBox();
             this.Label18 = new System.Windows.Forms.Label();
             this.TxtSupId = new System.Windows.Forms.TextBox();
             this.Panel29 = new System.Windows.Forms.Panel();
+            this.Panel31 = new System.Windows.Forms.Panel();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.BtnAddNew = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.Panel21 = new System.Windows.Forms.Panel();
             this.TxtSetDaysOrder = new System.Windows.Forms.TextBox();
             this.chkrequiredsetallitems = new System.Windows.Forms.CheckBox();
@@ -155,7 +158,6 @@ namespace unt_bingoo.view.Supplier
             ((System.ComponentModel.ISupportInitialize)(this.btnmainUpdateButton)).BeginInit();
             this.tabDetail.SuspendLayout();
             this.Panel28.SuspendLayout();
-            this.Panel31.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel22.SuspendLayout();
             this.panel26.SuspendLayout();
@@ -168,8 +170,12 @@ namespace unt_bingoo.view.Supplier
             this.Panel24.SuspendLayout();
             this.Panel8.SuspendLayout();
             this.Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDeactive.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             this.Panel17.SuspendLayout();
             this.Panel29.SuspendLayout();
+            this.Panel31.SuspendLayout();
+            this.panel15.SuspendLayout();
             this.Panel21.SuspendLayout();
             this.Panel14.SuspendLayout();
             this.Panel19.SuspendLayout();
@@ -201,7 +207,7 @@ namespace unt_bingoo.view.Supplier
             this.btnmainDeletebutton,
             this.btnmainUpdate1});
             this.gridControlSuppliers.Size = new System.Drawing.Size(1363, 223);
-            this.gridControlSuppliers.TabIndex = 1;
+            this.gridControlSuppliers.TabIndex = 0;
             this.gridControlSuppliers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSuppliers});
             // 
@@ -216,6 +222,7 @@ namespace unt_bingoo.view.Supplier
             this.Email,
             this.Address,
             this.TaxNumber,
+            this.SupplierNamekh,
             this.Status,
             this.KhmerSupAddress,
             this.Country,
@@ -255,8 +262,9 @@ namespace unt_bingoo.view.Supplier
             this.SupplierName.Caption = "SupplierName";
             this.SupplierName.FieldName = "SupplierName";
             this.SupplierName.Name = "SupplierName";
+            this.SupplierName.OptionsColumn.ReadOnly = true;
             this.SupplierName.Visible = true;
-            this.SupplierName.VisibleIndex = 1;
+            this.SupplierName.VisibleIndex = 2;
             this.SupplierName.Width = 150;
             // 
             // ContactName
@@ -264,8 +272,9 @@ namespace unt_bingoo.view.Supplier
             this.ContactName.Caption = "ContactName";
             this.ContactName.FieldName = "ContactName";
             this.ContactName.Name = "ContactName";
+            this.ContactName.OptionsColumn.ReadOnly = true;
             this.ContactName.Visible = true;
-            this.ContactName.VisibleIndex = 2;
+            this.ContactName.VisibleIndex = 3;
             this.ContactName.Width = 100;
             // 
             // Phone
@@ -273,16 +282,18 @@ namespace unt_bingoo.view.Supplier
             this.Phone.Caption = "Phone";
             this.Phone.FieldName = "Phone";
             this.Phone.Name = "Phone";
+            this.Phone.OptionsColumn.ReadOnly = true;
             this.Phone.Visible = true;
-            this.Phone.VisibleIndex = 3;
+            this.Phone.VisibleIndex = 4;
             // 
             // Email
             // 
             this.Email.Caption = "Email";
             this.Email.FieldName = "Email";
             this.Email.Name = "Email";
+            this.Email.OptionsColumn.ReadOnly = true;
             this.Email.Visible = true;
-            this.Email.VisibleIndex = 4;
+            this.Email.VisibleIndex = 5;
             this.Email.Width = 120;
             // 
             // Address
@@ -290,104 +301,123 @@ namespace unt_bingoo.view.Supplier
             this.Address.Caption = "Address";
             this.Address.FieldName = "Address";
             this.Address.Name = "Address";
+            this.Address.OptionsColumn.ReadOnly = true;
             this.Address.Visible = true;
-            this.Address.VisibleIndex = 5;
+            this.Address.VisibleIndex = 6;
             this.Address.Width = 200;
             // 
             // TaxNumber
             // 
-            this.TaxNumber.Caption = "TaxNumber";
+            this.TaxNumber.Caption = "VatNo";
             this.TaxNumber.FieldName = "TaxNumber";
             this.TaxNumber.Name = "TaxNumber";
+            this.TaxNumber.OptionsColumn.ReadOnly = true;
             this.TaxNumber.Visible = true;
-            this.TaxNumber.VisibleIndex = 6;
+            this.TaxNumber.VisibleIndex = 7;
             this.TaxNumber.Width = 100;
+            // 
+            // SupplierNamekh
+            // 
+            this.SupplierNamekh.Caption = "Supplier Namekh";
+            this.SupplierNamekh.FieldName = "SupplierNamekh";
+            this.SupplierNamekh.Name = "SupplierNamekh";
+            this.SupplierNamekh.Visible = true;
+            this.SupplierNamekh.VisibleIndex = 8;
             // 
             // Status
             // 
             this.Status.Caption = "Status";
             this.Status.FieldName = "Status";
             this.Status.Name = "Status";
+            this.Status.OptionsColumn.ReadOnly = true;
             this.Status.Visible = true;
-            this.Status.VisibleIndex = 7;
+            this.Status.VisibleIndex = 1;
             // 
             // KhmerSupAddress
             // 
             this.KhmerSupAddress.Caption = "KhmerSupAddress";
             this.KhmerSupAddress.FieldName = "KhmerSupAddress";
             this.KhmerSupAddress.Name = "KhmerSupAddress";
+            this.KhmerSupAddress.OptionsColumn.ReadOnly = true;
             this.KhmerSupAddress.Visible = true;
-            this.KhmerSupAddress.VisibleIndex = 8;
+            this.KhmerSupAddress.VisibleIndex = 9;
             // 
             // Country
             // 
             this.Country.Caption = "Country";
             this.Country.FieldName = "Country";
             this.Country.Name = "Country";
+            this.Country.OptionsColumn.ReadOnly = true;
             this.Country.Visible = true;
-            this.Country.VisibleIndex = 9;
+            this.Country.VisibleIndex = 10;
             // 
             // FaxLine2
             // 
             this.FaxLine2.Caption = "FaxLine";
             this.FaxLine2.FieldName = "FaxLine2";
             this.FaxLine2.Name = "FaxLine2";
+            this.FaxLine2.OptionsColumn.ReadOnly = true;
             this.FaxLine2.Visible = true;
-            this.FaxLine2.VisibleIndex = 10;
+            this.FaxLine2.VisibleIndex = 11;
             // 
             // Website
             // 
             this.Website.Caption = "Website";
             this.Website.FieldName = "Website";
             this.Website.Name = "Website";
+            this.Website.OptionsColumn.ReadOnly = true;
             this.Website.Visible = true;
-            this.Website.VisibleIndex = 11;
+            this.Website.VisibleIndex = 12;
             // 
             // LeaoTime
             // 
-            this.LeaoTime.Caption = "LeaoTime";
+            this.LeaoTime.Caption = "LeadTime";
             this.LeaoTime.FieldName = "LeaoTime";
             this.LeaoTime.Name = "LeaoTime";
+            this.LeaoTime.OptionsColumn.ReadOnly = true;
             this.LeaoTime.Visible = true;
-            this.LeaoTime.VisibleIndex = 12;
+            this.LeaoTime.VisibleIndex = 13;
             // 
             // Note
             // 
             this.Note.Caption = "Note";
             this.Note.FieldName = "Note";
             this.Note.Name = "Note";
+            this.Note.OptionsColumn.ReadOnly = true;
             this.Note.Visible = true;
-            this.Note.VisibleIndex = 13;
+            this.Note.VisibleIndex = 14;
             // 
             // ChequeName
             // 
             this.ChequeName.Caption = "ChequeName";
             this.ChequeName.FieldName = "ChequeName";
             this.ChequeName.Name = "ChequeName";
+            this.ChequeName.OptionsColumn.ReadOnly = true;
             this.ChequeName.Visible = true;
-            this.ChequeName.VisibleIndex = 14;
+            this.ChequeName.VisibleIndex = 15;
             // 
             // Term
             // 
             this.Term.Caption = "Term";
             this.Term.FieldName = "Term";
             this.Term.Name = "Term";
+            this.Term.OptionsColumn.ReadOnly = true;
             this.Term.Visible = true;
-            this.Term.VisibleIndex = 15;
+            this.Term.VisibleIndex = 16;
             // 
             // DayOrder
             // 
             this.DayOrder.Caption = "DayOrder";
             this.DayOrder.FieldName = "DayOrder";
             this.DayOrder.Name = "DayOrder";
-            this.DayOrder.Visible = true;
-            this.DayOrder.VisibleIndex = 16;
+            this.DayOrder.OptionsColumn.ReadOnly = true;
             // 
             // CountryOfPurchase
             // 
             this.CountryOfPurchase.Caption = "CountryOfPurchase";
             this.CountryOfPurchase.FieldName = "CountryOfPurchase";
             this.CountryOfPurchase.Name = "CountryOfPurchase";
+            this.CountryOfPurchase.OptionsColumn.ReadOnly = true;
             this.CountryOfPurchase.Visible = true;
             this.CountryOfPurchase.VisibleIndex = 17;
             // 
@@ -396,49 +426,47 @@ namespace unt_bingoo.view.Supplier
             this.SetPercentOrderLevel.Caption = "SetPercentOrderLevel";
             this.SetPercentOrderLevel.FieldName = "SetPercentOrderLevel";
             this.SetPercentOrderLevel.Name = "SetPercentOrderLevel";
-            this.SetPercentOrderLevel.Visible = true;
-            this.SetPercentOrderLevel.VisibleIndex = 18;
+            this.SetPercentOrderLevel.OptionsColumn.ReadOnly = true;
             // 
             // VatTemp
             // 
             this.VatTemp.Caption = "VatTemp";
             this.VatTemp.FieldName = "VatTemp";
             this.VatTemp.Name = "VatTemp";
-            this.VatTemp.Visible = true;
-            this.VatTemp.VisibleIndex = 19;
+            this.VatTemp.OptionsColumn.ReadOnly = true;
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "gridColumn1";
+            this.gridColumn1.Caption = "Edit";
             this.gridColumn1.ColumnEdit = this.btnmainUpdate1;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 20;
+            this.gridColumn1.VisibleIndex = 18;
             // 
             // btnmainUpdate1
             // 
             this.btnmainUpdate1.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.edit__1_;
+            editorButtonImageOptions4.Image = global::unt_bingoo.Properties.Resources.edit__1_;
             this.btnmainUpdate1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainUpdate1.Name = "btnmainUpdate1";
             this.btnmainUpdate1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainUpdate1.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainUpdate1_ButtonClick);
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "gridColumn2";
+            this.gridColumn2.Caption = "Delete";
             this.gridColumn2.ColumnEdit = this.btnmainDeletebutton;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 21;
+            this.gridColumn2.VisibleIndex = 19;
             // 
             // btnmainDeletebutton
             // 
             this.btnmainDeletebutton.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            editorButtonImageOptions5.Image = global::unt_bingoo.Properties.Resources.Delete_User;
             this.btnmainDeletebutton.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions5, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject17, serializableAppearanceObject18, serializableAppearanceObject19, serializableAppearanceObject20, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainDeletebutton.Name = "btnmainDeletebutton";
             this.btnmainDeletebutton.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainDeletebutton.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDeletebutton_ButtonClick);
@@ -446,9 +474,9 @@ namespace unt_bingoo.view.Supplier
             // btnmainUpdateButton
             // 
             this.btnmainUpdateButton.AutoHeight = false;
-            editorButtonImageOptions3.Image = global::unt_bingoo.Properties.Resources.edit__1_;
+            editorButtonImageOptions6.Image = global::unt_bingoo.Properties.Resources.edit__1_;
             this.btnmainUpdateButton.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions6, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject21, serializableAppearanceObject22, serializableAppearanceObject23, serializableAppearanceObject24, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainUpdateButton.Name = "btnmainUpdateButton";
             this.btnmainUpdateButton.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainUpdateButton.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainUpdateButton_ButtonClick);
@@ -470,7 +498,6 @@ namespace unt_bingoo.view.Supplier
             // 
             // Panel28
             // 
-            this.Panel28.Controls.Add(this.Panel31);
             this.Panel28.Controls.Add(this.panel13);
             this.Panel28.Controls.Add(this.panel4);
             this.Panel28.Controls.Add(this.Panel2);
@@ -484,36 +511,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel28.Location = new System.Drawing.Point(2, 2);
             this.Panel28.Name = "Panel28";
-            this.Panel28.Size = new System.Drawing.Size(834, 437);
-            this.Panel28.TabIndex = 134;
-            // 
-            // Panel31
-            // 
-            this.Panel31.BackColor = System.Drawing.Color.Transparent;
-            this.Panel31.Controls.Add(this.BtnAddNew);
-            this.Panel31.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Panel31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Panel31.Location = new System.Drawing.Point(0, 392);
-            this.Panel31.Name = "Panel31";
-            this.Panel31.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel31.Size = new System.Drawing.Size(834, 45);
-            this.Panel31.TabIndex = 135;
-            // 
-            // BtnAddNew
-            // 
-            this.BtnAddNew.BackColor = System.Drawing.SystemColors.Control;
-            this.BtnAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnAddNew.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BtnAddNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAddNew.ForeColor = System.Drawing.Color.SteelBlue;
-            this.BtnAddNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnAddNew.Location = new System.Drawing.Point(667, 4);
-            this.BtnAddNew.Name = "BtnAddNew";
-            this.BtnAddNew.Size = new System.Drawing.Size(163, 37);
-            this.BtnAddNew.TabIndex = 134;
-            this.BtnAddNew.Text = "&Add New";
-            this.BtnAddNew.UseVisualStyleBackColor = false;
-            this.BtnAddNew.Click += new System.EventHandler(this.BtnAddNew_Click_1);
+            this.Panel28.Size = new System.Drawing.Size(836, 437);
+            this.Panel28.TabIndex = 1;
             // 
             // panel13
             // 
@@ -525,8 +524,8 @@ namespace unt_bingoo.view.Supplier
             this.panel13.Location = new System.Drawing.Point(0, 335);
             this.panel13.Name = "panel13";
             this.panel13.Padding = new System.Windows.Forms.Padding(4);
-            this.panel13.Size = new System.Drawing.Size(834, 29);
-            this.panel13.TabIndex = 112;
+            this.panel13.Size = new System.Drawing.Size(836, 29);
+            this.panel13.TabIndex = 9;
             // 
             // panel22
             // 
@@ -537,7 +536,7 @@ namespace unt_bingoo.view.Supplier
             this.panel22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel22.Location = new System.Drawing.Point(4, 4);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(597, 21);
+            this.panel22.Size = new System.Drawing.Size(599, 21);
             this.panel22.TabIndex = 109;
             // 
             // CmbCountryOfPurchase
@@ -553,8 +552,8 @@ namespace unt_bingoo.view.Supplier
             "Oversea"});
             this.CmbCountryOfPurchase.Location = new System.Drawing.Point(155, 0);
             this.CmbCountryOfPurchase.Name = "CmbCountryOfPurchase";
-            this.CmbCountryOfPurchase.Size = new System.Drawing.Size(442, 21);
-            this.CmbCountryOfPurchase.TabIndex = 3;
+            this.CmbCountryOfPurchase.Size = new System.Drawing.Size(444, 21);
+            this.CmbCountryOfPurchase.TabIndex = 0;
             // 
             // Label7
             // 
@@ -575,7 +574,7 @@ namespace unt_bingoo.view.Supplier
             this.panel26.Controls.Add(this.Label3);
             this.panel26.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel26.Location = new System.Drawing.Point(601, 4);
+            this.panel26.Location = new System.Drawing.Point(603, 4);
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(229, 21);
             this.panel26.TabIndex = 108;
@@ -601,7 +600,7 @@ namespace unt_bingoo.view.Supplier
             this.CmbTerms.Location = new System.Drawing.Point(65, 0);
             this.CmbTerms.Name = "CmbTerms";
             this.CmbTerms.Size = new System.Drawing.Size(138, 21);
-            this.CmbTerms.TabIndex = 3;
+            this.CmbTerms.TabIndex = 10;
             // 
             // Label3
             // 
@@ -610,7 +609,7 @@ namespace unt_bingoo.view.Supplier
             this.Label3.Location = new System.Drawing.Point(0, 0);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(65, 21);
-            this.Label3.TabIndex = 2;
+            this.Label3.TabIndex = 100;
             this.Label3.Text = "Terms :";
             this.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -624,8 +623,8 @@ namespace unt_bingoo.view.Supplier
             this.panel4.Location = new System.Drawing.Point(0, 306);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(4);
-            this.panel4.Size = new System.Drawing.Size(834, 29);
-            this.panel4.TabIndex = 111;
+            this.panel4.Size = new System.Drawing.Size(836, 29);
+            this.panel4.TabIndex = 8;
             // 
             // TxtContactName
             // 
@@ -634,7 +633,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtContactName.Location = new System.Drawing.Point(159, 4);
             this.TxtContactName.MaxLength = 100;
             this.TxtContactName.Name = "TxtContactName";
-            this.TxtContactName.Size = new System.Drawing.Size(671, 20);
+            this.TxtContactName.Size = new System.Drawing.Size(673, 20);
             this.TxtContactName.TabIndex = 1;
             // 
             // Label5
@@ -658,8 +657,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel2.Location = new System.Drawing.Point(0, 277);
             this.Panel2.Name = "Panel2";
             this.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel2.Size = new System.Drawing.Size(834, 29);
-            this.Panel2.TabIndex = 3;
+            this.Panel2.Size = new System.Drawing.Size(836, 29);
+            this.Panel2.TabIndex = 7;
             // 
             // TxtCountry
             // 
@@ -668,8 +667,8 @@ namespace unt_bingoo.view.Supplier
             this.TxtCountry.Location = new System.Drawing.Point(159, 4);
             this.TxtCountry.MaxLength = 50;
             this.TxtCountry.Name = "TxtCountry";
-            this.TxtCountry.Size = new System.Drawing.Size(671, 20);
-            this.TxtCountry.TabIndex = 0;
+            this.TxtCountry.Size = new System.Drawing.Size(673, 20);
+            this.TxtCountry.TabIndex = 1;
             // 
             // Label4
             // 
@@ -692,8 +691,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel7.Location = new System.Drawing.Point(0, 249);
             this.Panel7.Name = "Panel7";
             this.Panel7.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel7.Size = new System.Drawing.Size(834, 28);
-            this.Panel7.TabIndex = 105;
+            this.Panel7.Size = new System.Drawing.Size(836, 28);
+            this.Panel7.TabIndex = 6;
             // 
             // TxtChequeName
             // 
@@ -702,7 +701,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtChequeName.Location = new System.Drawing.Point(159, 4);
             this.TxtChequeName.MaxLength = 50;
             this.TxtChequeName.Name = "TxtChequeName";
-            this.TxtChequeName.Size = new System.Drawing.Size(671, 20);
+            this.TxtChequeName.Size = new System.Drawing.Size(673, 20);
             this.TxtChequeName.TabIndex = 0;
             // 
             // Label2
@@ -726,8 +725,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel6.Location = new System.Drawing.Point(0, 182);
             this.Panel6.Name = "Panel6";
             this.Panel6.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel6.Size = new System.Drawing.Size(834, 67);
-            this.Panel6.TabIndex = 2;
+            this.Panel6.Size = new System.Drawing.Size(836, 67);
+            this.Panel6.TabIndex = 5;
             // 
             // TxtAddress
             // 
@@ -738,7 +737,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtAddress.Multiline = true;
             this.TxtAddress.Name = "TxtAddress";
             this.TxtAddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtAddress.Size = new System.Drawing.Size(671, 59);
+            this.TxtAddress.Size = new System.Drawing.Size(673, 59);
             this.TxtAddress.TabIndex = 0;
             // 
             // Label9
@@ -762,8 +761,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel23.Location = new System.Drawing.Point(0, 125);
             this.Panel23.Name = "Panel23";
             this.Panel23.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel23.Size = new System.Drawing.Size(834, 57);
-            this.Panel23.TabIndex = 109;
+            this.Panel23.Size = new System.Drawing.Size(836, 57);
+            this.Panel23.TabIndex = 4;
             // 
             // txtkhmeraddress
             // 
@@ -774,8 +773,8 @@ namespace unt_bingoo.view.Supplier
             this.txtkhmeraddress.Multiline = true;
             this.txtkhmeraddress.Name = "txtkhmeraddress";
             this.txtkhmeraddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtkhmeraddress.Size = new System.Drawing.Size(671, 49);
-            this.txtkhmeraddress.TabIndex = 0;
+            this.txtkhmeraddress.Size = new System.Drawing.Size(673, 49);
+            this.txtkhmeraddress.TabIndex = 4;
             this.txtkhmeraddress.Enter += new System.EventHandler(this.txtkhmeraddress_Enter);
             this.txtkhmeraddress.Leave += new System.EventHandler(this.txtkhmeraddress_Leave);
             // 
@@ -786,7 +785,7 @@ namespace unt_bingoo.view.Supplier
             this.Label19.Location = new System.Drawing.Point(4, 4);
             this.Label19.Name = "Label19";
             this.Label19.Size = new System.Drawing.Size(155, 49);
-            this.Label19.TabIndex = 0;
+            this.Label19.TabIndex = 1000;
             this.Label19.Text = "Khmer Address :";
             this.Label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -800,8 +799,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel5.Location = new System.Drawing.Point(0, 97);
             this.Panel5.Name = "Panel5";
             this.Panel5.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel5.Size = new System.Drawing.Size(834, 28);
-            this.Panel5.TabIndex = 1;
+            this.Panel5.Size = new System.Drawing.Size(836, 28);
+            this.Panel5.TabIndex = 3;
             // 
             // TxtSupName
             // 
@@ -810,8 +809,8 @@ namespace unt_bingoo.view.Supplier
             this.TxtSupName.Location = new System.Drawing.Point(159, 4);
             this.TxtSupName.MaxLength = 100;
             this.TxtSupName.Name = "TxtSupName";
-            this.TxtSupName.Size = new System.Drawing.Size(671, 20);
-            this.TxtSupName.TabIndex = 0;
+            this.TxtSupName.Size = new System.Drawing.Size(673, 20);
+            this.TxtSupName.TabIndex = 3;
             // 
             // Label8
             // 
@@ -820,7 +819,7 @@ namespace unt_bingoo.view.Supplier
             this.Label8.Location = new System.Drawing.Point(4, 4);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(155, 20);
-            this.Label8.TabIndex = 0;
+            this.Label8.TabIndex = 100;
             this.Label8.Text = "Supplier Name :";
             this.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -834,8 +833,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel24.Location = new System.Drawing.Point(0, 59);
             this.Panel24.Name = "Panel24";
             this.Panel24.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel24.Size = new System.Drawing.Size(834, 38);
-            this.Panel24.TabIndex = 110;
+            this.Panel24.Size = new System.Drawing.Size(836, 38);
+            this.Panel24.TabIndex = 2;
             // 
             // txtkhmername
             // 
@@ -844,8 +843,8 @@ namespace unt_bingoo.view.Supplier
             this.txtkhmername.Location = new System.Drawing.Point(159, 4);
             this.txtkhmername.MaxLength = 100;
             this.txtkhmername.Name = "txtkhmername";
-            this.txtkhmername.Size = new System.Drawing.Size(671, 28);
-            this.txtkhmername.TabIndex = 1;
+            this.txtkhmername.Size = new System.Drawing.Size(673, 28);
+            this.txtkhmername.TabIndex = 2;
             this.txtkhmername.Enter += new System.EventHandler(this.txtkhmername_Enter);
             this.txtkhmername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtkhmername_KeyPress);
             this.txtkhmername.Leave += new System.EventHandler(this.txtkhmername_Leave);
@@ -857,7 +856,7 @@ namespace unt_bingoo.view.Supplier
             this.Label20.Location = new System.Drawing.Point(4, 4);
             this.Label20.Name = "Label20";
             this.Label20.Size = new System.Drawing.Size(155, 30);
-            this.Label20.TabIndex = 0;
+            this.Label20.TabIndex = 100;
             this.Label20.Text = "Khmer Name :";
             this.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -872,7 +871,7 @@ namespace unt_bingoo.view.Supplier
             this.Panel8.Location = new System.Drawing.Point(0, 31);
             this.Panel8.Name = "Panel8";
             this.Panel8.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel8.Size = new System.Drawing.Size(834, 28);
+            this.Panel8.Size = new System.Drawing.Size(836, 28);
             this.Panel8.TabIndex = 0;
             // 
             // TxtVATNumber
@@ -883,8 +882,8 @@ namespace unt_bingoo.view.Supplier
             this.TxtVATNumber.Location = new System.Drawing.Point(159, 4);
             this.TxtVATNumber.MaxLength = 25;
             this.TxtVATNumber.Name = "TxtVATNumber";
-            this.TxtVATNumber.Size = new System.Drawing.Size(645, 20);
-            this.TxtVATNumber.TabIndex = 0;
+            this.TxtVATNumber.Size = new System.Drawing.Size(647, 20);
+            this.TxtVATNumber.TabIndex = 1;
             // 
             // btngeneratevat
             // 
@@ -893,7 +892,7 @@ namespace unt_bingoo.view.Supplier
             this.btngeneratevat.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btngeneratevat.Dock = System.Windows.Forms.DockStyle.Right;
             this.btngeneratevat.ImageOptions.Image = global::unt_bingoo.Properties.Resources.refresh_16;
-            this.btngeneratevat.Location = new System.Drawing.Point(804, 4);
+            this.btngeneratevat.Location = new System.Drawing.Point(806, 4);
             this.btngeneratevat.Name = "btngeneratevat";
             this.btngeneratevat.Size = new System.Drawing.Size(26, 20);
             this.btngeneratevat.TabIndex = 2;
@@ -908,15 +907,15 @@ namespace unt_bingoo.view.Supplier
             this.Label11.Location = new System.Drawing.Point(4, 4);
             this.Label11.Name = "Label11";
             this.Label11.Size = new System.Drawing.Size(155, 20);
-            this.Label11.TabIndex = 0;
+            this.Label11.TabIndex = 10000;
             this.Label11.Text = "VAT Number :";
             this.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Panel3
             // 
             this.Panel3.BackColor = System.Drawing.Color.Transparent;
-            this.Panel3.Controls.Add(this.CmbStatus);
-            this.Panel3.Controls.Add(this.label1);
+            this.Panel3.Controls.Add(this.chkDeactive);
+            this.Panel3.Controls.Add(this.chkActive);
             this.Panel3.Controls.Add(this.Label6);
             this.Panel3.Controls.Add(this.Panel17);
             this.Panel3.Controls.Add(this.TxtSupId);
@@ -925,33 +924,26 @@ namespace unt_bingoo.view.Supplier
             this.Panel3.Location = new System.Drawing.Point(0, 0);
             this.Panel3.Name = "Panel3";
             this.Panel3.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel3.Size = new System.Drawing.Size(834, 31);
-            this.Panel3.TabIndex = 100;
+            this.Panel3.Size = new System.Drawing.Size(836, 31);
+            this.Panel3.TabIndex = 0;
             // 
-            // CmbStatus
+            // chkDeactive
             // 
-            this.CmbStatus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmbStatus.FormattingEnabled = true;
-            this.CmbStatus.Items.AddRange(new object[] {
-            "Active",
-            "Deactive"});
-            this.CmbStatus.Location = new System.Drawing.Point(159, 0);
-            this.CmbStatus.Name = "CmbStatus";
-            this.CmbStatus.Size = new System.Drawing.Size(247, 21);
-            this.CmbStatus.TabIndex = 32;
+            this.chkDeactive.Location = new System.Drawing.Point(231, 8);
+            this.chkDeactive.Name = "chkDeactive";
+            this.chkDeactive.Properties.Caption = "Deactive";
+            this.chkDeactive.Size = new System.Drawing.Size(85, 19);
+            this.chkDeactive.TabIndex = 178;
+            this.chkDeactive.CheckedChanged += new System.EventHandler(this.chkDeactive_CheckedChanged);
             // 
-            // label1
+            // chkActive
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(4, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 23);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Status :";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkActive.Location = new System.Drawing.Point(159, 8);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Properties.Caption = "Active";
+            this.chkActive.Size = new System.Drawing.Size(75, 19);
+            this.chkActive.TabIndex = 0;
+            this.chkActive.CheckedChanged += new System.EventHandler(this.chkActive_CheckedChanged);
             // 
             // Label6
             // 
@@ -1005,6 +997,7 @@ namespace unt_bingoo.view.Supplier
             // 
             // Panel29
             // 
+            this.Panel29.Controls.Add(this.Panel31);
             this.Panel29.Controls.Add(this.Panel21);
             this.Panel29.Controls.Add(this.Panel14);
             this.Panel29.Controls.Add(this.Panel19);
@@ -1013,10 +1006,64 @@ namespace unt_bingoo.view.Supplier
             this.Panel29.Controls.Add(this.Panel11);
             this.Panel29.Controls.Add(this.Panel9);
             this.Panel29.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Panel29.Location = new System.Drawing.Point(836, 2);
+            this.Panel29.Location = new System.Drawing.Point(838, 2);
             this.Panel29.Name = "Panel29";
-            this.Panel29.Size = new System.Drawing.Size(519, 437);
-            this.Panel29.TabIndex = 133;
+            this.Panel29.Size = new System.Drawing.Size(517, 437);
+            this.Panel29.TabIndex = 19;
+            // 
+            // Panel31
+            // 
+            this.Panel31.BackColor = System.Drawing.Color.Transparent;
+            this.Panel31.Controls.Add(this.panel15);
+            this.Panel31.Controls.Add(this.button2);
+            this.Panel31.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Panel31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Panel31.Location = new System.Drawing.Point(0, 392);
+            this.Panel31.Name = "Panel31";
+            this.Panel31.Padding = new System.Windows.Forms.Padding(4);
+            this.Panel31.Size = new System.Drawing.Size(517, 45);
+            this.Panel31.TabIndex = 110;
+            // 
+            // panel15
+            // 
+            this.panel15.Controls.Add(this.BtnAddNew);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel15.Location = new System.Drawing.Point(4, 4);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(346, 37);
+            this.panel15.TabIndex = 2;
+            // 
+            // BtnAddNew
+            // 
+            this.BtnAddNew.BackColor = System.Drawing.SystemColors.Control;
+            this.BtnAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAddNew.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnAddNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddNew.ForeColor = System.Drawing.Color.SteelBlue;
+            this.BtnAddNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAddNew.Location = new System.Drawing.Point(183, 0);
+            this.BtnAddNew.Name = "BtnAddNew";
+            this.BtnAddNew.Size = new System.Drawing.Size(163, 37);
+            this.BtnAddNew.TabIndex = 4;
+            this.BtnAddNew.Text = "&Add New";
+            this.BtnAddNew.UseVisualStyleBackColor = false;
+            this.BtnAddNew.Click += new System.EventHandler(this.BtnAddNew_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.Control;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.Location = new System.Drawing.Point(350, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(163, 37);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "&CanCel";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Panel21
             // 
@@ -1029,7 +1076,7 @@ namespace unt_bingoo.view.Supplier
             this.Panel21.Location = new System.Drawing.Point(0, 272);
             this.Panel21.Name = "Panel21";
             this.Panel21.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel21.Size = new System.Drawing.Size(519, 29);
+            this.Panel21.Size = new System.Drawing.Size(517, 29);
             this.Panel21.TabIndex = 109;
             this.Panel21.Visible = false;
             // 
@@ -1040,7 +1087,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtSetDaysOrder.Location = new System.Drawing.Point(159, 4);
             this.TxtSetDaysOrder.MaxLength = 50;
             this.TxtSetDaysOrder.Name = "TxtSetDaysOrder";
-            this.TxtSetDaysOrder.Size = new System.Drawing.Size(153, 20);
+            this.TxtSetDaysOrder.Size = new System.Drawing.Size(151, 20);
             this.TxtSetDaysOrder.TabIndex = 0;
             // 
             // chkrequiredsetallitems
@@ -1049,11 +1096,11 @@ namespace unt_bingoo.view.Supplier
             this.chkrequiredsetallitems.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkrequiredsetallitems.Dock = System.Windows.Forms.DockStyle.Right;
             this.chkrequiredsetallitems.ForeColor = System.Drawing.Color.SteelBlue;
-            this.chkrequiredsetallitems.Location = new System.Drawing.Point(312, 4);
+            this.chkrequiredsetallitems.Location = new System.Drawing.Point(310, 4);
             this.chkrequiredsetallitems.Name = "chkrequiredsetallitems";
             this.chkrequiredsetallitems.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.chkrequiredsetallitems.Size = new System.Drawing.Size(203, 21);
-            this.chkrequiredsetallitems.TabIndex = 1;
+            this.chkrequiredsetallitems.TabIndex = 22;
             this.chkrequiredsetallitems.Text = "Required Set All Items For Rebate";
             this.chkrequiredsetallitems.UseVisualStyleBackColor = true;
             // 
@@ -1078,7 +1125,7 @@ namespace unt_bingoo.view.Supplier
             this.Panel14.Location = new System.Drawing.Point(0, 171);
             this.Panel14.Name = "Panel14";
             this.Panel14.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel14.Size = new System.Drawing.Size(519, 101);
+            this.Panel14.Size = new System.Drawing.Size(517, 101);
             this.Panel14.TabIndex = 11;
             // 
             // TxtNote
@@ -1090,7 +1137,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtNote.Multiline = true;
             this.TxtNote.Name = "TxtNote";
             this.TxtNote.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtNote.Size = new System.Drawing.Size(356, 93);
+            this.TxtNote.Size = new System.Drawing.Size(354, 93);
             this.TxtNote.TabIndex = 0;
             // 
             // Label17
@@ -1100,7 +1147,7 @@ namespace unt_bingoo.view.Supplier
             this.Label17.Location = new System.Drawing.Point(4, 4);
             this.Label17.Name = "Label17";
             this.Label17.Size = new System.Drawing.Size(155, 93);
-            this.Label17.TabIndex = 0;
+            this.Label17.TabIndex = 10;
             this.Label17.Text = "Note :";
             this.Label17.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -1114,8 +1161,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel19.Location = new System.Drawing.Point(0, 136);
             this.Panel19.Name = "Panel19";
             this.Panel19.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel19.Size = new System.Drawing.Size(519, 35);
-            this.Panel19.TabIndex = 9;
+            this.Panel19.Size = new System.Drawing.Size(517, 35);
+            this.Panel19.TabIndex = 14;
             // 
             // TxtWebsite
             // 
@@ -1124,7 +1171,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtWebsite.Location = new System.Drawing.Point(156, 4);
             this.TxtWebsite.MaxLength = 50;
             this.TxtWebsite.Name = "TxtWebsite";
-            this.TxtWebsite.Size = new System.Drawing.Size(359, 20);
+            this.TxtWebsite.Size = new System.Drawing.Size(357, 20);
             this.TxtWebsite.TabIndex = 0;
             // 
             // Label21
@@ -1150,8 +1197,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel12.Location = new System.Drawing.Point(0, 102);
             this.Panel12.Name = "Panel12";
             this.Panel12.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel12.Size = new System.Drawing.Size(519, 34);
-            this.Panel12.TabIndex = 8;
+            this.Panel12.Size = new System.Drawing.Size(517, 34);
+            this.Panel12.TabIndex = 13;
             // 
             // TxtEmail
             // 
@@ -1160,29 +1207,29 @@ namespace unt_bingoo.view.Supplier
             this.TxtEmail.Location = new System.Drawing.Point(159, 4);
             this.TxtEmail.MaxLength = 50;
             this.TxtEmail.Name = "TxtEmail";
-            this.TxtEmail.Size = new System.Drawing.Size(189, 20);
+            this.TxtEmail.Size = new System.Drawing.Size(187, 20);
             this.TxtEmail.TabIndex = 0;
             // 
             // Label22
             // 
             this.Label22.Dock = System.Windows.Forms.DockStyle.Right;
             this.Label22.ForeColor = System.Drawing.Color.Black;
-            this.Label22.Location = new System.Drawing.Point(348, 4);
+            this.Label22.Location = new System.Drawing.Point(346, 4);
             this.Label22.Name = "Label22";
             this.Label22.Size = new System.Drawing.Size(84, 26);
             this.Label22.TabIndex = 0;
-            this.Label22.Text = "LEAO Time :";
+            this.Label22.Text = "LeadTime :";
             this.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TxtLEAOTime
             // 
             this.TxtLEAOTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtLEAOTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtLEAOTime.Location = new System.Drawing.Point(432, 4);
+            this.TxtLEAOTime.Location = new System.Drawing.Point(430, 4);
             this.TxtLEAOTime.MaxLength = 50;
             this.TxtLEAOTime.Name = "TxtLEAOTime";
             this.TxtLEAOTime.Size = new System.Drawing.Size(83, 20);
-            this.TxtLEAOTime.TabIndex = 0;
+            this.TxtLEAOTime.TabIndex = 1;
             // 
             // Label15
             // 
@@ -1206,8 +1253,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel10.Location = new System.Drawing.Point(0, 68);
             this.Panel10.Name = "Panel10";
             this.Panel10.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel10.Size = new System.Drawing.Size(519, 34);
-            this.Panel10.TabIndex = 7;
+            this.Panel10.Size = new System.Drawing.Size(517, 34);
+            this.Panel10.TabIndex = 12;
             // 
             // TxtHPLine2
             // 
@@ -1216,8 +1263,9 @@ namespace unt_bingoo.view.Supplier
             this.TxtHPLine2.Location = new System.Drawing.Point(348, 4);
             this.TxtHPLine2.MaxLength = 25;
             this.TxtHPLine2.Name = "TxtHPLine2";
-            this.TxtHPLine2.Size = new System.Drawing.Size(167, 20);
-            this.TxtHPLine2.TabIndex = 5;
+            this.TxtHPLine2.Size = new System.Drawing.Size(165, 20);
+            this.TxtHPLine2.TabIndex = 1;
+            this.TxtHPLine2.TextChanged += new System.EventHandler(this.TxtHPLine2_TextChanged);
             this.TxtHPLine2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtHPLine2_KeyPress);
             // 
             // TxtHPLine1
@@ -1228,7 +1276,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtHPLine1.MaxLength = 25;
             this.TxtHPLine1.Name = "TxtHPLine1";
             this.TxtHPLine1.Size = new System.Drawing.Size(189, 20);
-            this.TxtHPLine1.TabIndex = 4;
+            this.TxtHPLine1.TabIndex = 0;
             this.TxtHPLine1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtHPLine1_KeyPress);
             // 
             // Label13
@@ -1253,8 +1301,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel11.Location = new System.Drawing.Point(0, 34);
             this.Panel11.Name = "Panel11";
             this.Panel11.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel11.Size = new System.Drawing.Size(519, 34);
-            this.Panel11.TabIndex = 6;
+            this.Panel11.Size = new System.Drawing.Size(517, 34);
+            this.Panel11.TabIndex = 11;
             // 
             // TxtFaxLine2
             // 
@@ -1263,8 +1311,8 @@ namespace unt_bingoo.view.Supplier
             this.TxtFaxLine2.Location = new System.Drawing.Point(348, 4);
             this.TxtFaxLine2.MaxLength = 25;
             this.TxtFaxLine2.Name = "TxtFaxLine2";
-            this.TxtFaxLine2.Size = new System.Drawing.Size(167, 20);
-            this.TxtFaxLine2.TabIndex = 4;
+            this.TxtFaxLine2.Size = new System.Drawing.Size(165, 20);
+            this.TxtFaxLine2.TabIndex = 1;
             this.TxtFaxLine2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFaxLine2_KeyPress);
             // 
             // TxtFaxLine1
@@ -1275,7 +1323,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtFaxLine1.MaxLength = 25;
             this.TxtFaxLine1.Name = "TxtFaxLine1";
             this.TxtFaxLine1.Size = new System.Drawing.Size(189, 20);
-            this.TxtFaxLine1.TabIndex = 3;
+            this.TxtFaxLine1.TabIndex = 0;
             this.TxtFaxLine1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFaxLine1_KeyPress);
             // 
             // Label14
@@ -1300,8 +1348,8 @@ namespace unt_bingoo.view.Supplier
             this.Panel9.Location = new System.Drawing.Point(0, 0);
             this.Panel9.Name = "Panel9";
             this.Panel9.Padding = new System.Windows.Forms.Padding(4);
-            this.Panel9.Size = new System.Drawing.Size(519, 34);
-            this.Panel9.TabIndex = 5;
+            this.Panel9.Size = new System.Drawing.Size(517, 34);
+            this.Panel9.TabIndex = 1;
             // 
             // TxtTelLine2
             // 
@@ -1310,8 +1358,8 @@ namespace unt_bingoo.view.Supplier
             this.TxtTelLine2.Location = new System.Drawing.Point(348, 4);
             this.TxtTelLine2.MaxLength = 25;
             this.TxtTelLine2.Name = "TxtTelLine2";
-            this.TxtTelLine2.Size = new System.Drawing.Size(167, 20);
-            this.TxtTelLine2.TabIndex = 2;
+            this.TxtTelLine2.Size = new System.Drawing.Size(165, 20);
+            this.TxtTelLine2.TabIndex = 1;
             this.TxtTelLine2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTelLine2_KeyPress);
             // 
             // TxtTelLine1
@@ -1322,7 +1370,7 @@ namespace unt_bingoo.view.Supplier
             this.TxtTelLine1.MaxLength = 25;
             this.TxtTelLine1.Name = "TxtTelLine1";
             this.TxtTelLine1.Size = new System.Drawing.Size(189, 20);
-            this.TxtTelLine1.TabIndex = 1;
+            this.TxtTelLine1.TabIndex = 0;
             this.TxtTelLine1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTelLine1_KeyPress);
             // 
             // Label12
@@ -1332,7 +1380,7 @@ namespace unt_bingoo.view.Supplier
             this.Label12.Location = new System.Drawing.Point(4, 4);
             this.Label12.Name = "Label12";
             this.Label12.Size = new System.Drawing.Size(155, 26);
-            this.Label12.TabIndex = 0;
+            this.Label12.TabIndex = 1;
             this.Label12.Text = "Office Number :";
             this.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1355,7 +1403,7 @@ namespace unt_bingoo.view.Supplier
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabMain);
             this.Name = "Form1";
-            this.Text = "Supplier";
+            this.Text = "SUPPLIER MANAGEMENT";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSuppliers)).EndInit();
@@ -1365,7 +1413,6 @@ namespace unt_bingoo.view.Supplier
             ((System.ComponentModel.ISupportInitialize)(this.btnmainUpdateButton)).EndInit();
             this.tabDetail.ResumeLayout(false);
             this.Panel28.ResumeLayout(false);
-            this.Panel31.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel22.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
@@ -1387,9 +1434,13 @@ namespace unt_bingoo.view.Supplier
             this.Panel8.PerformLayout();
             this.Panel3.ResumeLayout(false);
             this.Panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDeactive.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             this.Panel17.ResumeLayout(false);
             this.Panel17.PerformLayout();
             this.Panel29.ResumeLayout(false);
+            this.Panel31.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
             this.Panel21.ResumeLayout(false);
             this.Panel21.PerformLayout();
             this.Panel14.ResumeLayout(false);
@@ -1442,7 +1493,6 @@ namespace unt_bingoo.view.Supplier
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainUpdate1;
         internal DevExpress.XtraTab.XtraTabPage tabDetail;
         internal System.Windows.Forms.Panel Panel28;
-        internal System.Windows.Forms.Panel Panel31;
         internal System.Windows.Forms.Button BtnAddNew;
         internal System.Windows.Forms.Panel panel13;
         internal System.Windows.Forms.Panel panel22;
@@ -1469,16 +1519,11 @@ namespace unt_bingoo.view.Supplier
         internal System.Windows.Forms.Panel Panel5;
         internal System.Windows.Forms.TextBox TxtSupName;
         internal System.Windows.Forms.Label Label8;
-        internal System.Windows.Forms.Panel Panel24;
-        internal System.Windows.Forms.TextBox txtkhmername;
-        internal System.Windows.Forms.Label Label20;
         internal System.Windows.Forms.Panel Panel8;
         internal System.Windows.Forms.TextBox TxtVATNumber;
         internal DevExpress.XtraEditors.SimpleButton btngeneratevat;
         internal System.Windows.Forms.Label Label11;
         internal System.Windows.Forms.Panel Panel3;
-        internal System.Windows.Forms.ComboBox CmbStatus;
-        internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.Panel Panel17;
         internal System.Windows.Forms.TextBox TxtId;
@@ -1514,5 +1559,14 @@ namespace unt_bingoo.view.Supplier
         internal System.Windows.Forms.CheckBox chkrequiredsetallitems;
         internal System.Windows.Forms.Label Label10;
         private System.Windows.Forms.Button button1;
+        private DevExpress.XtraEditors.CheckEdit chkActive;
+        internal System.Windows.Forms.Panel Panel24;
+        internal System.Windows.Forms.TextBox txtkhmername;
+        internal System.Windows.Forms.Label Label20;
+        private DevExpress.XtraEditors.CheckEdit chkDeactive;
+        internal System.Windows.Forms.Panel Panel31;
+        private System.Windows.Forms.Panel panel15;
+        internal System.Windows.Forms.Button button2;
+        private DevExpress.XtraGrid.Columns.GridColumn SupplierNamekh;
     }
 }

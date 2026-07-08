@@ -446,7 +446,7 @@ namespace unt_bingoo.Frameworks
         }
         public void KeyPress(object sender, KeyPressEventArgs e, TypeKeyPress type = TypeKeyPress.Format_Number, string allowCharacter = "", int length = 100)
         {
-            var control = sender as TextBox; // Assuming the sender is a TextBox. Adjust as necessary.
+            var control = sender as TextBox;
             if (control.Text.Length >= length && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;

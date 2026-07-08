@@ -20,13 +20,15 @@ namespace unt_bingoo.view
         {
             InitializeComponent();
 
-            // GridView Configuration
-            if (gridViewProvince is GridView view)
+            gridViewProvince.OptionsBehavior.Editable = true;
+
+            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridViewProvince.Columns)
             {
-                view.OptionsBehavior.Editable = false;
-                view.OptionsView.ShowGroupPanel = false;
-                view.OptionsSelection.EnableAppearanceFocusedCell = false;
+                col.OptionsColumn.AllowEdit = false;
             }
+
+            gridColumn1.OptionsColumn.AllowEdit = true; // Edit Button
+            gridColumn2.OptionsColumn.AllowEdit = true; // Delete Button
         }
 
         private async void guiProvince_Load(object sender, EventArgs e)
@@ -49,6 +51,7 @@ namespace unt_bingoo.view
             {
                 XtraMessageBox.Show(ex.Message);
             }
+
         }
 
         private void loadingProvice()
@@ -227,6 +230,64 @@ namespace unt_bingoo.view
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtSearch_EditValueChanged(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text == null ? "" : txtSearch.Text.Trim();
+            gridViewProvince.ApplyFindFilter(keyword);
+
+        }
+
+        private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            int rowHandle = gridViewProvince.FocusedRowHandle;
+            if (rowHandle < 0) return;  
+
+       
+            txtProvinceId.Text = gridViewProvince.GetRowCellValue(rowHandle, "provinceId")?.ToString();
+            txtProvinceKH.Text = gridViewProvince.GetRowCellValue(rowHandle, "provinceNameKH")?.ToString();
+            txtProvinceEN.Text = gridViewProvince.GetRowCellValue(rowHandle, "provinceNameEN")?.ToString();
+            txtCode.Text = gridViewProvince.GetRowCellValue(rowHandle, "code")?.ToString();
+
+       
+            btnAdd.Text = "Update";
+        }
+
+        private async void repositoryItemButtonEdit2_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            int rowHandle = gridViewProvince.FocusedRowHandle;
+            if (rowHandle < 0) return;
+
+            string id = gridViewProvince
+                .GetRowCellValue(rowHandle, "provinceId")
+                ?.ToString();
+
+            if (string.IsNullOrEmpty(id))
+                return;
+
+            var confirm = XtraMessageBox.Show(
+                "Are you sure you want to delete this province?",
+                "Confirmation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            bool success = await _api.DeleteAsync($"api/Province/{id}");
+
+            if (success)
+            {
+                XtraMessageBox.Show(
+                    "Province deleted successfully!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                await LoadData();
+                ClearForm();
+            }
         }
     }
 

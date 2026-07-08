@@ -18,6 +18,7 @@ using unt_bingoo.view.Customer;
 using unt_bingoo.view.Supplier;
 using unt_bingoo.Controller;
 using DevExpress.XtraEditors;
+using unt_bingoo.Class;
 
 namespace unt_bingoo.view
 {
@@ -212,8 +213,8 @@ namespace unt_bingoo.view
 
         private void saleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new Sale() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
-            frm.Show();
+            //var frm = new Sale() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            //frm.Show();
         }
 
         private void reportListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -276,6 +277,39 @@ namespace unt_bingoo.view
         private void createUserProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripSeparator2_Click(object sender, EventArgs e)
+        {
+            var frm = new guiCurencys { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void menuItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+               
+        }
+
+        private void setupOutletMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.Product.cboProduct { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void setupBankMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+                 var frm = new unt_bingoo.view.Bank.BankSetup { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void supplierReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new guiSupplier { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+            
         }
     }
 }

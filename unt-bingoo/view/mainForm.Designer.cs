@@ -41,6 +41,8 @@ namespace unt_bingoo.view
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnufile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -55,9 +57,12 @@ namespace unt_bingoo.view
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuchangepassword = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupOutletMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupBankMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.supplierReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.status.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -124,6 +129,8 @@ namespace unt_bingoo.view
             // 
             this.mnufile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem6,
+            this.toolStripSeparator2,
+            this.paymentToolStripMenuItem,
             this.toolStripSeparator8,
             this.toolStripMenuItem5,
             this.toolStripSeparator7,
@@ -150,8 +157,22 @@ namespace unt_bingoo.view
             this.toolStripMenuItem6.Image = global::unt_bingoo.Properties.Resources.Currency;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItem6.Text = "Currency";
+            this.toolStripMenuItem6.Text = "Exchange Rate";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.currencyToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(202, 22);
+            this.toolStripSeparator2.Text = "Create Currency";
+            this.toolStripSeparator2.Click += new System.EventHandler(this.toolStripSeparator2_Click);
+            // 
+            // paymentToolStripMenuItem
+            // 
+            this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
+            this.paymentToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.paymentToolStripMenuItem.Text = "&Create Category";
+            this.paymentToolStripMenuItem.Click += new System.EventHandler(this.paymentToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
@@ -188,7 +209,7 @@ namespace unt_bingoo.view
             this.toolStripMenuItem2.Image = global::unt_bingoo.Properties.Resources.product_in_warehouse;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItem2.Text = "&Product";
+            this.toolStripMenuItem2.Text = "&Create Product";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.productToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -201,7 +222,7 @@ namespace unt_bingoo.view
             this.toolStripMenuItem3.Image = global::unt_bingoo.Properties.Resources.category;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItem3.Text = "&User ";
+            this.toolStripMenuItem3.Text = "&Create User";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripSeparator6
@@ -234,6 +255,7 @@ namespace unt_bingoo.view
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
             this.toolStripMenuItem9.Size = new System.Drawing.Size(202, 22);
             this.toolStripMenuItem9.Text = "StockProduct";
+            this.toolStripMenuItem9.Visible = false;
             this.toolStripMenuItem9.Click += new System.EventHandler(this.stockProductToolStripMenuItem_Click);
             // 
             // mnuchangepassword
@@ -249,30 +271,56 @@ namespace unt_bingoo.view
             this.menuStrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnufile,
-            this.paymentToolStripMenuItem,
-            this.reportToolStripMenuItem});
+            this.reportToolStripMenuItem,
+            this.menuItemToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(632, 26);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "MenuStrip";
             // 
-            // paymentToolStripMenuItem
-            // 
-            this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
-            this.paymentToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.paymentToolStripMenuItem.Text = "Product &Category";
-            this.paymentToolStripMenuItem.Click += new System.EventHandler(this.paymentToolStripMenuItem_Click);
-            // 
             // reportToolStripMenuItem
             // 
+            this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supplierReportToolStripMenuItem});
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.reportToolStripMenuItem.Text = "Report";
             // 
+            // menuItemToolStripMenuItem
+            // 
+            this.menuItemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setupOutletMenuToolStripMenuItem,
+            this.setupBankMenuToolStripMenuItem});
+            this.menuItemToolStripMenuItem.Name = "menuItemToolStripMenuItem";
+            this.menuItemToolStripMenuItem.Size = new System.Drawing.Size(57, 22);
+            this.menuItemToolStripMenuItem.Text = "Menu";
+            this.menuItemToolStripMenuItem.Click += new System.EventHandler(this.menuItemToolStripMenuItem_Click);
+            // 
+            // setupOutletMenuToolStripMenuItem
+            // 
+            this.setupOutletMenuToolStripMenuItem.Name = "setupOutletMenuToolStripMenuItem";
+            this.setupOutletMenuToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.setupOutletMenuToolStripMenuItem.Text = "Setup Outlet Menu";
+            this.setupOutletMenuToolStripMenuItem.Click += new System.EventHandler(this.setupOutletMenuToolStripMenuItem_Click);
+            // 
+            // setupBankMenuToolStripMenuItem
+            // 
+            this.setupBankMenuToolStripMenuItem.Name = "setupBankMenuToolStripMenuItem";
+            this.setupBankMenuToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.setupBankMenuToolStripMenuItem.Text = "Setup Bank Menu";
+            this.setupBankMenuToolStripMenuItem.Click += new System.EventHandler(this.setupBankMenuToolStripMenuItem_Click);
+            // 
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
+            // supplierReportToolStripMenuItem
+            // 
+            this.supplierReportToolStripMenuItem.Name = "supplierReportToolStripMenuItem";
+            this.supplierReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.supplierReportToolStripMenuItem.Text = "Supplier Report";
+            this.supplierReportToolStripMenuItem.Click += new System.EventHandler(this.supplierReportToolStripMenuItem_Click);
             // 
             // mainForm
             // 
@@ -323,10 +371,15 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supplierToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setupOutletMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setupBankMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supplierReportToolStripMenuItem;
     }
 }
 

@@ -63,6 +63,7 @@ namespace unt_bingoo.view.Supplier
             this.txtCountDay.Name = "txtCountDay";
             this.txtCountDay.Size = new System.Drawing.Size(150, 21);
             this.txtCountDay.TabIndex = 3;
+            this.txtCountDay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCountDay_KeyPress);
             // 
             // btnSave
             // 
@@ -141,6 +142,7 @@ namespace unt_bingoo.view.Supplier
             // Delete
             // 
             this.Delete.HeaderText = "Delete";
+            this.Delete.Image = global::unt_bingoo.Properties.Resources.Deleted16;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             // 

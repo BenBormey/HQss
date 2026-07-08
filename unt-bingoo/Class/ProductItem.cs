@@ -11,16 +11,17 @@ namespace unt_bingoo.Class
         public class ProductItem
         {
             public int ProID { get; set; }
-
+            public string ProImage { get; set; }
             public string ProNumY { get; set; }
             public string ProNumS { get; set; }
             public string ProNumYP { get; set; }
             public string ProNumYC { get; set; }
-
-            public string Sup1 { get; set; }
+        public int? SupplierID { get; set; }
+        public string Sup1 { get; set; }
             public string Sup2 { get; set; }
 
             public string ProName { get; set; }
+        public string categoryName { get; set; }
             public string KhmerNameUnicode { get; set; }
             public string KhmerName { get; set; }
 
@@ -34,8 +35,8 @@ namespace unt_bingoo.Class
             public decimal? ProImpPri { get; set; }
             public decimal? ProRecLev { get; set; }
             public decimal? ProRecOrder { get; set; }
-
-            public decimal? ProSSec { get; set; }
+        public int categoryId { get; set; }
+        public decimal? ProSSec { get; set; }
 
             public string ProRem { get; set; }
 
@@ -62,7 +63,7 @@ namespace unt_bingoo.Class
 
             public decimal? ProUPriBY { get; set; }
 
-            public float? ProAllowDisW { get; set; }
+        public float? ProAllowDisW { get; set; }
             public float? ProAllowDisU { get; set; }
 
             public float? ProDis { get; set; }
@@ -107,5 +108,14 @@ namespace unt_bingoo.Class
             public string ShelfLifeOfProduct { get; set; }
 
             public decimal? VOP { get; set; }
+        public ProductScaleDto ProductScale { get; set; }
+
+        public string desiplyname
+        {
+            get
+            {
+                return $"{ProNumY}  {ProName}";
+            }
+        }
         }
     }

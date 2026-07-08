@@ -43,6 +43,30 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClosedXML.dll" size="1700352">
+      <assemblyIdentity name="ClosedXML" version="0.105.0.0" publicKeyToken="FD1EB21B62AE805B" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>OdDWYGfDl3LOSzCFWbYrM3zxEwkLIebCaLvDPGu1D4A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClosedXML.Parser.dll" size="192000">
+      <assemblyIdentity name="ClosedXML.Parser" version="1.0.0.0" publicKeyToken="1D5F7376574C51EC" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>pydqEZwJpyAK3iaf/UpGN6gsQcNKVrAtcVvoQjX170E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Charts.v19.1.Core.dll" size="805624">
       <assemblyIdentity name="DevExpress.Charts.v19.1.Core" version="19.1.3.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -307,14 +331,50 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MD_ JuJuBi.exe" size="15462352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DocumentFormat.OpenXml.dll" size="6351712">
+      <assemblyIdentity name="DocumentFormat.OpenXml" version="3.1.1.0" publicKeyToken="8FB06CB64D019A17" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>u2qYjcyNwcc/PK7M/urGPUT6rAUdqKhJRmSkxp0XQgA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DocumentFormat.OpenXml.Framework.dll" size="476000">
+      <assemblyIdentity name="DocumentFormat.OpenXml.Framework" version="3.1.1.0" publicKeyToken="8FB06CB64D019A17" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>0i7YBEyz9QtgjN9tKwtStHdSSofO3uPp/tMyxTHi6nk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExcelNumberFormat.dll" size="30208">
+      <assemblyIdentity name="ExcelNumberFormat" version="1.1.0.0" publicKeyToken="23C6F5D73BE07ECA" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>A8zHGkKDMQLvVK6ezznZ1iwEkcFzWao30dLvDsc5fQQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MD_ JuJuBi.exe" size="15597008">
       <assemblyIdentity name="MD_ JuJuBi" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>v9Y9APgdgFk3XTzzcUdNRgKl49c/YcUantzq5qY69MA=</dsig:DigestValue>
+        <dsig:DigestValue>mGmz709nPeR09OYVsuAs1uxi4m/rIKZKsiH4ZejYO0g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -327,6 +387,18 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>+J9irulZ4Dz8UMZG04tQCFxYYs7Ib1GSVNu3ozgZObw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Bcl.HashCode.dll" size="23424">
+      <assemblyIdentity name="Microsoft.Bcl.HashCode" version="1.0.0.0" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>drEmDOdHoxfptRRDO4moGwOEEfyr3cb5x9ursHQti4E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -387,6 +459,30 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>4eJ697B+7t9c5xqSVfBCKBam/FhJpIPGcU4bRyBE+p0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RBush.dll" size="58880">
+      <assemblyIdentity name="RBush" version="4.0.0.0" publicKeyToken="C77E27B81F4D0187" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>G9aIpeiG1LwHhalDqCx/d7jih5ngdJ2bJ+demJs5Rmw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SixLabors.Fonts.dll" size="1142272">
+      <assemblyIdentity name="SixLabors.Fonts" version="1.0.0.0" publicKeyToken="D998EEA7B14CAB13" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>PYEdHDeh8OF/Nl8AYDAp61PiQFJlN+LNmf5CJ6q/Nqo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -528,13 +624,13 @@
       <dsig:DigestValue>1yR+GIMQHctQ6nCFk1NoKZmZAlS4711OzTXWM+37B1g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="MD_ JuJuBi.exe.config" size="544">
+  <file name="MD_ JuJuBi.exe.config" size="1528">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>r/4VxW4/7wZvogzilpC6rQ0OqZh2VN847iBxNjotGPI=</dsig:DigestValue>
+      <dsig:DigestValue>EJiEBUr6CZZW6BG+iZagrV+36pWL1tDHKC8Yf3EuS/Q=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\_advancement.png" size="15181">

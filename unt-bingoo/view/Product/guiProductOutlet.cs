@@ -5,7 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,15 +24,20 @@ namespace unt_bingoo.view.Product
     {
         private APIsController _api;
         private mainForm mdi;
-
+        private const string UPLOAD_URL = "http://192.168.1.99:8099/api/Product/upload";
         public List<ProductItem> RProductList;
 
         public string RWord_Searching;
-       private bool lIsMainProducts;
+        private bool lIsMainProducts;
         private DatabaseFramework Data = new DatabaseFramework();
         private ApplicationFramework App = new ApplicationFramework();
         private string DatabaseName;
         private BindingSource DataBindingSource;
+
+        private ProductLookupRepository _lookupRepo;
+
+        private bool _suspendCalc;
+
         public guiProductOutlet(mainForm mdi, bool lIsMainProducts)
         {
             InitializeComponent();
@@ -37,80 +45,60 @@ namespace unt_bingoo.view.Product
             this.mdi = mdi;
             this.lIsMainProducts = lIsMainProducts;
 
-
             DataBindingSource = new BindingSource();
+
+            // FIX (cannot close form / cannot leave supplier combo):
+            // When a data-bound ComboBox has a binding/validation error (e.g. the
+            // "Sup1" value doesn't exist in the supplier list yet), WinForms blocks
+            // focus from leaving the control — the whole form appears "stuck" and
+            // even the Close button won't work. This lets focus move anyway.
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
         }
+
         private void LoadingInitialized()
         {
             Initialized.LoadingInitialized(Data, App);
             DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
-            TimerCurrencyLoading.Enabled = true;
-            TimerUOMLoading.Enabled = true;
+
         }
+
+
+
+        private static double ParseDouble(string s)
+            => double.TryParse((s ?? "").Trim(), out double v) ? v : 0;
+
+        private static int ParseIntDefault(string s, int fallback)
+            => int.TryParse((s ?? "").Trim(), out int v) ? v : fallback;
+
+        private static decimal ParseDecimal(string s)
+            => decimal.TryParse((s ?? "").Trim(), out decimal v) ? v : 0;
+
+        /// <summary>
+        /// Parses text like "0", "0.0000" or "12.00" into a whole int.
+        /// Needed because the API declares some fields (e.g. proTotQty) as
+        /// Nullable&lt;Int32&gt; — sending 0.0 as a decimal makes ASP.NET model
+        /// binding fail with "The JSON value could not be converted to
+        /// System.Nullable`1[System.Int32]" and then "The dto field is required."
+        /// </summary>
+        private static int ParseWholeNumber(string s)
+            => (int)Math.Round(ParseDecimal(s), MidpointRounding.AwayFromZero);
+
+        private string CurrentConnectionString()
+            => Data.ConnectionString(Initialized.GetConnectionType(Data, App));
+
+        // ------------------------------------------------------------------------
+
         private void BtnAddDel_Click(object sender, EventArgs e)
         {
-
         }
+
         private void DataLoading()
         {
-            //IsUpdated = false;
-
-            // API Count
-            // var totalItems = await _api.GetAsync<int>("api/Product/count");
-            // var availableItems = await _api.GetAsync<int>("api/Product/count-available");
-
-            // LblNumberOfItems.Text = $"Numbers of Items : {totalItems}";
-            // LblAvailabelItems.Text = $"Available Items : {availableItems}";
-
             DataBindingSource.DataSource = RProductList;
 
-            TxtId.DataBindings.Clear();
-            TxtUnitNumber.DataBindings.Clear();
-            TxtPackNumber.DataBindings.Clear();
-            TxtCaseNumber.DataBindings.Clear();
-            TxtSKU.DataBindings.Clear();
-            TxtSupplierCode.DataBindings.Clear();
-            CmbSupplier.DataBindings.Clear();
-            CmbShelfliferequired.DataBindings.Clear();
-            TxtKhmerName.DataBindings.Clear();
-            TxtProductsName.DataBindings.Clear();
-            TxtSize.DataBindings.Clear();
-            TxtDescription.DataBindings.Clear();
-            CmbCategory.DataBindings.Clear();
-            TxtMadeIn.DataBindings.Clear();
-            DTPBirthDate.DataBindings.Clear();
-            TxtCurrentStock.DataBindings.Clear();
-            TxtQtySold.DataBindings.Clear();
-            TxtOrderLevel.DataBindings.Clear();
-            TxtOrderAmount.DataBindings.Clear();
-            TxtRemark.DataBindings.Clear();
-            CmbFactoryCurrency.DataBindings.Clear();
-            CmbFOBCIF.DataBindings.Clear();
-            TxtFactoryCost.DataBindings.Clear();
-            CmbCurrency.DataBindings.Clear();
-            txtFormDLanded.DataBindings.Clear();
-            TxtBuyin.DataBindings.Clear();
-            TxtBuyinDiscount.DataBindings.Clear();
-            TxtBuyinVAT.DataBindings.Clear();
-            txtexcisetax.DataBindings.Clear();
-            txtpubliclightingtax.DataBindings.Clear();
-            TxtTotalBuyin.DataBindings.Clear();
-            TxtAveragePrice.DataBindings.Clear();
-            TxtUnitPrice.DataBindings.Clear();
-            TxtSuggest.DataBindings.Clear();
-            TxtQtyPerPack.DataBindings.Clear();
-            TxtUnitProfit.DataBindings.Clear();
-            TxtPackPrice.DataBindings.Clear();
-            TxtPackProfit.DataBindings.Clear();
-            TxtQtyPerCase.DataBindings.Clear();
-            TxtCasePriceDiscount.DataBindings.Clear();
-            TxtCasePrice.DataBindings.Clear();
-            TxtCaseProfit.DataBindings.Clear();
-            CmbShelfLifeOfProduct.DataBindings.Clear();
-            txtvop.DataBindings.Clear();
+            ClearAllBindings();
 
             Navigator.BindingSource = DataBindingSource;
-
 
             if (DataBindingSource.DataSource != null)
             {
@@ -121,221 +109,130 @@ namespace unt_bingoo.view.Product
                 TxtSKU.DataBindings.Add("Text", DataBindingSource, "ProSKU");
                 TxtSupplierCode.DataBindings.Add("Text", DataBindingSource, "ProNumS");
 
-                // SupNum => Sup1
+                // FIX (supplier combo locking the form):
+                // Bind with formattingEnabled = true and a null default value so a
+                // Sup1 value that is missing from the supplier list does NOT throw
+                // a binding error (which is what froze the form before).
                 CmbSupplier.DataBindings.Add(
-                    "SelectedValue",
-                    DataBindingSource,
-                    "Sup1");
+                    new Binding("SelectedValue", DataBindingSource, "Sup1", true,
+                                DataSourceUpdateMode.OnPropertyChanged, null));
 
-                CmbShelfliferequired.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "Sup2");
-
-                TxtProductsName.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProName");
-
-                TxtKhmerName.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "KhmerName");
-
-                TxtSize.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProPacksize");
-
-                TxtDescription.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProDes");
-
-                CmbCategory.DataBindings.Add(
-                    "SelectedValue",
-                    DataBindingSource,
-                    "ProCat");
-
-                TxtMadeIn.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProMadein");
-
-                DTPBirthDate.DataBindings.Add(
-                    "Value",
-                    DataBindingSource,
-                    "BirthDate");
-
-                TxtCurrentStock.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProTotQty");
-
-                TxtQtySold.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProSSec");
-
-                TxtOrderLevel.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProRecLev");
-
-                TxtOrderAmount.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProRecOrder");
-
-                TxtRemark.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProRem");
-
-                TxtFactoryCost.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "FOBCIFCost");
-
-                TxtBuyin.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProImpPri");
-
-                TxtBuyinDiscount.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProDis");
-
-                TxtBuyinVAT.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProVAT");
-
-                txtexcisetax.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ExciseTax");
-
-                txtpubliclightingtax.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "PublicLightingTax");
-
-                TxtTotalBuyin.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProFinBuyin");
+                TxtProductsName.DataBindings.Add("Text", DataBindingSource, "ProName");
+                TxtKhmerName.DataBindings.Add("Text", DataBindingSource, "KhmerName");
+                TxtSize.DataBindings.Add("Text", DataBindingSource, "ProPacksize");
+                TxtDescription.DataBindings.Add("Text", DataBindingSource, "ProDes");
+                CmbCategory.DataBindings.Add("SelectedValue", DataBindingSource, "categoryId");
+                TxtMadeIn.DataBindings.Add("Text", DataBindingSource, "ProMadein");
+                DTPBirthDate.DataBindings.Add("Value", DataBindingSource, "BirthDate");
+                TxtCurrentStock.DataBindings.Add("Text", DataBindingSource, "ProTotQty");
+                TxtQtySold.DataBindings.Add("Text", DataBindingSource, "ProSSec");
+                TxtOrderLevel.DataBindings.Add("Text", DataBindingSource, "ProRecLev");
+                TxtOrderAmount.DataBindings.Add("Text", DataBindingSource, "ProRecOrder");
+                TxtRemark.DataBindings.Add("Text", DataBindingSource, "ProRem");
+                TxtFactoryCost.DataBindings.Add("Text", DataBindingSource, "FOBCIFCost");
+                TxtBuyin.DataBindings.Add("Text", DataBindingSource, "ProImpPri");
+                TxtBuyinDiscount.DataBindings.Add("Text", DataBindingSource, "ProDis");
+                TxtBuyinVAT.DataBindings.Add("Text", DataBindingSource, "ProVAT");
+                txtexcisetax.DataBindings.Add("Text", DataBindingSource, "ExciseTax");
+                txtpubliclightingtax.DataBindings.Add("Text", DataBindingSource, "PublicLightingTax");
+                TxtTotalBuyin.DataBindings.Add("Text", DataBindingSource, "ProFinBuyin");
 
                 TxtAveragePrice.DataBindings.Add(
-                    new Binding(
-                        "Text",
-                        DataBindingSource,
-                        "Average",
-                        true,
-                        DataSourceUpdateMode.Never,
-                        0,
-                        "N4"));
+                    new Binding("Text", DataBindingSource, "Average", true,
+                                DataSourceUpdateMode.Never, 0, "N4"));
 
                 TxtUnitPrice.DataBindings.Add(
-                    new Binding(
-                        "Text",
-                        DataBindingSource,
-                        "ProUPrSE",
-                        true,
-                        DataSourceUpdateMode.Never,
-                        0,
-                        "N2"));
+                    new Binding("Text", DataBindingSource, "ProUPrSE", true,
+                                DataSourceUpdateMode.Never, 0, "N2"));
 
-                TxtPackPrice.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProPckPri");
+                TxtPackPrice.DataBindings.Add("Text", DataBindingSource, "ProPckPri");
 
                 TxtCasePrice.DataBindings.Add(
-                    new Binding(
-                        "Text",
-                        DataBindingSource,
-                        "ProUPriSeH",
-                        true,
-                        DataSourceUpdateMode.Never,
-                        0,
-                        "N2"));
+                    new Binding("Text", DataBindingSource, "ProUPriSeH", true,
+                                DataSourceUpdateMode.Never, 0, "N2"));
 
-                TxtQtyPerPack.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProQtyPPack");
+                TxtQtyPerPack.DataBindings.Add("Text", DataBindingSource, "ProQtyPPack");
+                TxtQtyPerCase.DataBindings.Add("Text", DataBindingSource, "ProQtyPCase");
+                TxtUnitProfit.DataBindings.Add("Text", DataBindingSource, "ProProPer");
+                TxtPackProfit.DataBindings.Add("Text", DataBindingSource, "ProPckDis");
+                TxtCasePriceDiscount.DataBindings.Add("Text", DataBindingSource, "ProHolesaleper");
+                TxtCaseProfit.DataBindings.Add("Text", DataBindingSource, "ProHoleSalePP");
 
-                TxtQtyPerCase.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProQtyPCase");
+                CmbFactoryCurrency.DataBindings.Add("Text", DataBindingSource, "FactoryCurrency");
+                CmbFOBCIF.DataBindings.Add("Text", DataBindingSource, "FOB_CIF");
+                CmbCurrency.DataBindings.Add("Text", DataBindingSource, "ProCurr");
 
-                TxtUnitProfit.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProProPer");
+                txtFormDLanded.DataBindings.Add("Text", DataBindingSource, "FormDLanded");
+                CmbShelfLifeOfProduct.DataBindings.Add("Text", DataBindingSource, "ShelfLifeOfProduct");
+                txtvop.DataBindings.Add("Text", DataBindingSource, "VOP");
 
-                TxtPackProfit.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProPckDis");
+                // ===== Load Product Scale to Grid =====
+                LoadScaleGridFromCurrentProduct();
 
-                TxtCasePriceDiscount.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProHolesaleper");
-
-                TxtCaseProfit.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProHoleSalePP");
-
-                CmbFactoryCurrency.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "FactoryCurrency");
-
-                CmbFOBCIF.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "FOB_CIF");
-
-                CmbCurrency.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ProCurr");
-
-                txtFormDLanded.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "FormDLanded");
-
-                CmbShelfLifeOfProduct.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "ShelfLifeOfProduct");
-
-                txtvop.DataBindings.Add(
-                    "Text",
-                    DataBindingSource,
-                    "VOP");
+                DataBindingSource.CurrentChanged -= DataBindingSource_CurrentChanged;
+                DataBindingSource.CurrentChanged += DataBindingSource_CurrentChanged;
 
                 if (Navigator.BindingSource.Count > 0)
-                {
                     RefreshItems();
-                }
                 else
-                {
                     BtnAddNew_Click(BtnAddNew, EventArgs.Empty);
-                }
             }
             else
             {
                 BtnAddNew_Click(BtnAddNew, EventArgs.Empty);
             }
+
+            LoadProductImage();
         }
+
+
+        private void LoadScaleGridFromCurrentProduct()
+        {
+            _scaleList.Clear();
+
+            var currentProduct = DataBindingSource.Current as ProductItem;
+
+            if (currentProduct?.ProductScale != null)
+            {
+                var s = currentProduct.ProductScale;
+
+                _scaleList.Add(new ProductScal
+                {
+                    ProId = currentProduct.ProID,
+                    UOMCode = s.UOMCode,
+                    Width = (double?)s.Width,
+                    Length = (double?)s.Length,
+                    Height = (double?)s.Height,
+                    CBMPerCTN = (double?)s.CBMPerCTN,
+                    NetWeight = (double?)s.NetWeight,
+                    GrossWeight = (double?)s.GrossWeight,
+                    Status = true,
+                    ProNumY = currentProduct.ProNumY
+                });
+            }
+
+            gcScale.DataSource = _scaleList;
+            gvScale.RefreshData();
+        }
+
+        private void ClearAllBindings()
+        {
+            Control[] bound =
+            {
+                TxtId, TxtUnitNumber, TxtPackNumber, TxtCaseNumber, TxtSKU, TxtSupplierCode,
+                CmbSupplier, TxtKhmerName, TxtProductsName, TxtSize, TxtDescription, CmbCategory,
+                TxtMadeIn, DTPBirthDate, TxtCurrentStock, TxtQtySold, TxtOrderLevel, TxtOrderAmount,
+                TxtRemark, CmbFactoryCurrency, CmbFOBCIF, TxtFactoryCost, CmbCurrency, txtFormDLanded,
+                TxtBuyin, TxtBuyinDiscount, TxtBuyinVAT, txtexcisetax, txtpubliclightingtax,
+                TxtTotalBuyin, TxtAveragePrice, TxtUnitPrice, TxtSuggest, TxtQtyPerPack, TxtUnitProfit,
+                TxtPackPrice, TxtPackProfit, TxtQtyPerCase, TxtCasePriceDiscount, TxtCasePrice,
+                TxtCaseProfit, CmbShelfLifeOfProduct, txtvop
+            };
+
+            foreach (Control c in bound)
+                c.DataBindings.Clear();
+        }
+
         private void RefreshItems()
         {
             LoadingInitialized();
@@ -346,10 +243,17 @@ namespace unt_bingoo.view.Product
             PicProducts.Image = null;
 
             string status = "";
+            object current = DataBindingSource.Current;
 
-            if (DataBindingSource.Current is DataRowView row)
+            if (current is DataRowView row)
             {
                 status = Convert.ToString(row["Status"])?.Trim() ?? "";
+            }
+            else if (current != null)
+            {
+                var prop = current.GetType().GetProperty("Status");
+                if (prop != null)
+                    status = Convert.ToString(prop.GetValue(current))?.Trim() ?? "";
             }
 
             if (status == "Deactivated" || status == "Old_Deactivated")
@@ -363,36 +267,65 @@ namespace unt_bingoo.view.Product
                 LblStatus.Visible = false;
             }
 
-            // បើបងមាន Image Column ក្នុង Product Table
-            /*
-            if (DataBindingSource.Current is DataRowView currentRow)
-            {
-                if (currentRow["ProImage"] != DBNull.Value)
-                {
-                    PicProducts.Image =
-                        App.BytetoImage((byte[])currentRow["ProImage"]);
-                }
-            }
-            */
-
             TxtStockOldCode.Text = "0";
             TxtStockGRNTemp.Text = "0";
-
-            //if (!mdi.isAdmin)
-            //{
-            //    BtnMoveToDeactivated.Enabled = false;
-
-            //    // បើមាន Role/Permission API
-            //    // អាច call API មក verify នៅទីនេះ
-
-            //    BtnMoveToDeactivated.Enabled = true;
-            //}
         }
+
+        private void DataBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            LoadProductImage();
+            LoadScaleGridFromCurrentProduct();
+        }
+
+        private int _imageLoadToken;
+
+        private async void LoadProductImage()
+        {
+            int myToken = ++_imageLoadToken;
+
+            try
+            {
+                if (!(DataBindingSource.Current is ProductItem product))
+                {
+                    PicProducts.Image = null;
+                    return;
+                }
+
+                string imageUrl = product.ProImage;
+
+                if (string.IsNullOrWhiteSpace(imageUrl))
+                {
+                    PicProducts.Image = null;
+                    return;
+                }
+
+                byte[] bytes = await _httpClient.GetByteArrayAsync(imageUrl);
+
+                if (myToken != _imageLoadToken || PicProducts.IsDisposed)
+                    return;
+
+                using (MemoryStream ms = new MemoryStream(bytes))
+                using (Image downloaded = Image.FromStream(ms))
+                {
+                    PicProducts.Image?.Dispose();
+                    PicProducts.Image = new Bitmap(downloaded);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (myToken == _imageLoadToken && !PicProducts.IsDisposed)
+                    PicProducts.Image = null;
+
+                System.Diagnostics.Debug.WriteLine("LoadProductImage error: " + ex.Message);
+            }
+        }
+
         private void TimerCurrencyLoading_Tick(object sender, EventArgs e)
         {
-
+            TimerCurrencyLoading_Tick_1(sender, e);
         }
-        private async void LoadingSupplier()
+
+        private async Task LoadingSupplier()
         {
             try
             {
@@ -402,36 +335,61 @@ namespace unt_bingoo.view.Product
                 CmbSupplier.DisplayMember = "SupplierName";
                 CmbSupplier.ValueMember = "SupplierCode";
                 CmbSupplier.SelectedIndex = -1;
-
-                //if (DataBindingSource?.DataSource != null)
-                //{
-                //    string supNum = "";
-
-                //    if (DataBindingSource.Current is DataRowView row)
-                //    {
-                //        supNum = Convert.ToString(row["SupNum"])?.Trim() ?? "";
-                //    }
-
-                //    if (!string.IsNullOrWhiteSpace(supNum))
-                //    {
-                //        CmbSupplier.SelectedValue = supNum;
-                //    }
-                //}
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 Cursor = Cursors.Default;
             }
         }
-        private void guiProductOutlet_Load(object sender, EventArgs e)
+
+        // One shared client for the form's lifetime (don't new-up HttpClient per call).
+        private static readonly HttpClient _httpClient = new HttpClient();
+
+        private string _productImageFileName;   // set in PicProducts_DoubleClick
+
+        private async Task<T> SafeCall<T>(Func<Task<T>> action)
+        {
+            try
+            {
+                return await action();
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show("Connection error: " + ex.Message,
+                    "Network", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default;
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Request timed out. Please try again.",
+                    "Timeout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return default;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default;
+            }
+        }
+
+        private static string GuessContentType(string fileName)
+        {
+            string ext = System.IO.Path.GetExtension(fileName).ToLowerInvariant();
+            switch (ext)
+            {
+                case ".png": return "image/png";
+                case ".gif": return "image/gif";
+                case ".bmp": return "image/bmp";
+                default: return "image/jpeg";
+            }
+        }
+
+        private async void guiProductOutlet_Load(object sender, EventArgs e)
         {
             _api = APIGlobals.Api;
 
@@ -441,57 +399,52 @@ namespace unt_bingoo.view.Product
                 Close();
                 return;
             }
-            this.CityLoading.Enabled = true;
-      
-         
+
+
+            _lookupRepo = new ProductLookupRepository(CurrentConnectionString());
+
             DataBindingSource = new BindingSource();
-            this.LoadingSupplier();
-            this.LoadingShelfLifeOfProductLoading();
-            this.TimerCategoryLoading.Enabled = true;
+
+            await LoadingSupplier();
+            await LoadingCategory();
+
+            this.shelife();
+
             this.DataLoading();
+            this.LodingUOM();
+
+            this.CityLoading.Enabled = true;
+            this.TimerCurrencyLoading.Enabled = true;
+            this.TimerUOMLoading.Enabled = true;
+
+            TxtBuyinDiscount.TextChanged += (s, ev) => CalculatedTotalBuyin();
+            TxtBuyinVAT.TextChanged += (s, ev) => CalculatedTotalBuyin();
+            txtexcisetax.TextChanged += (s, ev) => CalculatedTotalBuyin();
+            txtpubliclightingtax.TextChanged += (s, ev) => CalculatedTotalBuyin();
+
             if (TxtId.Text == "")
-            {
                 TxtUnitNumber_Click(TxtUnitNumber, EventArgs.Empty);
-            }
         }
+
         private void LoadingShelfLifeOfProductLoading()
         {
             try
             {
-                string query = @"
-            SELECT DISTINCT ShelfLifeOfProduct
-            FROM [DBJuJuBi].[dbo].[TPRProducts]
-            ORDER BY ShelfLifeOfProduct";
-
-                DataTable dt = new DataTable();
-
-                using (SqlConnection con = new SqlConnection(Data.strConnection))
-                {
-                    con.Open();
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        dt.Load(cmd.ExecuteReader());
-                    }
-                }
+                DataTable dt = _lookupRepo.GetActiveShelfLife();
 
                 CmbShelfLifeOfProduct.DataSource = dt;
-                CmbShelfLifeOfProduct.DisplayMember = "ShelfLifeOfProduct";
-                CmbShelfLifeOfProduct.ValueMember = "ShelfLifeOfProduct";
+                CmbShelfLifeOfProduct.DisplayMember = "ShelfLifeText";
+                CmbShelfLifeOfProduct.ValueMember = "ShelfLifeId";
+                CmbShelfLifeOfProduct.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-
         }
 
         private List<ProductItem> _products;
@@ -505,7 +458,7 @@ namespace unt_bingoo.view.Product
                 if (products == null || products.Count == 0)
                     return;
 
-                BindProduct(products[0]); // យក row ដំបូង
+                BindProduct(products[0]);
             }
             catch (Exception ex)
             {
@@ -569,6 +522,7 @@ namespace unt_bingoo.view.Product
             CmbFOBCIF.Text = product.FOB_CIF;
             CmbShelfLifeOfProduct.Text = product.ShelfLifeOfProduct;
         }
+
         private async void CityLoading_Tick(object sender, EventArgs e)
         {
             try
@@ -585,21 +539,16 @@ namespace unt_bingoo.view.Product
                     foreach (var item in list)
                     {
                         cmbProvince.Properties.Items.Add(
-                            item.provinceId,       
-                            item.provinceNameEN,   
+                            item.provinceId,
+                            item.provinceNameEN,
                             CheckState.Unchecked,
-                            true
-                        );
+                            true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -609,15 +558,13 @@ namespace unt_bingoo.view.Product
 
         private void BtnAddDel_Click_1(object sender, EventArgs e)
         {
-
         }
 
- 
         public static void DataSources(
-    System.Windows.Forms.ComboBox combo,
-    DataTable dt,
-    string displayMember,
-    string valueMember)
+            System.Windows.Forms.ComboBox combo,
+            DataTable dt,
+            string displayMember,
+            string valueMember)
         {
             combo.DataSource = null;
             combo.DisplayMember = "";
@@ -627,6 +574,7 @@ namespace unt_bingoo.view.Product
             combo.DisplayMember = displayMember;
             combo.ValueMember = valueMember;
         }
+
         private void TxtUnitNumber_Click(object sender, EventArgs e)
         {
             bool isVisible = false;
@@ -672,9 +620,7 @@ namespace unt_bingoo.view.Product
                 lGUI.PanelAlert.Visible = isVisible;
                 lGUI.RCurrentBarcode = TxtUnitNumber.Text.Trim();
                 lGUI.RProId = (long)Convert.ToDecimal(
-                    string.IsNullOrWhiteSpace(TxtId.Text)
-                        ? "0"
-                        : TxtId.Text.Trim());
+                    string.IsNullOrWhiteSpace(TxtId.Text) ? "0" : TxtId.Text.Trim());
 
                 if (lGUI.ShowDialog() == DialogResult.Cancel)
                     return;
@@ -697,7 +643,7 @@ namespace unt_bingoo.view.Product
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
-                    continue; // VB GoTo Err_again
+                    continue;
                 }
 
                 break;
@@ -709,8 +655,6 @@ namespace unt_bingoo.view.Product
 
         private void TxtPackNumber_Click(object sender, EventArgs e)
         {
-   
-
             Initialized.R_Barcode = "";
 
             using (var lGUI = new FrmProductsPackNumber(this.mdi, this.lIsMainProducts))
@@ -737,7 +681,7 @@ namespace unt_bingoo.view.Product
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-        
+                return;
             }
 
             TxtPackNumber.Text = Initialized.R_Barcode.Trim();
@@ -771,6 +715,7 @@ namespace unt_bingoo.view.Product
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
+                return;
             }
 
             TxtCaseNumber.Text = Initialized.R_Barcode.Trim();
@@ -793,12 +738,8 @@ namespace unt_bingoo.view.Product
             if (char.IsControl(e.KeyChar))
                 return;
 
-
-
             if (e.KeyChar < 0x1780 || e.KeyChar > 0x17FF)
-            {
                 e.Handled = true;
-            }
         }
 
         private void TxtKhmerName_Enter(object sender, EventArgs e)
@@ -822,201 +763,142 @@ namespace unt_bingoo.view.Product
         {
             App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number, "", 10);
         }
-        public float CalculateUnitPercentage(
-    double average,
-    double qtyPerCase,
-    double unitPrice)
-        {
-            if (qtyPerCase == 0 || unitPrice == 0)
-                return 0;
 
-            double buyIn = average / qtyPerCase;
+        public float CalculateUnitPercentage(double average, double qtyPerCase, double unitPrice)
+            => ProductPricingCalculator.UnitPercentage(average, qtyPerCase, unitPrice);
 
-            double percent =
-                ((unitPrice - buyIn) / unitPrice) * 100;
+        public float CalculatePackPercentage(double aPack, double bPack, double cPack, double dPack)
+            => ProductPricingCalculator.PackPercentage(aPack, bPack, cPack, dPack);
 
-            return (float)Math.Round(percent, 2);
-        }
+        public float CalculateCasePercentage(double aCase, double eCase)
+            => ProductPricingCalculator.CasePercentage(aCase, eCase);
+
         private void TxtFactoryCost_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
-                    App.KeyPress(
-                            sender,
-                            e,
-                            ApplicationFramework.TypeKeyPress.Format_Float,
-                            null,
-                            25);
+            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Float, null, 25);
+        }
+
+        /// <summary>
+        /// Case price = (unit price x qty per case) reduced by the case discount %.
+        /// Example: Unit 23.00, Qty/Case 23, Discount 0% -> 529.00
+        ///          Unit 23.00, Qty/Case 23, Discount 5% -> 502.55
+        /// </summary>
+        private static double ComputeCasePrice(double unitPrice, double discountPercent, int qtyPerCase)
+        {
+            if (qtyPerCase <= 0)
+                qtyPerCase = 1;
+
+            double gross = unitPrice * qtyPerCase;
+
+            if (discountPercent > 0)
+                gross -= gross * (discountPercent / 100.0);
+
+            return gross;
+        }
+
+        private void RecalculateSellingPrices()
+        {
+            if (_suspendCalc)
+                return;
+
+            _suspendCalc = true;
+            try
+            {
+                double average = ParseDouble(TxtAveragePrice.Text);
+                double totalBuyin = ParseDouble(TxtTotalBuyin.Text);
+                int qtyPerCase = ParseIntDefault(TxtQtyPerCase.Text, 1);
+                int qtyPerPack = ParseIntDefault(TxtQtyPerPack.Text, 1);
+                double unitPrice = ParseDouble(TxtUnitPrice.Text);
+                double packPrice = ParseDouble(TxtPackPrice.Text);
+                double caseDiscount = ParseDouble(TxtCasePriceDiscount.Text);
+
+                // FIX ("Cannot allow Pack Price bigger than Case Price" firing wrongly):
+                // The old calculation returned a case price equal to the UNIT price
+                // (e.g. Unit 23, Qty/Case 23 -> Case Price 23.00 instead of 529.00),
+                // so any normal pack price looked "bigger than case price" and the
+                // save was blocked. Case price = unit price x qty per case, minus
+                // the case discount %.
+                double casePrice = ComputeCasePrice(unitPrice, caseDiscount, qtyPerCase);
+                TxtCasePrice.Text = casePrice.ToString("N2");
+
+                TxtUnitProfit.Text =
+                    ProductPricingCalculator.UnitPercentage(average, qtyPerCase, unitPrice).ToString("N2");
+
+                TxtPackProfit.Text =
+                    ProductPricingCalculator.PackPercentage(average, qtyPerCase, qtyPerPack, packPrice).ToString("N2");
+
+                TxtCaseProfit.Text =
+                    ProductPricingCalculator.CasePercentage(average, casePrice).ToString("N2");
+
+                TxtCaseProfitBuyin.Text =
+                    ProductPricingCalculator.CasePercentage(totalBuyin, casePrice).ToString("N2");
+            }
+            finally
+            {
+                _suspendCalc = false;
+            }
+        }
+
+        private void RecalculateProfitsFromCasePrice()
+        {
+            if (_suspendCalc)
+                return;
+
+            _suspendCalc = true;
+            try
+            {
+                double average = ParseDouble(TxtAveragePrice.Text);
+                double totalBuyin = ParseDouble(TxtTotalBuyin.Text);
+                double casePrice = ParseDouble(TxtCasePrice.Text);
+
+                TxtCaseProfit.Text =
+                    ProductPricingCalculator.CasePercentage(average, casePrice).ToString("N2");
+
+                TxtCaseProfitBuyin.Text =
+                    ProductPricingCalculator.CasePercentage(totalBuyin, casePrice).ToString("N2");
+            }
+            finally
+            {
+                _suspendCalc = false;
+            }
         }
 
         private void TxtUnitPrice_TextChanged(object sender, EventArgs e)
         {
-            if(TxtAveragePrice.Text == "")
-            {
-                return;
-            }
-            double average = string.IsNullOrWhiteSpace(TxtAveragePrice.Text)
-     ? 0
-     : Convert.ToDouble(TxtAveragePrice.Text.Trim());
-
-            int qtyPerCase = string.IsNullOrWhiteSpace(TxtQtyPerCase.Text)
-                ? 1
-                : Convert.ToInt32(TxtQtyPerCase.Text.Trim());
-
-            double unitPrice = string.IsNullOrWhiteSpace(TxtUnitPrice.Text)
-                ? 0
-                : Convert.ToDouble(TxtUnitPrice.Text.Trim());
-
-            float unitPercent = CalculateUnitPercentage(
-                average,
-                qtyPerCase,
-                unitPrice);
-
-            TxtUnitProfit.Text = unitPercent.ToString("N2");
-
-            float dis = string.IsNullOrWhiteSpace(TxtCasePriceDiscount.Text)
-                ? 0
-                : Convert.ToSingle(TxtCasePriceDiscount.Text.Trim());
-
-            dis = (100 - dis) / 100;
-
-            double wholesalePrice = (unitPrice * dis) * qtyPerCase;
-
-            TxtCasePrice.Text = wholesalePrice.ToString("N2");
+            RecalculateSellingPrices();
         }
 
         private void TxtQtyPerPack_KeyPress(object sender, KeyPressEventArgs e)
         {
-            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number,"" , 10)
-;
+            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number, "", 10);
         }
 
         private void TxtQtyPerPack_TextChanged(object sender, EventArgs e)
         {
-            TxtPackPrice_TextChanged(sender, e);
+            RecalculateSellingPrices();
         }
-        public float CalculatePackPercentage(
-    double aPack,
-    double bPack,
-    double cPack,
-    double dPack)
-        {
-            double buyInPack = (aPack / bPack) * cPack;
 
-            float percent = 0;
-
-            if (dPack == 0)
-            {
-                percent = 0;
-            }
-            else
-            {
-                percent = (float)(((dPack - buyInPack) / dPack) * 100);
-            }
-
-            return (float)Math.Round(percent, 2);
-        }
         private void TxtPackPrice_TextChanged(object sender, EventArgs e)
         {
-            double average = string.IsNullOrWhiteSpace(TxtAveragePrice.Text)
-    ? 0
-    : Convert.ToDouble(TxtAveragePrice.Text.Trim());
-
-            int qtyPerCase = string.IsNullOrWhiteSpace(TxtQtyPerCase.Text)
-                ? 1
-                : Convert.ToInt32(TxtQtyPerCase.Text.Trim());
-
-            int qtyPerPack = string.IsNullOrWhiteSpace(TxtQtyPerPack.Text)
-                ? 1
-                : Convert.ToInt32(TxtQtyPerPack.Text.Trim());
-
-            double packPrice = string.IsNullOrWhiteSpace(TxtPackPrice.Text)
-                ? 0
-                : Convert.ToDouble(TxtPackPrice.Text.Trim());
-
-            float packPercent = CalculatePackPercentage(
-                average,
-                qtyPerCase,
-                qtyPerPack,
-                packPrice);
-
-            TxtPackProfit.Text = packPercent.ToString("N2");
-        }
-        public float CalculateCasePercentage(
-    double aCase,
-    double eCase)
-        {
-            float percent = (float)(
-                ((eCase - aCase) /
-                (eCase == 0 ? 1 : eCase)) * 100);
-
-            return (float)Math.Round(percent, 2);
+            RecalculateSellingPrices();
         }
 
         private void TxtUnitProfit_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void TxtCasePriceDiscount_Validated(object sender, EventArgs e)
         {
-
         }
 
         private void TxtCasePriceDiscount_TextChanged(object sender, EventArgs e)
         {
-            int qtyPerCase = int.TryParse(TxtQtyPerCase.Text, out int q) ? q : 1;
-
-            double unitPrice = double.TryParse(TxtUnitPrice.Text, out double up)
-                ? up
-                : 0;
-
-            float discount = float.TryParse(TxtCasePriceDiscount.Text, out float d)
-                ? d
-                : 0;
-
-            double wholesalePrice =
-                unitPrice *
-                ((100 - discount) / 100.0) *
-                qtyPerCase;
-
-            TxtCasePrice.Text = wholesalePrice.ToString("N2");
+            RecalculateSellingPrices();
         }
 
         private void TxtCasePrice_TextChanged(object sender, EventArgs e)
         {
-            int qtyPerCase = string.IsNullOrWhiteSpace(TxtQtyPerCase.Text)
-    ? 1
-    : Convert.ToInt32(TxtQtyPerCase.Text.Trim());
-
-            double unitPrice = string.IsNullOrWhiteSpace(TxtUnitPrice.Text)
-                ? 0
-                : Convert.ToDouble(TxtUnitPrice.Text.Trim());
-
-            float dis = string.IsNullOrWhiteSpace(TxtCasePriceDiscount.Text)
-                ? 0
-                : Convert.ToSingle(TxtCasePriceDiscount.Text.Trim());
-
-            dis = (100 - dis) / 100;
-
-            double wholesalePrice = (unitPrice * dis) * qtyPerCase;
-
-            TxtCasePrice.Text = wholesalePrice.ToString("N2");
-
-            double average = string.IsNullOrWhiteSpace(TxtAveragePrice.Text)
-                ? 0
-                : Convert.ToDouble(TxtAveragePrice.Text.Trim());
-
-            wholesalePrice = string.IsNullOrWhiteSpace(TxtCasePrice.Text)
-                ? 0
-                : Convert.ToDouble(TxtCasePrice.Text.Trim());
-
-            float casePercent = CalculateCasePercentage(
-                average,
-                wholesalePrice);
-
-            TxtCaseProfit.Text = casePercent.ToString("N2");
-
-            CheckProfitBuyin();
+            RecalculateProfitsFromCasePrice();
         }
         private void CheckProfitBuyin()
         {
@@ -1032,11 +914,7 @@ namespace unt_bingoo.view.Product
                 ? 0
                 : Convert.ToDouble(TxtUnitPrice.Text.Trim());
 
-            float unitPercent = CalculateUnitPercentage(
-                average,
-                qtyPerCase,
-                unitPrice);
-
+            float unitPercent = CalculateUnitPercentage(average, qtyPerCase, unitPrice);
             TxtUnitProfit.Text = unitPercent.ToString("N2");
 
             double totalBuyin = string.IsNullOrWhiteSpace(TxtTotalBuyin.Text)
@@ -1047,10 +925,7 @@ namespace unt_bingoo.view.Product
                 ? 0
                 : Convert.ToDouble(TxtCasePrice.Text.Trim());
 
-            float casePercent = CalculateCasePercentage(
-                totalBuyin,
-                wholesalePrice);
-
+            float casePercent = CalculateCasePercentage(totalBuyin, wholesalePrice);
             TxtCaseProfitBuyin.Text = casePercent.ToString("N2");
 
             int qtyPerPack = string.IsNullOrWhiteSpace(TxtQtyPerPack.Text)
@@ -1061,61 +936,42 @@ namespace unt_bingoo.view.Product
                 ? 0
                 : Convert.ToDouble(TxtPackPrice.Text.Trim());
 
-            float packPercent = CalculatePackPercentage(
-                average,
-                qtyPerCase,
-                qtyPerPack,
-                packPrice);
-
+            float packPercent = CalculatePackPercentage(average, qtyPerCase, qtyPerPack, packPrice);
             TxtPackProfit.Text = packPercent.ToString("N2");
 
             wholesalePrice = string.IsNullOrWhiteSpace(TxtCasePrice.Text)
                 ? 0
                 : Convert.ToDouble(TxtCasePrice.Text.Trim());
 
-            casePercent = CalculateCasePercentage(
-                average,
-                wholesalePrice);
-
+            casePercent = CalculateCasePercentage(average, wholesalePrice);
             TxtCaseProfit.Text = casePercent.ToString("N2");
         }
+    
 
         private void TxtCaseProfitBuyin_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void TimerLoading_Tick(object sender, EventArgs e)
         {
-
         }
 
         private void BtnAddNew_Click(object sender, EventArgs e)
         {
-
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-
         }
-
-        private async void TimerCategoryLoading_Tick(object sender, EventArgs e)
+        private async Task LoadingCategory()
         {
-            this.TimerCategoryLoading.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                var data =
-                    await _api.GetAsync<List<CategoryItem>>(
-                        "api/category");
+                var data = await _api.GetAsync<List<CategoryItem>>("api/category");
 
                 CmbCategory.DataSource = data;
-
-                // Display Text
                 CmbCategory.DisplayMember = "CategoryName";
-
-                // Value
                 CmbCategory.ValueMember = "Id";
 
                 if (DataBindingSource.DataSource != null &&
@@ -1123,72 +979,339 @@ namespace unt_bingoo.view.Product
                 {
                     CmbCategory.SelectedValue = product.ProCat;
                 }
+                else
+                {
+                    CmbCategory.SelectedIndex = -1;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 Cursor = Cursors.Default;
             }
 
+        }
+
+        private async Task TimerCategoryLoading_Tick(object sender, EventArgs e)
+        {
+            this.TimerCategoryLoading.Enabled = false;
 
         }
 
         private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
                 e.Handled = true;
-            }
         }
 
         private void TxtPackPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
                 e.Handled = true;
-            }
         }
 
+        private byte[] _productImageBytes;
+
+        private async Task<string> UploadProductImageAsync()
+        {
+            if (_productImageBytes == null || _productImageBytes.Length == 0)
+                return null;
+
+            string fileName = string.IsNullOrWhiteSpace(_productImageFileName)
+                ? "product.jpg" : _productImageFileName;
+
+            return await _api.UploadFileAsync("api/Product/upload", _productImageBytes, fileName, "file");
+        }
+
+  
         private async void BtnUpdate_Click(object sender, EventArgs e)
         {
             if (!ValidateData())
                 return;
 
-            ProductItem product = GetData();
+            int proId = ParseIntDefault(TxtId.Text, 0);
+            bool isUpdate = proId > 0;
 
-            APIsController api = new APIsController();
-
-            bool success = await api.PostAsync(
-                "api/Product",
-                product);
-
-            if (success)
+            // Confirm with the user which action is about to happen.
+            string action = isUpdate ? "UPDATE this product" : "SAVE as a new product";
+            if (XtraMessageBox.Show(
+                    $"Do you want to {action}?",
+                    isUpdate ? "Confirm Update" : "Confirm Save",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.No)
             {
-                XtraMessageBox.Show(
-                    "Save Success",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                return;
             }
 
+            this.Cursor = Cursors.WaitCursor;
+            BtnUpdate.Enabled = false;
+
+            try
+            {
+                // 1. Upload the image first (if the user picked a new one).
+                string imagePath = await UploadProductImageAsync();
+                if (!string.IsNullOrWhiteSpace(imagePath))
+                    imagePath = imagePath.Trim('"');   
+                else if (DataBindingSource.Current is ProductItem current)
+                    imagePath = current.ProImage;    
+
+                bool success;
+
+                if (isUpdate)
+                {
+            
+                    object payload = GetPutPayload(proId, imagePath);
+                    success = await _api.PutAsync($"api/Product/{proId}", payload);
+                }
+                else
+                {
+
+                 
+                    object payload = GetPutPayload(proId, imagePath);
+
+                    success = await _api.PostAsync("api/Product", payload);
+                }
+
+                if (success)
+                {
+                    XtraMessageBox.Show(
+                        isUpdate ? "Update Success" : "Save Success",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                         await ReloadCurrentProduct();
+
+                }
+                else
+                {
+                    XtraMessageBox.Show(
+                        (isUpdate ? "Update" : "Save") + " failed. Please check the data and try again.",
+                        "Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    
+                }
+          
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                BtnUpdate.Enabled = true;
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Product scale taken from the dimension grid (last added row) or,
+        /// if the grid is empty, from the dimension text boxes.
+        /// </summary>
+        private object BuildProductScalePayload()
+        {
+            var s = _scaleList.LastOrDefault();
+
+            return new
+            {
+                ctnPerPallet = 0,
+                uomCode = s?.UOMCode ?? (CmbUOM.SelectedValue?.ToString() ?? ""),
+                width = s?.Width ?? ParseDouble(TxtWidth.Text),
+                length = s?.Length ?? ParseDouble(TxtLength.Text),
+                height = s?.Height ?? ParseDouble(TxtHeight.Text),
+                cbmPerCTN = s?.CBMPerCTN ?? ParseDouble(TxtCBMPerCTN.Text),
+                netWeight = s?.NetWeight ?? ParseDouble(TxtNetWeight.Text),
+                grossWeight = s?.GrossWeight ?? ParseDouble(TxtGrossWeight.Text),
+                createdDate = DateTime.Now,
+                status = true
+            };
+        }
+
+        /// <summary>
+        /// Payload for POST api/Product (new product).
+        /// Field names/types match the POST Swagger schema exactly:
+        /// "id", booleans, numeric proQtyPPack/proPckPri, numeric shelfLifeOfProduct.
+        /// </summary>
+        private object GetPostPayload(string imagePath)
+        {
+            int shelfLifeId = 0;
+            if (CmbShelfLifeOfProduct.SelectedValue != null &&
+                !(CmbShelfLifeOfProduct.SelectedValue is DataRowView))
+            {
+                int.TryParse(CmbShelfLifeOfProduct.SelectedValue.ToString(), out shelfLifeId);
+            }
+
+            return new
+            {
+                id = 0,
+                proNumY = TxtUnitNumber.Text.Trim(),
+                proNumS = TxtSupplierCode.Text.Trim(),
+                proNumYP = TxtPackNumber.Text.Trim(),
+                proNumYC = TxtCaseNumber.Text.Trim(),
+                sup1 = CmbSupplier.SelectedValue?.ToString() ?? "",
+                sup2 = CmbSupplier.SelectedValue?.ToString() ?? "",
+                proName = TxtProductsName.Text.Trim(),
+                khmerNameUnicode = TxtKhmerName.Text.Trim(),
+                proConsign = false,
+                proDes = TxtDescription.Text.Trim(),
+                proCat = CmbCategory.SelectedValue?.ToString() ?? "",
+                proPacksize = TxtSize.Text.Trim(),
+                proCurr = CmbCurrency.Text.Trim(),
+                proImpPri = ParseDecimal(TxtBuyin.Text),
+                proRecLev = ParseDecimal(TxtOrderLevel.Text),
+                proRecOrder = ParseDecimal(TxtOrderAmount.Text),
+                khmerName = TxtKhmerName.Text.Trim(),
+                proSSec = TxtQtySold.Text.Trim(),          // string in POST schema
+                proRem = TxtRemark.Text.Trim(),
+                auto = true,
+                profitAuto = true,
+                proTotQty = ParseWholeNumber(TxtCurrentStock.Text),   // API expects int
+                proMadein = TxtMadeIn.Text.Trim(),
+                proQtyPCase = ParseDecimal(TxtQtyPerCase.Text) == 0 ? 1 : ParseDecimal(TxtQtyPerCase.Text),
+                proQtyPPack = ParseDecimal(TxtQtyPerPack.Text),    // number in POST schema
+                proPckPri = ParseDecimal(TxtPackPrice.Text),       // number in POST schema
+                proPckDis = ParseDecimal(TxtPackProfit.Text),
+                proPckAllDis = 0,
+                proRecomLev = 0,
+                promotion = false,
+                formDLanded = ParseDecimal(txtFormDLanded.Text),
+                proUPriBY = 0,
+                proAllowDisW = false,
+                proAllowDisU = false,
+                proDis = ParseDecimal(TxtBuyinDiscount.Text),
+                exciseTax = ParseDouble(txtexcisetax.Text),
+                publicLightingTax = ParseDouble(txtpubliclightingtax.Text),
+                proVAT = ParseDecimal(TxtBuyinVAT.Text),
+                proFinBuyin = ParseDecimal(TxtTotalBuyin.Text),
+                proUPrSE = ParseDecimal(TxtUnitPrice.Text),
+                proProPer = ParseDecimal(TxtUnitProfit.Text),
+                proUPriSeH = ParseDecimal(TxtCasePrice.Text),
+                proHolesaleper = ParseDecimal(TxtCasePriceDiscount.Text),
+                proHoleSalePP = ParseDecimal(TxtCaseProfit.Text),
+                proRecPer = ParseDecimal(TxtSuggest.Text),
+                proSKU = TxtSKU.Text.Trim(),
+                average = ParseDecimal(TxtAveragePrice.Text),
+                birthDate = DTPBirthDate.Value,
+                averSalePmonth = 0,
+                wHcode = "",                               // string in POST schema
+                sampling = false,
+                factoryCurrency = CmbFactoryCurrency.Text.Trim(),
+                foB_CIF = CmbFOBCIF.Text.Trim(),
+                fobcifCost = ParseDecimal(TxtFactoryCost.Text),
+                shelfLifeOfProduct = shelfLifeId,          // number in POST schema
+                vop = ParseDecimal(txtvop.Text),
+                proImage = imagePath ?? "",
+                productScale = BuildProductScalePayload()
+            };
+        }
+
+        /// <summary>
+        /// Payload for PUT api/Product/{id} (update existing product).
+        /// Field names/types match the PUT Swagger schema exactly:
+        /// "proID", string proQtyPPack/proPckPri, string shelfLifeOfProduct,
+        /// numeric proSSec, string auto/profitAuto/proConsign.
+        /// </summary>
+        private object GetPutPayload(int proId, string imagePath)
+        {
+            return new
+            {
+                proID = proId,
+                proNumY = TxtUnitNumber.Text.Trim(),
+                proNumS = TxtSupplierCode.Text.Trim(),
+                proNumYP = TxtPackNumber.Text.Trim(),
+                proNumYC = TxtCaseNumber.Text.Trim(),
+
+                proImage = imagePath ?? "",
+
+                sup1 = CmbSupplier.SelectedValue?.ToString() ?? "",
+                sup2 = CmbSupplier.SelectedValue?.ToString() ?? "",
+                
+  
+
+                proName = TxtProductsName.Text.Trim(),
+                khmerNameUnicode = TxtKhmerName.Text.Trim(),
+                khmerName = TxtKhmerName.Text.Trim(),
+
+                proDes = TxtDescription.Text.Trim(),
+                proCat = CmbCategory.SelectedValue?.ToString() ?? "",
+                proPacksize = TxtSize.Text.Trim(),
+                proCurr = CmbCurrency.Text.Trim(),
+
+                proImpPri = ParseDecimal(TxtBuyin.Text),
+                proRecLev = ParseDecimal(TxtOrderLevel.Text),
+                proRecOrder = ParseDecimal(TxtOrderAmount.Text),
+                //proSSec = ParseDecimal(TxtQtySold.Text),
+
+                proRem = TxtRemark.Text.Trim(),
+
+                auto = "",
+                profitAuto = "",
+
+                proTotQty = ParseWholeNumber(TxtCurrentStock.Text),
+                proMadein = TxtMadeIn.Text.Trim(),
+
+                proQtyPCase = ParseDecimal(TxtQtyPerCase.Text) == 0 ? 1 : ParseDecimal(TxtQtyPerCase.Text),
+
+                // PUT expects string
+                proQtyPPack = TxtQtyPerPack.Text.Trim(),
+                proPckPri = TxtPackPrice.Text.Trim(),
+
+                proPckDis = ParseDecimal(TxtPackProfit.Text),
+                proPckAllDis = 0,
+                proRecomLev = 0,
+
+                promotion = 0,
+
+                formDLanded = ParseDecimal(txtFormDLanded.Text),
+                proUPriBY = 0,
+
+                proAllowDisW = 0,
+                proAllowDisU = 1,
+
+                proDis = ParseDecimal(TxtBuyinDiscount.Text),
+
+                exciseTax = ParseDouble(txtexcisetax.Text),
+                publicLightingTax = ParseDouble(txtpubliclightingtax.Text),
+                proVAT = ParseDecimal(TxtBuyinVAT.Text),
+
+                proFinBuyin = ParseDecimal(TxtTotalBuyin.Text),
+                proUPrSE = ParseDecimal(TxtUnitPrice.Text),
+                proProPer = ParseDecimal(TxtUnitProfit.Text),
+
+                proUPriSeH = ParseDecimal(TxtCasePrice.Text),
+                proHolesaleper = ParseDecimal(TxtCasePriceDiscount.Text),
+                proHoleSalePP = ParseDecimal(TxtCaseProfit.Text),
+                proRecPer = ParseDecimal(TxtSuggest.Text),
+
+                proSKU = TxtSKU.Text.Trim(),
+                average = ParseDecimal(TxtAveragePrice.Text),
+
+                birthDate = DTPBirthDate.Value,
+
+                averSalePmonth = 0,
+                wHcode = 0,
+                sampling = 0,
+
+                factoryCurrency = CmbFactoryCurrency.Text.Trim(),
+                foB_CIF = CmbFOBCIF.Text.Trim(),
+                fobcifCost = ParseDecimal(TxtFactoryCost.Text),
+
+                shelfLifeOfProduct = CmbShelfLifeOfProduct.Text.Trim(),
+
+                vop = ParseDecimal(txtvop.Text),
+
+                productScale = BuildProductScalePayload()
+            };
         }
         private bool ValidateData()
         {
             if (string.IsNullOrWhiteSpace(TxtUnitNumber.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter the unit number.",
-                    "Enter Unit Number",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter the unit number.", "Enter Unit Number",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtUnitNumber.Focus();
                 return false;
             }
@@ -1197,644 +1320,540 @@ namespace unt_bingoo.view.Product
                 CmbSupplier.SelectedValue is DataRowView ||
                 string.IsNullOrWhiteSpace(CmbSupplier.Text))
             {
-                XtraMessageBox.Show(
-                    "Please select any supplier.",
-                    "Select Supplier",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please select any supplier.", "Select Supplier",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CmbSupplier.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(TxtProductsName.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter product name.",
-                    "Enter Product Name",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter product name.", "Enter Product Name",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtProductsName.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(TxtKhmerName.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter khmer name.",
-                    "Enter Khmer Name",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter khmer name.", "Enter Khmer Name",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtKhmerName.Focus();
                 return false;
             }
 
-            if (CmbCategory.SelectedValue == null ||
-                CmbCategory.SelectedValue is DataRowView)
+            if (CmbCategory.SelectedValue == null || CmbCategory.SelectedValue is DataRowView)
             {
-                XtraMessageBox.Show(
-                    "Please select category.",
-                    "Select Category",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please select category.", "Select Category",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CmbCategory.Focus();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(TxtBuyin.Text))
-            {
-                XtraMessageBox.Show(
-                    "Please enter Buyin.",
-                    "Enter Buyin",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                TxtBuyin.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(TxtUnitPrice.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter Unit Price.",
-                    "Enter Unit Price",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter Unit Price.", "Enter Unit Price",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtUnitPrice.Focus();
                 return false;
             }
 
             if (PicProducts.Image == null)
             {
-                XtraMessageBox.Show(
-                    "Please select product image.",
-                    "Image",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please select product image.", "Image",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 PicProducts.Focus();
                 return false;
             }
 
             decimal packPrice = 0;
             decimal casePrice = 0;
-
             decimal.TryParse(TxtPackPrice.Text, out packPrice);
             decimal.TryParse(TxtCasePrice.Text, out casePrice);
 
             if (packPrice > casePrice && casePrice > 0)
             {
-                XtraMessageBox.Show(
-                    "Cannot allow Pack Price bigger than Case Price.",
-                    "Check Price",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Cannot allow Pack Price bigger than Case Price.", "Check Price",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtPackPrice.Focus();
                 return false;
             }
 
             return true;
         }
-        private ProductItem GetData()
-        {
-            return new ProductItem
-            {
-                ProID = string.IsNullOrWhiteSpace(TxtId.Text) ? 0 : Convert.ToInt32(TxtId.Text),
-                ProNumY = TxtUnitNumber.Text.Trim(),
-                Sup1 = TxtSupplierCode.Text.Trim(),
-                ProNumYP = TxtPackNumber.Text.Trim(),
-                ProNumYC = TxtCaseNumber.Text.Trim(),
 
-                Sup2 = CmbSupplier.SelectedValue?.ToString(),
-
-                ProName = TxtProductsName.Text.Trim(),
-                KhmerName = TxtKhmerName.Text.Trim(),
-                ProDes = TxtDescription.Text.Trim(),
-
-                ProCat = CmbCategory.SelectedValue?.ToString(),
-
-                ProPacksize = TxtSize.Text.Trim(),
-                ProCurr = CmbCurrency.Text.Trim(),
-
-                ProImpPri = string.IsNullOrWhiteSpace(TxtBuyin.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtBuyin.Text),
-
-                ProRecLev = string.IsNullOrWhiteSpace(TxtOrderLevel.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtOrderLevel.Text),
-
-                ProRecOrder = string.IsNullOrWhiteSpace(TxtOrderAmount.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtOrderAmount.Text),
-
-                ProMadein = TxtMadeIn.Text.Trim(),
-
-                ProQtyPCase = string.IsNullOrWhiteSpace(TxtQtyPerCase.Text)
-                    ? 1
-                    : Convert.ToDecimal(TxtQtyPerCase.Text),
-
-                ProQtyPPack = TxtQtyPerPack.Text.Trim(),
-                ProPckPri = TxtPackPrice.Text.Trim(),
-
-                ProFinBuyin = string.IsNullOrWhiteSpace(TxtTotalBuyin.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtTotalBuyin.Text),
-
-                ProUPrSE = string.IsNullOrWhiteSpace(TxtUnitPrice.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtUnitPrice.Text),
-
-                ProUPriSeH = string.IsNullOrWhiteSpace(TxtCasePrice.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtCasePrice.Text),
-
-                ProSKU = TxtSKU.Text.Trim(),
-
-                Average = string.IsNullOrWhiteSpace(TxtAveragePrice.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtAveragePrice.Text),
-
-                BirthDate = DTPBirthDate.Value,
-
-                FactoryCurrency = CmbFactoryCurrency.Text.Trim(),
-                FOB_CIF = CmbFOBCIF.Text.Trim(),
-
-                FOBCIFCost = string.IsNullOrWhiteSpace(TxtFactoryCost.Text)
-                    ? 0
-                    : Convert.ToDecimal(TxtFactoryCost.Text),
-
-                ShelfLifeOfProduct = CmbShelfLifeOfProduct.Text.Trim(),
-
-                ExciseTax = string.IsNullOrWhiteSpace(txtexcisetax.Text)
-                    ? 0
-                    : Convert.ToDouble(txtexcisetax.Text),
-
-                PublicLightingTax = string.IsNullOrWhiteSpace(txtpubliclightingtax.Text)
-                    ? 0
-                    : Convert.ToDouble(txtpubliclightingtax.Text),
-
-                VOP = string.IsNullOrWhiteSpace(txtvop.Text)
-                    ? 0
-                    : Convert.ToDecimal(txtvop.Text),
-
-                FormDLanded = string.IsNullOrWhiteSpace(txtFormDLanded.Text)
-                    ? 0
-                    : Convert.ToDecimal(txtFormDLanded.Text)
-            };
-        }
         private void LoadCurrency()
         {
+
             try
             {
-                string supplierCode = "SUP00000";
+                int? supplierId = null;
 
                 if (CmbSupplier.SelectedValue != null &&
-                    !(CmbSupplier.SelectedValue is DataRowView) &&
-                    !string.IsNullOrWhiteSpace(CmbSupplier.Text))
+                    CmbSupplier.SelectedValue != DBNull.Value &&
+                    !(CmbSupplier.SelectedValue is DataRowView))
                 {
-                    supplierCode = CmbSupplier.SelectedValue.ToString();
-                }
-
-                string query = $@"
-DECLARE @supnum_ NVARCHAR(8) = '{supplierCode}';
-
-IF NOT EXISTS
-(
-    SELECT *
-    FROM [DBJuJuBi].[dbo].[TblCurrencyjujubi]
-    WHERE [SupNum] = @supnum_
-)
-    SET @supnum_ = 'SUP00000';
-
-WITH v
-AS
-(
-    SELECT
-        CurNumber,
-        Currency,
-        COALESCE(CurNumber,'') + SPACE(3)
-        + COALESCE(Currency,'') + SPACE(3)
-        + COALESCE(CONVERT(NVARCHAR,Rate),'1') AS Display,
-        SupNum
-    FROM [DBJuJuBi].[dbo].[TblCurrencyjujubi]
-    WHERE COALESCE(SupNum,'') = @supnum_
-       OR @supnum_ = 'SUP00000'
-
-    UNION ALL
-
-    SELECT
-        LEFT(ProCurr,8) AS CurNumber,
-        RTRIM(LTRIM(SUBSTRING(ProCurr,9,7))) AS Currency,
-        ProCurr AS Display,
-        LEFT(Sup1,8) AS SupNum
-    FROM [DBJuJuBi].[dbo].[TPRProducts]
-)
-SELECT DISTINCT
-       CurNumber,
-       Currency,
-       Display
-FROM v
-ORDER BY Currency";
-
-                DataTable dt = new DataTable();
-
-                using (SqlConnection conn =
-                       new SqlConnection(
-                           Data.ConnectionString(
-                               Initialized.GetConnectionType(Data, App))))
-                {
-                    conn.Open();
-
-                    using (SqlCommand cmd =
-                           new SqlCommand(query, conn))
+                    if (int.TryParse(CmbSupplier.SelectedValue.ToString(), out int supId))
                     {
-                        SqlDataAdapter da =
-                            new SqlDataAdapter(cmd);
-
-                        da.Fill(dt);
+                        supplierId = supId;
                     }
                 }
+
+                // Load Currency
+                DataTable dt = _lookupRepo.GetCurrencies(supplierId);
 
                 CmbCurrency.DataSource = dt;
                 CmbCurrency.DisplayMember = "Display";
                 CmbCurrency.ValueMember = "CurNumber";
 
+                // Load Factory Currency
                 CmbFactoryCurrency.DataSource = dt.Copy();
                 CmbFactoryCurrency.DisplayMember = "Display";
                 CmbFactoryCurrency.ValueMember = "CurNumber";
+
+
+                DataRow usdRow = dt.AsEnumerable()
+                                   .FirstOrDefault(r =>
+                                       r["Currency"].ToString()
+                                        .Equals("USD", StringComparison.OrdinalIgnoreCase));
+
+                if (usdRow != null)
+                {
+                    CmbCurrency.SelectedValue = usdRow["CurNumber"];
+                    CmbFactoryCurrency.SelectedValue = usdRow["CurNumber"];
+                }
+                else
+                {
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        CmbCurrency.SelectedIndex = 0;
+                        CmbFactoryCurrency.SelectedIndex = 0;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
+                MessageBox.Show(ex.Message,
                     "Currency Load Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+
         }
 
         private void TimerCurrencyLoading_Tick_1(object sender, EventArgs e)
         {
+            this.TimerCurrencyLoading.Enabled = false;
             this.LoadCurrency();
-
         }
 
         private void CmbCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-       
-
-
-            //var row = DataBindingSource.Current as DataRowView;
-
-            //double proImpPri = 0;
-
-            //if (row != null)
-            //{
-            //    double.TryParse(
-            //        Convert.ToString(row["ProImpPri"]),
-            //        out proImpPri);
-            //}
-
-            //if (CmbCurrency.Text.Contains("KHR") ||
-            //    CmbCurrency.Text.Contains("KHM") ||
-            //    CmbCurrency.Text.Contains("RIL"))
-            //{
-            //    TxtBuyin.Text = string.Format("{0:N0}", proImpPri);
-            //}
-            //else
-            //{
-            //    TxtBuyin.Text = string.Format("{0:N4}", proImpPri);
-            //}
-
             CalculatedTotalBuyin();
         }
+
+        private static double ParseCurrencyRate(string currencyText)
+        {
+            if (string.IsNullOrWhiteSpace(currencyText) || currencyText.Length < 16)
+                return 1;
+
+            return double.TryParse(currencyText.Substring(15).Trim(), out double r) && r != 0 ? r : 1;
+        }
+
         private void CalculatedTotalBuyin()
         {
-            double buyin = string.IsNullOrWhiteSpace(TxtBuyin.Text)
-                ? 0
-                : Convert.ToDouble(TxtBuyin.Text);
+            double buyin = ParseDouble(TxtBuyin.Text);
+            double discount = ParseDouble(TxtBuyinDiscount.Text);
+            double vat = ParseDouble(TxtBuyinVAT.Text);
+            double excise = ParseDouble(txtexcisetax.Text);
+            double publicLight = ParseDouble(txtpubliclightingtax.Text);
+            double rate = ParseCurrencyRate(CmbCurrency.Text);
 
-            float dis = string.IsNullOrWhiteSpace(TxtBuyinDiscount.Text)
-                ? 0
-                : Convert.ToSingle(TxtBuyinDiscount.Text);
+            double totalBuyin = ProductPricingCalculator.TotalBuyin(
+                buyin, discount, vat, excise, publicLight, rate);
 
-            float vat = string.IsNullOrWhiteSpace(TxtBuyinVAT.Text)
-                ? 0
-                : Convert.ToSingle(TxtBuyinVAT.Text);
-
-            double exciseTax =
-                (100 + (string.IsNullOrWhiteSpace(txtexcisetax.Text)
-                ? 0
-                : Convert.ToDouble(txtexcisetax.Text))) / 100;
-
-            double publicLightTax =
-                (100 + (string.IsNullOrWhiteSpace(txtpubliclightingtax.Text)
-                ? 0
-                : Convert.ToDouble(txtpubliclightingtax.Text))) / 100;
-
-            string currency;
-
-            if (string.IsNullOrWhiteSpace(CmbCurrency.Text))
-            {
-                currency = "CUR00001   USD   1";
-            }
-            else
-            {
-                if (CmbCurrency.SelectedValue == null ||
-                    CmbCurrency.SelectedValue is DataRowView)
-                {
-                    currency = "CUR00001   USD   1";
-                }
-                else
-                {
-                    currency = CmbCurrency.Text.Trim();
-                }
-            }
-
-            float rate = 1;
-
-            try
-            {
-                rate = Convert.ToSingle(
-                    currency.Substring(15).Trim());
-            }
-            catch
-            {
-                rate = 1;
-            }
-
-            dis = (100 - dis) / 100;
-
-            vat = (vat / 100) + 1;
-
-            double totalBuyin =
-                ((buyin / rate) * dis)
-                * exciseTax
-                * publicLightTax
-                * vat;
-
-            TxtTotalBuyin.Text =
-                string.Format("{0:N4}", totalBuyin);
+            TxtTotalBuyin.Text = string.Format("{0:N4}", totalBuyin);
         }
 
         private async void TimerUOMLoading_Tick(object sender, EventArgs e)
         {
-
             this.Cursor = Cursors.WaitCursor;
-
             TimerUOMLoading.Enabled = false;
 
             try
             {
-                var data =
-                    await _api.GetAsync<List<ProductScal>>(
-                        "api/ProductScale");
-
-                CmbUOM.DataSource = data;
-
-
-                CmbUOM.DisplayMember = "UOM";
-
-
-                CmbUOM.ValueMember = "UOM";
+                var data = await _api.GetAsync<List<ProductScal>>("api/ProductScale");
 
                 if (DataBindingSource.DataSource != null &&
                     DataBindingSource.Current is ProductItem product)
                 {
-                    CmbCategory.SelectedValue = product.ProCat;
+                    //CmbCategory.SelectedValue = product.categoryId;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 Cursor = Cursors.Default;
             }
-
-
         }
 
         private async void disDimensionLoading_Tick(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-
             disDimensionLoading.Enabled = false;
-
-            try
-            {
-                var data =
-                    await _api.GetAsync<List<ProductScal>>(
-                        "api/ProductScale");
-
-                gcMain.DataSource = data;
-                gcMain.Refresh();
-                gvMain.IndicatorWidth = 50;
-
-                this.Cursor = Cursors.Default;
-
-                if (DataBindingSource.DataSource != null &&
-                    DataBindingSource.Current is ProductItem product)
-                {
-                    CmbCategory.SelectedValue = product.ProCat;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
-
         }
 
-        private async void btnAddDimension_Click(object sender, EventArgs e)
+        private void btnAddDimension_Click(object sender, EventArgs e)
         {
-
-        if (string.IsNullOrWhiteSpace(TxtCTNPerPallet.Text))
-            {
-                XtraMessageBox.Show(
-                    "Please enter CTN/Pallet.",
-                    "Enter CTN/Pallet",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                TxtCTNPerPallet.Focus();
-                return;
-            }
-
             if (string.IsNullOrWhiteSpace(CmbUOM.Text))
             {
-                XtraMessageBox.Show(
-                    "Please select/enter UOM.",
-                    "Select/Enter UOM",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please select/enter UOM.", "Select/Enter UOM",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CmbUOM.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(TxtWidth.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter Width.",
-                    "Enter Width",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter Width.", "Enter Width",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtWidth.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(TxtLength.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter Length.",
-                    "Enter Length",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter Length.", "Enter Length",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtLength.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(TxtHeight.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter Height.",
-                    "Enter Height",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter Height.", "Enter Height",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtHeight.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(TxtNetWeight.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter Net Weight.",
-                    "Enter Net Weight",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter Net Weight.", "Enter Net Weight",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtNetWeight.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(TxtGrossWeight.Text))
             {
-                XtraMessageBox.Show(
-                    "Please enter Gross Weight.",
-                    "Enter Gross Weight",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("Please enter Gross Weight.", "Enter Gross Weight",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtGrossWeight.Focus();
                 return;
             }
 
-            if(TxtId.Text == "")
+            if (string.IsNullOrWhiteSpace(TxtUnitNumber.Text))
             {
+                XtraMessageBox.Show("Please enter UnitNumber.", "Enter UnitNumber",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TxtUnitNumber.Focus();
                 return;
             }
+
             try
             {
-                var dto = new CreateProductScaleDto
+                if (CmbUOM.SelectedValue == null)
                 {
-                    ProId = string.IsNullOrWhiteSpace(TxtId.Text)
-                        ? 0
-                        : Convert.ToDecimal(TxtId.Text),
+                    XtraMessageBox.Show("Please select UOM.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                    CTNPerPallet = string.IsNullOrWhiteSpace(TxtCTNPerPallet.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtCTNPerPallet.Text),
-
-                    UOM = CmbUOM.Text.Trim(),
-
-                    Width = string.IsNullOrWhiteSpace(TxtWidth.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtWidth.Text),
-
-                    Length = string.IsNullOrWhiteSpace(TxtLength.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtLength.Text),
-
-                    Height = string.IsNullOrWhiteSpace(TxtHeight.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtHeight.Text),
-
-                    CBMPerCTN = string.IsNullOrWhiteSpace(TxtCBMPerCTN.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtCBMPerCTN.Text),
-
-                    NetWeight = string.IsNullOrWhiteSpace(TxtNetWeight.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtNetWeight.Text),
-
-                    GrossWeight = string.IsNullOrWhiteSpace(TxtGrossWeight.Text)
-                        ? 0
-                        : Convert.ToDouble(TxtGrossWeight.Text),
-
-                    Status = true
+                var dto = new ProductScal
+                {
+                    ProId = string.IsNullOrWhiteSpace(TxtId.Text) ? 0 : Convert.ToDecimal(TxtId.Text),
+                    UOMCode = CmbUOM.SelectedValue.ToString(),
+                    Width = ParseDouble(TxtWidth.Text),
+                    Length = ParseDouble(TxtLength.Text),
+                    Height = ParseDouble(TxtHeight.Text),
+                    CBMPerCTN = ParseDouble(TxtCBMPerCTN.Text),
+                    NetWeight = ParseDouble(TxtNetWeight.Text),
+                    GrossWeight = ParseDouble(TxtGrossWeight.Text),
+                    Status = true,
+                    ProNumY = TxtUnitNumber.Text.Trim(),
+                    UOMName = CmbUOM.Text.Trim()
                 };
 
-                await _api.PostAsync<object>(
-                    "api/ProductScale",
-                    dto);
+                _scaleList.Add(dto);
 
-                XtraMessageBox.Show(
-                    "Saved successfully.",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                if (!ReferenceEquals(gcScale.DataSource, _scaleList))
+                    gcScale.DataSource = _scaleList;
 
-                disDimensionLoading.Enabled = true;
+                gvScale.RefreshData();
+
+                XtraMessageBox.Show("Added to the list. Click Update to save the product.", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private BindingList<ProductScal> _scaleList = new BindingList<ProductScal>();
+
         private void PicProducts_Click(object sender, EventArgs e)
         {
-
         }
 
         private void TxtWidth_TextChanged(object sender, EventArgs e)
         {
-            
-                float W = (string.IsNullOrWhiteSpace(TxtWidth.Text) ? 0 : Convert.ToSingle(TxtWidth.Text)) / 100;
-                float L = (string.IsNullOrWhiteSpace(TxtLength.Text) ? 0 : Convert.ToSingle(TxtLength.Text)) / 100;
-                float H = (string.IsNullOrWhiteSpace(TxtHeight.Text) ? 0 : Convert.ToSingle(TxtHeight.Text)) / 100;
+            CalculateCBM();
+        }
 
-                float M3 = W * L * H;
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
 
-                TxtCBMPerCTN.Text = M3.ToString("N2");
-            
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ShelfLife gui = new ShelfLife();
+            gui.ShowDialog();
+            this.shelife();
+        }
+
+        public void shelife()
+        {
+            try
+            {
+                DataTable dt = _lookupRepo.GetAllShelfLife();
+
+                CmbShelfLifeOfProduct.DataSource = dt;
+                CmbShelfLifeOfProduct.DisplayMember = "ShelfLifeText";
+                CmbShelfLifeOfProduct.ValueMember = "ShelfLifeId";
+                CmbShelfLifeOfProduct.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TxtWidth_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private static void OnlyDecimalKeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                e.Handled = true;
+
+            if (e.KeyChar == '.' && txt != null && txt.Text.Contains("."))
+                e.Handled = true;
+        }
+
+        private void TxtLength_KeyPress(object sender, KeyPressEventArgs e) => OnlyDecimalKeyPress(sender, e);
+        private void TxtHeight_KeyPress(object sender, KeyPressEventArgs e) => OnlyDecimalKeyPress(sender, e);
+        private void TxtCBMPerCTN_KeyPress(object sender, KeyPressEventArgs e) => OnlyDecimalKeyPress(sender, e);
+        private void TxtNetWeight_KeyPress(object sender, KeyPressEventArgs e) => OnlyDecimalKeyPress(sender, e);
+        private void TxtGrossWeight_KeyPress(object sender, KeyPressEventArgs e) => OnlyDecimalKeyPress(sender, e);
+        private void TxtWidth_KeyPress_1(object sender, KeyPressEventArgs e) => OnlyDecimalKeyPress(sender, e);
+
+        private void ShelfLifeOfProductLoading_Tick(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            guiUOM gui = new guiUOM();
+            gui.ShowDialog();
+            this.LodingUOM();
+        }
+
+        public void LodingUOM()
+        {
+            try
+            {
+                DataTable dt = _lookupRepo.GetActiveUom();
+
+                List<UOMClas> list = dt.AsEnumerable()
+                    .Select(r => new UOMClas
+                    {
+                        UOMId = Convert.ToInt32(r["UOMId"]),
+                        UOMCode = r["UOMCode"].ToString(),
+                        UOMName = r["UOMName"].ToString()
+                    })
+                    .ToList();
+
+                CmbUOM.DataSource = list;
+                CmbUOM.DisplayMember = "UOMName";
+                CmbUOM.ValueMember = "UOMCode";
+                CmbUOM.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading UOM: " + ex.Message);
+            }
+        }
+
+        private void CalculateCBM()
+        {
+            float.TryParse(TxtWidth.Text.Trim(), out float w);
+            float.TryParse(TxtLength.Text.Trim(), out float l);
+            float.TryParse(TxtHeight.Text.Trim(), out float h);
+
+            double m3 = ProductPricingCalculator.CbmPerCtn(w, l, h);
+            TxtCBMPerCTN.Text = m3.ToString("0.######");
+        }
+
+        private void TxtHeight_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCBM();
+        }
+
+        private void btnDeleteItem_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+        }
+
+        private void PicProducts_DoubleClick(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Title = "Select Product Image";
+                dlg.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
+
+                if (dlg.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    byte[] bytes = File.ReadAllBytes(dlg.FileName);
+
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    using (Image temp = Image.FromStream(ms))
+                    {
+                        PicProducts.Image?.Dispose();
+                        PicProducts.Image = new Bitmap(temp);
+                    }
+
+                    _productImageBytes = bytes;
+                    _productImageFileName = Path.GetFileName(dlg.FileName);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show("Could not load image: " + ex.Message,
+                        "Image", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void TxtBuyin_TextChanged(object sender, EventArgs e)
+        {
+            CalculatedTotalBuyin();
+        }
+
+        private void TxtBuyin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Float, "", 25);
+        }
+
+        private void TxtBuyin_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            double vAvg = string.IsNullOrEmpty(TxtAveragePrice.Text.Trim()) ? 0 : Convert.ToDouble(TxtAveragePrice.Text.Trim());
+            double vBuyin = string.IsNullOrEmpty(TxtBuyin.Text.Trim()) ? 0 : Convert.ToDouble(TxtBuyin.Text.Trim());
+            decimal vQtyPCase = string.IsNullOrEmpty(TxtQtyPerCase.Text.Trim()) ? 1 : Convert.ToDecimal(TxtQtyPerCase.Text.Trim());
+            bool vDefaultBuyinFocus = sender == TxtBuyin;
+
+            FrmProductsBuyinNQtyPCase vFrm = new FrmProductsBuyinNQtyPCase
+            {
+                vBuyin = vBuyin,
+                vQtyPerCase = vQtyPCase,
+                vDefaultBuyinFocus = vDefaultBuyinFocus
+            };
+
+            if (vFrm.ShowDialog(this) == DialogResult.Cancel)
+                return;
+
+            if (vQtyPCase != vFrm.vQtyPerCase)
+            {
+                if (vBuyin == vFrm.vBuyin)
+                {
+                    DevExpress.XtraEditors.XtraMessageBox.Show(
+                        "Please check buyin again." + Environment.NewLine +
+                        "The Qty/Case have been changed from '" + vQtyPCase + "' to '" + vFrm.vQtyPerCase + "'.",
+                        "Invalid Change", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                double vTotalAvg = (double)((decimal)vAvg / vQtyPCase * vFrm.vQtyPerCase);
+                TxtAveragePrice.Text = vTotalAvg.ToString("N2");
+            }
+
+            TxtBuyin.Text = vFrm.vBuyin.ToString();
+            TxtQtyPerCase.Text = vFrm.vQtyPerCase.ToString();
+        }
+
+        private void TxtUnitNumber_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private async Task ReloadCurrentProduct()
+        {
+            if (!(DataBindingSource.Current is ProductItem current))
+                return;
+
+            var product = await _api.GetAsync<ProductItem>($"api/Product/{current.ProID}");
+
+            if (product == null)
+                return;
+
+            int index = DataBindingSource.Position;
+
+            RProductList[index] = product;
+
+            DataBindingSource.ResetBindings(false);
+            DataBindingSource.Position = index;
+        }
+
+        private void TxtTotalBuyin_TextChanged(object sender, EventArgs e)
+        {
+            double average = string.IsNullOrWhiteSpace(TxtAveragePrice.Text)
+                ? 0
+                : Convert.ToDouble(TxtAveragePrice.Text.Trim());
+
+            double totalBuyin = string.IsNullOrWhiteSpace(TxtTotalBuyin.Text)
+                ? 0
+                : Convert.ToDouble(TxtTotalBuyin.Text.Trim());
+
+            if (!BtnAddNew.Enabled)
+            {
+                TxtAveragePrice.Text = totalBuyin.ToString("N4");
+            }
+
+            int qtySold = string.IsNullOrWhiteSpace(TxtQtySold.Text)
+                ? 0
+                : Convert.ToInt32(TxtQtySold.Text.Trim());
+
+            if (qtySold == 0)
+            {
+                TxtAveragePrice.Text = totalBuyin.ToString("N4");
+            }
+
+            CheckProfitBuyin();
         }
     }
 }

@@ -45,14 +45,14 @@
             this.progressBar.Name = "progressBar";
             this.progressBar.Properties.MarqueeAnimationSpeed = 30;
             this.progressBar.Properties.ProgressAnimationMode = DevExpress.Utils.Drawing.ProgressAnimationMode.Cycle;
-            this.progressBar.Size = new System.Drawing.Size(272, 2);
+            this.progressBar.Size = new System.Drawing.Size(252, 0);
             this.progressBar.TabIndex = 0;
             // 
             // gui_loading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 42);
+            this.ClientSize = new System.Drawing.Size(252, 22);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblLoading);

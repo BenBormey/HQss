@@ -40,8 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.cboCurrency = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,17 +50,18 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.txtRemark = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.Panel14 = new System.Windows.Forms.Panel();
-            this.lblCountRow = new System.Windows.Forms.Label();
-            this.BtnExportToExcel = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.BtnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.BtnExportToExcel = new System.Windows.Forms.Button();
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.Panel6 = new System.Windows.Forms.Panel();
-            this.Label1 = new System.Windows.Forms.Label();
-            this.PicLogo = new System.Windows.Forms.PictureBox();
+            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
+            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
             this.Panel4 = new System.Windows.Forms.Panel();
             this.btnRemoveTemp = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.btnUpdateTemp = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -85,10 +84,11 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nExchangRate)).BeginInit();
             this.panel8.SuspendLayout();
-            this.Panel14.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.Panel1.SuspendLayout();
-            this.Panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRemoveTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUpdateTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
@@ -245,40 +245,15 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnClear);
-            this.panel3.Controls.Add(this.btnSave);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.panel7);
             this.panel3.Controls.Add(this.panel8);
             this.panel3.Controls.Add(this.panel2);
+            this.panel3.Controls.Add(this.panel9);
             this.panel3.Location = new System.Drawing.Point(380, 21);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(436, 198);
             this.panel3.TabIndex = 167;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClear.Image = global::unt_bingoo.Properties.Resources.Cancel16;
-            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClear.Location = new System.Drawing.Point(253, 160);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(85, 38);
-            this.btnClear.TabIndex = 171;
-            this.btnClear.Text = "&Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Image = global::unt_bingoo.Properties.Resources.Add_New_Bank_Book;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(338, 160);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 38);
-            this.btnSave.TabIndex = 170;
-            this.btnSave.Text = "&Add";
-            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -384,48 +359,34 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Remark : ";
             // 
-            // Panel14
+            // panel9
             // 
-            this.Panel14.BackColor = System.Drawing.Color.Transparent;
-            this.Panel14.Controls.Add(this.lblCountRow);
-            this.Panel14.Controls.Add(this.BtnExportToExcel);
-            this.Panel14.Controls.Add(this.BtnClose);
-            this.Panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Panel14.Location = new System.Drawing.Point(0, 584);
-            this.Panel14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Panel14.Name = "Panel14";
-            this.Panel14.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel14.Size = new System.Drawing.Size(1113, 36);
-            this.Panel14.TabIndex = 152;
+            this.panel9.Controls.Add(this.panel10);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(436, 198);
+            this.panel9.TabIndex = 1003;
             // 
-            // lblCountRow
+            // panel10
             // 
-            this.lblCountRow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblCountRow.AutoSize = true;
-            this.lblCountRow.ForeColor = System.Drawing.Color.Black;
-            this.lblCountRow.Location = new System.Drawing.Point(4, 12);
-            this.lblCountRow.Name = "lblCountRow";
-            this.lblCountRow.Size = new System.Drawing.Size(75, 13);
-            this.lblCountRow.TabIndex = 131;
-            this.lblCountRow.Text = "Count Row : 0";
-            this.lblCountRow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.panel10.Controls.Add(this.panel11);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel10.Location = new System.Drawing.Point(0, 161);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(436, 37);
+            this.panel10.TabIndex = 0;
             // 
-            // BtnExportToExcel
+            // panel11
             // 
-            this.BtnExportToExcel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnExportToExcel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BtnExportToExcel.Font = new System.Drawing.Font("Yu Gothic UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnExportToExcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BtnExportToExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnExportToExcel.Location = new System.Drawing.Point(830, 2);
-            this.BtnExportToExcel.Name = "BtnExportToExcel";
-            this.BtnExportToExcel.Padding = new System.Windows.Forms.Padding(2);
-            this.BtnExportToExcel.Size = new System.Drawing.Size(181, 32);
-            this.BtnExportToExcel.TabIndex = 130;
-            this.BtnExportToExcel.Text = "&Export To Excel";
-            this.BtnExportToExcel.UseVisualStyleBackColor = true;
-            this.BtnExportToExcel.Click += new System.EventHandler(this.BtnExportToExcel_Click);
+            this.panel11.Controls.Add(this.BtnClose);
+            this.panel11.Controls.Add(this.btnSave);
+            this.panel11.Controls.Add(this.BtnExportToExcel);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel11.Location = new System.Drawing.Point(88, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(348, 37);
+            this.panel11.TabIndex = 0;
             // 
             // BtnClose
             // 
@@ -434,14 +395,43 @@
             this.BtnClose.Font = new System.Drawing.Font("Yu Gothic UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BtnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnClose.Location = new System.Drawing.Point(1011, 2);
+            this.BtnClose.Location = new System.Drawing.Point(230, 0);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Padding = new System.Windows.Forms.Padding(2);
-            this.BtnClose.Size = new System.Drawing.Size(100, 32);
-            this.BtnClose.TabIndex = 129;
+            this.BtnClose.Size = new System.Drawing.Size(118, 37);
+            this.BtnClose.TabIndex = 1001;
             this.BtnClose.Text = "&Close";
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSave.Image = global::unt_bingoo.Properties.Resources.Add_New_Bank_Book;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(0, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(104, 37);
+            this.btnSave.TabIndex = 1000;
+            this.btnSave.Text = "&Add";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // BtnExportToExcel
+            // 
+            this.BtnExportToExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnExportToExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnExportToExcel.Font = new System.Drawing.Font("Yu Gothic UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnExportToExcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnExportToExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnExportToExcel.Location = new System.Drawing.Point(0, 0);
+            this.BtnExportToExcel.Name = "BtnExportToExcel";
+            this.BtnExportToExcel.Padding = new System.Windows.Forms.Padding(2);
+            this.BtnExportToExcel.Size = new System.Drawing.Size(348, 37);
+            this.BtnExportToExcel.TabIndex = 1002;
+            this.BtnExportToExcel.Text = "&Export To Excel";
+            this.BtnExportToExcel.UseVisualStyleBackColor = true;
+            this.BtnExportToExcel.Click += new System.EventHandler(this.BtnExportToExcel_Click);
             // 
             // gridColumn22
             // 
@@ -471,8 +461,8 @@
             // Panel1
             // 
             this.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.Panel1.Controls.Add(this.Panel6);
-            this.Panel1.Controls.Add(this.PicLogo);
+            this.Panel1.Controls.Add(this.lblSystemName);
+            this.Panel1.Controls.Add(this.PicSectionIcon);
             this.Panel1.Controls.Add(this.Panel4);
             this.Panel1.Controls.Add(this.txtDate);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -482,49 +472,39 @@
             this.Panel1.Size = new System.Drawing.Size(1113, 79);
             this.Panel1.TabIndex = 150;
             // 
-            // Panel6
+            // lblSystemName
             // 
-            this.Panel6.Controls.Add(this.Label1);
-            this.Panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel6.Location = new System.Drawing.Point(71, 0);
-            this.Panel6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Panel6.Name = "Panel6";
-            this.Panel6.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Panel6.Size = new System.Drawing.Size(299, 76);
-            this.Panel6.TabIndex = 120;
+            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSystemName.Appearance.Options.UseFont = true;
+            this.lblSystemName.Appearance.Options.UseForeColor = true;
+            this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblSystemName.Location = new System.Drawing.Point(98, 34);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
+            this.lblSystemName.TabIndex = 184;
+            this.lblSystemName.Text = "JuJuBi Management System";
             // 
-            // Label1
+            // PicSectionIcon
             // 
-            this.Label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Label1.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.ForeColor = System.Drawing.Color.Teal;
-            this.Label1.Location = new System.Drawing.Point(2, 3);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(295, 45);
-            this.Label1.TabIndex = 0;
-            this.Label1.Text = "Q\'s MANAGEMENT SYSTEM";
-            this.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // PicLogo
-            // 
-            this.PicLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PicLogo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PicLogo.Location = new System.Drawing.Point(0, 0);
-            this.PicLogo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.PicLogo.Name = "PicLogo";
-            this.PicLogo.Size = new System.Drawing.Size(71, 76);
-            this.PicLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PicLogo.TabIndex = 3;
-            this.PicLogo.TabStop = false;
+            this.PicSectionIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.PicSectionIcon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
+            this.PicSectionIcon.Location = new System.Drawing.Point(0, 0);
+            this.PicSectionIcon.Name = "PicSectionIcon";
+            this.PicSectionIcon.Size = new System.Drawing.Size(98, 60);
+            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicSectionIcon.TabIndex = 183;
+            this.PicSectionIcon.TabStop = false;
             // 
             // Panel4
             // 
             this.Panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Panel4.Location = new System.Drawing.Point(0, 76);
+            this.Panel4.Location = new System.Drawing.Point(0, 60);
             this.Panel4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Panel4.Name = "Panel4";
-            this.Panel4.Size = new System.Drawing.Size(1113, 3);
+            this.Panel4.Size = new System.Drawing.Size(1113, 19);
             this.Panel4.TabIndex = 7;
             // 
             // btnRemoveTemp
@@ -596,7 +576,7 @@
             // 
             // gridColumn16
             // 
-            this.gridColumn16.Caption = "createdDate";
+            this.gridColumn16.Caption = "Created Date";
             this.gridColumn16.DisplayFormat.FormatString = "dd-MM-yyyy hh:mm tt";
             this.gridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn16.FieldName = "createdDate";
@@ -616,7 +596,7 @@
             // 
             // rateDate
             // 
-            this.rateDate.Caption = "rateDate ";
+            this.rateDate.Caption = "Rate Date";
             this.rateDate.DisplayFormat.FormatString = "dd-MM-yyyy";
             this.rateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.rateDate.FieldName = "rateDate";
@@ -628,7 +608,7 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "rate ";
+            this.gridColumn7.Caption = "Rate";
             this.gridColumn7.DisplayFormat.FormatString = "N2";
             this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn7.FieldName = "rate";
@@ -650,7 +630,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "note ";
+            this.gridColumn2.Caption = "Note ";
             this.gridColumn2.FieldName = "note";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
@@ -682,12 +662,11 @@
             // 
             this.ClientSize = new System.Drawing.Size(1113, 620);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Panel14);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.gridControl1);
             this.Name = "guiExchange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Exchange Rate Management";
+            this.Text = "EXCHANGE RATE MANAGEMENT";
             this.Load += new System.EventHandler(this.guiExchange_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -702,12 +681,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nExchangRate)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.Panel14.ResumeLayout(false);
-            this.Panel14.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
-            this.Panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PicLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRemoveTemp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUpdateTemp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
@@ -731,17 +710,10 @@
         private System.Windows.Forms.TextBox txtAsk;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
-        internal System.Windows.Forms.Panel Panel14;
-        internal System.Windows.Forms.Label lblCountRow;
-        internal System.Windows.Forms.Button BtnExportToExcel;
-        internal System.Windows.Forms.Button BtnClose;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         internal System.Windows.Forms.Panel Panel1;
-        internal System.Windows.Forms.Panel Panel6;
-        internal System.Windows.Forms.Label Label1;
-        internal System.Windows.Forms.PictureBox PicLogo;
         internal System.Windows.Forms.Panel Panel4;
         internal DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnRemoveTemp;
         internal DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnUpdateTemp;
@@ -768,7 +740,13 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.TextBox txtRemark;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSave;
+        internal System.Windows.Forms.Button BtnExportToExcel;
+        internal System.Windows.Forms.Button BtnClose;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private DevExpress.XtraEditors.LabelControl lblSystemName;
+        private System.Windows.Forms.PictureBox PicSectionIcon;
     }
 }

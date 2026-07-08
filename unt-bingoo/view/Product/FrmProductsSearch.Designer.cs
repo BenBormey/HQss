@@ -29,7 +29,6 @@ namespace unt_bingoo.view.Product
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProductsSearch));
             this.rdbstockconsignment = new System.Windows.Forms.RadioButton();
             this.BtnClose = new System.Windows.Forms.Button();
             this.BtnAddNew = new System.Windows.Forms.Button();
@@ -45,15 +44,15 @@ namespace unt_bingoo.view.Product
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.Panel4 = new System.Windows.Forms.Panel();
             this.LblCompanyName = new System.Windows.Forms.Label();
-            this.Label1 = new System.Windows.Forms.Label();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.PicLogo = new System.Windows.Forms.PictureBox();
+            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
+            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.GroupControl1)).BeginInit();
             this.GroupControl1.SuspendLayout();
             this.Panel21.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             this.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // rdbstockconsignment
@@ -86,6 +85,7 @@ namespace unt_bingoo.view.Product
             this.BtnClose.TabIndex = 126;
             this.BtnClose.Text = "&Close";
             this.BtnClose.UseVisualStyleBackColor = false;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // BtnAddNew
             // 
@@ -191,6 +191,7 @@ namespace unt_bingoo.view.Product
             this.TxtSearch.Name = "TxtSearch";
             this.TxtSearch.Size = new System.Drawing.Size(330, 30);
             this.TxtSearch.TabIndex = 2;
+            this.TxtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtSearch_KeyPress);
             // 
             // RdbItemcodes
             // 
@@ -257,7 +258,7 @@ namespace unt_bingoo.view.Product
             this.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Panel4.Location = new System.Drawing.Point(0, 101);
             this.Panel4.Name = "Panel4";
-            this.Panel4.Size = new System.Drawing.Size(404, 2);
+            this.Panel4.Size = new System.Drawing.Size(452, 2);
             this.Panel4.TabIndex = 7;
             // 
             // LblCompanyName
@@ -270,51 +271,52 @@ namespace unt_bingoo.view.Product
             this.LblCompanyName.TabIndex = 6;
             this.LblCompanyName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.Label1.Location = new System.Drawing.Point(100, 19);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(276, 23);
-            this.Label1.TabIndex = 0;
-            this.Label1.Text = "Q\'s MANAGEMENT SYSTEM";
-            // 
             // Panel1
             // 
             this.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.Panel1.Controls.Add(this.PicLogo);
+            this.Panel1.Controls.Add(this.lblSystemName);
+            this.Panel1.Controls.Add(this.PicSectionIcon);
             this.Panel1.Controls.Add(this.Panel4);
             this.Panel1.Controls.Add(this.LblCompanyName);
-            this.Panel1.Controls.Add(this.Label1);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel1.Location = new System.Drawing.Point(0, 0);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(404, 103);
+            this.Panel1.Size = new System.Drawing.Size(452, 103);
             this.Panel1.TabIndex = 109;
             // 
-            // PicLogo
+            // lblSystemName
             // 
-            this.PicLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PicLogo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PicLogo.Image = ((System.Drawing.Image)(resources.GetObject("PicLogo.Image")));
-            this.PicLogo.Location = new System.Drawing.Point(0, 0);
-            this.PicLogo.Name = "PicLogo";
-            this.PicLogo.Size = new System.Drawing.Size(94, 101);
-            this.PicLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PicLogo.TabIndex = 3;
-            this.PicLogo.TabStop = false;
+            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSystemName.Appearance.Options.UseFont = true;
+            this.lblSystemName.Appearance.Options.UseForeColor = true;
+            this.lblSystemName.Location = new System.Drawing.Point(110, 54);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
+            this.lblSystemName.TabIndex = 184;
+            this.lblSystemName.Text = "JuJuBi Management System";
+            // 
+            // PicSectionIcon
+            // 
+            this.PicSectionIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.PicSectionIcon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
+            this.PicSectionIcon.Location = new System.Drawing.Point(0, 0);
+            this.PicSectionIcon.Name = "PicSectionIcon";
+            this.PicSectionIcon.Size = new System.Drawing.Size(98, 101);
+            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicSectionIcon.TabIndex = 183;
+            this.PicSectionIcon.TabStop = false;
             // 
             // FrmProductsSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 400);
+            this.ClientSize = new System.Drawing.Size(452, 400);
             this.Controls.Add(this.GroupBox1);
             this.Controls.Add(this.Panel1);
             this.Name = "FrmProductsSearch";
-            this.Text = "FrmProductsSearch";
+            this.Text = "SEARCH MANAGEMENT";
             ((System.ComponentModel.ISupportInitialize)(this.GroupControl1)).EndInit();
             this.GroupControl1.ResumeLayout(false);
             this.Panel21.ResumeLayout(false);
@@ -322,7 +324,7 @@ namespace unt_bingoo.view.Product
             this.GroupBox1.ResumeLayout(false);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,10 +344,10 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Label LblDescription;
         internal System.Windows.Forms.Panel Panel21;
         internal System.Windows.Forms.GroupBox GroupBox1;
-        internal System.Windows.Forms.PictureBox PicLogo;
         internal System.Windows.Forms.Panel Panel4;
         internal System.Windows.Forms.Label LblCompanyName;
-        internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.Panel Panel1;
+        private DevExpress.XtraEditors.LabelControl lblSystemName;
+        private System.Windows.Forms.PictureBox PicSectionIcon;
     }
 }

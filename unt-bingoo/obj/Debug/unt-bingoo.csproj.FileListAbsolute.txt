@@ -3,6 +3,8 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe.manifest
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.application
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.pdb
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.Parser.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Charts.v19.1.Core.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Data.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.DataAccess.v19.1.dll
@@ -25,12 +27,18 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraLayout.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraPrinting.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraReports.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraReports.v19.1.Extensions.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ExcelNumberFormat.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.HashCode.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.ReportViewer.Common.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.ReportViewer.WinForms.DLL
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.SqlServer.Types.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Newtonsoft.Json.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\RBush.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\SixLabors.Fonts.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Buffers.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.IO.Pipelines.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Memory.dll
@@ -41,8 +49,17 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Json.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Threading.Tasks.Extensions.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.presentation.dll
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.pdb
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.Parser.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ExcelNumberFormat.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.HashCode.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Newtonsoft.Json.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\RBush.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\SixLabors.Fonts.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Buffers.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.IO.Pipelines.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Memory.xml
@@ -53,11 +70,14 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Json.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.presentation.xml
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.Properties.Resources.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Bank.BankSetup.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.guiBranch.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.guiOutlet.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Category.guiCategory.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiCurency.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiCurencys.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiExchange.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiListExchange.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Customer.guiCustomer.resources
@@ -70,10 +90,24 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiFranchis
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiListoutLet.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutlet.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutletCode.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProducts.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBarcode.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBuyinNQtyPCase.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsCaseNumber.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsPackNumber.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsSearch.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiHourOpration.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProduct.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductStock.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Sale.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiUOM.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.cboProduct.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.ShelfLife.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.Form1.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSuppliers.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiTerm.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.XtraForm1.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiChangePassword.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUser.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUserrole.resources
@@ -85,15 +119,3 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.application
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.pdb
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.test.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.Form1.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiTerm.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.XtraForm1.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProducts.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsSearch.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBarcode.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsPackNumber.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsCaseNumber.resources

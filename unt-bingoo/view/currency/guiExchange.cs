@@ -8,7 +8,8 @@ using unt_bingoo.Controller;
 using System.Drawing;
 using System.Collections.Generic;
 using System.IO;
-
+using DevExpress.XtraEditors;
+using Excel = Microsoft.Office.Interop.Excel;
 namespace unt_bingoo.view.currency
 {
     public partial class guiExchange : Form
@@ -56,6 +57,12 @@ namespace unt_bingoo.view.currency
         {
             try
             {
+
+                if (nExchangRate.Value <= 0)
+                {
+                    XtraMessageBox.Show("Exchange Rate must be greater than 0.");
+                    return;
+                }
                 // 1. Validate currency
                 if (string.IsNullOrWhiteSpace(cboCurrency.Text))
                 {
@@ -63,7 +70,7 @@ namespace unt_bingoo.view.currency
                     return;
                 }
 
-                // 2. Validate numbers
+   
                 if (!decimal.TryParse(txtAsk.Text, out decimal ask) ||
                     !decimal.TryParse(txtBid.Text, out decimal bid) ||
                     !decimal.TryParse(txtAvg.Text, out decimal avg))
@@ -173,11 +180,11 @@ namespace unt_bingoo.view.currency
                 }
 
                 _list.Add(model);
-
+                await LoadGrid();
                 MessageBox.Show("Added successfully ✅");
 
                 ClearForm();
-                await LoadGrid();
+             
 
                 try
                 {
@@ -545,70 +552,144 @@ namespace unt_bingoo.view.currency
         {
 
         }
-        private void BtnExportToExcel_Click(object sender, EventArgs e)
+
+
+
+
+private void BtnExportToExcel_Click(object sender, EventArgs e)
+    {
+        try
         {
-            try
+            if (gridView1.RowCount <= 0)
             {
-                if (gridView1.RowCount <= 0)
-                {
-                    MessageBox.Show("No data to export.",
-                                    "Information",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                    return;
-                }
-
-                Cursor = Cursors.WaitCursor;
-
-                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-                excelApp.Visible = true;
-
-                Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Add(Type.Missing);
-                Microsoft.Office.Interop.Excel.Worksheet worksheet =
-                    (Microsoft.Office.Interop.Excel.Worksheet)workbook.ActiveSheet;
-
-                // Header
-                for (int col = 0; col < gridView1.Columns.Count; col++)
-                {
-                    worksheet.Cells[1, col + 1] =
-                        gridView1.Columns[col].Caption;
-
-                    ((Microsoft.Office.Interop.Excel.Range)worksheet.Cells[1, col + 1]).Font.Bold = true;
-                }
-
-                // Data
-                for (int row = 0; row < gridView1.RowCount; row++)
-                {
-                    for (int col = 0; col < gridView1.Columns.Count; col++)
-                    {
-                        object value =
-                            gridView1.GetRowCellValue(row, gridView1.Columns[col]);
-
-                        worksheet.Cells[row + 2, col + 1] =
-                            value?.ToString() ?? "";
-                    }
-                }
-
-                worksheet.Columns.AutoFit();
-
-                Cursor = Cursors.Default;
-
                 MessageBox.Show(
-                    "Data exported to Excel successfully.\n\nYou can choose Save or Don't Save when closing Excel.",
-                    "Success",
+                    "No data to export.",
+                    "Information",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                Cursor = Cursors.Default;
 
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                return;
             }
+
+            Cursor = Cursors.WaitCursor;
+
+            Excel.Application excelApp = new Excel.Application();
+            excelApp.Visible = true;
+
+            Excel.Workbook workbook = excelApp.Workbooks.Add(Type.Missing);
+            Excel.Worksheet worksheet =
+                (Excel.Worksheet)workbook.ActiveSheet;
+
+            int excelCol = 1;
+
+      
+            for (int col = 0; col < gridView1.Columns.Count; col++)
+            {
+                string fieldName =
+                    (gridView1.Columns[col].FieldName ?? "")
+                    .Trim()
+                    .ToLower();
+
+                if (fieldName == "rownum" ||
+                    fieldName == "createddate" ||
+                    fieldName == "note" ||
+                    string.IsNullOrWhiteSpace(fieldName))
+                {
+                    continue;
+                }
+
+                worksheet.Cells[1, excelCol] =
+                    gridView1.Columns[col].Caption;
+
+                Excel.Range headerCell =
+                    (Excel.Range)worksheet.Cells[1, excelCol];
+
+                headerCell.Font.Bold = true;
+
+                excelCol++;
+            }
+
+
+            for (int row = 0; row < gridView1.RowCount; row++)
+            {
+                excelCol = 1;
+
+                for (int col = 0; col < gridView1.Columns.Count; col++)
+                {
+                    string fieldName =
+                        (gridView1.Columns[col].FieldName ?? "")
+                        .Trim()
+                        .ToLower();
+
+                    if (fieldName == "rownum" ||
+                        fieldName == "createddate" ||
+                        fieldName == "note" ||
+                        string.IsNullOrWhiteSpace(fieldName))
+                    {
+                        continue;
+                    }
+
+                    object value =
+                        gridView1.GetRowCellValue(
+                            row,
+                            gridView1.Columns[col]);
+
+                    if (fieldName == "rate")
+                    {
+                        if (decimal.TryParse(
+                            value?.ToString(),
+                            out decimal rate))
+                        {
+                            worksheet.Cells[row + 2, excelCol] = rate;
+
+                            ((Excel.Range)worksheet.Cells[row + 2, excelCol])
+                                .NumberFormat = "#,##0.00";
+                        }
+                        else
+                        {
+                            worksheet.Cells[row + 2, excelCol] = 0;
+                        }
+                    }
+                    else if (value is DateTime dt)
+                    {
+                        worksheet.Cells[row + 2, excelCol] =
+                            dt.ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        worksheet.Cells[row + 2, excelCol] =
+                            value?.ToString() ?? "";
+                    }
+
+                    excelCol++;
+                }
+            }
+
+            worksheet.Columns.AutoFit();
+
+
+            excelApp.ActiveWindow.SplitRow = 1;
+            excelApp.ActiveWindow.FreezePanes = true;
+
+            Cursor = Cursors.Default;
+
+            MessageBox.Show(
+                "Export completed successfully.",
+                "Success",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            Cursor = Cursors.Default;
+
+            MessageBox.Show(
+                ex.Message,
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
     }
+
+}
 }

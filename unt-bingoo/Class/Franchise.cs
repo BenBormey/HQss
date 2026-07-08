@@ -14,5 +14,11 @@ namespace unt_bingoo.Class
         public string franchiseInformation { get; set; }
         public string typeName { get; set; }
         public int franchiseTypeId { get; set; }
+        public DateTime? AgreementDate { get; set; }
+
+        public DateTime? ExpirationDate { get; set; }
+
+        public DateTime? AfterDate { get; set; }
+        public bool Status { get; set; }
     }
 }

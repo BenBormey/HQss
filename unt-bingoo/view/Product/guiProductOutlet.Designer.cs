@@ -30,24 +30,10 @@ namespace unt_bingoo.view.Product
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions11 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject41 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject42 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject43 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject44 = new DevExpress.Utils.SerializableAppearanceObject();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions12 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject45 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject46 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject47 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject48 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(guiProductOutlet));
-            this.Label10 = new System.Windows.Forms.Label();
-            this.Label3 = new System.Windows.Forms.Label();
             this.TxtFactoryCost = new System.Windows.Forms.TextBox();
-            this.GridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TimerCurrencyLoading = new System.Windows.Forms.Timer(this.components);
-            this.GridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Label60 = new System.Windows.Forms.Label();
             this.TxtSuggest = new System.Windows.Forms.TextBox();
             this.TxtPackProfit = new System.Windows.Forms.TextBox();
@@ -61,10 +47,6 @@ namespace unt_bingoo.view.Product
             this.Label18 = new System.Windows.Forms.Label();
             this.btnAddDimension = new System.Windows.Forms.Button();
             this.SeparatorControl11 = new DevExpress.XtraEditors.SeparatorControl();
-            this.Panel11 = new System.Windows.Forms.Panel();
-            this.CmbShelfliferequired = new System.Windows.Forms.ComboBox();
-            this.CmbShelfLifeOfProduct = new System.Windows.Forms.ComboBox();
-            this.Label8 = new System.Windows.Forms.Label();
             this.Label39 = new System.Windows.Forms.Label();
             this.GroupInventory = new System.Windows.Forms.GroupBox();
             this.Panel21 = new System.Windows.Forms.Panel();
@@ -91,11 +73,8 @@ namespace unt_bingoo.view.Product
             this.Label19 = new System.Windows.Forms.Label();
             this.SeparatorControl8 = new DevExpress.XtraEditors.SeparatorControl();
             this.Label32 = new System.Windows.Forms.Label();
-            this.GridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnEditDimension = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.TimerCategoryLoading = new System.Windows.Forms.Timer(this.components);
             this.CmbFactoryCurrency = new System.Windows.Forms.ComboBox();
-            this.CmbSupplier = new System.Windows.Forms.ComboBox();
             this.DeliveryCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeparatorControl13 = new DevExpress.XtraEditors.SeparatorControl();
             this.Panel31 = new System.Windows.Forms.Panel();
@@ -108,15 +87,11 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl12 = new DevExpress.XtraEditors.SeparatorControl();
             this.txtpubliclightingtax = new System.Windows.Forms.TextBox();
             this.txtexcisetax = new System.Windows.Forms.TextBox();
-            this.Panel10 = new System.Windows.Forms.Panel();
-            this.TxtSupplierCode = new System.Windows.Forms.TextBox();
-            this.Label5 = new System.Windows.Forms.Label();
-            this.TxtSKU = new System.Windows.Forms.TextBox();
-            this.Label7 = new System.Windows.Forms.Label();
             this.Label51 = new System.Windows.Forms.Label();
             this.Label56 = new System.Windows.Forms.Label();
             this.BtnAddDel = new System.Windows.Forms.Button();
             this.Panel46 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.CmbUOM = new System.Windows.Forms.ComboBox();
             this.Label53 = new System.Windows.Forms.Label();
             this.SeparatorControl17 = new DevExpress.XtraEditors.SeparatorControl();
@@ -136,32 +111,12 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl5 = new DevExpress.XtraEditors.SeparatorControl();
             this.Label27 = new System.Windows.Forms.Label();
             this.Panel55 = new System.Windows.Forms.Panel();
-            this.gcMain = new DevExpress.XtraGrid.GridControl();
-            this.gvMain = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.GridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnDeleteItem = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.GridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Label40 = new System.Windows.Forms.Label();
-            this.Panel8 = new System.Windows.Forms.Panel();
-            this.TxtCaseNumber = new System.Windows.Forms.TextBox();
-            this.Label4 = new System.Windows.Forms.Label();
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.disDimensionLoading = new System.Windows.Forms.Timer(this.components);
-            this.Panel45 = new System.Windows.Forms.Panel();
             this.TxtCTNPerPallet = new System.Windows.Forms.TextBox();
-            this.Label52 = new System.Windows.Forms.Label();
             this.SeparatorControl10 = new DevExpress.XtraEditors.SeparatorControl();
             this.PicProducts = new System.Windows.Forms.PictureBox();
-            this.Label2 = new System.Windows.Forms.Label();
             this.TxtBuyinDiscount = new System.Windows.Forms.TextBox();
             this.Label43 = new System.Windows.Forms.Label();
             this.MnuMoveNextItem = new System.Windows.Forms.ToolStripButton();
@@ -171,14 +126,6 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl2 = new DevExpress.XtraEditors.SeparatorControl();
             this.Label26 = new System.Windows.Forms.Label();
             this.TxtDeliveryCost = new System.Windows.Forms.TextBox();
-            this.Panel9 = new System.Windows.Forms.Panel();
-            this.Label9 = new System.Windows.Forms.Label();
-            this.Label1 = new System.Windows.Forms.Label();
-            this.Panel13 = new System.Windows.Forms.Panel();
-            this.TxtProductsName = new System.Windows.Forms.TextBox();
-            this.Label12 = new System.Windows.Forms.Label();
-            this.TxtSize = new System.Windows.Forms.TextBox();
-            this.Label11 = new System.Windows.Forms.Label();
             this.Panel30 = new System.Windows.Forms.Panel();
             this.SeparatorControl15 = new DevExpress.XtraEditors.SeparatorControl();
             this.Label30 = new System.Windows.Forms.Label();
@@ -199,14 +146,14 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl7 = new DevExpress.XtraEditors.SeparatorControl();
             this.TxtBuyin = new System.Windows.Forms.TextBox();
             this.SeparatorControl6 = new DevExpress.XtraEditors.SeparatorControl();
-            this.TxtUnitNumber = new System.Windows.Forms.TextBox();
             this.TxtGrossWeight = new System.Windows.Forms.TextBox();
             this.Label38 = new System.Windows.Forms.Label();
             this.BtnMoveToDeactivated = new System.Windows.Forms.Button();
-            this.Label15 = new System.Windows.Forms.Label();
             this.TimerSupplierLoading = new System.Windows.Forms.Timer(this.components);
             this.Label49 = new System.Windows.Forms.Label();
             this.GroupBox6 = new System.Windows.Forms.GroupBox();
+            this.gcScale = new DevExpress.XtraGrid.GridControl();
+            this.gvScale = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Panel43 = new System.Windows.Forms.Panel();
             this.Panel56 = new System.Windows.Forms.Panel();
             this.Panel41 = new System.Windows.Forms.Panel();
@@ -252,17 +199,42 @@ namespace unt_bingoo.view.Product
             this.Panel14 = new System.Windows.Forms.Panel();
             this.TxtDescription = new System.Windows.Forms.TextBox();
             this.Label14 = new System.Windows.Forms.Label();
+            this.Panel13 = new System.Windows.Forms.Panel();
+            this.TxtProductsName = new System.Windows.Forms.TextBox();
+            this.Label12 = new System.Windows.Forms.Label();
+            this.TxtSize = new System.Windows.Forms.TextBox();
+            this.Label11 = new System.Windows.Forms.Label();
             this.Panel12 = new System.Windows.Forms.Panel();
             this.TxtKhmerName = new System.Windows.Forms.TextBox();
+            this.Label10 = new System.Windows.Forms.Label();
             this.Panel15 = new System.Windows.Forms.Panel();
             this.CmbCategory = new System.Windows.Forms.ComboBox();
+            this.Label15 = new System.Windows.Forms.Label();
             this.TxtMadeIn = new System.Windows.Forms.TextBox();
             this.Label13 = new System.Windows.Forms.Label();
+            this.Panel11 = new System.Windows.Forms.Panel();
+            this.CmbShelfLifeOfProduct = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.Label8 = new System.Windows.Forms.Label();
+            this.Panel9 = new System.Windows.Forms.Panel();
+            this.CmbSupplier = new System.Windows.Forms.ComboBox();
+            this.Label9 = new System.Windows.Forms.Label();
+            this.Panel10 = new System.Windows.Forms.Panel();
+            this.TxtSupplierCode = new System.Windows.Forms.TextBox();
+            this.Label5 = new System.Windows.Forms.Label();
+            this.TxtSKU = new System.Windows.Forms.TextBox();
+            this.Label7 = new System.Windows.Forms.Label();
             this.Panel5 = new System.Windows.Forms.Panel();
+            this.Panel8 = new System.Windows.Forms.Panel();
+            this.TxtCaseNumber = new System.Windows.Forms.TextBox();
+            this.Label4 = new System.Windows.Forms.Label();
             this.Panel7 = new System.Windows.Forms.Panel();
             this.TxtPackNumber = new System.Windows.Forms.TextBox();
+            this.Label3 = new System.Windows.Forms.Label();
             this.Panel6 = new System.Windows.Forms.Panel();
             this.PicOldCode = new System.Windows.Forms.PictureBox();
+            this.TxtUnitNumber = new System.Windows.Forms.TextBox();
+            this.Label2 = new System.Windows.Forms.Label();
             this.TxtId = new System.Windows.Forms.TextBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.Panel27 = new System.Windows.Forms.Panel();
@@ -282,7 +254,8 @@ namespace unt_bingoo.view.Product
             this.DgvDeliveryLogistic = new System.Windows.Forms.DataGridView();
             this.BtnAccept = new System.Windows.Forms.Button();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.PicLogo = new System.Windows.Forms.PictureBox();
+            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
+            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
             this.Panel4 = new System.Windows.Forms.Panel();
             this.LblCompanyName = new System.Windows.Forms.Label();
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
@@ -306,11 +279,11 @@ namespace unt_bingoo.view.Product
             this.ShelfLifeOfProductLoading = new System.Windows.Forms.Timer(this.components);
             this.City = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CityLoading = new System.Windows.Forms.Timer(this.components);
+            this.UOMCode = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl14)).BeginInit();
             this.Panel52.SuspendLayout();
             this.Panel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl11)).BeginInit();
-            this.Panel11.SuspendLayout();
             this.GroupInventory.SuspendLayout();
             this.Panel21.SuspendLayout();
             this.Panel23.SuspendLayout();
@@ -321,13 +294,11 @@ namespace unt_bingoo.view.Product
             this.Panel17.SuspendLayout();
             this.Panel20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnEditDimension)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl13)).BeginInit();
             this.Panel31.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl12)).BeginInit();
-            this.Panel10.SuspendLayout();
             this.Panel46.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl17)).BeginInit();
             this.Panel34.SuspendLayout();
@@ -336,19 +307,11 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl5)).BeginInit();
             this.Panel55.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
-            this.Panel8.SuspendLayout();
-            this.Panel45.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicProducts)).BeginInit();
             this.Panel26.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl2)).BeginInit();
-            this.Panel9.SuspendLayout();
-            this.Panel13.SuspendLayout();
             this.Panel30.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl9)).BeginInit();
@@ -361,6 +324,8 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl6)).BeginInit();
             this.GroupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvScale)).BeginInit();
             this.Panel43.SuspendLayout();
             this.Panel56.SuspendLayout();
             this.Panel41.SuspendLayout();
@@ -380,9 +345,14 @@ namespace unt_bingoo.view.Product
             this.Panel38.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             this.Panel14.SuspendLayout();
+            this.Panel13.SuspendLayout();
             this.Panel12.SuspendLayout();
             this.Panel15.SuspendLayout();
+            this.Panel11.SuspendLayout();
+            this.Panel9.SuspendLayout();
+            this.Panel10.SuspendLayout();
             this.Panel5.SuspendLayout();
+            this.Panel8.SuspendLayout();
             this.Panel7.SuspendLayout();
             this.Panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicOldCode)).BeginInit();
@@ -392,7 +362,7 @@ namespace unt_bingoo.view.Product
             this.Panel33.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDeliveryLogistic)).BeginInit();
             this.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             this.GroupBox3.SuspendLayout();
             this.Panel22.SuspendLayout();
             this.GroupEvent2.SuspendLayout();
@@ -404,29 +374,6 @@ namespace unt_bingoo.view.Product
             this.Panel32.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Label10
-            // 
-            this.Label10.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label10.ForeColor = System.Drawing.Color.Black;
-            this.Label10.Location = new System.Drawing.Point(2, 2);
-            this.Label10.Name = "Label10";
-            this.Label10.Size = new System.Drawing.Size(125, 29);
-            this.Label10.TabIndex = 0;
-            this.Label10.Text = "Khmer Name";
-            this.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label3
-            // 
-            this.Label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label3.ForeColor = System.Drawing.Color.Black;
-            this.Label3.Location = new System.Drawing.Point(2, 2);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(106, 15);
-            this.Label3.TabIndex = 0;
-            this.Label3.Text = "Pack Number";
-            // 
             // TxtFactoryCost
             // 
             this.TxtFactoryCost.Dock = System.Windows.Forms.DockStyle.Right;
@@ -437,60 +384,10 @@ namespace unt_bingoo.view.Product
             this.TxtFactoryCost.TabIndex = 9;
             this.TxtFactoryCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // GridColumn10
-            // 
-            this.GridColumn10.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn10.AppearanceCell.Options.UseFont = true;
-            this.GridColumn10.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn10.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn10.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn10.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn10.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn10.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn10.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn10.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn10.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn10.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn10.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn10.Caption = "Gross Weight";
-            this.GridColumn10.FieldName = "CreatedDate";
-            this.GridColumn10.MinWidth = 85;
-            this.GridColumn10.Name = "GridColumn10";
-            this.GridColumn10.Visible = true;
-            this.GridColumn10.VisibleIndex = 7;
-            this.GridColumn10.Width = 100;
-            // 
             // TimerCurrencyLoading
             // 
             this.TimerCurrencyLoading.Interval = 5;
             this.TimerCurrencyLoading.Tick += new System.EventHandler(this.TimerCurrencyLoading_Tick_1);
-            // 
-            // GridColumn9
-            // 
-            this.GridColumn9.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn9.AppearanceCell.Options.UseFont = true;
-            this.GridColumn9.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn9.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn9.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn9.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn9.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn9.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn9.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn9.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn9.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn9.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn9.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn9.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn9.Caption = "Net Weight";
-            this.GridColumn9.FieldName = "NetWeight";
-            this.GridColumn9.MinWidth = 85;
-            this.GridColumn9.Name = "GridColumn9";
-            this.GridColumn9.Visible = true;
-            this.GridColumn9.VisibleIndex = 6;
-            this.GridColumn9.Width = 100;
             // 
             // Label60
             // 
@@ -642,67 +539,6 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl11.Padding = new System.Windows.Forms.Padding(2);
             this.SeparatorControl11.Size = new System.Drawing.Size(5, 22);
             this.SeparatorControl11.TabIndex = 14;
-            // 
-            // Panel11
-            // 
-            this.Panel11.Controls.Add(this.CmbShelfliferequired);
-            this.Panel11.Controls.Add(this.CmbShelfLifeOfProduct);
-            this.Panel11.Controls.Add(this.Label8);
-            this.Panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel11.Location = new System.Drawing.Point(3, 111);
-            this.Panel11.Name = "Panel11";
-            this.Panel11.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel11.Size = new System.Drawing.Size(753, 26);
-            this.Panel11.TabIndex = 5;
-            // 
-            // CmbShelfliferequired
-            // 
-            this.CmbShelfliferequired.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.CmbShelfliferequired.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.CmbShelfliferequired.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CmbShelfliferequired.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CmbShelfliferequired.FormattingEnabled = true;
-            this.CmbShelfliferequired.Items.AddRange(new object[] {
-            "None",
-            "1 month 15 days",
-            "Not less than 12 months",
-            "Not less than 15 days",
-            "Not less than 18 months",
-            "Not less than 24 months",
-            "Not less than 36 months",
-            "Not less than 4 months",
-            "Not less than 6 months",
-            "Not less than 60 months",
-            "Not less than 8 months",
-            "Not less than 9 months"});
-            this.CmbShelfliferequired.Location = new System.Drawing.Point(127, 2);
-            this.CmbShelfliferequired.Name = "CmbShelfliferequired";
-            this.CmbShelfliferequired.Size = new System.Drawing.Size(503, 21);
-            this.CmbShelfliferequired.TabIndex = 1;
-            // 
-            // CmbShelfLifeOfProduct
-            // 
-            this.CmbShelfLifeOfProduct.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.CmbShelfLifeOfProduct.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.CmbShelfLifeOfProduct.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CmbShelfLifeOfProduct.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CmbShelfLifeOfProduct.FormattingEnabled = true;
-            this.CmbShelfLifeOfProduct.Location = new System.Drawing.Point(630, 2);
-            this.CmbShelfLifeOfProduct.Name = "CmbShelfLifeOfProduct";
-            this.CmbShelfLifeOfProduct.Size = new System.Drawing.Size(121, 21);
-            this.CmbShelfLifeOfProduct.TabIndex = 1;
-            // 
-            // Label8
-            // 
-            this.Label8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label8.ForeColor = System.Drawing.Color.Black;
-            this.Label8.Location = new System.Drawing.Point(2, 2);
-            this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(125, 22);
-            this.Label8.TabIndex = 0;
-            this.Label8.Text = "Shelf Life Required";
-            this.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Label39
             // 
@@ -1004,52 +840,9 @@ namespace unt_bingoo.view.Product
             this.Label32.Text = "Avg Price $";
             this.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // GridColumn13
-            // 
-            this.GridColumn13.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn13.AppearanceCell.Options.UseFont = true;
-            this.GridColumn13.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn13.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn13.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn13.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn13.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn13.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn13.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn13.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn13.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn13.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn13.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn13.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn13.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn13.ColumnEdit = this.btnEditDimension;
-            this.GridColumn13.MaxWidth = 25;
-            this.GridColumn13.MinWidth = 25;
-            this.GridColumn13.Name = "GridColumn13";
-            this.GridColumn13.Visible = true;
-            this.GridColumn13.VisibleIndex = 8;
-            this.GridColumn13.Width = 25;
-            // 
-            // btnEditDimension
-            // 
-            this.btnEditDimension.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.btnEditDimension.Appearance.Options.UseFont = true;
-            this.btnEditDimension.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.btnEditDimension.AppearanceDisabled.Options.UseFont = true;
-            this.btnEditDimension.AppearanceFocused.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.btnEditDimension.AppearanceFocused.Options.UseFont = true;
-            this.btnEditDimension.AppearanceReadOnly.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.btnEditDimension.AppearanceReadOnly.Options.UseFont = true;
-            this.btnEditDimension.AutoHeight = false;
-            editorButtonImageOptions11.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.btnEditDimension.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions11, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject41, serializableAppearanceObject42, serializableAppearanceObject43, serializableAppearanceObject44, "Modify Dimension", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.btnEditDimension.Name = "btnEditDimension";
-            this.btnEditDimension.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            // 
             // TimerCategoryLoading
             // 
             this.TimerCategoryLoading.Interval = 5;
-            this.TimerCategoryLoading.Tick += new System.EventHandler(this.TimerCategoryLoading_Tick);
             // 
             // CmbFactoryCurrency
             // 
@@ -1062,24 +855,12 @@ namespace unt_bingoo.view.Product
             this.CmbFactoryCurrency.Size = new System.Drawing.Size(268, 21);
             this.CmbFactoryCurrency.TabIndex = 1;
             // 
-            // CmbSupplier
-            // 
-            this.CmbSupplier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.CmbSupplier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.CmbSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CmbSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CmbSupplier.FormattingEnabled = true;
-            this.CmbSupplier.Location = new System.Drawing.Point(127, 2);
-            this.CmbSupplier.Name = "CmbSupplier";
-            this.CmbSupplier.Size = new System.Drawing.Size(624, 21);
-            this.CmbSupplier.TabIndex = 1;
-            // 
             // DeliveryCost
             // 
             this.DeliveryCost.DataPropertyName = "DeliveryCost";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "C2";
-            this.DeliveryCost.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            this.DeliveryCost.DefaultCellStyle = dataGridViewCellStyle2;
             this.DeliveryCost.HeaderText = "Additional Cost";
             this.DeliveryCost.Name = "DeliveryCost";
             this.DeliveryCost.ReadOnly = true;
@@ -1167,6 +948,7 @@ namespace unt_bingoo.view.Product
             this.TxtTotalBuyin.Size = new System.Drawing.Size(83, 22);
             this.TxtTotalBuyin.TabIndex = 9;
             this.TxtTotalBuyin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtTotalBuyin.TextChanged += new System.EventHandler(this.TxtTotalBuyin_TextChanged);
             // 
             // TxtBuyinVAT
             // 
@@ -1210,64 +992,6 @@ namespace unt_bingoo.view.Product
             this.txtexcisetax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtexcisetax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtexcisetax_KeyPress);
             // 
-            // Panel10
-            // 
-            this.Panel10.Controls.Add(this.TxtSupplierCode);
-            this.Panel10.Controls.Add(this.Label5);
-            this.Panel10.Controls.Add(this.TxtSKU);
-            this.Panel10.Controls.Add(this.Label7);
-            this.Panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel10.Location = new System.Drawing.Point(3, 59);
-            this.Panel10.Name = "Panel10";
-            this.Panel10.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel10.Size = new System.Drawing.Size(753, 26);
-            this.Panel10.TabIndex = 3;
-            // 
-            // TxtSupplierCode
-            // 
-            this.TxtSupplierCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TxtSupplierCode.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtSupplierCode.Location = new System.Drawing.Point(368, 2);
-            this.TxtSupplierCode.MaxLength = 13;
-            this.TxtSupplierCode.Name = "TxtSupplierCode";
-            this.TxtSupplierCode.Size = new System.Drawing.Size(383, 22);
-            this.TxtSupplierCode.TabIndex = 5;
-            // 
-            // Label5
-            // 
-            this.Label5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label5.ForeColor = System.Drawing.Color.Black;
-            this.Label5.Location = new System.Drawing.Point(256, 2);
-            this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(112, 22);
-            this.Label5.TabIndex = 4;
-            this.Label5.Text = "Supplier Code";
-            this.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // TxtSKU
-            // 
-            this.TxtSKU.Dock = System.Windows.Forms.DockStyle.Left;
-            this.TxtSKU.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtSKU.Location = new System.Drawing.Point(127, 2);
-            this.TxtSKU.MaxLength = 13;
-            this.TxtSKU.Name = "TxtSKU";
-            this.TxtSKU.ReadOnly = true;
-            this.TxtSKU.Size = new System.Drawing.Size(129, 22);
-            this.TxtSKU.TabIndex = 3;
-            // 
-            // Label7
-            // 
-            this.Label7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label7.ForeColor = System.Drawing.Color.Black;
-            this.Label7.Location = new System.Drawing.Point(2, 2);
-            this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(125, 22);
-            this.Label7.TabIndex = 0;
-            this.Label7.Text = "SKU";
-            this.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Label51
             // 
             this.Label51.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1308,23 +1032,36 @@ namespace unt_bingoo.view.Product
             // 
             // Panel46
             // 
+            this.Panel46.Controls.Add(this.button2);
             this.Panel46.Controls.Add(this.CmbUOM);
             this.Panel46.Controls.Add(this.Label53);
             this.Panel46.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel46.Location = new System.Drawing.Point(65, 0);
+            this.Panel46.Location = new System.Drawing.Point(0, 0);
             this.Panel46.Name = "Panel46";
             this.Panel46.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel46.Size = new System.Drawing.Size(75, 42);
+            this.Panel46.Size = new System.Drawing.Size(119, 42);
             this.Panel46.TabIndex = 4;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.Image = global::unt_bingoo.Properties.Resources.add16;
+            this.button2.Location = new System.Drawing.Point(86, 17);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(31, 23);
+            this.button2.TabIndex = 173;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // CmbUOM
             // 
             this.CmbUOM.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CmbUOM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CmbUOM.Dock = System.Windows.Forms.DockStyle.Left;
             this.CmbUOM.FormattingEnabled = true;
             this.CmbUOM.Location = new System.Drawing.Point(2, 17);
             this.CmbUOM.Name = "CmbUOM";
-            this.CmbUOM.Size = new System.Drawing.Size(71, 21);
+            this.CmbUOM.Size = new System.Drawing.Size(84, 21);
             this.CmbUOM.TabIndex = 2;
             // 
             // Label53
@@ -1334,7 +1071,7 @@ namespace unt_bingoo.view.Product
             this.Label53.ForeColor = System.Drawing.Color.Black;
             this.Label53.Location = new System.Drawing.Point(2, 2);
             this.Label53.Name = "Label53";
-            this.Label53.Size = new System.Drawing.Size(71, 15);
+            this.Label53.Size = new System.Drawing.Size(115, 15);
             this.Label53.TabIndex = 0;
             this.Label53.Text = "UOM";
             // 
@@ -1414,7 +1151,7 @@ namespace unt_bingoo.view.Product
             this.Panel48.Controls.Add(this.TxtHeight);
             this.Panel48.Controls.Add(this.Label55);
             this.Panel48.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel48.Location = new System.Drawing.Point(280, 0);
+            this.Panel48.Location = new System.Drawing.Point(259, 0);
             this.Panel48.Name = "Panel48";
             this.Panel48.Padding = new System.Windows.Forms.Padding(2);
             this.Panel48.Size = new System.Drawing.Size(70, 42);
@@ -1429,6 +1166,8 @@ namespace unt_bingoo.view.Product
             this.TxtHeight.Size = new System.Drawing.Size(66, 22);
             this.TxtHeight.TabIndex = 3;
             this.TxtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtHeight.TextChanged += new System.EventHandler(this.TxtHeight_TextChanged);
+            this.TxtHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtHeight_KeyPress);
             // 
             // Label55
             // 
@@ -1541,302 +1280,6 @@ namespace unt_bingoo.view.Product
             this.Panel55.Size = new System.Drawing.Size(84, 41);
             this.Panel55.TabIndex = 7;
             // 
-            // gcMain
-            // 
-            this.gcMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gcMain.Location = new System.Drawing.Point(3, 59);
-            this.gcMain.MainView = this.gvMain;
-            this.gcMain.Name = "gcMain";
-            this.gcMain.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnDeleteItem,
-            this.btnEditDimension});
-            this.gcMain.Size = new System.Drawing.Size(753, 85);
-            this.gcMain.TabIndex = 118;
-            this.gcMain.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvMain,
-            this.GridView1});
-            // 
-            // gvMain
-            // 
-            this.gvMain.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.GridColumn1,
-            this.GridColumn2,
-            this.GridColumn3,
-            this.GridColumn4,
-            this.GridColumn5,
-            this.GridColumn6,
-            this.GridColumn7,
-            this.GridColumn8,
-            this.GridColumn9,
-            this.GridColumn10,
-            this.GridColumn11,
-            this.GridColumn13,
-            this.GridColumn12});
-            this.gvMain.CustomizationFormBounds = new System.Drawing.Rectangle(596, 435, 260, 232);
-            this.gvMain.GridControl = this.gcMain;
-            this.gvMain.Name = "gvMain";
-            this.gvMain.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvMain.OptionsBehavior.ReadOnly = true;
-            this.gvMain.OptionsDetail.ShowDetailTabs = false;
-            this.gvMain.OptionsPrint.EnableAppearanceOddRow = true;
-            this.gvMain.OptionsSelection.CheckBoxSelectorColumnWidth = 25;
-            this.gvMain.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvMain.OptionsView.EnableAppearanceOddRow = true;
-            this.gvMain.OptionsView.ShowGroupPanel = false;
-            // 
-            // GridColumn1
-            // 
-            this.GridColumn1.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn1.AppearanceCell.Options.UseFont = true;
-            this.GridColumn1.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn1.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn1.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn1.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn1.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn1.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn1.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn1.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn1.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn1.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn1.Caption = "Id";
-            this.GridColumn1.FieldName = "Id";
-            this.GridColumn1.Name = "GridColumn1";
-            // 
-            // GridColumn2
-            // 
-            this.GridColumn2.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn2.AppearanceCell.Options.UseFont = true;
-            this.GridColumn2.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn2.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn2.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn2.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn2.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn2.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn2.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn2.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn2.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn2.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn2.Caption = "proId";
-            this.GridColumn2.FieldName = "ProId";
-            this.GridColumn2.Name = "GridColumn2";
-            // 
-            // GridColumn3
-            // 
-            this.GridColumn3.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn3.AppearanceCell.Options.UseFont = true;
-            this.GridColumn3.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn3.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn3.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn3.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn3.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn3.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn3.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn3.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn3.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn3.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn3.Caption = "CTN/Pallet";
-            this.GridColumn3.FieldName = "CTNPerPallet";
-            this.GridColumn3.MinWidth = 85;
-            this.GridColumn3.Name = "GridColumn3";
-            this.GridColumn3.Visible = true;
-            this.GridColumn3.VisibleIndex = 0;
-            this.GridColumn3.Width = 125;
-            // 
-            // GridColumn4
-            // 
-            this.GridColumn4.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn4.AppearanceCell.Options.UseFont = true;
-            this.GridColumn4.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn4.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn4.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn4.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn4.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn4.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn4.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn4.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn4.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn4.Caption = "UOM";
-            this.GridColumn4.FieldName = "UOM";
-            this.GridColumn4.MinWidth = 85;
-            this.GridColumn4.Name = "GridColumn4";
-            this.GridColumn4.Visible = true;
-            this.GridColumn4.VisibleIndex = 1;
-            this.GridColumn4.Width = 125;
-            // 
-            // GridColumn5
-            // 
-            this.GridColumn5.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn5.AppearanceCell.Options.UseFont = true;
-            this.GridColumn5.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn5.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn5.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn5.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn5.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn5.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn5.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn5.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn5.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn5.Caption = "Width";
-            this.GridColumn5.FieldName = "Width";
-            this.GridColumn5.MinWidth = 85;
-            this.GridColumn5.Name = "GridColumn5";
-            this.GridColumn5.Visible = true;
-            this.GridColumn5.VisibleIndex = 2;
-            this.GridColumn5.Width = 100;
-            // 
-            // GridColumn6
-            // 
-            this.GridColumn6.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn6.AppearanceCell.Options.UseFont = true;
-            this.GridColumn6.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn6.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn6.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn6.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn6.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn6.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn6.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn6.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn6.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn6.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn6.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn6.Caption = "Length";
-            this.GridColumn6.FieldName = "Length";
-            this.GridColumn6.MinWidth = 85;
-            this.GridColumn6.Name = "GridColumn6";
-            this.GridColumn6.Visible = true;
-            this.GridColumn6.VisibleIndex = 3;
-            this.GridColumn6.Width = 100;
-            // 
-            // GridColumn7
-            // 
-            this.GridColumn7.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn7.AppearanceCell.Options.UseFont = true;
-            this.GridColumn7.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn7.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn7.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn7.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn7.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn7.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn7.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn7.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn7.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn7.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn7.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn7.Caption = "Height";
-            this.GridColumn7.FieldName = "Height";
-            this.GridColumn7.MinWidth = 85;
-            this.GridColumn7.Name = "GridColumn7";
-            this.GridColumn7.Visible = true;
-            this.GridColumn7.VisibleIndex = 4;
-            this.GridColumn7.Width = 100;
-            // 
-            // GridColumn8
-            // 
-            this.GridColumn8.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn8.AppearanceCell.Options.UseFont = true;
-            this.GridColumn8.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn8.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn8.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn8.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn8.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn8.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn8.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn8.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn8.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn8.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn8.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn8.Caption = "CBM/CTN";
-            this.GridColumn8.FieldName = "CBMPerCTN";
-            this.GridColumn8.MinWidth = 85;
-            this.GridColumn8.Name = "GridColumn8";
-            this.GridColumn8.Visible = true;
-            this.GridColumn8.VisibleIndex = 5;
-            this.GridColumn8.Width = 100;
-            // 
-            // GridColumn11
-            // 
-            this.GridColumn11.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn11.AppearanceCell.Options.UseFont = true;
-            this.GridColumn11.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn11.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn11.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn11.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn11.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn11.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn11.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn11.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn11.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn11.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn11.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn11.Caption = "CreatedDate";
-            this.GridColumn11.FieldName = "createdDate";
-            this.GridColumn11.Name = "GridColumn11";
-            // 
-            // GridColumn12
-            // 
-            this.GridColumn12.AppearanceCell.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.GridColumn12.AppearanceCell.Options.UseFont = true;
-            this.GridColumn12.AppearanceCell.Options.UseTextOptions = true;
-            this.GridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn12.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn12.AppearanceHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn12.AppearanceHeader.BackColor2 = System.Drawing.Color.SteelBlue;
-            this.GridColumn12.AppearanceHeader.BorderColor = System.Drawing.Color.SteelBlue;
-            this.GridColumn12.AppearanceHeader.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GridColumn12.AppearanceHeader.Options.UseBackColor = true;
-            this.GridColumn12.AppearanceHeader.Options.UseBorderColor = true;
-            this.GridColumn12.AppearanceHeader.Options.UseFont = true;
-            this.GridColumn12.AppearanceHeader.Options.UseTextOptions = true;
-            this.GridColumn12.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.GridColumn12.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.GridColumn12.ColumnEdit = this.btnDeleteItem;
-            this.GridColumn12.MaxWidth = 25;
-            this.GridColumn12.MinWidth = 25;
-            this.GridColumn12.Name = "GridColumn12";
-            this.GridColumn12.Visible = true;
-            this.GridColumn12.VisibleIndex = 9;
-            this.GridColumn12.Width = 25;
-            // 
-            // btnDeleteItem
-            // 
-            this.btnDeleteItem.AutoHeight = false;
-            editorButtonImageOptions12.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.btnDeleteItem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions12, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject45, serializableAppearanceObject46, serializableAppearanceObject47, serializableAppearanceObject48, "Delete Dimension", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.btnDeleteItem.Name = "btnDeleteItem";
-            this.btnDeleteItem.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            // 
-            // GridView1
-            // 
-            this.GridView1.GridControl = this.gcMain;
-            this.GridView1.Name = "GridView1";
-            // 
             // Label40
             // 
             this.Label40.Dock = System.Windows.Forms.DockStyle.Left;
@@ -1848,40 +1291,6 @@ namespace unt_bingoo.view.Product
             this.Label40.TabIndex = 0;
             this.Label40.Text = "Pack Price";
             this.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Panel8
-            // 
-            this.Panel8.Controls.Add(this.TxtCaseNumber);
-            this.Panel8.Controls.Add(this.Label4);
-            this.Panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel8.Location = new System.Drawing.Point(366, 0);
-            this.Panel8.Name = "Panel8";
-            this.Panel8.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel8.Size = new System.Drawing.Size(387, 42);
-            this.Panel8.TabIndex = 4;
-            // 
-            // TxtCaseNumber
-            // 
-            this.TxtCaseNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TxtCaseNumber.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtCaseNumber.Location = new System.Drawing.Point(2, 17);
-            this.TxtCaseNumber.MaxLength = 14;
-            this.TxtCaseNumber.Name = "TxtCaseNumber";
-            this.TxtCaseNumber.ReadOnly = true;
-            this.TxtCaseNumber.Size = new System.Drawing.Size(383, 22);
-            this.TxtCaseNumber.TabIndex = 3;
-            this.TxtCaseNumber.Click += new System.EventHandler(this.TxtCaseNumber_Click);
-            // 
-            // Label4
-            // 
-            this.Label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.ForeColor = System.Drawing.Color.Black;
-            this.Label4.Location = new System.Drawing.Point(2, 2);
-            this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(383, 15);
-            this.Label4.TabIndex = 0;
-            this.Label4.Text = "Case Number";
             // 
             // BtnRefresh
             // 
@@ -1904,38 +1313,16 @@ namespace unt_bingoo.view.Product
             this.disDimensionLoading.Interval = 5;
             this.disDimensionLoading.Tick += new System.EventHandler(this.disDimensionLoading_Tick);
             // 
-            // Panel45
-            // 
-            this.Panel45.Controls.Add(this.TxtCTNPerPallet);
-            this.Panel45.Controls.Add(this.Label52);
-            this.Panel45.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel45.Location = new System.Drawing.Point(0, 0);
-            this.Panel45.Name = "Panel45";
-            this.Panel45.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel45.Size = new System.Drawing.Size(65, 42);
-            this.Panel45.TabIndex = 3;
-            // 
             // TxtCTNPerPallet
             // 
-            this.TxtCTNPerPallet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtCTNPerPallet.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtCTNPerPallet.Location = new System.Drawing.Point(2, 17);
+            this.TxtCTNPerPallet.Location = new System.Drawing.Point(104, 12);
             this.TxtCTNPerPallet.Name = "TxtCTNPerPallet";
             this.TxtCTNPerPallet.Size = new System.Drawing.Size(61, 22);
             this.TxtCTNPerPallet.TabIndex = 3;
             this.TxtCTNPerPallet.Text = "1";
             this.TxtCTNPerPallet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Label52
-            // 
-            this.Label52.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Label52.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.Label52.ForeColor = System.Drawing.Color.Black;
-            this.Label52.Location = new System.Drawing.Point(2, 2);
-            this.Label52.Name = "Label52";
-            this.Label52.Size = new System.Drawing.Size(61, 15);
-            this.Label52.TabIndex = 0;
-            this.Label52.Text = "CTN/Pallet";
+            this.TxtCTNPerPallet.Visible = false;
             // 
             // SeparatorControl10
             // 
@@ -1960,17 +1347,7 @@ namespace unt_bingoo.view.Product
             this.PicProducts.TabIndex = 9;
             this.PicProducts.TabStop = false;
             this.PicProducts.Click += new System.EventHandler(this.PicProducts_Click);
-            // 
-            // Label2
-            // 
-            this.Label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label2.ForeColor = System.Drawing.Color.Black;
-            this.Label2.Location = new System.Drawing.Point(0, 2);
-            this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(127, 15);
-            this.Label2.TabIndex = 0;
-            this.Label2.Text = "Unit Number";
+            this.PicProducts.DoubleClick += new System.EventHandler(this.PicProducts_DoubleClick);
             // 
             // TxtBuyinDiscount
             // 
@@ -2074,97 +1451,6 @@ namespace unt_bingoo.view.Product
             this.TxtDeliveryCost.Size = new System.Drawing.Size(89, 22);
             this.TxtDeliveryCost.TabIndex = 4;
             this.TxtDeliveryCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Panel9
-            // 
-            this.Panel9.Controls.Add(this.CmbSupplier);
-            this.Panel9.Controls.Add(this.Label9);
-            this.Panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel9.Location = new System.Drawing.Point(3, 85);
-            this.Panel9.Name = "Panel9";
-            this.Panel9.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel9.Size = new System.Drawing.Size(753, 26);
-            this.Panel9.TabIndex = 4;
-            // 
-            // Label9
-            // 
-            this.Label9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label9.ForeColor = System.Drawing.Color.Black;
-            this.Label9.Location = new System.Drawing.Point(2, 2);
-            this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(125, 22);
-            this.Label9.TabIndex = 0;
-            this.Label9.Text = "Supplier";
-            this.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.Label1.Location = new System.Drawing.Point(100, 19);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(276, 23);
-            this.Label1.TabIndex = 0;
-            this.Label1.Text = "Q\'s MANAGEMENT SYSTEM";
-            // 
-            // Panel13
-            // 
-            this.Panel13.Controls.Add(this.TxtProductsName);
-            this.Panel13.Controls.Add(this.Label12);
-            this.Panel13.Controls.Add(this.TxtSize);
-            this.Panel13.Controls.Add(this.Label11);
-            this.Panel13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel13.Location = new System.Drawing.Point(3, 170);
-            this.Panel13.Name = "Panel13";
-            this.Panel13.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel13.Size = new System.Drawing.Size(753, 26);
-            this.Panel13.TabIndex = 7;
-            // 
-            // TxtProductsName
-            // 
-            this.TxtProductsName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TxtProductsName.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtProductsName.Location = new System.Drawing.Point(127, 2);
-            this.TxtProductsName.MaxLength = 50;
-            this.TxtProductsName.Name = "TxtProductsName";
-            this.TxtProductsName.Size = new System.Drawing.Size(516, 22);
-            this.TxtProductsName.TabIndex = 4;
-            // 
-            // Label12
-            // 
-            this.Label12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label12.ForeColor = System.Drawing.Color.Black;
-            this.Label12.Location = new System.Drawing.Point(643, 2);
-            this.Label12.Name = "Label12";
-            this.Label12.Size = new System.Drawing.Size(46, 22);
-            this.Label12.TabIndex = 6;
-            this.Label12.Text = "Size";
-            this.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // TxtSize
-            // 
-            this.TxtSize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TxtSize.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtSize.Location = new System.Drawing.Point(689, 2);
-            this.TxtSize.MaxLength = 30;
-            this.TxtSize.Name = "TxtSize";
-            this.TxtSize.Size = new System.Drawing.Size(62, 22);
-            this.TxtSize.TabIndex = 7;
-            // 
-            // Label11
-            // 
-            this.Label11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label11.ForeColor = System.Drawing.Color.Black;
-            this.Label11.Location = new System.Drawing.Point(2, 2);
-            this.Label11.Name = "Label11";
-            this.Label11.Size = new System.Drawing.Size(125, 22);
-            this.Label11.TabIndex = 0;
-            this.Label11.Text = "Products Name";
-            this.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Panel30
             // 
@@ -2408,10 +1694,12 @@ namespace unt_bingoo.view.Product
             this.TxtBuyin.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.TxtBuyin.Location = new System.Drawing.Point(275, 2);
             this.TxtBuyin.Name = "TxtBuyin";
-            this.TxtBuyin.ReadOnly = true;
             this.TxtBuyin.Size = new System.Drawing.Size(89, 22);
             this.TxtBuyin.TabIndex = 10;
             this.TxtBuyin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtBuyin.TextChanged += new System.EventHandler(this.TxtBuyin_TextChanged);
+            this.TxtBuyin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBuyin_KeyPress);
+            this.TxtBuyin.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TxtBuyin_PreviewKeyDown);
             // 
             // SeparatorControl6
             // 
@@ -2423,18 +1711,6 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl6.Size = new System.Drawing.Size(5, 22);
             this.SeparatorControl6.TabIndex = 12;
             // 
-            // TxtUnitNumber
-            // 
-            this.TxtUnitNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TxtUnitNumber.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtUnitNumber.Location = new System.Drawing.Point(0, 17);
-            this.TxtUnitNumber.MaxLength = 13;
-            this.TxtUnitNumber.Name = "TxtUnitNumber";
-            this.TxtUnitNumber.ReadOnly = true;
-            this.TxtUnitNumber.Size = new System.Drawing.Size(127, 22);
-            this.TxtUnitNumber.TabIndex = 3;
-            this.TxtUnitNumber.Click += new System.EventHandler(this.TxtUnitNumber_Click);
-            // 
             // TxtGrossWeight
             // 
             this.TxtGrossWeight.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2444,6 +1720,7 @@ namespace unt_bingoo.view.Product
             this.TxtGrossWeight.Size = new System.Drawing.Size(82, 22);
             this.TxtGrossWeight.TabIndex = 3;
             this.TxtGrossWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtGrossWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtGrossWeight_KeyPress);
             // 
             // Label38
             // 
@@ -2472,18 +1749,6 @@ namespace unt_bingoo.view.Product
             this.BtnMoveToDeactivated.Text = "&Move To Deactivated";
             this.BtnMoveToDeactivated.UseVisualStyleBackColor = false;
             // 
-            // Label15
-            // 
-            this.Label15.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label15.ForeColor = System.Drawing.Color.Black;
-            this.Label15.Location = new System.Drawing.Point(599, 2);
-            this.Label15.Name = "Label15";
-            this.Label15.Size = new System.Drawing.Size(46, 22);
-            this.Label15.TabIndex = 8;
-            this.Label15.Text = "Made In";
-            this.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // TimerSupplierLoading
             // 
             this.TimerSupplierLoading.Interval = 5;
@@ -2501,7 +1766,7 @@ namespace unt_bingoo.view.Product
             // 
             // GroupBox6
             // 
-            this.GroupBox6.Controls.Add(this.gcMain);
+            this.GroupBox6.Controls.Add(this.gcScale);
             this.GroupBox6.Controls.Add(this.Panel43);
             this.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GroupBox6.ForeColor = System.Drawing.Color.SteelBlue;
@@ -2511,6 +1776,22 @@ namespace unt_bingoo.view.Product
             this.GroupBox6.TabIndex = 9;
             this.GroupBox6.TabStop = false;
             this.GroupBox6.Text = "Scale";
+            // 
+            // gcScale
+            // 
+            this.gcScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcScale.Location = new System.Drawing.Point(3, 59);
+            this.gcScale.MainView = this.gvScale;
+            this.gcScale.Name = "gcScale";
+            this.gcScale.Size = new System.Drawing.Size(753, 85);
+            this.gcScale.TabIndex = 2;
+            this.gcScale.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvScale});
+            // 
+            // gvScale
+            // 
+            this.gvScale.GridControl = this.gcScale;
+            this.gvScale.Name = "gvScale";
             // 
             // Panel43
             // 
@@ -2522,7 +1803,6 @@ namespace unt_bingoo.view.Product
             this.Panel43.Controls.Add(this.Panel44);
             this.Panel43.Controls.Add(this.Panel47);
             this.Panel43.Controls.Add(this.Panel46);
-            this.Panel43.Controls.Add(this.Panel45);
             this.Panel43.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel43.Location = new System.Drawing.Point(3, 17);
             this.Panel43.Name = "Panel43";
@@ -2533,7 +1813,7 @@ namespace unt_bingoo.view.Product
             // 
             this.Panel56.Controls.Add(this.btnAddDimension);
             this.Panel56.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel56.Location = new System.Drawing.Point(594, 0);
+            this.Panel56.Location = new System.Drawing.Point(573, 0);
             this.Panel56.Name = "Panel56";
             this.Panel56.Padding = new System.Windows.Forms.Padding(2);
             this.Panel56.Size = new System.Drawing.Size(109, 42);
@@ -2544,7 +1824,7 @@ namespace unt_bingoo.view.Product
             this.Panel41.Controls.Add(this.TxtGrossWeight);
             this.Panel41.Controls.Add(this.Label49);
             this.Panel41.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel41.Location = new System.Drawing.Point(508, 0);
+            this.Panel41.Location = new System.Drawing.Point(487, 0);
             this.Panel41.Name = "Panel41";
             this.Panel41.Padding = new System.Windows.Forms.Padding(2);
             this.Panel41.Size = new System.Drawing.Size(86, 42);
@@ -2555,7 +1835,7 @@ namespace unt_bingoo.view.Product
             this.Panel40.Controls.Add(this.TxtNetWeight);
             this.Panel40.Controls.Add(this.Label48);
             this.Panel40.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel40.Location = new System.Drawing.Point(438, 0);
+            this.Panel40.Location = new System.Drawing.Point(417, 0);
             this.Panel40.Name = "Panel40";
             this.Panel40.Padding = new System.Windows.Forms.Padding(2);
             this.Panel40.Size = new System.Drawing.Size(70, 42);
@@ -2570,7 +1850,7 @@ namespace unt_bingoo.view.Product
             this.TxtNetWeight.Size = new System.Drawing.Size(66, 22);
             this.TxtNetWeight.TabIndex = 3;
             this.TxtNetWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TxtNetWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFactoryCost_KeyPress);
+            this.TxtNetWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNetWeight_KeyPress);
             // 
             // Label48
             // 
@@ -2588,7 +1868,7 @@ namespace unt_bingoo.view.Product
             this.Panel49.Controls.Add(this.TxtCBMPerCTN);
             this.Panel49.Controls.Add(this.Label56);
             this.Panel49.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel49.Location = new System.Drawing.Point(350, 0);
+            this.Panel49.Location = new System.Drawing.Point(329, 0);
             this.Panel49.Name = "Panel49";
             this.Panel49.Padding = new System.Windows.Forms.Padding(2);
             this.Panel49.Size = new System.Drawing.Size(88, 42);
@@ -2604,13 +1884,14 @@ namespace unt_bingoo.view.Product
             this.TxtCBMPerCTN.Size = new System.Drawing.Size(84, 22);
             this.TxtCBMPerCTN.TabIndex = 3;
             this.TxtCBMPerCTN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtCBMPerCTN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCBMPerCTN_KeyPress);
             // 
             // Panel44
             // 
             this.Panel44.Controls.Add(this.TxtLength);
             this.Panel44.Controls.Add(this.Label51);
             this.Panel44.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel44.Location = new System.Drawing.Point(210, 0);
+            this.Panel44.Location = new System.Drawing.Point(189, 0);
             this.Panel44.Name = "Panel44";
             this.Panel44.Padding = new System.Windows.Forms.Padding(2);
             this.Panel44.Size = new System.Drawing.Size(70, 42);
@@ -2626,14 +1907,14 @@ namespace unt_bingoo.view.Product
             this.TxtLength.TabIndex = 3;
             this.TxtLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TxtLength.TextChanged += new System.EventHandler(this.TxtWidth_TextChanged);
-            this.TxtLength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFactoryCost_KeyPress);
+            this.TxtLength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtLength_KeyPress);
             // 
             // Panel47
             // 
             this.Panel47.Controls.Add(this.TxtWidth);
             this.Panel47.Controls.Add(this.Label54);
             this.Panel47.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Panel47.Location = new System.Drawing.Point(140, 0);
+            this.Panel47.Location = new System.Drawing.Point(119, 0);
             this.Panel47.Name = "Panel47";
             this.Panel47.Padding = new System.Windows.Forms.Padding(2);
             this.Panel47.Size = new System.Drawing.Size(70, 42);
@@ -2649,6 +1930,7 @@ namespace unt_bingoo.view.Product
             this.TxtWidth.TabIndex = 3;
             this.TxtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TxtWidth.TextChanged += new System.EventHandler(this.TxtWidth_TextChanged);
+            this.TxtWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtWidth_KeyPress_1);
             // 
             // Label54
             // 
@@ -2973,6 +2255,7 @@ namespace unt_bingoo.view.Product
             this.BtnClose.TabIndex = 127;
             this.BtnClose.Text = "&Close";
             this.BtnClose.UseVisualStyleBackColor = false;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // BtnDelete
             // 
@@ -3059,6 +2342,63 @@ namespace unt_bingoo.view.Product
             this.Label14.Text = "Description";
             this.Label14.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // Panel13
+            // 
+            this.Panel13.Controls.Add(this.TxtProductsName);
+            this.Panel13.Controls.Add(this.Label12);
+            this.Panel13.Controls.Add(this.TxtSize);
+            this.Panel13.Controls.Add(this.Label11);
+            this.Panel13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Panel13.Location = new System.Drawing.Point(3, 170);
+            this.Panel13.Name = "Panel13";
+            this.Panel13.Padding = new System.Windows.Forms.Padding(2);
+            this.Panel13.Size = new System.Drawing.Size(753, 26);
+            this.Panel13.TabIndex = 7;
+            // 
+            // TxtProductsName
+            // 
+            this.TxtProductsName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtProductsName.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.TxtProductsName.Location = new System.Drawing.Point(127, 2);
+            this.TxtProductsName.MaxLength = 50;
+            this.TxtProductsName.Name = "TxtProductsName";
+            this.TxtProductsName.Size = new System.Drawing.Size(516, 22);
+            this.TxtProductsName.TabIndex = 4;
+            // 
+            // Label12
+            // 
+            this.Label12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Label12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label12.ForeColor = System.Drawing.Color.Black;
+            this.Label12.Location = new System.Drawing.Point(643, 2);
+            this.Label12.Name = "Label12";
+            this.Label12.Size = new System.Drawing.Size(46, 22);
+            this.Label12.TabIndex = 6;
+            this.Label12.Text = "Size";
+            this.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // TxtSize
+            // 
+            this.TxtSize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.TxtSize.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.TxtSize.Location = new System.Drawing.Point(689, 2);
+            this.TxtSize.MaxLength = 30;
+            this.TxtSize.Name = "TxtSize";
+            this.TxtSize.Size = new System.Drawing.Size(62, 22);
+            this.TxtSize.TabIndex = 7;
+            // 
+            // Label11
+            // 
+            this.Label11.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Label11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label11.ForeColor = System.Drawing.Color.Black;
+            this.Label11.Location = new System.Drawing.Point(2, 2);
+            this.Label11.Name = "Label11";
+            this.Label11.Size = new System.Drawing.Size(125, 22);
+            this.Label11.TabIndex = 0;
+            this.Label11.Text = "Products Name";
+            this.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Panel12
             // 
             this.Panel12.Controls.Add(this.TxtKhmerName);
@@ -3082,6 +2422,18 @@ namespace unt_bingoo.view.Product
             this.TxtKhmerName.Enter += new System.EventHandler(this.TxtKhmerName_Enter);
             this.TxtKhmerName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtKhmerName_KeyPress);
             this.TxtKhmerName.Leave += new System.EventHandler(this.TxtKhmerName_Leave);
+            // 
+            // Label10
+            // 
+            this.Label10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label10.ForeColor = System.Drawing.Color.Black;
+            this.Label10.Location = new System.Drawing.Point(2, 2);
+            this.Label10.Name = "Label10";
+            this.Label10.Size = new System.Drawing.Size(125, 29);
+            this.Label10.TabIndex = 0;
+            this.Label10.Text = "Khmer Name";
+            this.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Panel15
             // 
@@ -3108,6 +2460,18 @@ namespace unt_bingoo.view.Product
             this.CmbCategory.Size = new System.Drawing.Size(472, 21);
             this.CmbCategory.TabIndex = 1;
             // 
+            // Label15
+            // 
+            this.Label15.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label15.ForeColor = System.Drawing.Color.Black;
+            this.Label15.Location = new System.Drawing.Point(599, 2);
+            this.Label15.Name = "Label15";
+            this.Label15.Size = new System.Drawing.Size(46, 22);
+            this.Label15.TabIndex = 8;
+            this.Label15.Text = "Made In";
+            this.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // TxtMadeIn
             // 
             this.TxtMadeIn.Dock = System.Windows.Forms.DockStyle.Right;
@@ -3130,6 +2494,147 @@ namespace unt_bingoo.view.Product
             this.Label13.Text = "Category";
             this.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // Panel11
+            // 
+            this.Panel11.Controls.Add(this.CmbShelfLifeOfProduct);
+            this.Panel11.Controls.Add(this.button1);
+            this.Panel11.Controls.Add(this.Label8);
+            this.Panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Panel11.Location = new System.Drawing.Point(3, 111);
+            this.Panel11.Name = "Panel11";
+            this.Panel11.Padding = new System.Windows.Forms.Padding(2);
+            this.Panel11.Size = new System.Drawing.Size(753, 26);
+            this.Panel11.TabIndex = 5;
+            // 
+            // CmbShelfLifeOfProduct
+            // 
+            this.CmbShelfLifeOfProduct.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.CmbShelfLifeOfProduct.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CmbShelfLifeOfProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CmbShelfLifeOfProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CmbShelfLifeOfProduct.FormattingEnabled = true;
+            this.CmbShelfLifeOfProduct.Location = new System.Drawing.Point(127, 2);
+            this.CmbShelfLifeOfProduct.Name = "CmbShelfLifeOfProduct";
+            this.CmbShelfLifeOfProduct.Size = new System.Drawing.Size(593, 21);
+            this.CmbShelfLifeOfProduct.TabIndex = 171;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.Image = global::unt_bingoo.Properties.Resources.add16;
+            this.button1.Location = new System.Drawing.Point(720, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(31, 22);
+            this.button1.TabIndex = 170;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // Label8
+            // 
+            this.Label8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label8.ForeColor = System.Drawing.Color.Black;
+            this.Label8.Location = new System.Drawing.Point(2, 2);
+            this.Label8.Name = "Label8";
+            this.Label8.Size = new System.Drawing.Size(125, 22);
+            this.Label8.TabIndex = 0;
+            this.Label8.Text = "Shelf Life Required";
+            this.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Panel9
+            // 
+            this.Panel9.Controls.Add(this.CmbSupplier);
+            this.Panel9.Controls.Add(this.Label9);
+            this.Panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Panel9.Location = new System.Drawing.Point(3, 85);
+            this.Panel9.Name = "Panel9";
+            this.Panel9.Padding = new System.Windows.Forms.Padding(2);
+            this.Panel9.Size = new System.Drawing.Size(753, 26);
+            this.Panel9.TabIndex = 4;
+            // 
+            // CmbSupplier
+            // 
+            this.CmbSupplier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.CmbSupplier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CmbSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CmbSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CmbSupplier.FormattingEnabled = true;
+            this.CmbSupplier.Location = new System.Drawing.Point(127, 2);
+            this.CmbSupplier.Name = "CmbSupplier";
+            this.CmbSupplier.Size = new System.Drawing.Size(624, 21);
+            this.CmbSupplier.TabIndex = 1;
+            // 
+            // Label9
+            // 
+            this.Label9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label9.ForeColor = System.Drawing.Color.Black;
+            this.Label9.Location = new System.Drawing.Point(2, 2);
+            this.Label9.Name = "Label9";
+            this.Label9.Size = new System.Drawing.Size(125, 22);
+            this.Label9.TabIndex = 0;
+            this.Label9.Text = "Supplier";
+            this.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Panel10
+            // 
+            this.Panel10.Controls.Add(this.TxtSupplierCode);
+            this.Panel10.Controls.Add(this.Label5);
+            this.Panel10.Controls.Add(this.TxtSKU);
+            this.Panel10.Controls.Add(this.Label7);
+            this.Panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Panel10.Location = new System.Drawing.Point(3, 59);
+            this.Panel10.Name = "Panel10";
+            this.Panel10.Padding = new System.Windows.Forms.Padding(2);
+            this.Panel10.Size = new System.Drawing.Size(753, 26);
+            this.Panel10.TabIndex = 3;
+            // 
+            // TxtSupplierCode
+            // 
+            this.TxtSupplierCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtSupplierCode.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.TxtSupplierCode.Location = new System.Drawing.Point(368, 2);
+            this.TxtSupplierCode.MaxLength = 13;
+            this.TxtSupplierCode.Name = "TxtSupplierCode";
+            this.TxtSupplierCode.Size = new System.Drawing.Size(383, 22);
+            this.TxtSupplierCode.TabIndex = 5;
+            // 
+            // Label5
+            // 
+            this.Label5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label5.ForeColor = System.Drawing.Color.Black;
+            this.Label5.Location = new System.Drawing.Point(256, 2);
+            this.Label5.Name = "Label5";
+            this.Label5.Size = new System.Drawing.Size(112, 22);
+            this.Label5.TabIndex = 4;
+            this.Label5.Text = "Supplier Code";
+            this.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // TxtSKU
+            // 
+            this.TxtSKU.Dock = System.Windows.Forms.DockStyle.Left;
+            this.TxtSKU.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.TxtSKU.Location = new System.Drawing.Point(127, 2);
+            this.TxtSKU.MaxLength = 13;
+            this.TxtSKU.Name = "TxtSKU";
+            this.TxtSKU.ReadOnly = true;
+            this.TxtSKU.Size = new System.Drawing.Size(129, 22);
+            this.TxtSKU.TabIndex = 3;
+            // 
+            // Label7
+            // 
+            this.Label7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label7.ForeColor = System.Drawing.Color.Black;
+            this.Label7.Location = new System.Drawing.Point(2, 2);
+            this.Label7.Name = "Label7";
+            this.Label7.Size = new System.Drawing.Size(125, 22);
+            this.Label7.TabIndex = 0;
+            this.Label7.Text = "SKU";
+            this.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Panel5
             // 
             this.Panel5.Controls.Add(this.Panel8);
@@ -3141,6 +2646,40 @@ namespace unt_bingoo.view.Product
             this.Panel5.Name = "Panel5";
             this.Panel5.Size = new System.Drawing.Size(753, 42);
             this.Panel5.TabIndex = 0;
+            // 
+            // Panel8
+            // 
+            this.Panel8.Controls.Add(this.TxtCaseNumber);
+            this.Panel8.Controls.Add(this.Label4);
+            this.Panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel8.Location = new System.Drawing.Point(366, 0);
+            this.Panel8.Name = "Panel8";
+            this.Panel8.Padding = new System.Windows.Forms.Padding(2);
+            this.Panel8.Size = new System.Drawing.Size(387, 42);
+            this.Panel8.TabIndex = 4;
+            // 
+            // TxtCaseNumber
+            // 
+            this.TxtCaseNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtCaseNumber.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.TxtCaseNumber.Location = new System.Drawing.Point(2, 17);
+            this.TxtCaseNumber.MaxLength = 14;
+            this.TxtCaseNumber.Name = "TxtCaseNumber";
+            this.TxtCaseNumber.ReadOnly = true;
+            this.TxtCaseNumber.Size = new System.Drawing.Size(383, 22);
+            this.TxtCaseNumber.TabIndex = 3;
+            this.TxtCaseNumber.Click += new System.EventHandler(this.TxtCaseNumber_Click);
+            // 
+            // Label4
+            // 
+            this.Label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label4.ForeColor = System.Drawing.Color.Black;
+            this.Label4.Location = new System.Drawing.Point(2, 2);
+            this.Label4.Name = "Label4";
+            this.Label4.Size = new System.Drawing.Size(383, 15);
+            this.Label4.TabIndex = 0;
+            this.Label4.Text = "Case Number";
             // 
             // Panel7
             // 
@@ -3165,6 +2704,17 @@ namespace unt_bingoo.view.Product
             this.TxtPackNumber.TabIndex = 3;
             this.TxtPackNumber.Click += new System.EventHandler(this.TxtPackNumber_Click);
             // 
+            // Label3
+            // 
+            this.Label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label3.ForeColor = System.Drawing.Color.Black;
+            this.Label3.Location = new System.Drawing.Point(2, 2);
+            this.Label3.Name = "Label3";
+            this.Label3.Size = new System.Drawing.Size(106, 15);
+            this.Label3.TabIndex = 0;
+            this.Label3.Text = "Pack Number";
+            // 
             // Panel6
             // 
             this.Panel6.Controls.Add(this.PicOldCode);
@@ -3187,6 +2737,30 @@ namespace unt_bingoo.view.Product
             this.PicOldCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicOldCode.TabIndex = 10;
             this.PicOldCode.TabStop = false;
+            // 
+            // TxtUnitNumber
+            // 
+            this.TxtUnitNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtUnitNumber.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.TxtUnitNumber.Location = new System.Drawing.Point(0, 17);
+            this.TxtUnitNumber.MaxLength = 13;
+            this.TxtUnitNumber.Name = "TxtUnitNumber";
+            this.TxtUnitNumber.ReadOnly = true;
+            this.TxtUnitNumber.Size = new System.Drawing.Size(127, 22);
+            this.TxtUnitNumber.TabIndex = 3;
+            this.TxtUnitNumber.Click += new System.EventHandler(this.TxtUnitNumber_Click);
+            this.TxtUnitNumber.TextChanged += new System.EventHandler(this.TxtUnitNumber_TextChanged);
+            // 
+            // Label2
+            // 
+            this.Label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label2.ForeColor = System.Drawing.Color.Black;
+            this.Label2.Location = new System.Drawing.Point(0, 2);
+            this.Label2.Name = "Label2";
+            this.Label2.Size = new System.Drawing.Size(127, 15);
+            this.Label2.TabIndex = 0;
+            this.Label2.Text = "Unit Number";
             // 
             // TxtId
             // 
@@ -3358,12 +2932,7 @@ namespace unt_bingoo.view.Product
             // 
             // ProId
             // 
-            this.ProId.DataPropertyName = "ProId";
-            this.ProId.HeaderText = "ProId";
             this.ProId.Name = "ProId";
-            this.ProId.ReadOnly = true;
-            this.ProId.Visible = false;
-            this.ProId.Width = 57;
             // 
             // TimerLoading
             // 
@@ -3405,29 +2974,43 @@ namespace unt_bingoo.view.Product
             // Panel1
             // 
             this.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.Panel1.Controls.Add(this.TxtCTNPerPallet);
+            this.Panel1.Controls.Add(this.lblSystemName);
+            this.Panel1.Controls.Add(this.PicSectionIcon);
             this.Panel1.Controls.Add(this.PicProducts);
             this.Panel1.Controls.Add(this.GroupInventory);
-            this.Panel1.Controls.Add(this.PicLogo);
             this.Panel1.Controls.Add(this.Panel4);
             this.Panel1.Controls.Add(this.LblCompanyName);
-            this.Panel1.Controls.Add(this.Label1);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel1.Location = new System.Drawing.Point(0, 0);
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(763, 103);
             this.Panel1.TabIndex = 110;
             // 
-            // PicLogo
+            // lblSystemName
             // 
-            this.PicLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PicLogo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PicLogo.Image = ((System.Drawing.Image)(resources.GetObject("PicLogo.Image")));
-            this.PicLogo.Location = new System.Drawing.Point(0, 0);
-            this.PicLogo.Name = "PicLogo";
-            this.PicLogo.Size = new System.Drawing.Size(94, 101);
-            this.PicLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PicLogo.TabIndex = 3;
-            this.PicLogo.TabStop = false;
+            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSystemName.Appearance.Options.UseFont = true;
+            this.lblSystemName.Appearance.Options.UseForeColor = true;
+            this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblSystemName.Location = new System.Drawing.Point(98, 75);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
+            this.lblSystemName.TabIndex = 184;
+            this.lblSystemName.Text = "JuJuBi Management System";
+            // 
+            // PicSectionIcon
+            // 
+            this.PicSectionIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.PicSectionIcon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
+            this.PicSectionIcon.Location = new System.Drawing.Point(0, 0);
+            this.PicSectionIcon.Name = "PicSectionIcon";
+            this.PicSectionIcon.Size = new System.Drawing.Size(98, 101);
+            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicSectionIcon.TabIndex = 183;
+            this.PicSectionIcon.TabStop = false;
             // 
             // Panel4
             // 
@@ -3658,6 +3241,7 @@ namespace unt_bingoo.view.Product
             // ShelfLifeOfProductLoading
             // 
             this.ShelfLifeOfProductLoading.Interval = 5;
+            this.ShelfLifeOfProductLoading.Tick += new System.EventHandler(this.ShelfLifeOfProductLoading_Tick);
             // 
             // City
             // 
@@ -3672,6 +3256,12 @@ namespace unt_bingoo.view.Product
             this.CityLoading.Interval = 5;
             this.CityLoading.Tick += new System.EventHandler(this.CityLoading_Tick);
             // 
+            // UOMCode
+            // 
+            this.UOMCode.Caption = "UOMCode ";
+            this.UOMCode.FieldName = "UOMCode";
+            this.UOMCode.Name = "UOMCode";
+            // 
             // guiProductOutlet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3681,14 +3271,13 @@ namespace unt_bingoo.view.Product
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.Panel3);
             this.Name = "guiProductOutlet";
-            this.Text = "&Product";
+            this.Text = "PRODUCT MANAGEMENT";
             this.Load += new System.EventHandler(this.guiProductOutlet_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl14)).EndInit();
             this.Panel52.ResumeLayout(false);
             this.Panel52.PerformLayout();
             this.Panel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl11)).EndInit();
-            this.Panel11.ResumeLayout(false);
             this.GroupInventory.ResumeLayout(false);
             this.Panel21.ResumeLayout(false);
             this.Panel23.ResumeLayout(false);
@@ -3705,15 +3294,12 @@ namespace unt_bingoo.view.Product
             this.Panel20.ResumeLayout(false);
             this.Panel20.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnEditDimension)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl13)).EndInit();
             this.Panel31.ResumeLayout(false);
             this.Panel31.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl12)).EndInit();
-            this.Panel10.ResumeLayout(false);
-            this.Panel10.PerformLayout();
             this.Panel46.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl17)).EndInit();
             this.Panel34.ResumeLayout(false);
@@ -3724,22 +3310,11 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl5)).EndInit();
             this.Panel55.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcMain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvMain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
-            this.Panel8.ResumeLayout(false);
-            this.Panel8.PerformLayout();
-            this.Panel45.ResumeLayout(false);
-            this.Panel45.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicProducts)).EndInit();
             this.Panel26.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl2)).EndInit();
-            this.Panel9.ResumeLayout(false);
-            this.Panel13.ResumeLayout(false);
-            this.Panel13.PerformLayout();
             this.Panel30.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl9)).EndInit();
@@ -3754,6 +3329,8 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl6)).EndInit();
             this.GroupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvScale)).EndInit();
             this.Panel43.ResumeLayout(false);
             this.Panel56.ResumeLayout(false);
             this.Panel41.ResumeLayout(false);
@@ -3782,11 +3359,19 @@ namespace unt_bingoo.view.Product
             this.GroupBox1.ResumeLayout(false);
             this.Panel14.ResumeLayout(false);
             this.Panel14.PerformLayout();
+            this.Panel13.ResumeLayout(false);
+            this.Panel13.PerformLayout();
             this.Panel12.ResumeLayout(false);
             this.Panel12.PerformLayout();
             this.Panel15.ResumeLayout(false);
             this.Panel15.PerformLayout();
+            this.Panel11.ResumeLayout(false);
+            this.Panel9.ResumeLayout(false);
+            this.Panel10.ResumeLayout(false);
+            this.Panel10.PerformLayout();
             this.Panel5.ResumeLayout(false);
+            this.Panel8.ResumeLayout(false);
+            this.Panel8.PerformLayout();
             this.Panel7.ResumeLayout(false);
             this.Panel7.PerformLayout();
             this.Panel6.ResumeLayout(false);
@@ -3801,7 +3386,7 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.DgvDeliveryLogistic)).EndInit();
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             this.GroupBox3.ResumeLayout(false);
             this.Panel22.ResumeLayout(false);
             this.Panel22.PerformLayout();
@@ -3819,13 +3404,8 @@ namespace unt_bingoo.view.Product
         }
 
         #endregion
-
-        internal System.Windows.Forms.Label Label10;
-        internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.TextBox TxtFactoryCost;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn10;
         internal System.Windows.Forms.Timer TimerCurrencyLoading;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn9;
         internal System.Windows.Forms.Label Label60;
         internal System.Windows.Forms.TextBox TxtSuggest;
         internal System.Windows.Forms.TextBox TxtPackProfit;
@@ -3839,10 +3419,6 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Label Label18;
         internal System.Windows.Forms.Button btnAddDimension;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl11;
-        internal System.Windows.Forms.Panel Panel11;
-        internal System.Windows.Forms.ComboBox CmbShelfliferequired;
-        internal System.Windows.Forms.ComboBox CmbShelfLifeOfProduct;
-        internal System.Windows.Forms.Label Label8;
         internal System.Windows.Forms.Label Label39;
         internal System.Windows.Forms.GroupBox GroupInventory;
         internal System.Windows.Forms.Panel Panel21;
@@ -3869,11 +3445,8 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Label Label19;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl8;
         internal System.Windows.Forms.Label Label32;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn13;
-        internal DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEditDimension;
         internal System.Windows.Forms.Timer TimerCategoryLoading;
         internal System.Windows.Forms.ComboBox CmbFactoryCurrency;
-        internal System.Windows.Forms.ComboBox CmbSupplier;
         internal System.Windows.Forms.DataGridViewTextBoxColumn DeliveryCost;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl13;
         internal System.Windows.Forms.Panel Panel31;
@@ -3886,11 +3459,6 @@ namespace unt_bingoo.view.Product
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl12;
         internal System.Windows.Forms.TextBox txtpubliclightingtax;
         internal System.Windows.Forms.TextBox txtexcisetax;
-        internal System.Windows.Forms.Panel Panel10;
-        internal System.Windows.Forms.TextBox TxtSupplierCode;
-        internal System.Windows.Forms.Label Label5;
-        internal System.Windows.Forms.TextBox TxtSKU;
-        internal System.Windows.Forms.Label Label7;
         internal System.Windows.Forms.Label Label51;
         internal System.Windows.Forms.Label Label56;
         internal System.Windows.Forms.Button BtnAddDel;
@@ -3914,32 +3482,12 @@ namespace unt_bingoo.view.Product
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl5;
         internal System.Windows.Forms.Label Label27;
         internal System.Windows.Forms.Panel Panel55;
-        internal DevExpress.XtraGrid.GridControl gcMain;
-        internal DevExpress.XtraGrid.Views.Grid.GridView gvMain;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn1;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn2;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn3;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn4;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn5;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn6;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn7;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn8;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn11;
-        internal DevExpress.XtraGrid.Columns.GridColumn GridColumn12;
-        internal DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDeleteItem;
-        internal DevExpress.XtraGrid.Views.Grid.GridView GridView1;
         internal System.Windows.Forms.Label Label40;
-        internal System.Windows.Forms.Panel Panel8;
-        internal System.Windows.Forms.TextBox TxtCaseNumber;
-        internal System.Windows.Forms.Label Label4;
         internal System.Windows.Forms.Button BtnRefresh;
         internal System.Windows.Forms.Timer disDimensionLoading;
-        internal System.Windows.Forms.Panel Panel45;
         internal System.Windows.Forms.TextBox TxtCTNPerPallet;
-        internal System.Windows.Forms.Label Label52;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl10;
         internal System.Windows.Forms.PictureBox PicProducts;
-        internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.TextBox TxtBuyinDiscount;
         internal System.Windows.Forms.Label Label43;
         internal System.Windows.Forms.ToolStripButton MnuMoveNextItem;
@@ -3949,14 +3497,6 @@ namespace unt_bingoo.view.Product
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl2;
         internal System.Windows.Forms.Label Label26;
         internal System.Windows.Forms.TextBox TxtDeliveryCost;
-        internal System.Windows.Forms.Panel Panel9;
-        internal System.Windows.Forms.Label Label9;
-        internal System.Windows.Forms.Label Label1;
-        internal System.Windows.Forms.Panel Panel13;
-        internal System.Windows.Forms.TextBox TxtProductsName;
-        internal System.Windows.Forms.Label Label12;
-        internal System.Windows.Forms.TextBox TxtSize;
-        internal System.Windows.Forms.Label Label11;
         internal System.Windows.Forms.Panel Panel30;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl15;
         internal System.Windows.Forms.Label Label30;
@@ -3977,11 +3517,9 @@ namespace unt_bingoo.view.Product
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl7;
         internal System.Windows.Forms.TextBox TxtBuyin;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl6;
-        internal System.Windows.Forms.TextBox TxtUnitNumber;
         internal System.Windows.Forms.TextBox TxtGrossWeight;
         internal System.Windows.Forms.Label Label38;
         internal System.Windows.Forms.Button BtnMoveToDeactivated;
-        internal System.Windows.Forms.Label Label15;
         internal System.Windows.Forms.Timer TimerSupplierLoading;
         internal System.Windows.Forms.Label Label49;
         internal System.Windows.Forms.GroupBox GroupBox6;
@@ -4026,23 +3564,6 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Button BtnClose;
         internal System.Windows.Forms.Button BtnDelete;
         internal System.Windows.Forms.Button BtnUpdate;
-        internal System.Windows.Forms.GroupBox GroupBox1;
-        internal System.Windows.Forms.Panel Panel14;
-        internal System.Windows.Forms.TextBox TxtDescription;
-        internal System.Windows.Forms.Label Label14;
-        internal System.Windows.Forms.Panel Panel12;
-        internal System.Windows.Forms.TextBox TxtKhmerName;
-        internal System.Windows.Forms.Panel Panel15;
-        internal System.Windows.Forms.ComboBox CmbCategory;
-        internal System.Windows.Forms.TextBox TxtMadeIn;
-        internal System.Windows.Forms.Label Label13;
-        internal System.Windows.Forms.Panel Panel5;
-        internal System.Windows.Forms.Panel Panel7;
-        internal System.Windows.Forms.TextBox TxtPackNumber;
-        internal System.Windows.Forms.Panel Panel6;
-        internal System.Windows.Forms.PictureBox PicOldCode;
-        internal System.Windows.Forms.TextBox TxtId;
-        internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.Panel Panel27;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl4;
         internal System.Windows.Forms.ComboBox CmbFOBCIF;
@@ -4060,7 +3581,6 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.DataGridView DgvDeliveryLogistic;
         internal System.Windows.Forms.Button BtnAccept;
         internal System.Windows.Forms.Panel Panel1;
-        internal System.Windows.Forms.PictureBox PicLogo;
         internal System.Windows.Forms.Panel Panel4;
         internal System.Windows.Forms.Label LblCompanyName;
         internal System.Windows.Forms.GroupBox GroupBox3;
@@ -4084,5 +3604,53 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Timer ShelfLifeOfProductLoading;
         internal System.Windows.Forms.DataGridViewTextBoxColumn City;
         internal System.Windows.Forms.Timer CityLoading;
+        private System.Windows.Forms.Button button2;
+        private DevExpress.XtraEditors.LabelControl lblSystemName;
+        private System.Windows.Forms.PictureBox PicSectionIcon;
+        internal System.Windows.Forms.GroupBox GroupBox1;
+        internal System.Windows.Forms.Panel Panel14;
+        internal System.Windows.Forms.TextBox TxtDescription;
+        internal System.Windows.Forms.Label Label14;
+        internal System.Windows.Forms.Panel Panel13;
+        internal System.Windows.Forms.TextBox TxtProductsName;
+        internal System.Windows.Forms.Label Label12;
+        internal System.Windows.Forms.TextBox TxtSize;
+        internal System.Windows.Forms.Label Label11;
+        internal System.Windows.Forms.Panel Panel12;
+        internal System.Windows.Forms.TextBox TxtKhmerName;
+        internal System.Windows.Forms.Label Label10;
+        internal System.Windows.Forms.Panel Panel15;
+        internal System.Windows.Forms.ComboBox CmbCategory;
+        internal System.Windows.Forms.Label Label15;
+        internal System.Windows.Forms.TextBox TxtMadeIn;
+        internal System.Windows.Forms.Label Label13;
+        internal System.Windows.Forms.Panel Panel11;
+        internal System.Windows.Forms.ComboBox CmbShelfLifeOfProduct;
+        private System.Windows.Forms.Button button1;
+        internal System.Windows.Forms.Label Label8;
+        internal System.Windows.Forms.Panel Panel9;
+        internal System.Windows.Forms.ComboBox CmbSupplier;
+        internal System.Windows.Forms.Label Label9;
+        internal System.Windows.Forms.Panel Panel10;
+        internal System.Windows.Forms.TextBox TxtSupplierCode;
+        internal System.Windows.Forms.Label Label5;
+        internal System.Windows.Forms.TextBox TxtSKU;
+        internal System.Windows.Forms.Label Label7;
+        internal System.Windows.Forms.Panel Panel5;
+        internal System.Windows.Forms.Panel Panel8;
+        internal System.Windows.Forms.TextBox TxtCaseNumber;
+        internal System.Windows.Forms.Label Label4;
+        internal System.Windows.Forms.Panel Panel7;
+        internal System.Windows.Forms.TextBox TxtPackNumber;
+        internal System.Windows.Forms.Label Label3;
+        internal System.Windows.Forms.Panel Panel6;
+        internal System.Windows.Forms.PictureBox PicOldCode;
+        internal System.Windows.Forms.TextBox TxtUnitNumber;
+        internal System.Windows.Forms.Label Label2;
+        internal System.Windows.Forms.TextBox TxtId;
+        internal System.Windows.Forms.Label Label6;
+        private DevExpress.XtraGrid.Columns.GridColumn UOMCode;
+        private DevExpress.XtraGrid.GridControl gcScale;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvScale;
     }
 }

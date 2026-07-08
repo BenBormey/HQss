@@ -8,7 +8,9 @@ using System.Data.SqlClient;
 using System.Data;
 using unt_bingoo.Declares;
 using unt_bingoo.Frameworks;
-
+using DevExpress.XtraEditors;
+using System.Linq;
+using System.Drawing;
 namespace unt_bingoo.view.Outlet
 {
     public partial class guiFranchise : DevExpress.XtraEditors.XtraForm
@@ -16,11 +18,22 @@ namespace unt_bingoo.view.Outlet
         private readonly APIsController _api;
         private DatabaseFramework Data = new DatabaseFramework();
         private ApplicationFramework App = new ApplicationFramework();
+        private bool _suspendDateRules = false;
         public guiFranchise()
         {
             InitializeComponent();
             this.LoadingInitialized();
             _api = new APIsController();
+       
+
+            gridView1.Appearance.HeaderPanel.BackColor = Color.Silver;
+            gridView1.Appearance.HeaderPanel.ForeColor = Color.Black;
+            gridView1.Appearance.HeaderPanel.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            gridView1.Appearance.HeaderPanel.Options.UseBackColor = true;
+            gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
+            gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+
         }
 
         private void guiFranchise_Load(object sender, EventArgs e)
@@ -39,21 +52,39 @@ namespace unt_bingoo.view.Outlet
             {
                 btnSave.Enabled = false;
 
-                var data = await _api.GetAsync<List<Franchise>>("api/Franchise");
+                // Load Franchise
+                var franchises = await _api.GetAsync<List<Franchise>>("api/Franchise");
 
-                if (data != null)
+                // Load Outlet
+                var outlets = await _api.GetAsync<List<OutletItem>>("api/Outlet");
+
+                if (franchises != null)
                 {
-                    gridControl1.DataSource = data; // if you use GridControl
+                    foreach (var franchise in franchises)
+                    {
+                        bool isUsed = outlets != null &&
+                                      outlets.Any(o => o.FranchiseId == franchise.franchiseId);
+
+                        franchise.Status = isUsed;
+                    }
+
+                    gridControl1.DataSource = franchises;
+                    gridView1.BestFitColumns();
+                    gridView1.RefreshData();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Load Error:\n" + ex.Message);
+                XtraMessageBox.Show(
+                    "Load Error:\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
             finally
             {
                 btnSave.Enabled = true;
-                this.loadingOutletcode();
+                loadingOutletcode();
             }
         }
         private async Task SaveFranchise()
@@ -79,6 +110,17 @@ namespace unt_bingoo.view.Outlet
                     MessageBox.Show("Please select franchise type");
                     return;
                 }
+                DateTime? agreementDate = dtpAgreementDate.Checked
+    ? dtpAgreementDate.Value
+    : (DateTime?)null;
+
+                DateTime? expirationDate = dtpExpirationDate.Checked
+                    ? dtpExpirationDate.Value
+                    : (DateTime?)null;
+
+                DateTime? afterDate = dtpAfterDate.Checked
+                    ? dtpAfterDate.Value
+                    : (DateTime?)null;
 
                 var model = new
                 {
@@ -87,7 +129,11 @@ namespace unt_bingoo.view.Outlet
                     outletName = txtOutletName.Text.Trim(),
                     franchiseInformation = txtFranchiseInfo.Text?.Trim(),
                     franchiseTypeId = Convert.ToInt32(cboFranchiseType.SelectedValue),
-                    typeName = cboFranchiseType.Text
+                    typeName = cboFranchiseType.Text,
+                    agreementDate = agreementDate,
+                    expirationDate = expirationDate,
+                    afterDate = afterDate
+
                 };
 
                 bool result = false;
@@ -333,5 +379,31 @@ namespace unt_bingoo.view.Outlet
         }
 
         private int _editingFranchiseId = 0;
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpAgreementDate_ValueChanged(object sender, EventArgs e)
+        {
+            //dtpExpirationDate.MinDate = dtpAgreementDate.Value.Date;
+            dtpExpirationDate.Value = dtpAgreementDate.Value.AddYears(1);
+           
+        }
+
+        private void dtpExpirationDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (_suspendDateRules) return;
+
+            // Auto-suggest Alert Date = 1 month after Expiration.
+            // User can still change it after this.
+            dtpAfterDate.Value = dtpExpirationDate.Value.AddMonths(-1);
+        }
+
+        private void cbooutletCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+     
+        }
     }
 }

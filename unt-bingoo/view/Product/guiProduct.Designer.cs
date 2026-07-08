@@ -870,7 +870,7 @@ namespace unt_bingoo.view.Product
             this.Controls.Add(this.panelHeader);
             this.Name = "guiProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Product Management";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.guiProduct_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.panelHeader)).EndInit();
             this.panelHeader.ResumeLayout(false);

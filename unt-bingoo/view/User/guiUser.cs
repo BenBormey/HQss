@@ -49,7 +49,7 @@ namespace unt_bingoo.view.User
             {
                 XtraMessageBox.Show(ex.Message);
             }
-            ApplyModernUI();
+            //ApplyModernUI();
 
         }
         public async Task LoadData()

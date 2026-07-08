@@ -11,7 +11,7 @@ namespace unt_bingoo.Class
         public string SupplierName { get; set; }
 
         public string ContactName { get; set; }
-
+        public string SupplierNamekh { get; set; }
         public string Phone { get; set; }
 
         public string Email { get; set; }
@@ -37,6 +37,7 @@ namespace unt_bingoo.Class
         public string Note { get; set; }
 
         public string ChequeName { get; set; }
+        public int TermId { get; set; }
 
         public int Term { get; set; }
 

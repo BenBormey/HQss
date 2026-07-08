@@ -69,6 +69,12 @@
     <StartupObject>unt_bingoo.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.105.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.105.0\lib\netstandard2.0\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1d5f7376574c51ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Parser.2.0.0\lib\netstandard2.0\ClosedXML.Parser.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -154,8 +160,20 @@
     <Reference Include="DevExtreme.AspNet.Mvc">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 19.1\DevExtreme\System\DevExtreme\Bin\AspNet\DevExtreme.AspNet.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.3.1.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.Framework.3.1.1\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.7, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.7\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
@@ -175,6 +193,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c77e27b81f4d0187, processorArchitecture=MSIL">
+      <HintPath>..\packages\RBush.Signed.4.0.0\lib\net47\RBush.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -214,6 +238,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="zxing, Version=0.16.11.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZXing.Net.0.16.11\lib\net48\zxing.dll</HintPath>
     </Reference>
@@ -222,6 +247,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\ApiError.cs" />
+    <Compile Include="Class\BankSetup.cs" />
     <Compile Include="Class\BranchItem.cs" />
     <Compile Include="Class\CartItemVM.cs" />
     <Compile Include="Class\CartResponseVM.cs" />
@@ -229,15 +256,20 @@
     <Compile Include="Class\CashPaymentDto.cs" />
     <Compile Include="Class\CategoryItem.cs" />
     <Compile Include="Class\CheckoutResponse.cs" />
+    <Compile Include="Class\citizetionPhoto.cs" />
     <Compile Include="Class\CreateOutlet.cs" />
     <Compile Include="Class\ExchangeRateModel.cs" />
     <Compile Include="Class\ExchangeRateResponse.cs" />
     <Compile Include="Class\Franchise.cs" />
     <Compile Include="Class\FranchiseTypeItem.cs" />
+    <Compile Include="Class\HoureOparation\CreateHourOperationDto.cs" />
+    <Compile Include="Class\HoureOparation\UpdateHourOperationDto.cs" />
+    <Compile Include="Class\HourOperation.cs" />
     <Compile Include="Class\KHQRRequestDto.cs" />
     <Compile Include="Class\LoginResponse.cs" />
     <Compile Include="Class\CurrencyItem.cs" />
     <Compile Include="Class\MefExchangeResponse.cs" />
+    <Compile Include="Class\MenuItem.cs" />
     <Compile Include="Class\MenuItemVM.cs" />
     <Compile Include="Class\NBCItem.cs" />
     <Compile Include="Class\NBCResponse.cs" />
@@ -249,7 +281,10 @@
     <Compile Include="Class\PnLDto.cs" />
     <Compile Include="Class\ProductItem.cs" />
     <Compile Include="Class\ProductPosDto.cs" />
+    <Compile Include="Class\ProductScaleDto.cs" />
     <Compile Include="Class\ProductScal\CreateProductScaleDto.cs" />
+    <Compile Include="Class\ProductScal\ProductLookupRepository.cs" />
+    <Compile Include="Class\ProductScal\ProductPricingCalculator.cs" />
     <Compile Include="Class\ProductScal\ProductScal.cs" />
     <Compile Include="Class\ProductStockModel.cs" />
     <Compile Include="Class\ProvinceItem.cs" />
@@ -262,6 +297,9 @@
     <Compile Include="Class\SaleReportVM.cs" />
     <Compile Include="Class\Session.cs" />
     <Compile Include="Class\SupplierItem.cs" />
+    <Compile Include="Class\SupplierLookup.cs" />
+    <Compile Include="Class\SupplierReportItem.cs" />
+    <Compile Include="Class\UOMClas.cs" />
     <Compile Include="Class\UploadResult.cs" />
     <Compile Include="Class\UserItem.cs" />
     <Compile Include="Controller\APIGlobals.cs" />
@@ -276,9 +314,16 @@
     <Compile Include="Frameworks\ApplicationFramework.cs" />
     <Compile Include="Frameworks\Configuration.cs" />
     <Compile Include="Frameworks\DatabaseFramework.cs" />
+    <Compile Include="Interface\IBankSetupRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\Text\Json.cs" />
+    <Compile Include="view\Bank\BankSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Bank\BankSetup.Designer.cs">
+      <DependentUpon>BankSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Branch\guiBranch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -291,12 +336,6 @@
     <Compile Include="view\Branch\guiOutlet.Designer.cs">
       <DependentUpon>guiOutlet.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\Branch\test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\Branch\test.Designer.cs">
-      <DependentUpon>test.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\Category\guiCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +347,12 @@
     </Compile>
     <Compile Include="view\currency\guiCurency.Designer.cs">
       <DependentUpon>guiCurency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\currency\guiCurencys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\currency\guiCurencys.Designer.cs">
+      <DependentUpon>guiCurencys.cs</DependentUpon>
     </Compile>
     <Compile Include="view\currency\guiExchange.cs">
       <SubType>Form</SubType>
@@ -400,6 +445,12 @@
     <Compile Include="view\Product\FrmProductsBarcode.Designer.cs">
       <DependentUpon>FrmProductsBarcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\Product\FrmProductsBuyinNQtyPCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\FrmProductsBuyinNQtyPCase.Designer.cs">
+      <DependentUpon>FrmProductsBuyinNQtyPCase.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Product\FrmProductsCaseNumber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +468,12 @@
     </Compile>
     <Compile Include="view\Product\FrmProductsSearch.Designer.cs">
       <DependentUpon>FrmProductsSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Product\guiHourOpration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\guiHourOpration.Designer.cs">
+      <DependentUpon>guiHourOpration.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Product\guiProduct.cs">
       <SubType>Form</SubType>
@@ -436,11 +493,23 @@
     <Compile Include="view\Product\guiProductStock.Designer.cs">
       <DependentUpon>guiProductStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\Sale.cs">
+    <Compile Include="view\Product\guiUOM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\Sale.Designer.cs">
-      <DependentUpon>Sale.cs</DependentUpon>
+    <Compile Include="view\Product\guiUOM.Designer.cs">
+      <DependentUpon>guiUOM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Product\SetupOutletMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\SetupOutletMenu.Designer.cs">
+      <DependentUpon>SetupOutletMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Product\ShelfLife.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\ShelfLife.Designer.cs">
+      <DependentUpon>ShelfLife.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Supplier\Form1.cs">
       <SubType>Form</SubType>
@@ -448,11 +517,23 @@
     <Compile Include="view\Supplier\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\Supplier\frmExportExcelOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Supplier\frmExportExcelOptions.Designer.cs">
+      <DependentUpon>frmExportExcelOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Supplier\guiSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\Supplier\guiSupplier.Designer.cs">
       <DependentUpon>guiSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Supplier\guiSupplierReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Supplier\guiSupplierReport.Designer.cs">
+      <DependentUpon>guiSupplierReport.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Supplier\guiSuppliers.cs">
       <SubType>Form</SubType>
@@ -501,20 +582,23 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="view\Bank\BankSetup.resx">
+      <DependentUpon>BankSetup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\Branch\guiBranch.resx">
       <DependentUpon>guiBranch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Branch\guiOutlet.resx">
       <DependentUpon>guiOutlet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\Branch\test.resx">
-      <DependentUpon>test.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="view\Category\guiCategory.resx">
       <DependentUpon>guiCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\currency\guiCurency.resx">
       <DependentUpon>guiCurency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\currency\guiCurencys.resx">
+      <DependentUpon>guiCurencys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\currency\guiExchange.resx">
       <DependentUpon>guiExchange.cs</DependentUpon>
@@ -558,6 +642,9 @@
     <EmbeddedResource Include="view\Product\FrmProductsBarcode.resx">
       <DependentUpon>FrmProductsBarcode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\FrmProductsBuyinNQtyPCase.resx">
+      <DependentUpon>FrmProductsBuyinNQtyPCase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\Product\FrmProductsCaseNumber.resx">
       <DependentUpon>FrmProductsCaseNumber.cs</DependentUpon>
     </EmbeddedResource>
@@ -566,6 +653,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Product\FrmProductsSearch.resx">
       <DependentUpon>FrmProductsSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\guiHourOpration.resx">
+      <DependentUpon>guiHourOpration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Product\guiProduct.resx">
       <DependentUpon>guiProduct.cs</DependentUpon>
@@ -576,8 +666,14 @@
     <EmbeddedResource Include="view\Product\guiProductStock.resx">
       <DependentUpon>guiProductStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\Sale.resx">
-      <DependentUpon>Sale.cs</DependentUpon>
+    <EmbeddedResource Include="view\Product\guiUOM.resx">
+      <DependentUpon>guiUOM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\SetupOutletMenu.resx">
+      <DependentUpon>SetupOutletMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\ShelfLife.resx">
+      <DependentUpon>ShelfLife.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Supplier\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -833,6 +929,7 @@
     <Content Include="unt.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Class\NewFolder1\" />
     <Folder Include="NewFolder1\" />
     <Folder Include="view\NewFolder1\" />
   </ItemGroup>
