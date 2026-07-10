@@ -47,12 +47,14 @@ namespace unt_bingoo.view.Product
 
             DataBindingSource = new BindingSource();
 
-            // FIX (cannot close form / cannot leave supplier combo):
-            // When a data-bound ComboBox has a binding/validation error (e.g. the
-            // "Sup1" value doesn't exist in the supplier list yet), WinForms blocks
-            // focus from leaving the control — the whole form appears "stuck" and
-            // even the Close button won't work. This lets focus move anyway.
             this.AutoValidate = AutoValidate.EnableAllowFocusChange;
+
+            // Wired here (not in the async Load handler) so live recalculation
+            // is guaranteed even if something earlier in Load throws.
+            TxtBuyinDiscount.TextChanged += (s, ev) => CalculatedTotalBuyin();
+            TxtBuyinVAT.TextChanged += (s, ev) => CalculatedTotalBuyin();
+            txtexcisetax.TextChanged += (s, ev) => CalculatedTotalBuyin();
+            txtpubliclightingtax.TextChanged += (s, ev) => CalculatedTotalBuyin();
         }
 
         private void LoadingInitialized()
@@ -91,6 +93,41 @@ namespace unt_bingoo.view.Product
         private void BtnAddDel_Click(object sender, EventArgs e)
         {
         }
+        // Numeric two-way binding: commit immediately, show 2 decimals,
+        // but keep raw text while typing so the caret doesn't jump.
+        private void BindEditableNumeric(Control control, string dataMember)
+        {
+            var binding = new Binding("Text", DataBindingSource, dataMember, true,
+                                      DataSourceUpdateMode.OnPropertyChanged);
+
+            binding.Format += (s, e) =>
+            {
+                // កំពុងវាយ -> ទុក text ដដែល (កុំ reformat)
+                if (control.Focused)
+                {
+                    e.Value = control.Text;
+                    return;
+                }
+
+                if (e.Value == null) { e.Value = ""; return; }
+
+                if (decimal.TryParse(e.Value.ToString(), out var d))
+                    e.Value = d.ToString("0.00"); 
+            };
+
+            control.DataBindings.Add(binding);
+        }
+
+        private static void BindEditable(Control control, string controlProperty,
+                                         BindingSource source, string dataMember,
+                                         string formatString = null)
+        {
+            var binding = new Binding(controlProperty, source, dataMember, true,
+                                      DataSourceUpdateMode.OnPropertyChanged);
+            if (!string.IsNullOrEmpty(formatString))
+                binding.FormatString = formatString;
+            control.DataBindings.Add(binding);
+        }
 
         private void DataLoading()
         {
@@ -102,71 +139,67 @@ namespace unt_bingoo.view.Product
 
             if (DataBindingSource.DataSource != null)
             {
-                TxtId.DataBindings.Add("Text", DataBindingSource, "ProID");
-                TxtUnitNumber.DataBindings.Add("Text", DataBindingSource, "ProNumY");
-                TxtPackNumber.DataBindings.Add("Text", DataBindingSource, "ProNumYP");
-                TxtCaseNumber.DataBindings.Add("Text", DataBindingSource, "ProNumYC");
-                TxtSKU.DataBindings.Add("Text", DataBindingSource, "ProSKU");
-                TxtSupplierCode.DataBindings.Add("Text", DataBindingSource, "ProNumS");
+             
+                BindEditable(TxtId, "Text", DataBindingSource, "ProID");
+                BindEditable(TxtUnitNumber, "Text", DataBindingSource, "ProNumY");
+                BindEditable(TxtPackNumber, "Text", DataBindingSource, "ProNumYP");
+                BindEditable(TxtCaseNumber, "Text", DataBindingSource, "ProNumYC");
+                BindEditable(TxtSKU, "Text", DataBindingSource, "ProSKU");
+                BindEditable(TxtSupplierCode, "Text", DataBindingSource, "ProNumS");
 
-                // FIX (supplier combo locking the form):
-                // Bind with formattingEnabled = true and a null default value so a
-                // Sup1 value that is missing from the supplier list does NOT throw
-                // a binding error (which is what froze the form before).
-                CmbSupplier.DataBindings.Add(
-                    new Binding("SelectedValue", DataBindingSource, "Sup1", true,
-                                DataSourceUpdateMode.OnPropertyChanged, null));
+                BindEditable(CmbSupplier, "SelectedValue", DataBindingSource, "Sup1");
 
-                TxtProductsName.DataBindings.Add("Text", DataBindingSource, "ProName");
-                TxtKhmerName.DataBindings.Add("Text", DataBindingSource, "KhmerName");
-                TxtSize.DataBindings.Add("Text", DataBindingSource, "ProPacksize");
-                TxtDescription.DataBindings.Add("Text", DataBindingSource, "ProDes");
-                CmbCategory.DataBindings.Add("SelectedValue", DataBindingSource, "categoryId");
-                TxtMadeIn.DataBindings.Add("Text", DataBindingSource, "ProMadein");
-                DTPBirthDate.DataBindings.Add("Value", DataBindingSource, "BirthDate");
-                TxtCurrentStock.DataBindings.Add("Text", DataBindingSource, "ProTotQty");
-                TxtQtySold.DataBindings.Add("Text", DataBindingSource, "ProSSec");
-                TxtOrderLevel.DataBindings.Add("Text", DataBindingSource, "ProRecLev");
-                TxtOrderAmount.DataBindings.Add("Text", DataBindingSource, "ProRecOrder");
-                TxtRemark.DataBindings.Add("Text", DataBindingSource, "ProRem");
-                TxtFactoryCost.DataBindings.Add("Text", DataBindingSource, "FOBCIFCost");
-                TxtBuyin.DataBindings.Add("Text", DataBindingSource, "ProImpPri");
-                TxtBuyinDiscount.DataBindings.Add("Text", DataBindingSource, "ProDis");
-                TxtBuyinVAT.DataBindings.Add("Text", DataBindingSource, "ProVAT");
-                txtexcisetax.DataBindings.Add("Text", DataBindingSource, "ExciseTax");
-                txtpubliclightingtax.DataBindings.Add("Text", DataBindingSource, "PublicLightingTax");
-                TxtTotalBuyin.DataBindings.Add("Text", DataBindingSource, "ProFinBuyin");
+                BindEditable(TxtProductsName, "Text", DataBindingSource, "ProName");
+                BindEditable(TxtKhmerName, "Text", DataBindingSource, "KhmerName");
+                BindEditable(TxtSize, "Text", DataBindingSource, "ProPacksize");
+                BindEditable(TxtDescription, "Text", DataBindingSource, "ProDes");
+                //BindEditable(CmbCategory, "SelectedValue", DataBindingSource, "ProCat");
+                BindEditable(TxtMadeIn, "Text", DataBindingSource, "ProMadein");
+                BindEditable(DTPBirthDate, "Value", DataBindingSource, "BirthDate");
+                BindEditable(TxtCurrentStock, "Text", DataBindingSource, "ProTotQty");
+                BindEditable(TxtQtySold, "Text", DataBindingSource, "ProSSec");
+                BindEditable(TxtOrderLevel, "Text", DataBindingSource, "ProRecLev");
+                BindEditable(TxtOrderAmount, "Text", DataBindingSource, "ProRecOrder");
+                BindEditable(TxtRemark, "Text", DataBindingSource, "ProRem");
 
+        
+                BindEditableNumeric(TxtFactoryCost, "FOBCIFCost");
+                BindEditableNumeric(TxtBuyin, "ProImpPri");
+                BindEditableNumeric(TxtBuyinDiscount, "ProDis");
+                BindEditableNumeric(TxtBuyinVAT, "ProVAT");
+                BindEditableNumeric(txtexcisetax, "ExciseTax");
+                BindEditableNumeric(txtpubliclightingtax, "PublicLightingTax");
+                BindEditableNumeric(TxtTotalBuyin, "ProFinBuyin");
+                BindEditableNumeric(TxtPackPrice, "ProPckPri");
+                BindEditableNumeric(TxtUnitProfit, "ProProPer");
+                BindEditableNumeric(TxtPackProfit, "ProPckDis");
+                BindEditableNumeric(TxtCasePriceDiscount, "ProHolesaleper");
+                BindEditableNumeric(TxtCaseProfit, "ProHoleSalePP");
+                BindEditableNumeric(txtFormDLanded, "FormDLanded");
+                BindEditableNumeric(txtvop, "VOP");
+
+           
+                BindEditable(TxtQtyPerPack, "Text", DataBindingSource, "ProQtyPPack");
+                BindEditable(TxtQtyPerCase, "Text", DataBindingSource, "ProQtyPCase");
+
+         
+                BindEditable(CmbFactoryCurrency, "Text", DataBindingSource, "FactoryCurrency");
+                BindEditable(CmbFOBCIF, "Text", DataBindingSource, "FOB_CIF");
+                BindEditable(CmbCurrency, "Text", DataBindingSource, "ProCurr");
+                BindEditable(CmbShelfLifeOfProduct, "Text", DataBindingSource, "ShelfLifeOfProduct");
+
+          
                 TxtAveragePrice.DataBindings.Add(
                     new Binding("Text", DataBindingSource, "Average", true,
-                                DataSourceUpdateMode.Never, 0, "N4"));
-
+                                DataSourceUpdateMode.Never, 0, "N2"));
                 TxtUnitPrice.DataBindings.Add(
                     new Binding("Text", DataBindingSource, "ProUPrSE", true,
                                 DataSourceUpdateMode.Never, 0, "N2"));
-
-                TxtPackPrice.DataBindings.Add("Text", DataBindingSource, "ProPckPri");
-
                 TxtCasePrice.DataBindings.Add(
                     new Binding("Text", DataBindingSource, "ProUPriSeH", true,
                                 DataSourceUpdateMode.Never, 0, "N2"));
 
-                TxtQtyPerPack.DataBindings.Add("Text", DataBindingSource, "ProQtyPPack");
-                TxtQtyPerCase.DataBindings.Add("Text", DataBindingSource, "ProQtyPCase");
-                TxtUnitProfit.DataBindings.Add("Text", DataBindingSource, "ProProPer");
-                TxtPackProfit.DataBindings.Add("Text", DataBindingSource, "ProPckDis");
-                TxtCasePriceDiscount.DataBindings.Add("Text", DataBindingSource, "ProHolesaleper");
-                TxtCaseProfit.DataBindings.Add("Text", DataBindingSource, "ProHoleSalePP");
-
-                CmbFactoryCurrency.DataBindings.Add("Text", DataBindingSource, "FactoryCurrency");
-                CmbFOBCIF.DataBindings.Add("Text", DataBindingSource, "FOB_CIF");
-                CmbCurrency.DataBindings.Add("Text", DataBindingSource, "ProCurr");
-
-                txtFormDLanded.DataBindings.Add("Text", DataBindingSource, "FormDLanded");
-                CmbShelfLifeOfProduct.DataBindings.Add("Text", DataBindingSource, "ShelfLifeOfProduct");
-                txtvop.DataBindings.Add("Text", DataBindingSource, "VOP");
-
-                // ===== Load Product Scale to Grid =====
+                
                 LoadScaleGridFromCurrentProduct();
 
                 DataBindingSource.CurrentChanged -= DataBindingSource_CurrentChanged;
@@ -198,6 +231,7 @@ namespace unt_bingoo.view.Product
 
                 _scaleList.Add(new ProductScal
                 {
+                    Id = s.Id,
                     ProId = currentProduct.ProID,
                     UOMCode = s.UOMCode,
                     Width = (double?)s.Width,
@@ -207,7 +241,7 @@ namespace unt_bingoo.view.Product
                     NetWeight = (double?)s.NetWeight,
                     GrossWeight = (double?)s.GrossWeight,
                     Status = true,
-                    ProNumY = currentProduct.ProNumY
+                    //ProNumY = currentProduct.ProNumY
                 });
             }
 
@@ -275,8 +309,20 @@ namespace unt_bingoo.view.Product
         {
             LoadProductImage();
             LoadScaleGridFromCurrentProduct();
+            SyncCategoryCombo();
         }
-
+        public void SyncCategoryCombo()
+        {
+            if (DataBindingSource.Current is ProductItem product &&
+      int.TryParse(product.ProCat?.ToString(), out int catId))
+            {
+                CmbCategory.SelectedValue = catId;
+            }
+            else
+            {
+                CmbCategory.SelectedIndex = -1;
+            }
+        }
         private int _imageLoadToken;
 
         private async void LoadProductImage()
@@ -329,6 +375,7 @@ namespace unt_bingoo.view.Product
         {
             try
             {
+                //npte
                 var list = await _api.GetAsync<List<SupplierItem>>("api/Supplier");
 
                 CmbSupplier.DataSource = list;
@@ -399,7 +446,7 @@ namespace unt_bingoo.view.Product
                 Close();
                 return;
             }
-
+           
 
             _lookupRepo = new ProductLookupRepository(CurrentConnectionString());
 
@@ -412,18 +459,24 @@ namespace unt_bingoo.view.Product
 
             this.DataLoading();
             this.LodingUOM();
+            if (DataBindingSource.Current is ProductItem product)
+            {
+                CmbCategory.SelectedValue = Convert.ToInt32(product.ProCat);
+            }
+            else
+            {
+                CmbCategory.SelectedValue = -1;
+
+            }
+            SyncCategoryCombo();
 
             this.CityLoading.Enabled = true;
             this.TimerCurrencyLoading.Enabled = true;
             this.TimerUOMLoading.Enabled = true;
 
-            TxtBuyinDiscount.TextChanged += (s, ev) => CalculatedTotalBuyin();
-            TxtBuyinVAT.TextChanged += (s, ev) => CalculatedTotalBuyin();
-            txtexcisetax.TextChanged += (s, ev) => CalculatedTotalBuyin();
-            txtpubliclightingtax.TextChanged += (s, ev) => CalculatedTotalBuyin();
-
             if (TxtId.Text == "")
                 TxtUnitNumber_Click(TxtUnitNumber, EventArgs.Empty);
+   
         }
 
         private void LoadingShelfLifeOfProductLoading()
@@ -494,7 +547,9 @@ namespace unt_bingoo.view.Product
             TxtFactoryCost.Text = product.FOBCIFCost.ToString();
             txtFormDLanded.Text = product.FormDLanded.ToString();
 
-            TxtBuyin.Text = product.ProImpPri.ToString();
+            TxtBuyin.Text = product.ProImpPri.HasValue
+     ? product.ProImpPri.Value.ToString("0.##")
+     : "";
             TxtBuyinDiscount.Text = product.ProDis.ToString();
             TxtBuyinVAT.Text = product.ProVAT.ToString();
 
@@ -775,7 +830,77 @@ namespace unt_bingoo.view.Product
 
         private void TxtFactoryCost_KeyPress(object sender, KeyPressEventArgs e)
         {
-            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Float, null, 25);
+            TextBox txt = (TextBox)sender;
+
+        
+            if (char.IsControl(e.KeyChar))
+                return;
+
+   
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+            if (e.KeyChar == '.' && !txt.Text.Contains("."))
+                return;
+
+            e.Handled = true;
+        }
+
+        private void TxtDeliveryCost_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+
+        
+            if (char.IsControl(e.KeyChar))
+                return;
+
+   
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+     
+            if (e.KeyChar == '.' && !txt.Text.Contains("."))
+                return;
+
+          
+            e.Handled = true;
+        }
+
+        private void txtFormDLanded_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+
+          
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+          
+            if (e.KeyChar == '.' && !txt.Text.Contains("."))
+                return;
+
+            e.Handled = true;
+        }
+
+        private void txtpubliclightingtax_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+
+          
+            if (char.IsControl(e.KeyChar))
+                return;
+
+
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+     
+            if (e.KeyChar == '.' && !txt.Text.Contains("."))
+                return;
+
+            e.Handled = true;
         }
 
         /// <summary>
@@ -812,12 +937,6 @@ namespace unt_bingoo.view.Product
                 double packPrice = ParseDouble(TxtPackPrice.Text);
                 double caseDiscount = ParseDouble(TxtCasePriceDiscount.Text);
 
-                // FIX ("Cannot allow Pack Price bigger than Case Price" firing wrongly):
-                // The old calculation returned a case price equal to the UNIT price
-                // (e.g. Unit 23, Qty/Case 23 -> Case Price 23.00 instead of 529.00),
-                // so any normal pack price looked "bigger than case price" and the
-                // save was blocked. Case price = unit price x qty per case, minus
-                // the case discount %.
                 double casePrice = ComputeCasePrice(unitPrice, caseDiscount, qtyPerCase);
                 TxtCasePrice.Text = casePrice.ToString("N2");
 
@@ -962,10 +1081,12 @@ namespace unt_bingoo.view.Product
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
+            this.DataLoading();
         }
         private async Task LoadingCategory()
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
+
             try
             {
                 var data = await _api.GetAsync<List<CategoryItem>>("api/category");
@@ -973,20 +1094,6 @@ namespace unt_bingoo.view.Product
                 CmbCategory.DataSource = data;
                 CmbCategory.DisplayMember = "CategoryName";
                 CmbCategory.ValueMember = "Id";
-
-                if (DataBindingSource.DataSource != null &&
-                    DataBindingSource.Current is ProductItem product)
-                {
-                    CmbCategory.SelectedValue = product.ProCat;
-                }
-                else
-                {
-                    CmbCategory.SelectedIndex = -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -1025,26 +1132,33 @@ namespace unt_bingoo.view.Product
 
             return await _api.UploadFileAsync("api/Product/upload", _productImageBytes, fileName, "file");
         }
-
-  
-        private async void BtnUpdate_Click(object sender, EventArgs e)
+        private async Task UpdateProductAsync()
         {
             if (!ValidateData())
                 return;
 
+
             int proId = ParseIntDefault(TxtId.Text, 0);
             bool isUpdate = proId > 0;
-
-            // Confirm with the user which action is about to happen.
             string action = isUpdate ? "UPDATE this product" : "SAVE as a new product";
-            if (XtraMessageBox.Show(
+
+            if (searching == true)
+            {
+
+            }
+            else{
+                if (XtraMessageBox.Show(
                     $"Do you want to {action}?",
                     isUpdate ? "Confirm Update" : "Confirm Save",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
+                {
+                    return;
+                }
             }
+
+            // Confirm with the user which action is about to happen.
+        
 
             this.Cursor = Cursors.WaitCursor;
             BtnUpdate.Enabled = false;
@@ -1054,22 +1168,22 @@ namespace unt_bingoo.view.Product
                 // 1. Upload the image first (if the user picked a new one).
                 string imagePath = await UploadProductImageAsync();
                 if (!string.IsNullOrWhiteSpace(imagePath))
-                    imagePath = imagePath.Trim('"');   
+                    imagePath = imagePath.Trim('"');
                 else if (DataBindingSource.Current is ProductItem current)
-                    imagePath = current.ProImage;    
+                    imagePath = current.ProImage;
 
                 bool success;
 
                 if (isUpdate)
                 {
-            
+
                     object payload = GetPutPayload(proId, imagePath);
                     success = await _api.PutAsync($"api/Product/{proId}", payload);
                 }
                 else
                 {
 
-                 
+
                     object payload = GetPutPayload(proId, imagePath);
 
                     success = await _api.PostAsync("api/Product", payload);
@@ -1082,7 +1196,7 @@ namespace unt_bingoo.view.Product
                         "Information",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                         await ReloadCurrentProduct();
+                    await ReloadCurrentProduct();
 
                 }
                 else
@@ -1092,9 +1206,9 @@ namespace unt_bingoo.view.Product
                         "Warning",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-                    
+
                 }
-          
+
             }
             catch (Exception ex)
             {
@@ -1105,6 +1219,13 @@ namespace unt_bingoo.view.Product
                 BtnUpdate.Enabled = true;
                 this.Cursor = Cursors.Default;
             }
+        }
+
+        private async void BtnUpdate_Click(object sender, EventArgs e)
+        {
+           await this.UpdateProductAsync();
+
+
         }
 
         /// <summary>
@@ -1473,7 +1594,7 @@ namespace unt_bingoo.view.Product
             double totalBuyin = ProductPricingCalculator.TotalBuyin(
                 buyin, discount, vat, excise, publicLight, rate);
 
-            TxtTotalBuyin.Text = string.Format("{0:N4}", totalBuyin);
+            TxtTotalBuyin.Text = string.Format("{0:N2}", totalBuyin);
         }
 
         private async void TimerUOMLoading_Tick(object sender, EventArgs e)
@@ -1585,7 +1706,7 @@ namespace unt_bingoo.view.Product
                     GrossWeight = ParseDouble(TxtGrossWeight.Text),
                     Status = true,
                     ProNumY = TxtUnitNumber.Text.Trim(),
-                    UOMName = CmbUOM.Text.Trim()
+                    //UOMName = CmbUOM.Text.Trim()
                 };
 
                 _scaleList.Add(dto);
@@ -1763,44 +1884,7 @@ namespace unt_bingoo.view.Product
             App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Float, "", 25);
         }
 
-        private void TxtBuyin_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter)
-                return;
 
-            double vAvg = string.IsNullOrEmpty(TxtAveragePrice.Text.Trim()) ? 0 : Convert.ToDouble(TxtAveragePrice.Text.Trim());
-            double vBuyin = string.IsNullOrEmpty(TxtBuyin.Text.Trim()) ? 0 : Convert.ToDouble(TxtBuyin.Text.Trim());
-            decimal vQtyPCase = string.IsNullOrEmpty(TxtQtyPerCase.Text.Trim()) ? 1 : Convert.ToDecimal(TxtQtyPerCase.Text.Trim());
-            bool vDefaultBuyinFocus = sender == TxtBuyin;
-
-            FrmProductsBuyinNQtyPCase vFrm = new FrmProductsBuyinNQtyPCase
-            {
-                vBuyin = vBuyin,
-                vQtyPerCase = vQtyPCase,
-                vDefaultBuyinFocus = vDefaultBuyinFocus
-            };
-
-            if (vFrm.ShowDialog(this) == DialogResult.Cancel)
-                return;
-
-            if (vQtyPCase != vFrm.vQtyPerCase)
-            {
-                if (vBuyin == vFrm.vBuyin)
-                {
-                    DevExpress.XtraEditors.XtraMessageBox.Show(
-                        "Please check buyin again." + Environment.NewLine +
-                        "The Qty/Case have been changed from '" + vQtyPCase + "' to '" + vFrm.vQtyPerCase + "'.",
-                        "Invalid Change", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                double vTotalAvg = (double)((decimal)vAvg / vQtyPCase * vFrm.vQtyPerCase);
-                TxtAveragePrice.Text = vTotalAvg.ToString("N2");
-            }
-
-            TxtBuyin.Text = vFrm.vBuyin.ToString();
-            TxtQtyPerCase.Text = vFrm.vQtyPerCase.ToString();
-        }
 
         private void TxtUnitNumber_TextChanged(object sender, EventArgs e)
         {
@@ -1841,7 +1925,7 @@ namespace unt_bingoo.view.Product
 
             if (!BtnAddNew.Enabled)
             {
-                TxtAveragePrice.Text = totalBuyin.ToString("N4");
+                TxtAveragePrice.Text = totalBuyin.ToString("N2");
             }
 
             int qtySold = string.IsNullOrWhiteSpace(TxtQtySold.Text)
@@ -1850,10 +1934,183 @@ namespace unt_bingoo.view.Product
 
             if (qtySold == 0)
             {
-                TxtAveragePrice.Text = totalBuyin.ToString("N4");
+                TxtAveragePrice.Text = totalBuyin.ToString("N2");
             }
 
             CheckProfitBuyin();
+        }
+        static int x = 200;
+        static int y = 200;
+        private void TxtBuyin_Click(object sender, EventArgs e)
+        {
+            OpenBuyinDialog(sender);
+        }
+        private void OpenBuyinDialog(object sender)
+        {
+            double vAvg = string.IsNullOrEmpty(TxtAveragePrice.Text.Trim()) ? 0 : Convert.ToDouble(TxtAveragePrice.Text.Trim());
+            double vBuyin = string.IsNullOrEmpty(TxtBuyin.Text.Trim()) ? 0 : Convert.ToDouble(TxtBuyin.Text.Trim());
+            decimal vQtyPCase = string.IsNullOrEmpty(TxtQtyPerCase.Text.Trim()) ? 1 : Convert.ToDecimal(TxtQtyPerCase.Text.Trim());
+            bool vDefaultBuyinFocus = sender == TxtBuyin;
+
+            FrmProductsBuyinNQtyPCase vFrm = new FrmProductsBuyinNQtyPCase
+            {
+                vBuyin = vBuyin,
+                vQtyPerCase = vQtyPCase,
+                vDefaultBuyinFocus = vDefaultBuyinFocus,
+                StartPosition = FormStartPosition.Manual
+            };
+
+        
+            var wa = Screen.FromControl(this).WorkingArea;
+            int x = this.Location.X + (this.Width - vFrm.Width) / 2 + 550;
+            int y = this.Location.Y  + (this.Height - vFrm.Height) /2  -200;
+
+            x = Math.Max(wa.Left, Math.Min(x, wa.Right - vFrm.Width));
+            y = Math.Max(wa.Top, Math.Min(y, wa.Bottom - vFrm.Height));
+
+            vFrm.Location = new Point(x, y);
+
+            if (vFrm.ShowDialog(this) == DialogResult.Cancel)
+                return;
+
+            if (vQtyPCase != vFrm.vQtyPerCase)
+            {
+                if (vBuyin == vFrm.vBuyin)
+                {
+                    DevExpress.XtraEditors.XtraMessageBox.Show(
+                        "Please check buyin again." + Environment.NewLine +
+                        "The Qty/Case have been changed from '" + vQtyPCase + "' to '" + vFrm.vQtyPerCase + "'.",
+                        "Invalid Change", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                double vTotalAvg = (double)((decimal)vAvg / vQtyPCase * vFrm.vQtyPerCase);
+                TxtAveragePrice.Text = vTotalAvg.ToString("N2");
+            }
+
+            TxtBuyin.Text = vFrm.vBuyin.ToString();
+            TxtQtyPerCase.Text = vFrm.vQtyPerCase.ToString();
+        }
+
+        private void TxtBuyin_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+           
+        }
+
+        private void TxtBuyin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+
+
+            OpenBuyinDialog(sender);
+        }
+        public bool searching = false;
+        private async void BtnSearch_Click(object sender, EventArgs e)
+        {
+            int proId = ParseIntDefault(TxtId.Text, 0);
+            searching = true;
+            if (proId > 0)
+            {
+                DialogResult answer = XtraMessageBox.Show(
+                    "Do you want to update this product before searching?",
+                    "Confirm Update",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (answer == DialogResult.Yes)
+                {
+                    await UpdateProductAsync();
+                }
+            }
+
+
+            FrmProductsSearch frm = new FrmProductsSearch(this.MdiParent as mainForm);
+
+
+            this.Close();
+
+
+            frm.Show();
+        }
+        private void OpenSearchAndClose()
+        {
+            var frm = new FrmProductsSearch(this.MdiParent as mainForm);
+            frm.MdiParent = this.MdiParent;   
+            frm.Show();
+
+            this.Close();   
+        }
+
+        private void TxtFactoryCost_Leave(object sender, EventArgs e)
+        {
+            FormatNumber(TxtFactoryCost);
+        }
+        private void FormatNumber(TextBox txt)
+        {
+            if (decimal.TryParse(txt.Text, out decimal value))
+            {
+                txt.Text = value == 0 ? "" : value.ToString("0.##");
+            }
+            else
+            {
+                txt.Text = "";
+            }
+        }
+
+        private void TxtBuyin_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel27_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TxtBuyinDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+
+    
+            if (char.IsControl(e.KeyChar))
+                return;
+
+     
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+     
+            if (e.KeyChar == '.' && !txt.Text.Contains("."))
+                return;
+
+
+            e.Handled = true;
+        }
+
+        private void txtvop_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+
+
+            if (char.IsControl(e.KeyChar))
+                return;
+
+
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+
+            if (e.KeyChar == '.' && !txt.Text.Contains("."))
+                return;
+
+            e.Handled = true;
+        }
+
+        private void TxtBuyinDiscount_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

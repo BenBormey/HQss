@@ -30,11 +30,10 @@ namespace unt_bingoo.view.User
         {
             try
             {
-                //string oldPass = txtOldPassword.Text.Trim();
                 string newPass = txtNewPassword.Text.Trim();
                 string confirm = txtConfirmPassword.Text.Trim();
 
-            
+
                 if (
                     string.IsNullOrEmpty(newPass) ||
                     string.IsNullOrEmpty(confirm))
@@ -49,11 +48,11 @@ namespace unt_bingoo.view.User
                     return;
                 }
 
-                if (newPass.Length < 8)
-                {
-                    XtraMessageBox.Show("Password must be at least 8 characters.");
-                    return;
-                }
+                //if (newPass.Length < 8)
+                //{
+                //    XtraMessageBox.Show("Password must be at least 8 characters.");
+                //    return;
+                //}
 
               
                 var data = new
@@ -61,9 +60,9 @@ namespace unt_bingoo.view.User
                     newPassword = newPass
                 };
 
-               
+
                 var res = await _api.PutAsync(
-                    "api/users/change-password",
+                    $"api/users/{APIGlobals.UserId}/reset-password",
                     data);
 
                 if (!res)
@@ -72,7 +71,7 @@ namespace unt_bingoo.view.User
                     return;
                 }
 
-                // 4️⃣ Success
+         
                 XtraMessageBox.Show("Password changed successfully.");
 
                 this.DialogResult = DialogResult.OK;
@@ -96,13 +95,20 @@ namespace unt_bingoo.view.User
                     Close();
                     return;
                 }
+                txtNewPassword.PasswordChar = '•';
+                txtConfirmPassword.PasswordChar = '•';
 
-           
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
             }
+        }
+
+        private void chkShow_CheckedChanged(object sender, EventArgs e)
+        {
+            txtNewPassword.PasswordChar = chkShow.Checked ? '\0' : '•';
+            txtConfirmPassword.PasswordChar = chkShow.Checked ? '\0' : '•';
         }
     }
 }

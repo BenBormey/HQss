@@ -17,13 +17,11 @@ namespace unt_bingoo.Controller
     public class APIsController
     {
  
-       private const string ApiBaseUrl = "http://192.168.1.99:8099/";
-                // private const string ApiBaseUrl = "http://localhost:5189/"; 
+        private const string ApiBaseUrl = "http://192.168.1.99:8099/";
+         //private const string ApiBaseUrl = "http://localhost:5189/"; 
 
 
-        //   "http://localhost:5189/"
-        //   "http://localhost:8085/"
-        //   "http://192.168.2.26:8085/"
+     
 
    
         private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(30);
@@ -77,12 +75,15 @@ namespace unt_bingoo.Controller
             return !string.IsNullOrEmpty(_token);
         }
 
-        // ---------------------------------------------------------
-        //  LOGIN MODELS
-        // ---------------------------------------------------------
+      
         private class LoginRequest
         {
             public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
+        private class MdLoginRequest
+        {
             public string Password { get; set; }
         }
 
@@ -95,7 +96,7 @@ namespace unt_bingoo.Controller
         private class UserInfo
         {
             public int id { get; set; }
-            public int outletId { get; set; }
+            public int? outletId { get; set; }
             public string username { get; set; }
             public string fullName { get; set; }
             public string roleName { get; set; }
@@ -120,6 +121,9 @@ namespace unt_bingoo.Controller
 
                 APIGlobals.UserId = res.user.id;
                 APIGlobals.OutletId = res.user.outletId;
+                APIGlobals.UserName = res.user.username;
+                APIGlobals.FullName = res.user.fullName;
+                APIGlobals.RoleName = res.user.roleName;
 
                 return true;
             }
@@ -130,9 +134,48 @@ namespace unt_bingoo.Controller
             }
         }
 
-        // ---------------------------------------------------------
-        //  SAFE CALL WRAPPERS
-        // ---------------------------------------------------------
+        public async Task<bool> MdLoginAsync(string password)
+        {
+            try
+            {
+                var req = new MdLoginRequest
+                {
+                    Password = password
+                };
+
+                var res = await PostAsync<LoginResponse>("api/auth/md-login", req);
+
+                if (res == null || string.IsNullOrEmpty(res.access_token))
+                    return false;
+
+                SetToken(res.access_token);
+
+                APIGlobals.UserId = res.user.id;
+                APIGlobals.OutletId = res.user.outletId;
+                APIGlobals.UserName = res.user.username;
+                APIGlobals.FullName = res.user.fullName;
+                APIGlobals.RoleName = res.user.roleName;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Login Error:\n" + ex.Message);
+                return false;
+            }
+        }
+
+        // The md-login/login response doesn't include HasSystemAccess, so
+        // look the logged-in user up in the full user list to check it.
+        public async Task<bool> HasSystemAccessAsync(int userId)
+        {
+            var users = await GetAsync<List<UserItem>>("api/users") ?? new List<UserItem>();
+            var match = users.FirstOrDefault(u => u.Id == userId);
+
+            // If the lookup fails for some reason, don't lock the user out over it.
+            return match?.HasSystemAccess ?? true;
+        }
+
         private async Task<T> SafeCall<T>(Func<Task<T>> action)
         {
             try
@@ -141,16 +184,20 @@ namespace unt_bingoo.Controller
             }
             catch (TaskCanceledException)
             {
-                MessageBox.Show("Request timeout!");
+                MessageBox.Show("Request timeout! Server មិនឆ្លើយតបក្នុង 30 វិនាទី។");
+                return default;
+            }
+            catch (HttpRequestException ex)
+            {
+           
                 return default;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("API Error:\n" + ex.Message);
+                //MessageBox.Show("API Error:\n" + ex.Message);
                 return default;
             }
         }
-
         private async Task<bool> SafeCall(Func<Task<bool>> action)
         {
             try

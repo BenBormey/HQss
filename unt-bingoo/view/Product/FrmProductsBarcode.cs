@@ -92,6 +92,7 @@ namespace unt_bingoo.view.Product
             {
                 BtnChange.Text = "&Ok";
             }
+            TxtBarcode.Focus();
         }
 
         private void DataSources(

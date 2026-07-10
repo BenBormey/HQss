@@ -18,7 +18,7 @@ using unt_bingoo.Frameworks;
 
 namespace unt_bingoo.view.Supplier
 {
-    public partial class Form1 : Form
+    public partial class guiSupplierSetup : Form
     {
 
         private APIsController _api;
@@ -37,7 +37,7 @@ namespace unt_bingoo.view.Supplier
         private int? _editingId = null;
 
       
-        public Form1()
+        public guiSupplierSetup()
         {
             InitializeComponent();
             DataBindingSource = new BindingSource();
@@ -145,7 +145,7 @@ namespace unt_bingoo.view.Supplier
      
         //}
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private async void guiSupplierSetup_Load(object sender, EventArgs e)
         {
 
             button2.Visible = false;
@@ -403,6 +403,19 @@ namespace unt_bingoo.view.Supplier
 
                 if (row == null)
                     return;
+
+                var products = await _api.GetAsync<List<ProductItem>>("api/Product")
+                               ?? new List<ProductItem>();
+
+                if (products.Any(p => p.SupplierID == row.SupplierID))
+                {
+                    MessageBox.Show(
+                        $"Cannot delete supplier '{row.SupplierName}' because one or more products still use it.\nPlease change or remove the supplier from those products first.",
+                        "Cannot Delete",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
 
                 var result = MessageBox.Show(
                     $"Are you sure you want to delete supplier '{row.SupplierName}'?",

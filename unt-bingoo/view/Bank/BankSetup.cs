@@ -1,7 +1,10 @@
 ﻿using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using unt_bingoo.Class;
 using unt_bingoo.Controller;
 using unt_bingoo.Declares;
 
@@ -12,14 +15,14 @@ namespace unt_bingoo.view.Bank
     public partial class BankSetup : DevExpress.XtraEditors.XtraForm
     {
         private APIsController _api;
-        private int _currentBankId = 0; // 0 = new record
+        private int _currentBankId = 0; 
 
         public BankSetup()
         {
             InitializeComponent();
         }
 
-        private void BankSetup_Load(object sender, EventArgs e)
+        private async void BankSetup_Load(object sender, EventArgs e)
         {
             _api = APIGlobals.Api;
 
@@ -30,16 +33,28 @@ namespace unt_bingoo.view.Bank
                 return;
             }
 
-            LoadCurrencyOptions();
+            await LoadCurrencyOptions();
             LoadBankTypeOptions();
             LoadGrid();
             ClearForm();
         }
 
-        private void LoadCurrencyOptions()
+        private async Task LoadCurrencyOptions()
         {
-            cmbCurrency.Properties.Items.Clear();
-            cmbCurrency.Properties.Items.AddRange(new object[] { "USD", "KHR", "EUR" });
+            try
+            {
+                var currencies = await _api.GetAsync<List<CurrencyItem>>("api/Currency")
+                                  ?? new List<CurrencyItem>();
+
+                cmbCurrency.Properties.Items.Clear();
+                cmbCurrency.Properties.Items.AddRange(
+                    currencies.Select(c => c.CurrencyCode).ToArray());
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Load Currency Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadBankTypeOptions()
@@ -193,24 +208,35 @@ namespace unt_bingoo.view.Bank
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            // Add always creates a brand-new record, even if a row is currently loaded for editing.
+            _currentBankId = 0;
+            await SaveBank(isUpdate: false);
+        }
+
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (_currentBankId == 0)
+            {
+                XtraMessageBox.Show("Please select a bank from the list first.", "Update",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            await SaveBank(isUpdate: true);
+        }
+
+        private async Task SaveBank(bool isUpdate)
+        {
             if (!ValidateForm())
                 return;
 
             try
             {
                 var bank = GetFormData();
-                bool success;
 
-                if (_currentBankId == 0)
-                {
-                    // CREATE: POST api/BankSetup
-                    success = await _api.PostAsync("api/BankSetup", bank);
-                }
-                else
-                {
-                
-                    success = await _api.PutAsync($"api/BankSetup/{_currentBankId}", bank);
-                }
+                bool success = isUpdate
+                    ? await _api.PutAsync($"api/BankSetup/{_currentBankId}", bank)
+                    : await _api.PostAsync("api/BankSetup", bank);
 
                 if (success)
                 {

@@ -35,6 +35,8 @@
             this.chkIsDefault = new DevExpress.XtraEditors.CheckEdit();
             this.cmbCurrency = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.btnUpdate = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.lblCurrency = new DevExpress.XtraEditors.LabelControl();
             this.txtCallbackUrl = new DevExpress.XtraEditors.TextEdit();
             this.lblCallbackUrl = new DevExpress.XtraEditors.LabelControl();
@@ -135,6 +137,8 @@
             this.panelEntry.Controls.Add(this.chkIsDefault);
             this.panelEntry.Controls.Add(this.cmbCurrency);
             this.panelEntry.Controls.Add(this.btnSave);
+            this.panelEntry.Controls.Add(this.btnUpdate);
+            this.panelEntry.Controls.Add(this.btnDelete);
             this.panelEntry.Controls.Add(this.lblCurrency);
             this.panelEntry.Controls.Add(this.txtCallbackUrl);
             this.panelEntry.Controls.Add(this.lblCallbackUrl);
@@ -182,14 +186,32 @@
             this.cmbCurrency.TabIndex = 39;
             // 
             // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(830, 222);
+            //
+            this.btnSave.Location = new System.Drawing.Point(714, 222);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 32);
             this.btnSave.TabIndex = 41;
             this.btnSave.Text = "&Add";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
+            //
+            // btnUpdate
+            //
+            this.btnUpdate.Location = new System.Drawing.Point(820, 222);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(100, 32);
+            this.btnUpdate.TabIndex = 42;
+            this.btnUpdate.Text = "&Update";
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            //
+            // btnDelete
+            //
+            this.btnDelete.Location = new System.Drawing.Point(926, 222);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 32);
+            this.btnDelete.TabIndex = 44;
+            this.btnDelete.Text = "&Delete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            //
             // lblCurrency
             // 
             this.lblCurrency.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -592,6 +614,8 @@
 
         private DevExpress.XtraEditors.PanelControl panelButtons;
         private DevExpress.XtraEditors.SimpleButton btnSave;
+        private DevExpress.XtraEditors.SimpleButton btnUpdate;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnRefresh;
     }
 }

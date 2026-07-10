@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"${env:ProgramFiles\\(x86\\)}\\\\Microsoft Visual Studio\\\\2019\\\\BuildTools\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" \"e:\\\\unt-bingoo\\\\unt-bingoo\\\\unt-bingoo\\\\unt-bingoo.csproj\" /t:Build /p:Configuration=Debug /nologo /v:minimal)"
+    ]
+  }
+}

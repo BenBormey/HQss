@@ -29,7 +29,7 @@ namespace unt_bingoo.view
         public mainForm()
         {
             InitializeComponent();
-            this._api = new APIsController();
+            this._api = APIGlobals.Api ?? new APIsController();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -231,19 +231,8 @@ namespace unt_bingoo.view
 
         }
 
-        private async void mainForm_Load(object sender, EventArgs e)
+        private void mainForm_Load(object sender, EventArgs e)
         {
-       
-        bool login_=    await _api.LoginAsync("admin", "123");
-            if (!login_)
-            {
-                await _api.LoginAsync("bormey", "12345678");
-            }
-
-       
-
-
-            APIGlobals.Api = _api;
         }
 
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -270,7 +259,7 @@ namespace unt_bingoo.view
 
         private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new unt_bingoo.view.Supplier.Form1() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new unt_bingoo.view.Supplier.guiSupplierSetup() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
         }
 

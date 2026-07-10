@@ -63,8 +63,8 @@ namespace unt_bingoo.Class
 
             public decimal? ProUPriBY { get; set; }
 
-        public float? ProAllowDisW { get; set; }
-            public float? ProAllowDisU { get; set; }
+        //public float? ProAllowDisW { get; set; }
+        //    public float? ProAllowDisU { get; set; }
 
             public float? ProDis { get; set; }
 

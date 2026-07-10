@@ -30,50 +30,43 @@ namespace unt_bingoo.view
             this.CancelButton = BtnExit;
         }
 
-        private async void btnLogin_Click(object sender, EventArgs e)
-        {
-            await Login();
-        }
-
         private async Task Login()
         {
             try
             {
-                // Basic validation
-                //if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
-                //    string.IsNullOrWhiteSpace(txtPassword.Text))
-                //{
-                //    XtraMessageBox.Show("Please enter username and password!");
-                //    return;
-                //}
+                BtnLogIn.Enabled = false;
 
-                //btnLogin.Enabled = false;
+                bool ok = await _api.MdLoginAsync(TxtPassword.Text.Trim());
 
-                //// USE EXISTING API INSTANCE ✅
-                //bool ok = await _api.LoginAsync(
-                //    txtUsername.Text.Trim(),
-                //    txtPassword.Text.Trim());
+                if (!ok)
+                {
+                    XtraMessageBox.Show("The Password is wrong!" + Environment.NewLine + "Please check the password again...", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    TxtPassword.SelectionStart = 0;
+                    TxtPassword.SelectionLength = TxtPassword.TextLength;
+                    TxtPassword.Focus();
+                    return;
+                }
 
-                //if (!ok)
-                //{
-                //    XtraMessageBox.Show("Login failed!");
-                //    return;
-                //}
+                if (!await _api.HasSystemAccessAsync(APIGlobals.UserId))
+                {
+                    _api.Logout();
+                    XtraMessageBox.Show("This account does not have permission to use this system.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    TxtPassword.SelectionStart = 0;
+                    TxtPassword.SelectionLength = TxtPassword.TextLength;
+                    TxtPassword.Focus();
+                    return;
+                }
 
-                //// SAVE GLOBAL API
-                //APIGlobals.Api = _api;
+                // SAVE GLOBAL API
+                APIGlobals.Api = _api;
 
-                //// Debug (optional - remove later)
-                //// XtraMessageBox.Show("UserId = " + APIGlobals.UserId);
+                Hide();
 
-                //// Open main form
-                //Hide();
+                var main = new mainForm();
 
-                //var main = new mainForm();
+                main.FormClosed += (s, e) => Close();
 
-                //main.FormClosed += (s, e) => Close();
-
-                //main.Show();
+                main.Show();
             }
             catch (Exception ex)
             {
@@ -81,7 +74,7 @@ namespace unt_bingoo.view
             }
             finally
             {
-                //btnLogin.Enabled = true;
+                BtnLogIn.Enabled = true;
             }
         }
 
@@ -115,7 +108,7 @@ namespace unt_bingoo.view
             }
         }
 
-        private void BtnLogIn_Click_1(object sender, EventArgs e)
+        private async void BtnLogIn_Click_1(object sender, EventArgs e)
         {
             if (TxtPassword.Text == "")
             {
@@ -123,60 +116,8 @@ namespace unt_bingoo.view
                 this.TxtPassword.Focus();
                 return;
             }
-            else
-            {
-                // Check Password MD
-                Dictionary<string, object> Dic = new Dictionary<string, object>();
-                Dic.Add("ProgramName", "Managing Director");
 
-                if (((DataTable)Data.Selects("PasswordLogin", null, Dic, false, SeparatorList.Is_And, null, null, Initialized.GetConnectionType(Data, App))).Rows.Count <= 0)
-                {
-                    Dic = new Dictionary<string, object>();
-                    Dic.Add("ProgramName", "Managing Director");
-                    Dic.Add("UserName", "Managing Director");
-                    Dic.Add("Password", App.ConvertTextToPassword("Admin", Initialized.R_KeyPassword));
-                    Dic.Add("CreatedDate", "GETDATE()");
-
-                    bool R_Result = Data.Inserts("PasswordLogin", Dic, Initialized.GetConnectionType(Data, App));
-                }
-
-                // Check Password GM
-                Dic = new Dictionary<string, object>();
-                Dic.Add("ProgramName", "UNT-ADMIN");
-
-                if (((DataTable)Data.Selects("PasswordLogin", null, Dic, false, SeparatorList.Is_And, null, null, Initialized.GetConnectionType(Data, App))).Rows.Count <= 0)
-                {
-                    Dic = new Dictionary<string, object>();
-                    Dic.Add("ProgramName", "UNT-ADMIN");
-                    Dic.Add("UserName", "UNT-ADMIN");
-                    Dic.Add("Password", App.ConvertTextToPassword("1122", Initialized.R_KeyPassword));
-                    Dic.Add("CreatedDate", "GETDATE()");
-
-                    bool R_Result = Data.Inserts("PasswordLogin", Dic, Initialized.GetConnectionType(Data, App));
-                }
-
-
-                Dictionary<string, object> Dics = new Dictionary<string, object>();
-
-                Dics.Add("ProgramName", "N'Managing Director',N'GM',N'IT Manager',N'UNT-ADMIN',N'National Sale Manager 1',N'National Sale Manager 2',N'National Sale Manager 3',N'National Sale Manager 5',N'national-sale-manager-nestle',N'Programming Support'");
-
-                Dics.Add("Password", string.Format("'{0}'", App.ConvertTextToPassword(TxtPassword.Text, Initialized.R_KeyPassword)));
-
-                if (((DataTable)Data.Selects("PasswordLogin", null, Dics, true, SeparatorList.Is_And, null, null, Initialized.GetConnectionType(Data, App))).Rows.Count > 0)
-                {
-                    this.Hide();
-                    mainForm mdi = new mainForm();
-                    mdi.Show();
-                }
-                else
-                {
-                    XtraMessageBox.Show("The Password is wrong!" + Environment.NewLine + "Please check the password again...", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    TxtPassword.SelectionStart = 0;
-                    TxtPassword.SelectionLength = TxtPassword.TextLength;
-                    TxtPassword.Focus();
-                    return;
-                }
-            }
+            await Login();
         }
 
         private void guiLogin_Load(object sender, EventArgs e)

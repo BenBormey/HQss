@@ -18,6 +18,8 @@
         private void InitializeComponent()
         {
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
+            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.panelMain = new System.Windows.Forms.Panel();
             this.lblNew = new System.Windows.Forms.Label();
             this.txtNewPassword = new System.Windows.Forms.TextBox();
@@ -26,11 +28,9 @@
             this.chkShow = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.PicSectionIcon = new System.Windows.Forms.PictureBox();
-            this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.panelHeader.SuspendLayout();
-            this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
+            this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -43,6 +43,28 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(440, 90);
             this.panelHeader.TabIndex = 0;
+            // 
+            // PicSectionIcon
+            // 
+            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
+            this.PicSectionIcon.Location = new System.Drawing.Point(27, 6);
+            this.PicSectionIcon.Name = "PicSectionIcon";
+            this.PicSectionIcon.Size = new System.Drawing.Size(89, 78);
+            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicSectionIcon.TabIndex = 164;
+            this.PicSectionIcon.TabStop = false;
+            // 
+            // lblSystemName
+            // 
+            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSystemName.Appearance.Options.UseFont = true;
+            this.lblSystemName.Appearance.Options.UseForeColor = true;
+            this.lblSystemName.Location = new System.Drawing.Point(122, 42);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
+            this.lblSystemName.TabIndex = 163;
+            this.lblSystemName.Text = "JuJuBi Management System";
             // 
             // panelMain
             // 
@@ -75,7 +97,6 @@
             this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtNewPassword.Location = new System.Drawing.Point(15, 40);
             this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.PasswordChar = '●';
             this.txtNewPassword.Size = new System.Drawing.Size(350, 25);
             this.txtNewPassword.TabIndex = 0;
             // 
@@ -95,7 +116,6 @@
             this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtConfirmPassword.Location = new System.Drawing.Point(15, 100);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.PasswordChar = '●';
             this.txtConfirmPassword.Size = new System.Drawing.Size(350, 25);
             this.txtConfirmPassword.TabIndex = 1;
             // 
@@ -110,6 +130,7 @@
             this.chkShow.TabIndex = 2;
             this.chkShow.Text = "Show password";
             this.chkShow.UseVisualStyleBackColor = true;
+            this.chkShow.CheckedChanged += new System.EventHandler(this.chkShow_CheckedChanged);
             // 
             // btnSave
             // 
@@ -141,28 +162,6 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // PicSectionIcon
-            // 
-            this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
-            this.PicSectionIcon.Location = new System.Drawing.Point(27, 6);
-            this.PicSectionIcon.Name = "PicSectionIcon";
-            this.PicSectionIcon.Size = new System.Drawing.Size(89, 78);
-            this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicSectionIcon.TabIndex = 164;
-            this.PicSectionIcon.TabStop = false;
-            // 
-            // lblSystemName
-            // 
-            this.lblSystemName.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblSystemName.Appearance.Options.UseFont = true;
-            this.lblSystemName.Appearance.Options.UseForeColor = true;
-            this.lblSystemName.Location = new System.Drawing.Point(122, 42);
-            this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(291, 26);
-            this.lblSystemName.TabIndex = 163;
-            this.lblSystemName.Text = "JuJuBi Management System";
-            // 
             // guiChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,9 +178,9 @@
             this.Load += new System.EventHandler(this.guiChangePassword_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
             this.ResumeLayout(false);
 
         }

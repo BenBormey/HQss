@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using unt_bingoo.Controller;
 using unt_bingoo.Declares;
 using unt_bingoo.Frameworks;
 
@@ -9,86 +10,39 @@ namespace unt_bingoo.view.Supplier
 {
     public partial class guiTerm : DevExpress.XtraEditors.XtraForm
     {
-        private DatabaseFramework Data = new DatabaseFramework();
+        private readonly APIsController _api = new APIsController();
         private ApplicationFramework App = new ApplicationFramework();
+
+        private int _id = 0;
 
         public guiTerm()
         {
             InitializeComponent();
             dgvTerm.AutoGenerateColumns = false;
-            Initialized.LoadingInitialized(Data, App);
-
-
         }
 
-        private void LoadData()
+    
+        private async Task LoadData()
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(
-                    Data.ConnectionString(
-                    Initialized.GetConnectionType(Data, App))))
-                {
-                    conn.Open();
+            var list = await _api.GetAsync<List<TermDayClass>>("api/termday");
+            if (list == null) list = new List<TermDayClass>();
 
-                    string query = @"
-            SELECT
-                Id,
-                CAST(CountDay AS VARCHAR(10)) + ' Day' AS TermDay,
-              CountDay
-            FROM [DBJuJuBi].[dbo].[tblTermDay]
-            ORDER BY Id DESC";
+            foreach (var item in list)
+                if (string.IsNullOrEmpty(item.TermDay))
+                    item.TermDay = item.CountDay + " Day";
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            List<TermDayClass> list = new List<TermDayClass>();
+            dgvTerm.AutoGenerateColumns = false;
+            dgvTerm.Columns["Id"].DataPropertyName = "Id";
+            dgvTerm.Columns["TermDay"].DataPropertyName = "TermDay";
+            dgvTerm.Columns["CountDay"].DataPropertyName = "CountDay";
 
-                            while (reader.Read())
-                            {
-                                list.Add(new TermDayClass
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    TermDay = reader["TermDay"].ToString(),
-                                    CountDay =Convert.ToInt32(reader["CountDay"])
-                                });
-                            }
-
-
-
-                            dgvTerm.AutoGenerateColumns = false;
-
-                            dgvTerm.Columns["Id"].DataPropertyName = "Id";
-                            dgvTerm.Columns["TermDay"].DataPropertyName = "TermDay";
-                            dgvTerm.Columns["CountDay"].DataPropertyName = "CountDay";
-
-                            dgvTerm.DataSource = null;
-                            dgvTerm.DataSource = list;
-                            btnClose.Visible = false;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(
-                    "SQL Error: " + ex.Message,
-                    "Database Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Error: " + ex.Message,
-                    "System Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            dgvTerm.DataSource = null;
+            dgvTerm.DataSource = list;
+            btnClose.Visible = false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        // ================= SAVE (Add / Update) =================
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -98,61 +52,43 @@ namespace unt_bingoo.view.Supplier
                     return;
                 }
 
-                using (SqlConnection conn =
-                    new SqlConnection(Data.ConnectionString(
-                    Initialized.GetConnectionType(Data, App))))
+                var payload = new TermDayClass
                 {
-                    conn.Open();
+                    CountDay = Convert.ToInt32(txtCountDay.Text)
+                };
 
-                    string query = "";
+                bool ok;
 
-                    if (_id == 0)
+                if (_id == 0)
+                {
+                    // Insert -> POST
+                    ok = await _api.PostAsync("api/termday", payload);
+                }
+                else
+                {
+                    // Update -> PUT
+                    payload.Id = _id;
+
+                    try
                     {
-                        // Insert
-                        query = @"
-            INSERT INTO [DBJuJuBi].[dbo].[tblTermDay]
-            (
-                CountDay
-            )
-            VALUES
-            (
-                @CountDay
-            )";
+                        ok = await _api.PutAsync($"api/termday/{_id}", payload);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        // Update
-                        query = @"
-            UPDATE [DBJuJuBi].[dbo].[tblTermDay]
-            SET CountDay = @CountDay
-            WHERE Id = @Id";
-                    }
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue(
-                            "@CountDay",
-                            Convert.ToInt32(txtCountDay.Text));
-
-                        if (_id != 0)
-                        {
-                            cmd.Parameters.AddWithValue("@Id", _id);
-                        }
-
-                        cmd.ExecuteNonQuery();
+                        MessageBox.Show(ex.Message);
+                        return;
                     }
                 }
 
-                MessageBox.Show(
-                    _id == 0
-                        ? "Saved Successfully"
-                        : "Updated Successfully");
+                if (!ok) return;   // error បង្ហាញ​ក្នុង controller រួច
+
+                MessageBox.Show(_id == 0 ? "Saved Successfully" : "Updated Successfully");
 
                 _id = 0;
                 txtCountDay.Clear();
                 btnSave.Text = "Save";
 
-                LoadData();
+                await LoadData();
             }
             catch (Exception ex)
             {
@@ -160,29 +96,14 @@ namespace unt_bingoo.view.Supplier
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            btnSave.Text = "Save";
-            _id = 0;
-            this.LoadData();
-
-            txtCountDay.Clear();
-
-        }
-
-        private void guiTerm_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
-
-        private int _id = 0;
-
-        private void dgvTerm_CellClick(object sender, DataGridViewCellEventArgs e)
+        // ================= EDIT / DELETE (grid click) =================
+        private async void dgvTerm_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.RowIndex < 0)
                     return;
+
                 if (dgvTerm.Columns[e.ColumnIndex].Name == "Edit")
                 {
                     DataGridViewRow row = dgvTerm.Rows[e.RowIndex];
@@ -193,10 +114,10 @@ namespace unt_bingoo.view.Supplier
                     btnClose.Visible = true;
                     btnSave.Text = "Update";
                 }
+
                 if (dgvTerm.Columns[e.ColumnIndex].Name == "Delete")
                 {
                     DataGridViewRow row = dgvTerm.Rows[e.RowIndex];
-
                     int id = Convert.ToInt32(row.Cells["Id"].Value);
 
                     DialogResult result = MessageBox.Show(
@@ -207,23 +128,17 @@ namespace unt_bingoo.view.Supplier
 
                     if (result == DialogResult.Yes)
                     {
-                            using (SqlConnection conn =
-                    new SqlConnection(Data.ConnectionString(
-                    Initialized.GetConnectionType(Data, App))))
-                {
-                    conn.Open();
+                        try
+                        {
+                            bool ok = await _api.DeleteAsync($"api/termday/{id}");
+                            if (!ok) return;
 
-                    string query = $@"
-delete from  [DBJuJuBi].[dbo].[tblTermDay] where Id ={id} 
-
-                   ";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                        LoadData();   
+                            await LoadData();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
             }
@@ -231,6 +146,20 @@ delete from  [DBJuJuBi].[dbo].[tblTermDay] where Id ={id}
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+       
+        private async void guiTerm_Load(object sender, EventArgs e)
+        {
+            await LoadData();
+        }
+
+        private async void btnClose_Click(object sender, EventArgs e)
+        {
+            btnSave.Text = "Save";
+            _id = 0;
+            txtCountDay.Clear();
+            await LoadData();
         }
 
         private void button1_Click(object sender, EventArgs e)

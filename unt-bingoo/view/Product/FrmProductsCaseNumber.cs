@@ -298,7 +298,11 @@ WHERE ProNumY = '{barcode}'
 
         private void TxtBarcode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number, "", 25);
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            //App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number, "", 25);
         }
     }
 }

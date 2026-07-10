@@ -16,6 +16,8 @@ using unt_bingoo.view.currency;
 
 namespace unt_bingoo.view.Product
 {
+ 
+ 
     public partial class cboProduct : DevExpress.XtraEditors.XtraForm
     {
         private APIsController api_;
@@ -27,8 +29,13 @@ namespace unt_bingoo.view.Product
 
         private BindingList<MenuItems> _menuItems = new BindingList<MenuItems>();
 
+        // Guards to stop combo events firing while we programmatically rebind.
         private bool _loadingProduct = false;
         private bool _bindingEditForm = false;
+
+        // Bumped on every product selection so a slow, now-stale image request
+        // can't overwrite the preview after a newer selection has already loaded.
+        private int _imagePreviewToken = 0;
 
         public cboProduct()
         {
@@ -68,18 +75,20 @@ namespace unt_bingoo.view.Product
             }
         }
 
+        // Loads PRODUCTS into cboOutlets.
         public async Task loadingProduct()
         {
             try
             {
                 _loadingProduct = true;
 
-                var products = await api_.GetAsync<List<ProductItem>>("api/Product");
+                var products = await api_.GetAsync<List<ProductItem>>("api/Product")
+                               ?? new List<ProductItem>();
 
                 cboOutlets.DataSource = null;
                 cboOutlets.DisplayMember = "desiplyname";
                 cboOutlets.ValueMember = "ProNumY";
-                cboOutlets.DataSource = products ?? new List<ProductItem>();
+                cboOutlets.DataSource = products;
 
                 cboOutlets.SelectedIndex = -1;
             }
@@ -89,6 +98,7 @@ namespace unt_bingoo.view.Product
             }
         }
 
+        // Loads OUTLETS into cboProducts.
         public async Task loadingOutlet()
         {
             try
@@ -98,6 +108,7 @@ namespace unt_bingoo.view.Product
                     .Where(x => x.IsActive == true)
                     .ToList();
 
+                cboProducts.DataSource = null;
                 cboProducts.DataSource = activeOutlets;
                 cboProducts.DisplayMember = "OutletName";
                 cboProducts.ValueMember = "Id";
@@ -138,7 +149,7 @@ namespace unt_bingoo.view.Product
                     return;
                 }
 
-                // Load data AFTER the token is confirmed, and await it.
+     
                 await loadingOutlet();
                 await loadingProduct();
                 await loadingCurrency();
@@ -201,22 +212,20 @@ namespace unt_bingoo.view.Product
                         return;
                     }
 
-                    // FIX: was an invalid cast (decimal)txtPromotionPrice.Text — now parsed safely.
                     if (!decimal.TryParse(txtPromotionPrice.Text.Trim(), out decimal promoPriceValue) || promoPriceValue <= 0)
                     {
                         XtraMessageBox.Show("Invalid promotion price!");
                         txtPromotionPrice.Focus();
                         return;
                     }
-                    promotionPrice = Convert.ToDecimal(txtPromotionPrice.Text.Trim());
+                    promotionPrice = promoPriceValue;
                 }
 
-                int proId = Convert.ToInt32(cboOutlets.SelectedValue is string s ? 0 : cboOutlets.SelectedValue);
                 int outletId = Convert.ToInt32(cboProducts.SelectedValue);
+                int currencyId = Convert.ToInt32(cboCurrency.SelectedValue);
 
                 // Exclude the row we are editing from the duplicate check.
-                // FIX: compare by MenuItemId, not ReferenceEquals — after a grid
-                // reload the list contains new objects and ReferenceEquals fails.
+                // Compare by MenuItemId (ReferenceEquals fails after a grid reload).
                 string selectedProNumY = cboOutlets.SelectedValue?.ToString();
                 int editingId = _editingItem?.MenuItemId ?? 0;
 
@@ -234,20 +243,17 @@ namespace unt_bingoo.view.Product
                 string text = cboOutlets.Text.Trim();
                 int index = text.IndexOf(' ');
 
-                string proNumY = "";
-                string productName = "";
-
+                string proNumY;
                 if (index > 0)
                 {
                     proNumY = text.Substring(0, index).Trim();
-                    productName = text.Substring(index).Trim();
                 }
                 else
                 {
                     proNumY = selectedProNumY ?? text;
                 }
 
-                // FIX: upload the selected image before saving, so the file actually exists on the server.
+                // Upload the selected image before saving, so the file exists on the server.
                 if (_productImageBytes != null && _productImageBytes.Length > 0)
                 {
                     string uploadedName = await UploadProductImageAsync();
@@ -261,7 +267,7 @@ namespace unt_bingoo.view.Product
                     {
                         OutletId = outletId,
                         ProNumY = proNumY,
-                        CurrencyId = cboCurrency.SelectedValue,
+                        CurrencyId = currencyId,
                         SellingPrice = sellingPrice,
                         IsPromotion = chkPromotion.Checked,
                         Discount = chkPromotion.Checked ? discount : (decimal?)null,
@@ -274,7 +280,6 @@ namespace unt_bingoo.view.Product
                         CreatedBy = ""
                     };
 
-                    // FIX: was PostAsync<MenuItem> (WinForms type) — must be our model MenuItems.
                     var result = await api_.PostAsync<MenuItems>("api/MenuItem", request);
 
                     if (result != null)
@@ -291,7 +296,7 @@ namespace unt_bingoo.view.Product
                         MenuItemId = _editingItem.MenuItemId,
                         OutletId = outletId,
                         ProNumY = proNumY,
-                        CurrencyId = cboCurrency.SelectedValue,
+                        CurrencyId = currencyId,
                         SellingPrice = sellingPrice,
                         IsPromotion = chkPromotion.Checked,
                         Discount = chkPromotion.Checked ? discount : (decimal?)null,
@@ -326,8 +331,6 @@ namespace unt_bingoo.view.Product
 
         private async Task LoadMenuItems(int outletid)
         {
-            // FIX: decide based on outlet id instead of SelectedValue?.ToString() == null,
-            // which was never reliable.
             List<MenuItems> data;
 
             if (outletid <= 0 || cboProducts.SelectedValue == null)
@@ -392,14 +395,13 @@ namespace unt_bingoo.view.Product
             _editingItem = null;
             btnAdd.Text = "Add";
 
-            // FIX: restore edit-mode UI state (was left disabled/visible after Update).
+            // Restore edit-mode UI state.
             btncancel.Visible = false;
             cboProducts.Enabled = true;
             gridControlMenu.Enabled = true;
         }
 
-        // FIX: promotion enable/disable logic was duplicated in two handlers —
-        // now both call this single method (and it also toggles txtPromotionPrice).
+        // Single source of truth for promotion enable/disable.
         private void ApplyPromotionState()
         {
             bool on = chkPromotion.Checked;
@@ -496,6 +498,37 @@ namespace unt_bingoo.view.Product
 
         private void cboOutlet_SelectedIndexChanged(object sender, EventArgs e) { }
 
+
+        private async Task LoadAvailableProducts(int outletId, string includeProNumY = null)
+        {
+            var products = await api_.GetAsync<List<ProductItem>>("api/Product")
+                           ?? new List<ProductItem>();
+
+            var existingProducts = _menuItems
+                .Select(x => x.ProNumY)
+                .Where(x => !string.IsNullOrEmpty(x))
+                .ToHashSet();
+
+            var availableProducts = products
+                .Where(p => !existingProducts.Contains(p.ProNumY)
+                         || p.ProNumY == includeProNumY)    
+                .ToList();
+
+            _loadingProduct = true;
+            try
+            {
+                cboOutlets.DataSource = null;
+                cboOutlets.DisplayMember = "desiplyname";
+                cboOutlets.ValueMember = "ProNumY";
+                cboOutlets.DataSource = availableProducts;
+                cboOutlets.SelectedIndex = -1;
+            }
+            finally
+            {
+                _loadingProduct = false;
+            }
+        }
+
         private async void cboProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_bindingEditForm || _editingItem != null)
@@ -504,60 +537,35 @@ namespace unt_bingoo.view.Product
             if (!int.TryParse(cboProducts.SelectedValue?.ToString(), out int outletId))
                 return;
 
-            // Load MenuItems របស់ Outlet ដែលបានជ្រើស
-            await LoadMenuItems(outletId);
-
-            // Load Product ទាំងអស់
-            var products = await api_.GetAsync<List<ProductItem>>("api/Product");
-
-            // Product ដែលមានរួចក្នុង Outlet
-            var existingProducts = _menuItems
-                .Select(x => x.ProNumY)
-                .ToHashSet();
-
-            // ដក Product ដែលមានរួចចេញ
-            var availableProducts = products
-                .Where(p => !existingProducts.Contains(p.ProNumY))
-                .ToList();
-
-         
-            cboOutlets.DataSource = null;
-            cboOutlets.DisplayMember = "desiplyname";
-            cboOutlets.ValueMember = "ProNumY";
-            cboOutlets.DataSource = availableProducts;
-            cboOutlets.SelectedIndex = -1;
-            if (_bindingEditForm || _editingItem != null)
-                return;
-
-        
+            try
+            {
+                await LoadMenuItems(outletId);
+                await LoadAvailableProducts(outletId);     // add mode: no product kept
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Load products for outlet failed: " + ex.Message);
+            }
         }
 
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            guiHourOpration gui = new guiHourOpration();
-            gui.ShowDialog();
-        }
-
-        private void simpleButton2_Click(object sender, EventArgs e)
-        {
-            guiCurencys gui = new guiCurencys();
-            gui.ShowDialog();
-        }
-
-        private void btnMainEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        // NOTE: now async so we can rebuild the product list before selecting.
+        private async void btnMainEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             var item = gridViewMenu.GetFocusedRow() as MenuItems;
             if (item == null) return;
 
             _editingItem = item;
 
-            // FIX: block SelectedIndexChanged reloads while filling the form.
             _bindingEditForm = true;
             try
             {
-                // ដាក់តម្លៃចូល form វិញ
-                cboOutlets.SelectedValue = item.ProNumY;
+                // Load this outlet's menu, then load products KEEPING the edited one,
+                // so its barcode/name actually shows in cboOutlets.
+                await LoadMenuItems(item.OutletId);
+                await LoadAvailableProducts(item.OutletId, item.ProNumY);
+
                 cboProducts.SelectedValue = item.OutletId;
+                cboOutlets.SelectedValue = item.ProNumY;
                 cboCurrency.SelectedValue = item.CurrencyId;
                 txtsellingPrice.Text = item.SellingPrice.ToString();
                 txtRemark.Text = item.Remark;
@@ -578,11 +586,65 @@ namespace unt_bingoo.view.Product
             {
                 _bindingEditForm = false;
             }
+
             gridControlMenu.Enabled = false;
             btncancel.Visible = true;
             cboProducts.Enabled = false;
             btnAdd.Text = "Update";
         }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            guiHourOpration gui = new guiHourOpration();
+            gui.ShowDialog();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            guiCurencys gui = new guiCurencys();
+            gui.ShowDialog();
+        }
+
+        //private void btnMainEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        //{
+        //    var item = gridViewMenu.GetFocusedRow() as MenuItems;
+        //    if (item == null) return;
+      
+        //    _editingItem = item;
+
+        //    _bindingEditForm = true;
+        //    try
+        //    {
+               
+        //        cboProducts.SelectedValue = item.OutletId;
+          
+        //        cboOutlets.SelectedValue = item.ProNumY;
+        //        cboCurrency.SelectedValue = item.CurrencyId;
+        //        txtsellingPrice.Text = item.SellingPrice.ToString();
+        //        txtRemark.Text = item.Remark;
+        //        txtPromotionPrice.Text = item.PromotionPrice?.ToString() ?? "";
+
+        //        chkPromotion.Checked = item.IsPromotion;
+        //        if (item.IsPromotion)
+        //        {
+        //            txtDiscount.Text = item.Discount?.ToString() ?? "";
+        //            if (item.PromoStartDate.HasValue) dtpOpening.Value = item.PromoStartDate.Value;
+        //            if (item.PromoEndDate.HasValue) dateTimePicker1.Value = item.PromoEndDate.Value;
+        //        }
+
+        //        chkActive.Checked = item.IsActive;
+        //        chkDeactive.Checked = !item.IsActive;
+        //    }
+        //    finally
+        //    {
+        //        _bindingEditForm = false;
+        //    }
+
+        //    gridControlMenu.Enabled = false;
+        //    btncancel.Visible = true;
+        //    cboProducts.Enabled = false;
+        //    btnAdd.Text = "Update";
+        //}
 
         private async void btnMainDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -599,8 +661,8 @@ namespace unt_bingoo.view.Product
 
             try
             {
-                // FIX: delete on the server too — before, the row only disappeared
-                // from the grid and came back after reload.
+                // Delete on the server too (before, the row only disappeared
+                // from the grid and came back after reload).
                 bool success = await api_.DeleteAsync($"api/MenuItem/{item.MenuItemId}");
 
                 if (!success)
@@ -624,6 +686,7 @@ namespace unt_bingoo.view.Product
             }
         }
 
+        // When a PRODUCT is selected (this combo holds products), show its image.
         private async void cboOutlets_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_loadingProduct)
@@ -636,9 +699,14 @@ namespace unt_bingoo.view.Product
             if (product == null)
                 return;
 
+            int myToken = ++_imagePreviewToken;
+
             try
             {
                 var detail = await api_.GetAsync<ProductItem>($"api/Product/{product.ProID}");
+                if (myToken != _imagePreviewToken)
+                    return; // a newer selection has started; discard this stale result
+
                 if (detail == null)
                 {
                     picPreview.Image?.Dispose();
@@ -649,6 +717,9 @@ namespace unt_bingoo.view.Product
                 if (!string.IsNullOrWhiteSpace(detail.ProImage))
                 {
                     byte[] bytes = await api_.GetBytesAsync(detail.ProImage);
+
+                    if (myToken != _imagePreviewToken)
+                        return; // stale again after the second await
 
                     if (bytes != null)
                     {

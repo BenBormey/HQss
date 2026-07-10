@@ -41,7 +41,7 @@ namespace unt_bingoo.view.Product
         {
             Initialized.LoadingInitialized(Data, App);
             DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
-            TxtBuyin.Text = vBuyin.ToString("N4");
+            TxtBuyin.Text = vBuyin.ToString("N2");
             TxtQtyPerCase.Text = vQtyPerCase.ToString("N0");
         }
 

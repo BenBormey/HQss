@@ -8,7 +8,8 @@ namespace unt_bingoo.Class
 {
    public class ProductScaleDto
     {
-        public decimal? CTNPerPallet { get; set; }
+        public int Id { get; set; }
+        //public decimal? CTNPerPallet { get; set; }
 
         public string UOMCode { get; set; }
 

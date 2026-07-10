@@ -89,33 +89,44 @@ namespace unt_bingoo.view.Product
         {
             List<ProductItem> products;
             string keyword;
-
             if (string.IsNullOrWhiteSpace(TxtSearch.Text))
             {
+                XtraMessageBox.Show(
+                    "Please enter a search keyword.",
+                    "Search Required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
-                var answer = XtraMessageBox.Show(
-                    "Do you want to search all products?",
-                    "Confirm Search",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (answer == DialogResult.No)
-                {
-                    TxtSearch.Focus();
-                    return;
-                }
-
-            
-                keyword = string.Empty;
-
-                products = await _api.GetAsync<List<ProductItem>>(
-                    "api/Product");
+                TxtSearch.Focus();
+                return;
             }
+
+            //if (string.IsNullOrWhiteSpace(TxtSearch.Text))
+            //{
+
+            //    var answer = XtraMessageBox.Show(
+            //        "Do you want to search all products?",
+            //        "Confirm Search",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Question);
+
+            //    if (answer == DialogResult.No)
+            //    {
+            //        TxtSearch.Focus();
+            //        return;
+            //    }
+
+
+            //    keyword = string.Empty;
+
+            //    products = await _api.GetAsync<List<ProductItem>>(
+            //        "api/Product");
+            //}
             else
             {
                 keyword = TxtSearch.Text.Trim();
 
-                // Format barcode: pad number part to 13 digits (e.g. 34 -> 0000000000034)
+           
                 if (RdbBarcode.Checked && keyword.Length <= 13)
                 {
                     char firstChar = keyword[0];
@@ -148,13 +159,15 @@ namespace unt_bingoo.view.Product
                 }
                 else if (RdbItemcodes.Checked)
                 {
+                  
+
                     products = await _api.GetAsync<List<ProductItem>>(
-                        $"api/Product/search-sku/{keyword}");
+                        $"api/Product/search-sku?sku={Uri.EscapeDataString(keyword)}");
                 }
                 else
                 {
                     products = await _api.GetAsync<List<ProductItem>>(
-                        $"api/Product/search-name/{keyword}");
+                          $"api/Product/search?name={Uri.EscapeDataString(keyword)}");
                 }
             }
 
@@ -196,6 +209,12 @@ namespace unt_bingoo.view.Product
                 e.Handled = true;                 // បិទសំឡេង "ding" របស់ Windows
                 BtnSearch_Click(sender, e);       // ហៅ search ដូចចុច button
             }
+        }
+
+        private void FrmProductsSearch_Load(object sender, EventArgs e)
+        {
+            RdbBarcode.Checked = true;
+            this.ActiveControl = TxtSearch;
         }
     }
 }

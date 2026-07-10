@@ -317,6 +317,7 @@ namespace unt_bingoo.view.Product
             this.Controls.Add(this.Panel1);
             this.Name = "FrmProductsSearch";
             this.Text = "SEARCH MANAGEMENT";
+            this.Load += new System.EventHandler(this.FrmProductsSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GroupControl1)).EndInit();
             this.GroupControl1.ResumeLayout(false);
             this.Panel21.ResumeLayout(false);

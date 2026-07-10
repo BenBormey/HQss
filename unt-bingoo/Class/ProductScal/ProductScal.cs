@@ -4,11 +4,11 @@ namespace unt_bingoo.Class.ProductScal
 {
     public class ProductScal
     {
-        public decimal Id { get; set; }
+        public int Id { get; set; }
 
         public decimal ProId { get; set; }
 
-        public double? CTNPerPallet { get; set; }
+        //public double? CTNPerPallet { get; set; }
 
         //public string UOM { get; set; }
 
@@ -21,7 +21,7 @@ namespace unt_bingoo.Class.ProductScal
 
         public double? CBMPerCTN { get; set; }
         public string UOMCode { get; set; }
-        public string UOMName { get; set; }
+        //public string UOMName { get; set; }
         public double? NetWeight { get; set; }
 
         public double? GrossWeight { get; set; }

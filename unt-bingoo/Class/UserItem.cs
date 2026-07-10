@@ -21,8 +21,9 @@ namespace unt_bingoo.Class
         public string Email { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public bool HasSystemAccess { get; set; } = true;
 
-        public int outLetId { get; set; }
+        public int? outLetId { get; set; }
         public string outLetName { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? LastLoginAt { get; set; }

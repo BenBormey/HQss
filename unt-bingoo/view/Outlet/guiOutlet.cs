@@ -213,11 +213,11 @@ namespace unt_bingoo.view.Outlet
                 //imgCol.OptionsColumn.FixedWidth = false;
                 //imgCol.OptionsColumn.AllowEdit = false;
 
-                await LoadData();
-                await LoadingProvince();
-                await GenerateAutoOutletCodeAsync();
-                await this.LoadFranchiseToComboBox();
-                await this.LoadingHourseOparation();
+                await Task.WhenAll(
+                    LoadData(),
+                    LoadingProvince(),
+                    LoadingHourseOparation());
+
                 ClearForm();
             }
             catch (Exception ex)
@@ -230,19 +230,6 @@ namespace unt_bingoo.view.Outlet
             OutletCode.Width = 30;
             OutletCode.MinWidth = 30;
             OutletCode.MaxWidth = 30;
-        }
-
-        private async Task GenerateAutoOutletCodeAsync()
-        {
-            try
-            {
-                var list = await _api.GetAsync<List<OutletItem>>("api/Outlet");
-                int newId = (list != null && list.Any()) ? list.Max(x => x.Id) + 1 : 1;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show($"Error generating code: {ex.Message}");
-            }
         }
 
         private async Task LoadingProvince()
@@ -261,68 +248,76 @@ namespace unt_bingoo.view.Outlet
                 var list = await _api.GetAsync<List<OutletItem>>("api/Outlet");
                 if (list == null) return;
 
-                var imageTasks = new List<Task>();
-
-                foreach (var item in list)
-                {
-                    // រូបមេ
-                    if (!string.IsNullOrEmpty(item.PhotoPath))
-                    {
-                        var captured = item;
-                        imageTasks.Add(Task.Run(async () =>
-                        {
-                            try { captured.ProductImage = await LoadImageFromUrl(captured.PhotoPath); }
-                            catch { captured.ProductImage = null; }
-                        }));
-                    }
-
-                    if (item.ShopPhoto != null && item.ShopPhoto.Any())
-                    {
-                        foreach (var photo in item.ShopPhoto)
-                        {
-                            if (!string.IsNullOrEmpty(photo.Url))
-                            {
-                                var capturedPhoto = photo;
-                                imageTasks.Add(Task.Run(async () =>
-                                {
-                                    try { capturedPhoto.DetailImage = await LoadImageFromUrl(capturedPhoto.Url); }
-                                    catch { capturedPhoto.DetailImage = null; }
-                                }));
-                            }
-                        }
-                    }
-
-                    // ★ Citizenship photos (tab Citizenship)
-                    if (item.citizenshipPhotos != null && item.citizenshipPhotos.Any())
-                    {
-                        foreach (var cp in item.citizenshipPhotos)
-                        {
-                            if (!string.IsNullOrEmpty(cp.ImageUrl))
-                            {
-                                var capturedCp = cp;
-                                imageTasks.Add(Task.Run(async () =>
-                                {
-                                    try { capturedCp.CitizenshipImage = await LoadImageFromUrl(capturedCp.ImageUrl); }
-                                    catch { capturedCp.CitizenshipImage = null; }
-                                }));
-                            }
-                        }
-                    }
-                }
-
-                await Task.WhenAll(imageTasks);
-          
+                // Show the rows right away instead of blocking on every photo download first.
                 _outletList = new BindingList<OutletItem>(list);
                 gridControlOutlet.DataSource = _outletList;
-                //gridViewOutlet.BestFitColumns();
-                //gridViewOutlet.RefreshData();
                 lblCountRow.Text = $"Count Row: {_outletList.Count}";
+
                 await this.LoadFranchiseToComboBox();
+
+                _ = LoadOutletImagesAsync(list);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show("Error loading data: " + ex.Message);
             }
+        }
+
+        private async Task LoadOutletImagesAsync(List<OutletItem> list)
+        {
+            var imageTasks = new List<Task>();
+
+            foreach (var item in list)
+            {
+                // រូបមេ
+                if (!string.IsNullOrEmpty(item.PhotoPath))
+                {
+                    var captured = item;
+                    imageTasks.Add(Task.Run(async () =>
+                    {
+                        try { captured.ProductImage = await LoadImageFromUrl(captured.PhotoPath); }
+                        catch { captured.ProductImage = null; }
+                    }));
+                }
+
+                if (item.ShopPhoto != null && item.ShopPhoto.Any())
+                {
+                    foreach (var photo in item.ShopPhoto)
+                    {
+                        if (!string.IsNullOrEmpty(photo.Url))
+                        {
+                            var capturedPhoto = photo;
+                            imageTasks.Add(Task.Run(async () =>
+                            {
+                                try { capturedPhoto.DetailImage = await LoadImageFromUrl(capturedPhoto.Url); }
+                                catch { capturedPhoto.DetailImage = null; }
+                            }));
+                        }
+                    }
+                }
+
+                // ★ Citizenship photos (tab Citizenship)
+                if (item.citizenshipPhotos != null && item.citizenshipPhotos.Any())
+                {
+                    foreach (var cp in item.citizenshipPhotos)
+                    {
+                        if (!string.IsNullOrEmpty(cp.ImageUrl))
+                        {
+                            var capturedCp = cp;
+                            imageTasks.Add(Task.Run(async () =>
+                            {
+                                try { capturedCp.CitizenshipImage = await LoadImageFromUrl(capturedCp.ImageUrl); }
+                                catch { capturedCp.CitizenshipImage = null; }
+                            }));
+                        }
+                    }
+                }
+            }
+
+            await Task.WhenAll(imageTasks);
+
+            if (!IsDisposed)
+                gridViewOutlet.RefreshData();
         }
 
         private async Task<Image> LoadImageFromUrl(string url)
@@ -375,7 +370,6 @@ namespace unt_bingoo.view.Outlet
                 if (ok)
                 {
                     await LoadData();
-                    await GenerateAutoOutletCodeAsync();
                     ClearForm();
                 }
                 else
@@ -1366,20 +1360,46 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
+        // Keep Active / Deactive mutually exclusive AND mandatory, like a two-option radio group:
+        // exactly one of the two must be checked at all times.
+        private bool _suppressStatusEvents;
+
         private void chkActive_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkActive.Checked)
+            if (_suppressStatusEvents) return;
+            _suppressStatusEvents = true;
+            try
             {
-                chkDeactive.Checked = false;
+                if (chkActive.Checked)
+                {
+                    chkDeactive.Checked = false;
+                }
+                else if (!chkDeactive.Checked)
+                {
+                    // Don't allow both to end up unchecked.
+                    chkActive.Checked = true;
+                }
             }
+            finally { _suppressStatusEvents = false; }
         }
 
         private void checkEdit1_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDeactive.Checked)
+            if (_suppressStatusEvents) return;
+            _suppressStatusEvents = true;
+            try
             {
-                chkActive.Checked = false;
+                if (chkDeactive.Checked)
+                {
+                    chkActive.Checked = false;
+                }
+                else if (!chkActive.Checked)
+                {
+                    // Don't allow both to end up unchecked.
+                    chkDeactive.Checked = true;
+                }
             }
+            finally { _suppressStatusEvents = false; }
         }
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)

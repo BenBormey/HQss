@@ -260,7 +260,10 @@ namespace unt_bingoo.view.Product
         }
         private void TxtBarcode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            App.KeyPress(sender, e, ApplicationFramework.TypeKeyPress.Format_Number, "", 25);
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void BtnClearPackNumber_Click(object sender, EventArgs e)

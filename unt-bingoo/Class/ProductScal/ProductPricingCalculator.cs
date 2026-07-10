@@ -66,14 +66,21 @@ namespace unt_bingoo.Class.ProductScal
             double publicLightingTaxPercent,
             double rate)
         {
-            if (rate == 0) rate = 1;
-
-            double discountFactor = (100 - discountPercent) / 100.0;
-            double vatFactor = (vatPercent / 100.0) + 1;
-            double exciseFactor = (100 + exciseTaxPercent) / 100.0;
-            double publicLightFactor = (100 + publicLightingTaxPercent) / 100.0;
-
-            return ((buyin / rate) * discountFactor) * exciseFactor * publicLightFactor * vatFactor;
+            try
+            {
+                if (rate == 0) rate = 1;
+                double discountFactor = (100 - discountPercent) / 100.0;
+                double vatFactor = (vatPercent / 100.0) + 1;
+                double exciseFactor = (100 + exciseTaxPercent) / 100.0;
+                double publicLightFactor = (100 + publicLightingTaxPercent) / 100.0;
+                return ((buyin / rate) * discountFactor) * exciseFactor * publicLightFactor * vatFactor;
+            }
+            catch (Exception ex)
+            {
+                // log បើ​អ្នក​មាន logger ស្រាប់
+                System.Diagnostics.Debug.WriteLine($"TotalBuyin error: {ex.Message}");
+                return 0;
+            }
         }
     }
 }
