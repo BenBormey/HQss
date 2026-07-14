@@ -30,7 +30,7 @@ namespace unt_bingoo.view.Product
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(guiProductOutlet));
             this.TxtFactoryCost = new System.Windows.Forms.TextBox();
             this.TimerCurrencyLoading = new System.Windows.Forms.Timer(this.components);
@@ -880,9 +880,9 @@ namespace unt_bingoo.view.Product
             // DeliveryCost
             // 
             this.DeliveryCost.DataPropertyName = "DeliveryCost";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "C2";
-            this.DeliveryCost.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            this.DeliveryCost.DefaultCellStyle = dataGridViewCellStyle1;
             this.DeliveryCost.HeaderText = "Additional Cost";
             this.DeliveryCost.Name = "DeliveryCost";
             this.DeliveryCost.ReadOnly = true;
@@ -990,6 +990,7 @@ namespace unt_bingoo.view.Product
             this.txtpubliclightingtax.Size = new System.Drawing.Size(78, 22);
             this.txtpubliclightingtax.TabIndex = 14;
             this.txtpubliclightingtax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtpubliclightingtax.TextChanged += new System.EventHandler(this.txtpubliclightingtax_TextChanged);
             this.txtpubliclightingtax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtpubliclightingtax_KeyPress);
             // 
             // txtexcisetax
@@ -1001,6 +1002,7 @@ namespace unt_bingoo.view.Product
             this.txtexcisetax.Size = new System.Drawing.Size(78, 22);
             this.txtexcisetax.TabIndex = 12;
             this.txtexcisetax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtexcisetax.TextChanged += new System.EventHandler(this.txtexcisetax_TextChanged);
             this.txtexcisetax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtexcisetax_KeyPress);
             // 
             // TxtBuyinVAT
@@ -1012,6 +1014,7 @@ namespace unt_bingoo.view.Product
             this.TxtBuyinVAT.Size = new System.Drawing.Size(100, 22);
             this.TxtBuyinVAT.TabIndex = 10;
             this.TxtBuyinVAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtBuyinVAT.TextChanged += new System.EventHandler(this.TxtBuyinVAT_TextChanged);
             this.TxtBuyinVAT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBuyinVAT_KeyPress);
             // 
             // Label51

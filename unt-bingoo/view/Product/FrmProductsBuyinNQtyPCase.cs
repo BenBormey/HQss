@@ -6,8 +6,6 @@ using System.Windows.Forms;
 using Microsoft.Reporting.WinForms;
 using unt_bingoo.Frameworks;
 using unt_bingoo.Declares;
-// TODO: replace with the real namespace for DatabaseFramework / ApplicationFramework / Initialized
-// using unt_bingoo.Frameworks; 
 
 namespace unt_bingoo.view.Product
 {

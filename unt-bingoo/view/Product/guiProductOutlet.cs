@@ -48,13 +48,6 @@ namespace unt_bingoo.view.Product
             DataBindingSource = new BindingSource();
 
             this.AutoValidate = AutoValidate.EnableAllowFocusChange;
-
-            // Wired here (not in the async Load handler) so live recalculation
-            // is guaranteed even if something earlier in Load throws.
-            TxtBuyinDiscount.TextChanged += (s, ev) => CalculatedTotalBuyin();
-            TxtBuyinVAT.TextChanged += (s, ev) => CalculatedTotalBuyin();
-            txtexcisetax.TextChanged += (s, ev) => CalculatedTotalBuyin();
-            txtpubliclightingtax.TextChanged += (s, ev) => CalculatedTotalBuyin();
         }
 
         private void LoadingInitialized()
@@ -95,10 +88,13 @@ namespace unt_bingoo.view.Product
         }
         // Numeric two-way binding: commit immediately, show 2 decimals,
         // but keep raw text while typing so the caret doesn't jump.
-        private void BindEditableNumeric(Control control, string dataMember)
+        private void BindEditableNumeric(Control control, string dataMember, string formatString = "0.00")
         {
+            // Never push back to the data source: every read of these fields (calc + save)
+            // already goes straight to the control's Text, so a live two-way push only
+            // causes a reformat-while-typing fight that can revert what was just typed.
             var binding = new Binding("Text", DataBindingSource, dataMember, true,
-                                      DataSourceUpdateMode.OnPropertyChanged);
+                                      DataSourceUpdateMode.Never);
 
             binding.Format += (s, e) =>
             {
@@ -112,7 +108,7 @@ namespace unt_bingoo.view.Product
                 if (e.Value == null) { e.Value = ""; return; }
 
                 if (decimal.TryParse(e.Value.ToString(), out var d))
-                    e.Value = d.ToString("0.00"); 
+                    e.Value = d.ToString(formatString);
             };
 
             control.DataBindings.Add(binding);
@@ -162,21 +158,14 @@ namespace unt_bingoo.view.Product
                 BindEditable(TxtOrderAmount, "Text", DataBindingSource, "ProRecOrder");
                 BindEditable(TxtRemark, "Text", DataBindingSource, "ProRem");
 
-        
-                BindEditableNumeric(TxtFactoryCost, "FOBCIFCost");
-                BindEditableNumeric(TxtBuyin, "ProImpPri");
-                BindEditableNumeric(TxtBuyinDiscount, "ProDis");
-                BindEditableNumeric(TxtBuyinVAT, "ProVAT");
-                BindEditableNumeric(txtexcisetax, "ExciseTax");
-                BindEditableNumeric(txtpubliclightingtax, "PublicLightingTax");
-                BindEditableNumeric(TxtTotalBuyin, "ProFinBuyin");
-                BindEditableNumeric(TxtPackPrice, "ProPckPri");
-                BindEditableNumeric(TxtUnitProfit, "ProProPer");
-                BindEditableNumeric(TxtPackProfit, "ProPckDis");
-                BindEditableNumeric(TxtCasePriceDiscount, "ProHolesaleper");
-                BindEditableNumeric(TxtCaseProfit, "ProHoleSalePP");
-                BindEditableNumeric(txtFormDLanded, "FormDLanded");
-                BindEditableNumeric(txtvop, "VOP");
+
+                // NOTE: these are intentionally NOT two-way DataBindings. Any bound control
+                // on this form that pushes a value (e.g. TxtQtyPerCase via OpenBuyinDialog)
+                // can make the shared BindingManagerBase re-pull every bound control for the
+                // current item, which would blow away whatever the user just typed here.
+                // Calc + Save already read straight from .Text, so a persistent Binding buys
+                // nothing except that fight. PopulateCalculatedFieldsFromCurrent() below does
+                // the one-time initial display instead.
 
            
                 BindEditable(TxtQtyPerPack, "Text", DataBindingSource, "ProQtyPPack");
@@ -191,7 +180,7 @@ namespace unt_bingoo.view.Product
           
                 TxtAveragePrice.DataBindings.Add(
                     new Binding("Text", DataBindingSource, "Average", true,
-                                DataSourceUpdateMode.Never, 0, "N2"));
+                                DataSourceUpdateMode.Never, 0, "N4"));
                 TxtUnitPrice.DataBindings.Add(
                     new Binding("Text", DataBindingSource, "ProUPrSE", true,
                                 DataSourceUpdateMode.Never, 0, "N2"));
@@ -303,10 +292,39 @@ namespace unt_bingoo.view.Product
 
             TxtStockOldCode.Text = "0";
             TxtStockGRNTemp.Text = "0";
+
+            PopulateCalculatedFieldsFromCurrent();
+        }
+
+        // One-time display of the buy-in/pricing fields from the current record.
+        // These fields are read directly from .Text everywhere else (calc + save),
+        // so this replaces what a persistent two-way Binding used to do, without
+        // the risk of an unrelated bound control's edit reverting them mid-typing.
+        private void PopulateCalculatedFieldsFromCurrent()
+        {
+            if (!(DataBindingSource.Current is ProductItem product))
+                return;
+
+            TxtFactoryCost.Text = (product.FOBCIFCost ?? 0).ToString("0.00");
+            TxtBuyin.Text = (product.ProImpPri ?? 0).ToString("N2");
+            TxtBuyinDiscount.Text = (product.ProDis ?? 0).ToString("0.00");
+            TxtBuyinVAT.Text = (product.ProVAT ?? 0).ToString("0.00");
+            txtexcisetax.Text = (product.ExciseTax ?? 0).ToString("0.00");
+            txtpubliclightingtax.Text = (product.PublicLightingTax ?? 0).ToString("0.00");
+            TxtTotalBuyin.Text = (product.ProFinBuyin ?? 0).ToString("N2");
+            TxtPackPrice.Text = decimal.TryParse(product.ProPckPri, out var packPrice)
+                ? packPrice.ToString("0.00") : "0.00";
+            TxtUnitProfit.Text = (product.ProProPer ?? 0).ToString("0.00");
+            TxtPackProfit.Text = (product.ProPckDis ?? 0).ToString("0.00");
+            TxtCasePriceDiscount.Text = (product.ProHolesaleper ?? 0).ToString("0.00");
+            TxtCaseProfit.Text = (product.ProHoleSalePP ?? 0).ToString("0.00");
+            txtFormDLanded.Text = (product.FormDLanded ?? 0).ToString("N2");
+            txtvop.Text = (product.VOP ?? 0).ToString("0.00");
         }
 
         private void DataBindingSource_CurrentChanged(object sender, EventArgs e)
         {
+            PopulateCalculatedFieldsFromCurrent();
             LoadProductImage();
             LoadScaleGridFromCurrentProduct();
             SyncCategoryCombo();
@@ -1487,6 +1505,22 @@ namespace unt_bingoo.view.Product
                 return false;
             }
 
+            if (!decimal.TryParse(TxtQtyPerCase.Text, out decimal qtyPerCase) || qtyPerCase <= 0)
+            {
+                XtraMessageBox.Show("Qty Per Case cannot be 0. Please enter a valid quantity.", "Enter Qty Per Case",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TxtQtyPerCase.Focus();
+                return false;
+            }
+
+            if (!decimal.TryParse(TxtQtyPerPack.Text, out decimal qtyPerPack) || qtyPerPack <= 0)
+            {
+                XtraMessageBox.Show("Qty Per Pack cannot be 0. Please enter a valid quantity.", "Enter Qty Per Pack",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TxtQtyPerPack.Focus();
+                return false;
+            }
+
             decimal packPrice = 0;
             decimal casePrice = 0;
             decimal.TryParse(TxtPackPrice.Text, out packPrice);
@@ -1595,6 +1629,10 @@ namespace unt_bingoo.view.Product
                 buyin, discount, vat, excise, publicLight, rate);
 
             TxtTotalBuyin.Text = string.Format("{0:N2}", totalBuyin);
+
+            // Total Buyin/Average Price feed Case Price, Unit/Pack/Case Profit -
+            // refresh those immediately instead of waiting for another field to change.
+            RecalculateSellingPrices();
         }
 
         private async void TimerUOMLoading_Tick(object sender, EventArgs e)
@@ -1830,7 +1868,7 @@ namespace unt_bingoo.view.Product
             float.TryParse(TxtHeight.Text.Trim(), out float h);
 
             double m3 = ProductPricingCalculator.CbmPerCtn(w, l, h);
-            TxtCBMPerCTN.Text = m3.ToString("0.######");
+            TxtCBMPerCTN.Text = m3.ToString("N2");
         }
 
         private void TxtHeight_TextChanged(object sender, EventArgs e)
@@ -2110,7 +2148,22 @@ namespace unt_bingoo.view.Product
 
         private void TxtBuyinDiscount_TextChanged(object sender, EventArgs e)
         {
+            CalculatedTotalBuyin();
+        }
 
+        private void TxtBuyinVAT_TextChanged(object sender, EventArgs e)
+        {
+            CalculatedTotalBuyin();
+        }
+
+        private void txtexcisetax_TextChanged(object sender, EventArgs e)
+        {
+            CalculatedTotalBuyin();
+        }
+
+        private void txtpubliclightingtax_TextChanged(object sender, EventArgs e)
+        {
+            CalculatedTotalBuyin();
         }
     }
 }

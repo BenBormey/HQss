@@ -1,5 +1,7 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Export;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +38,15 @@ namespace unt_bingoo.view.Product
         // Bumped on every product selection so a slow, now-stale image request
         // can't overwrite the preview after a newer selection has already loaded.
         private int _imagePreviewToken = 0;
+
+        // Guards the search/filter toolbar from firing before it's populated.
+        private bool _filtersReady = false;
+
+        private class OutletFilterOption
+        {
+            public int? Id { get; set; }
+            public string Name { get; set; }
+        }
 
         public cboProduct()
         {
@@ -154,12 +165,101 @@ namespace unt_bingoo.view.Product
                 await loadingProduct();
                 await loadingCurrency();
                 await LoadMenuItems(0);
+                await PopulateOutletFilterAsync();
+
+                cboFilterStatus.SelectedIndex = 0;
+                _filtersReady = true;
 
                 chkActive.Checked = true;
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        private async Task PopulateOutletFilterAsync()
+        {
+            var outlets = await api_.GetAsync<List<OutletItem>>("api/Outlet") ?? new List<OutletItem>();
+
+            var options = new List<OutletFilterOption> { new OutletFilterOption { Id = null, Name = "All Outlets" } };
+            options.AddRange(outlets.Select(o => new OutletFilterOption { Id = o.Id, Name = o.OutletName }));
+
+            cboFilterOutlet.DataSource = options;
+            cboFilterOutlet.DisplayMember = "Name";
+            cboFilterOutlet.ValueMember = "Id";
+            cboFilterOutlet.SelectedIndex = 0;
+        }
+
+        private void SearchOrFilter_Changed(object sender, EventArgs e)
+        {
+            ApplyGridFilter();
+        }
+
+        private void ApplyGridFilter()
+        {
+            if (!_filtersReady)
+                return;
+
+            var conditions = new List<string>();
+
+            string search = txtSearch.Text.Trim();
+            if (!string.IsNullOrEmpty(search))
+            {
+                string escaped = search.Replace("'", "''");
+                conditions.Add($"(Contains([ProductName], '{escaped}') Or Contains([ProNumY], '{escaped}'))");
+            }
+
+            if (cboFilterOutlet.SelectedValue is int outletId)
+            {
+                conditions.Add($"[OutletId] = {outletId}");
+            }
+
+            if (cboFilterStatus.SelectedIndex == 1) // Active
+                conditions.Add("[IsActive] = True");
+            else if (cboFilterStatus.SelectedIndex == 2) // Inactive
+                conditions.Add("[IsActive] = False");
+
+            gridViewMenu.ActiveFilterString = conditions.Count > 0
+                ? string.Join(" And ", conditions)
+                : string.Empty;
+        }
+
+        private async void btnRefresh_Click(object sender, EventArgs e)
+        {
+            int outletId = 0;
+            int.TryParse(cboProducts.SelectedValue?.ToString(), out outletId);
+
+            await LoadMenuItems(outletId);
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel File (*.xlsx)|*.xlsx";
+                saveFileDialog.Title = "Export Menu Items to Excel";
+                saveFileDialog.FileName = "MenuItems.xlsx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var options = new XlsxExportOptionsEx
+                    {
+                        ExportType = ExportType.WYSIWYG,
+                        SheetName = "Menu Items"
+                    };
+
+                    gridControlMenu.ExportToXlsx(saveFileDialog.FileName, options);
+
+                    XtraMessageBox.Show("Export successful!", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Export failed: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

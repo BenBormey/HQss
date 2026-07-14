@@ -73,7 +73,10 @@ namespace unt_bingoo.Class.ProductScal
                 double vatFactor = (vatPercent / 100.0) + 1;
                 double exciseFactor = (100 + exciseTaxPercent) / 100.0;
                 double publicLightFactor = (100 + publicLightingTaxPercent) / 100.0;
-                return ((buyin / rate) * discountFactor) * exciseFactor * publicLightFactor * vatFactor;
+
+
+                double total = ((buyin / rate) * discountFactor) * exciseFactor * publicLightFactor * vatFactor;
+                return total;
             }
             catch (Exception ex)
             {

@@ -56,8 +56,6 @@ namespace unt_bingoo.view
                     TxtPassword.Focus();
                     return;
                 }
-
-                // SAVE GLOBAL API
                 APIGlobals.Api = _api;
 
                 Hide();
@@ -104,7 +102,7 @@ namespace unt_bingoo.view
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-              //  btnLogin.PerformClick(); 
+             
             }
         }
 

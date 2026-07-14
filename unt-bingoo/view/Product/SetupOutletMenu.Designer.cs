@@ -79,6 +79,15 @@
             this.ProID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Remark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblCountRow = new DevExpress.XtraEditors.LabelControl();
+            this.panelToolbar = new System.Windows.Forms.Panel();
+            this.lblSearch = new DevExpress.XtraEditors.LabelControl();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblFilterOutlet = new DevExpress.XtraEditors.LabelControl();
+            this.cboFilterOutlet = new System.Windows.Forms.ComboBox();
+            this.lblFilterStatus = new DevExpress.XtraEditors.LabelControl();
+            this.cboFilterStatus = new System.Windows.Forms.ComboBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.cboOutlet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             this.groupEntry.SuspendLayout();
@@ -90,6 +99,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMainEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMainDelete)).BeginInit();
+            this.panelToolbar.SuspendLayout();
             this.SuspendLayout();
             // 
             // cboOutlet
@@ -397,13 +407,13 @@
             this.gridControlMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControlMenu.Location = new System.Drawing.Point(12, 357);
+            this.gridControlMenu.Location = new System.Drawing.Point(12, 394);
             this.gridControlMenu.MainView = this.gridViewMenu;
             this.gridControlMenu.Name = "gridControlMenu";
             this.gridControlMenu.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnMainEdit,
             this.btnMainDelete});
-            this.gridControlMenu.Size = new System.Drawing.Size(1054, 446);
+            this.gridControlMenu.Size = new System.Drawing.Size(1054, 409);
             this.gridControlMenu.TabIndex = 2;
             this.gridControlMenu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewMenu});
@@ -644,12 +654,106 @@
             this.lblCountRow.TabIndex = 3;
             this.lblCountRow.Text = "Count Row : 0";
             // 
+            // panelToolbar
+            // 
+            this.panelToolbar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelToolbar.Controls.Add(this.lblSearch);
+            this.panelToolbar.Controls.Add(this.txtSearch);
+            this.panelToolbar.Controls.Add(this.lblFilterOutlet);
+            this.panelToolbar.Controls.Add(this.cboFilterOutlet);
+            this.panelToolbar.Controls.Add(this.lblFilterStatus);
+            this.panelToolbar.Controls.Add(this.cboFilterStatus);
+            this.panelToolbar.Controls.Add(this.btnRefresh);
+            this.panelToolbar.Controls.Add(this.btnExport);
+            this.panelToolbar.Location = new System.Drawing.Point(12, 354);
+            this.panelToolbar.Name = "panelToolbar";
+            this.panelToolbar.Size = new System.Drawing.Size(1054, 34);
+            this.panelToolbar.TabIndex = 4;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.Location = new System.Drawing.Point(4, 11);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(40, 13);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Search :";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(52, 6);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(190, 21);
+            this.txtSearch.TabIndex = 1;
+            this.txtSearch.TextChanged += new System.EventHandler(this.SearchOrFilter_Changed);
+            // 
+            // lblFilterOutlet
+            // 
+            this.lblFilterOutlet.Location = new System.Drawing.Point(256, 11);
+            this.lblFilterOutlet.Name = "lblFilterOutlet";
+            this.lblFilterOutlet.Size = new System.Drawing.Size(37, 13);
+            this.lblFilterOutlet.TabIndex = 2;
+            this.lblFilterOutlet.Text = "Outlet :";
+            // 
+            // cboFilterOutlet
+            // 
+            this.cboFilterOutlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilterOutlet.FormattingEnabled = true;
+            this.cboFilterOutlet.Location = new System.Drawing.Point(295, 6);
+            this.cboFilterOutlet.Name = "cboFilterOutlet";
+            this.cboFilterOutlet.Size = new System.Drawing.Size(160, 21);
+            this.cboFilterOutlet.TabIndex = 3;
+            this.cboFilterOutlet.SelectedIndexChanged += new System.EventHandler(this.SearchOrFilter_Changed);
+            // 
+            // lblFilterStatus
+            // 
+            this.lblFilterStatus.Location = new System.Drawing.Point(468, 11);
+            this.lblFilterStatus.Name = "lblFilterStatus";
+            this.lblFilterStatus.Size = new System.Drawing.Size(38, 13);
+            this.lblFilterStatus.TabIndex = 4;
+            this.lblFilterStatus.Text = "Status :";
+            // 
+            // cboFilterStatus
+            // 
+            this.cboFilterStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilterStatus.FormattingEnabled = true;
+            this.cboFilterStatus.Items.AddRange(new object[] {
+            "All",
+            "Active",
+            "Inactive"});
+            this.cboFilterStatus.Location = new System.Drawing.Point(510, 6);
+            this.cboFilterStatus.Name = "cboFilterStatus";
+            this.cboFilterStatus.Size = new System.Drawing.Size(110, 21);
+            this.cboFilterStatus.TabIndex = 5;
+            this.cboFilterStatus.SelectedIndexChanged += new System.EventHandler(this.SearchOrFilter_Changed);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(869, 5);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(85, 25);
+            this.btnRefresh.TabIndex = 6;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(960, 5);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(94, 25);
+            this.btnExport.TabIndex = 7;
+            this.btnExport.Text = "Export Excel";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // cboProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1080, 833);
             this.Controls.Add(this.lblCountRow);
+            this.Controls.Add(this.panelToolbar);
             this.Controls.Add(this.groupEntry);
             this.Controls.Add(this.cboOutlet);
             this.Controls.Add(this.gridControlMenu);
@@ -670,6 +774,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMainEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMainDelete)).EndInit();
+            this.panelToolbar.ResumeLayout(false);
+            this.panelToolbar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -732,5 +838,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn ImageFileName;
         private DevExpress.XtraGrid.Columns.GridColumn Remark;
         private System.Windows.Forms.Button btncancel;
+        private System.Windows.Forms.Panel panelToolbar;
+        private DevExpress.XtraEditors.LabelControl lblSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private DevExpress.XtraEditors.LabelControl lblFilterOutlet;
+        private System.Windows.Forms.ComboBox cboFilterOutlet;
+        private DevExpress.XtraEditors.LabelControl lblFilterStatus;
+        private System.Windows.Forms.ComboBox cboFilterStatus;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnExport;
     }
 }
