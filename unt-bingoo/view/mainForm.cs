@@ -206,8 +206,8 @@ namespace unt_bingoo.view
 
         private void stockProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new guiProductStock() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
-            frm.Show();
+            //var frm = new guiProductStock() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            //frm.Show();
 
         }
 
@@ -291,7 +291,7 @@ namespace unt_bingoo.view
         private void setupBankMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-                 var frm = new unt_bingoo.view.Bank.BankSetup { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new unt_bingoo.view.Bank.BankSetup { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
         }
 
@@ -300,6 +300,13 @@ namespace unt_bingoo.view
             var frm = new guiSupplier { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
             
+        }
+
+        private void createCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new guiCustomer { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+
         }
     }
 }

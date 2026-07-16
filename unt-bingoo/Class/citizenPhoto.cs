@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace unt_bingoo.Class
 {
-  public  class citizetionPhoto
+  public  class citizenPhoto
     {
         [Browsable(false)]
         [JsonProperty("imageUrl")]

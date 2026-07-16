@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace unt_bingoo.Class
 {
-   public class HourOperation
+   public class HourOperationItem
     {
         public int Id { get; set; }
 

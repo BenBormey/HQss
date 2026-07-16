@@ -44,7 +44,7 @@ namespace unt_bingoo.view.Product
         {
             try
             {
-                var list = await _api.GetAsync<List<UOMClas>>("api/uom") ?? new List<UOMClas>();
+                var list = await _api.GetAsync<List<UOMClass>>("api/uom") ?? new List<UOMClass>();
 
                 grdUOM.DataSource = list;
                 lblCount.Text = "Total Records: " + list.Count;
@@ -99,7 +99,7 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
-            var existing = await _api.GetAsync<List<UOMClas>>("api/uom") ?? new List<UOMClas>();
+            var existing = await _api.GetAsync<List<UOMClass>>("api/uom") ?? new List<UOMClass>();
 
             bool duplicate = existing.Any(u =>
                 string.Equals(u.UOMCode, finalUOMCode, StringComparison.OrdinalIgnoreCase) &&
@@ -117,7 +117,7 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
-            var uom = new UOMClas
+            var uom = new UOMClass
             {
                 UOMId = string.IsNullOrEmpty(editid) ? 0 : Convert.ToInt32(editid),
                 UOMCode = finalUOMCode,

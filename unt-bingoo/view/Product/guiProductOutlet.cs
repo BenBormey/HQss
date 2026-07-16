@@ -1803,7 +1803,7 @@ namespace unt_bingoo.view.Product
         {
             try
             {
-                var all = await _api.GetAsync<List<UOMClas>>("api/uom") ?? new List<UOMClas>();
+                var all = await _api.GetAsync<List<UOMClass>>("api/uom") ?? new List<UOMClass>();
 
                 var list = all.Where(u => u.IsActive).ToList();
 

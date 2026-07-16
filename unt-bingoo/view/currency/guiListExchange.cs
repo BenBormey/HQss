@@ -1,91 +1,82 @@
-﻿using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using unt_bingoo.Class;
 using unt_bingoo.Controller;
 
 namespace unt_bingoo.view.currency
 {
-    public partial class guiListExchange : DevExpress.XtraEditors.XtraForm
+    public partial class guiListExchange : Form
     {
-        // Property to pass the selected rate back to your main form
+        private readonly APIsController _api;
+        private List<ExchangeRateModel> _list = new List<ExchangeRateModel>();
+
         public decimal SelectedRate { get; private set; }
+        public DateTime SelectedDate { get; private set; }
 
         public guiListExchange()
         {
             InitializeComponent();
-            // Set default date to today for the MEF API
-            dtpExchangeDate.DateTime = DateTime.Now;
+            _api = APIGlobals.Api ?? new APIsController();
         }
 
-        private async void btnView_Click(object sender, EventArgs e)
+        private async void guiListExchange_Load(object sender, EventArgs e)
         {
             try
             {
-                btnView.Enabled = false;
-                APIsController api = new APIsController();
+                var data = await _api.GetAsync<List<ExchangeRateModel>>("api/ExchangeRate")
+                           ?? new List<ExchangeRateModel>();
 
-                // Call the MEF API using the date from the picker
-                var result = await api.GetListByDate(dtpExchangeDate.DateTime);
+                _list = data.OrderByDescending(x => x.rateDate).ToList();
 
-                if (result?.data != null)
-                {
-                    // Update header label
-                    lblRateValue.Text = $"{result.data.bid:N0} KHR / {result.data.currency_id}";
-
-                    // Bind data to the DevExpress Grid
-                    gridExchange.DataSource = new List<MefData> { result.data };
-                    gvExchange.BestFitColumns();
-                }
-                else
-                {
-                    XtraMessageBox.Show("No data found for the selected date.", "Information",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                dgvExchange.DataSource = _list
+                    .Select(x => new
+                    {
+                        x.currencyCode,
+                        x.rate,
+                        x.ask,
+                        x.bid,
+                        x.average,
+                        x.rateDate,
+                        x.note
+                    })
+                    .ToList();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("API Error: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                btnView.Enabled = true;
+                MessageBox.Show("Load Error: " + ex.Message);
             }
         }
 
-       
-        public DateTime SelectedDate { get; private set; }
-
-        private void btnCopyToInput_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e)
         {
-      
-            var data = gvExchange.GetFocusedRow() as MefData;
+            SelectRow();
+        }
 
-            if (data != null)
+        private void dgvExchange_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            SelectRow();
+        }
+
+        private void SelectRow()
+        {
+            if (dgvExchange.CurrentRow == null || dgvExchange.CurrentRow.Index < 0)
             {
-              
-                SelectedRate = data.bid;
-
-            
-                if (DateTime.TryParse(data.valid_date, out DateTime validDate))
-                {
-                    SelectedDate = validDate;
-                }
-                else
-                {
-                    SelectedDate = DateTime.Now;
-                }
-
-               
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                MessageBox.Show("Please select a row.");
+                return;
             }
-            else
-            {
-                XtraMessageBox.Show("Please select a row in the grid first.", "Selection Required");
-            }
+
+            var row = _list[dgvExchange.CurrentRow.Index];
+
+            SelectedRate = row.rate;
+            SelectedDate = row.rateDate;
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

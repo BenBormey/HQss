@@ -147,7 +147,7 @@ namespace unt_bingoo.view.Outlet
         {
             try
             {
-                var data = await _api.GetAsync<List<HourOperation>>("api/HourOperation");
+                var data = await _api.GetAsync<List<HourOperationItem>>("api/HourOperation");
 
                 cboHourOperation.DataSource = null;
 

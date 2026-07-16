@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace unt_bingoo.Class
 {
-    public class UOMClas
+    public class UOMClass
     {
         public int UOMId { get; set; }
         public string UOMCode { get; set; }

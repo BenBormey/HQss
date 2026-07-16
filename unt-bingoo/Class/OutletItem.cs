@@ -37,7 +37,7 @@ namespace unt_bingoo.Class
         }
 
 
-        public List<citizetionPhoto> citizenshipPhotos { get; set; } = new List<citizetionPhoto>();
+        public List<citizenPhoto> citizenshipPhotos { get; set; } = new List<citizenPhoto>();
         public DateTime grandOpeningDate { get; set; }
         public string typeName { get; set; }
         public Image ProductImage { get; set; }

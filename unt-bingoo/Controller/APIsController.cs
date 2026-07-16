@@ -17,8 +17,8 @@ namespace unt_bingoo.Controller
     public class APIsController
     {
  
-             private const string ApiBaseUrl = "http://192.168.1.99:8099/";
-        // private const string ApiBaseUrl = "http://localhost:5189/"; 
+       private const string ApiBaseUrl = "http://192.168.1.99:8099/";
+        /// private const string ApiBaseUrl = "http://localhost:5189/"; 
    
         private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(30);
         private readonly HttpClient _client;
@@ -199,7 +199,7 @@ namespace unt_bingoo.Controller
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("API Error:\n" + ex.Message);
+         
                 return default;
             }
         }

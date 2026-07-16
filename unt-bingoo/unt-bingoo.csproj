@@ -256,18 +256,19 @@
     <Compile Include="Class\CashPaymentDto.cs" />
     <Compile Include="Class\CategoryItem.cs" />
     <Compile Include="Class\CheckoutResponse.cs" />
-    <Compile Include="Class\citizetionPhoto.cs" />
+    <Compile Include="Class\citizenPhoto.cs" />
     <Compile Include="Class\CreateOutlet.cs" />
     <Compile Include="Class\ExchangeRateModel.cs" />
     <Compile Include="Class\ExchangeRateResponse.cs" />
     <Compile Include="Class\Franchise.cs" />
     <Compile Include="Class\FranchiseTypeItem.cs" />
-    <Compile Include="Class\HoureOparation\CreateHourOperationDto.cs" />
-    <Compile Include="Class\HoureOparation\UpdateHourOperationDto.cs" />
+    <Compile Include="Class\HourOperation\CreateHourOperationDto.cs" />
+    <Compile Include="Class\HourOperation\UpdateHourOperationDto.cs" />
     <Compile Include="Class\HourOperation.cs" />
     <Compile Include="Class\KHQRRequestDto.cs" />
     <Compile Include="Class\LoginResponse.cs" />
     <Compile Include="Class\CurrencyItem.cs" />
+    <Compile Include="Class\CustomerItem.cs" />
     <Compile Include="Class\MefExchangeResponse.cs" />
     <Compile Include="Class\MenuItem.cs" />
     <Compile Include="Class\MenuItemVM.cs" />
@@ -299,7 +300,7 @@
     <Compile Include="Class\SupplierItem.cs" />
     <Compile Include="Class\SupplierLookup.cs" />
     <Compile Include="Class\SupplierReportItem.cs" />
-    <Compile Include="Class\UOMClas.cs" />
+    <Compile Include="Class\UOMClass.cs" />
     <Compile Include="Class\UploadResult.cs" />
     <Compile Include="Class\UserItem.cs" />
     <Compile Include="Class\TermDayItem.cs" />
@@ -331,23 +332,11 @@
     <Compile Include="view\Branch\guiBranch.Designer.cs">
       <DependentUpon>guiBranch.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\Branch\guiOutlet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\Branch\guiOutlet.Designer.cs">
-      <DependentUpon>guiOutlet.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\Category\guiCategory.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\Category\guiCategory.Designer.cs">
       <DependentUpon>guiCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\currency\guiCurency.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\currency\guiCurency.Designer.cs">
-      <DependentUpon>guiCurency.cs</DependentUpon>
     </Compile>
     <Compile Include="view\currency\guiCurencys.cs">
       <SubType>Form</SubType>
@@ -434,12 +423,6 @@
       <DependentUpon>guiOutlettest.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Outlet\OutletcodeClas.cs" />
-    <Compile Include="view\Product\FrmProducts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\Product\FrmProducts.Designer.cs">
-      <DependentUpon>FrmProducts.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\Product\FrmProductsBarcode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,12 +464,6 @@
     </Compile>
     <Compile Include="view\Product\guiProductOutlet.Designer.cs">
       <DependentUpon>guiProductOutlet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\Product\guiProductStock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\Product\guiProductStock.Designer.cs">
-      <DependentUpon>guiProductStock.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Product\guiUOM.cs">
       <SubType>Form</SubType>
@@ -589,23 +566,14 @@
     <EmbeddedResource Include="view\Branch\guiBranch.resx">
       <DependentUpon>guiBranch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\Branch\guiOutlet.resx">
-      <DependentUpon>guiOutlet.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="view\Category\guiCategory.resx">
       <DependentUpon>guiCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\currency\guiCurency.resx">
-      <DependentUpon>guiCurency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\currency\guiCurencys.resx">
       <DependentUpon>guiCurencys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\currency\guiExchange.resx">
       <DependentUpon>guiExchange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\currency\guiListExchange.resx">
-      <DependentUpon>guiListExchange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Customer\guiCustomer.resx">
       <DependentUpon>guiCustomer.cs</DependentUpon>
@@ -637,9 +605,6 @@
     <EmbeddedResource Include="view\Outlet\guiOutletCode.resx">
       <DependentUpon>guiOutletCode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\Product\FrmProducts.resx">
-      <DependentUpon>FrmProducts.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="view\Product\FrmProductsBarcode.resx">
       <DependentUpon>FrmProductsBarcode.cs</DependentUpon>
     </EmbeddedResource>
@@ -660,9 +625,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Product\guiProductOutlet.resx">
       <DependentUpon>guiProductOutlet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\Product\guiProductStock.resx">
-      <DependentUpon>guiProductStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Product\guiUOM.resx">
       <DependentUpon>guiUOM.cs</DependentUpon>
@@ -929,7 +891,6 @@
   <ItemGroup>
     <Folder Include="Class\NewFolder1\" />
     <Folder Include="NewFolder1\" />
-    <Folder Include="view\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">

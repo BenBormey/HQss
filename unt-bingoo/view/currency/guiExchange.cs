@@ -349,25 +349,7 @@ namespace unt_bingoo.view.currency
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var frm = new guiListExchange())
-            {
-           
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-
-                    nExchangRate.Value = frm.SelectedRate;
-                    dtDate.Value = frm.SelectedDate;
-
-
-                    txtAsk.Text = frm.SelectedRate.ToString("N0");
-                    txtBid.Text = frm.SelectedRate.ToString("N0");
-                    txtAvg.Text = frm.SelectedRate.ToString("N2");
-
-
-                    cboCurrency.Text = "KHR";
-
-                }
-            }
+         
         }
 
         private async void btnRemoveTemp_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

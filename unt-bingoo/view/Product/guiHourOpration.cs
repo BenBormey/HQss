@@ -17,8 +17,8 @@ namespace unt_bingoo.view.Product
     {
         private int? _editingId = null;
         private APIsController _api;
-        private BindingList<HourOperation> _list =
-          new BindingList<HourOperation>();
+        private BindingList<HourOperationItem> _list =
+          new BindingList<HourOperationItem>();
         
         public guiHourOpration()
         {
@@ -149,7 +149,7 @@ namespace unt_bingoo.view.Product
             }
         }
 
-        private HourOperation GetData()
+        private HourOperationItem GetData()
         {
             TimeSpan openTime;
             TimeSpan closeTime;
@@ -165,7 +165,7 @@ namespace unt_bingoo.view.Product
                 closeTime = ((DateTime)cboCloseTime.EditValue).TimeOfDay;
             }
 
-            return new HourOperation
+            return new HourOperationItem
             {
                 Id = _editingId ?? 0,
                 OpenTime = openTime,
@@ -228,12 +228,12 @@ namespace unt_bingoo.view.Product
         {
             try
             {
-                var data = await _api.GetAsync<List<HourOperation>>("api/HourOperation");
+                var data = await _api.GetAsync<List<HourOperationItem>>("api/HourOperation");
 
                 if (data == null)
-                    data = new List<HourOperation>();
+                    data = new List<HourOperationItem>();
 
-                _list = new BindingList<HourOperation>(data);
+                _list = new BindingList<HourOperationItem>(data);
 
                 gridControlHour.DataSource = _list;
 
@@ -260,7 +260,7 @@ namespace unt_bingoo.view.Product
 
         private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row = gridViewHour.GetFocusedRow() as HourOperation;
+            var row = gridViewHour.GetFocusedRow() as HourOperationItem;
 
             if (row == null)
             {
@@ -287,7 +287,7 @@ namespace unt_bingoo.view.Product
 
         private async void repositoryItemButtonEdit2_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            var row = gridViewHour.GetFocusedRow() as HourOperation;
+            var row = gridViewHour.GetFocusedRow() as HourOperationItem;
 
             if (row == null)
             {

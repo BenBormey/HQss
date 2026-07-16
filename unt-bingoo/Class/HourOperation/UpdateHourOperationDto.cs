@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace unt_bingoo.Class.HoureOparation
+namespace unt_bingoo.Class.HourOperation
 {
    public class UpdateHourOperationDto
     {

@@ -58,11 +58,13 @@ namespace unt_bingoo.view
             this.mnuchangepassword = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supplierReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupOutletMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupBankMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.supplierReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.status.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -110,7 +112,6 @@ namespace unt_bingoo.view
             this.createUserProfileToolStripMenuItem.Name = "createUserProfileToolStripMenuItem";
             this.createUserProfileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.createUserProfileToolStripMenuItem.Text = "Create User Profile";
-            this.createUserProfileToolStripMenuItem.Visible = true;
             this.createUserProfileToolStripMenuItem.Click += new System.EventHandler(this.createUserProfileToolStripMenuItem_Click);
             // 
             // mnuexit
@@ -272,7 +273,8 @@ namespace unt_bingoo.view
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnufile,
             this.reportToolStripMenuItem,
-            this.menuItemToolStripMenuItem});
+            this.menuItemToolStripMenuItem,
+            this.customerToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(632, 26);
@@ -286,6 +288,13 @@ namespace unt_bingoo.view
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.reportToolStripMenuItem.Text = "Report";
+            // 
+            // supplierReportToolStripMenuItem
+            // 
+            this.supplierReportToolStripMenuItem.Name = "supplierReportToolStripMenuItem";
+            this.supplierReportToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.supplierReportToolStripMenuItem.Text = "Supplier Report";
+            this.supplierReportToolStripMenuItem.Click += new System.EventHandler(this.supplierReportToolStripMenuItem_Click);
             // 
             // menuItemToolStripMenuItem
             // 
@@ -315,12 +324,20 @@ namespace unt_bingoo.view
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
             // 
-            // supplierReportToolStripMenuItem
+            // customerToolStripMenuItem
             // 
-            this.supplierReportToolStripMenuItem.Name = "supplierReportToolStripMenuItem";
-            this.supplierReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.supplierReportToolStripMenuItem.Text = "Supplier Report";
-            this.supplierReportToolStripMenuItem.Click += new System.EventHandler(this.supplierReportToolStripMenuItem_Click);
+            this.customerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createCustomerToolStripMenuItem});
+            this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
+            this.customerToolStripMenuItem.Size = new System.Drawing.Size(86, 22);
+            this.customerToolStripMenuItem.Text = "Customer";
+            // 
+            // createCustomerToolStripMenuItem
+            // 
+            this.createCustomerToolStripMenuItem.Name = "createCustomerToolStripMenuItem";
+            this.createCustomerToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.createCustomerToolStripMenuItem.Text = "CreateCustomer";
+            this.createCustomerToolStripMenuItem.Click += new System.EventHandler(this.createCustomerToolStripMenuItem_Click);
             // 
             // mainForm
             // 
@@ -380,6 +397,8 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem setupOutletMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setupBankMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supplierReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createCustomerToolStripMenuItem;
     }
 }
 

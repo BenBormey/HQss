@@ -1,3 +1,41 @@
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.Properties.Resources.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Bank.BankSetup.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.guiBranch.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Category.guiCategory.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiCurencys.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiExchange.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Customer.guiCustomer.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.guiLogin.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.guiProvince.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.gui_loading.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.mainForm.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.franchise_type.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiFranchise.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiListoutLet.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutlet.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutletCode.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBarcode.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBuyinNQtyPCase.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsCaseNumber.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsPackNumber.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsSearch.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiHourOpration.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiUOM.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.cboProduct.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.ShelfLife.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplierSetup.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSuppliers.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiTerm.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.XtraForm1.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiChangePassword.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUser.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUserrole.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.GenerateResource.cache
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe.licenses
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CoreCompileInputs.cache
+e:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe.config
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe.manifest
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.application
@@ -70,51 +108,8 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Json.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.xml
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.presentation.xml
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.Properties.Resources.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Bank.BankSetup.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.guiBranch.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.guiOutlet.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Category.guiCategory.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiCurency.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiCurencys.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiExchange.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiListExchange.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Customer.guiCustomer.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.guiLogin.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.guiProvince.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.gui_loading.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.mainForm.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.franchise_type.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiFranchise.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiListoutLet.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutlet.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutletCode.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProducts.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBarcode.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBuyinNQtyPCase.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsCaseNumber.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsPackNumber.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsSearch.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiHourOpration.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductStock.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiUOM.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.cboProduct.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.ShelfLife.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSuppliers.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiTerm.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.XtraForm1.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiChangePassword.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUser.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUserrole.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.GenerateResource.cache
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe.licenses
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CoreCompileInputs.cache
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe.manifest
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.application
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.pdb
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplierSetup.resources
-e:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete
