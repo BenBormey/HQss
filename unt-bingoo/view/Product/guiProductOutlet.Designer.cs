@@ -41,13 +41,11 @@ namespace unt_bingoo.view.Product
             this.Label24 = new System.Windows.Forms.Label();
             this.Panel52 = new System.Windows.Forms.Panel();
             this.TxtCaseProfit = new System.Windows.Forms.TextBox();
-            this.Label44 = new System.Windows.Forms.Label();
             this.Panel19 = new System.Windows.Forms.Panel();
             this.DTPBirthDate = new System.Windows.Forms.DateTimePicker();
             this.Label18 = new System.Windows.Forms.Label();
             this.btnAddDimension = new System.Windows.Forms.Button();
             this.SeparatorControl11 = new DevExpress.XtraEditors.SeparatorControl();
-            this.Label39 = new System.Windows.Forms.Label();
             this.GroupInventory = new System.Windows.Forms.GroupBox();
             this.Panel21 = new System.Windows.Forms.Panel();
             this.LblStatus = new System.Windows.Forms.Label();
@@ -95,11 +93,8 @@ namespace unt_bingoo.view.Product
             this.CmbUOM = new System.Windows.Forms.ComboBox();
             this.Label53 = new System.Windows.Forms.Label();
             this.SeparatorControl17 = new DevExpress.XtraEditors.SeparatorControl();
-            this.Panel34 = new System.Windows.Forms.Panel();
             this.TxtUnitPrice = new System.Windows.Forms.TextBox();
-            this.Label33 = new System.Windows.Forms.Label();
             this.Label37 = new System.Windows.Forms.Label();
-            this.Label36 = new System.Windows.Forms.Label();
             this.Panel48 = new System.Windows.Forms.Panel();
             this.TxtHeight = new System.Windows.Forms.TextBox();
             this.Label55 = new System.Windows.Forms.Label();
@@ -168,9 +163,7 @@ namespace unt_bingoo.view.Product
             this.Panel47 = new System.Windows.Forms.Panel();
             this.TxtWidth = new System.Windows.Forms.TextBox();
             this.Label54 = new System.Windows.Forms.Label();
-            this.Panel36 = new System.Windows.Forms.Panel();
             this.TxtQtyPerCase = new System.Windows.Forms.TextBox();
-            this.Label45 = new System.Windows.Forms.Label();
             this.TxtCasePriceDiscount = new System.Windows.Forms.TextBox();
             this.Label46 = new System.Windows.Forms.Label();
             this.LblDiscountWS = new System.Windows.Forms.Label();
@@ -249,37 +242,36 @@ namespace unt_bingoo.view.Product
             this.separatorControl21 = new DevExpress.XtraEditors.SeparatorControl();
             this.panelcueency = new System.Windows.Forms.Panel();
             this.TxtCaseProfitBuyin = new System.Windows.Forms.TextBox();
-            this.Panel33 = new System.Windows.Forms.Panel();
             this.TxtPackPrice = new System.Windows.Forms.TextBox();
-            this.Label41 = new System.Windows.Forms.Label();
             this.TxtUnitProfit = new System.Windows.Forms.TextBox();
             this.TxtQtyPerPack = new System.Windows.Forms.TextBox();
-            this.Label50 = new System.Windows.Forms.Label();
             this.Label42 = new System.Windows.Forms.Label();
             this.ProId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimerLoading = new System.Windows.Forms.Timer(this.components);
             this.DgvDeliveryLogistic = new System.Windows.Forms.DataGridView();
             this.BtnAccept = new System.Windows.Forms.Button();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.Panel4 = new System.Windows.Forms.Panel();
             this.panel45 = new System.Windows.Forms.Panel();
             this.TxtCTNPerPallet = new System.Windows.Forms.TextBox();
             this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.PicSectionIcon = new System.Windows.Forms.PictureBox();
+            this.Panel35 = new System.Windows.Forms.Panel();
             this.LblCompanyName = new System.Windows.Forms.Label();
-            this.Panel4 = new System.Windows.Forms.Panel();
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
             this.Panel22 = new System.Windows.Forms.Panel();
             this.TxtRemark = new System.Windows.Forms.TextBox();
             this.Label20 = new System.Windows.Forms.Label();
             this.GroupEvent2 = new System.Windows.Forms.GroupBox();
             this.PanelAccept = new System.Windows.Forms.Panel();
-            this.Panel35 = new System.Windows.Forms.Panel();
             this.TxtCasePrice = new System.Windows.Forms.TextBox();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.GroupEvent3 = new System.Windows.Forms.GroupBox();
             this.GroupBox4 = new System.Windows.Forms.GroupBox();
-            this.Panel32 = new System.Windows.Forms.Panel();
-            this.Label34 = new System.Windows.Forms.Label();
+            this.Label44 = new System.Windows.Forms.Label();
+            this.Label50 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Label36 = new System.Windows.Forms.Label();
             this.Label35 = new System.Windows.Forms.Label();
             this.TimerUOMLoading = new System.Windows.Forms.Timer(this.components);
             this.CreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -291,7 +283,6 @@ namespace unt_bingoo.view.Product
             this.UOMCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel57 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl14)).BeginInit();
-            this.Panel52.SuspendLayout();
             this.Panel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl11)).BeginInit();
             this.GroupInventory.SuspendLayout();
@@ -311,7 +302,6 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl12)).BeginInit();
             this.Panel46.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl17)).BeginInit();
-            this.Panel34.SuspendLayout();
             this.Panel48.SuspendLayout();
             this.Panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl19)).BeginInit();
@@ -345,7 +335,6 @@ namespace unt_bingoo.view.Product
             this.Panel49.SuspendLayout();
             this.Panel44.SuspendLayout();
             this.Panel47.SuspendLayout();
-            this.Panel36.SuspendLayout();
             this.Panel2.SuspendLayout();
             this.GroupEvent1.SuspendLayout();
             this.Panel42.SuspendLayout();
@@ -377,20 +366,18 @@ namespace unt_bingoo.view.Product
             this.panel58.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl21)).BeginInit();
             this.panelcueency.SuspendLayout();
-            this.Panel33.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDeliveryLogistic)).BeginInit();
             this.Panel1.SuspendLayout();
             this.panel45.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
+            this.Panel35.SuspendLayout();
             this.GroupBox3.SuspendLayout();
             this.Panel22.SuspendLayout();
             this.GroupEvent2.SuspendLayout();
             this.PanelAccept.SuspendLayout();
-            this.Panel35.SuspendLayout();
             this.Panel3.SuspendLayout();
             this.GroupEvent3.SuspendLayout();
             this.GroupBox4.SuspendLayout();
-            this.Panel32.SuspendLayout();
             this.panel57.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -426,23 +413,21 @@ namespace unt_bingoo.view.Product
             // 
             // TxtSuggest
             // 
-            this.TxtSuggest.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtSuggest.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtSuggest.Location = new System.Drawing.Point(278, 2);
+            this.TxtSuggest.Location = new System.Drawing.Point(80, 18);
             this.TxtSuggest.Name = "TxtSuggest";
-            this.TxtSuggest.Size = new System.Drawing.Size(85, 22);
+            this.TxtSuggest.Size = new System.Drawing.Size(72, 22);
             this.TxtSuggest.TabIndex = 9;
             this.TxtSuggest.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtSuggest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFactoryCost_KeyPress);
             // 
             // TxtPackProfit
             // 
-            this.TxtPackProfit.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtPackProfit.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtPackProfit.Location = new System.Drawing.Point(278, 2);
+            this.TxtPackProfit.Location = new System.Drawing.Point(234, 99);
             this.TxtPackProfit.Name = "TxtPackProfit";
             this.TxtPackProfit.ReadOnly = true;
-            this.TxtPackProfit.Size = new System.Drawing.Size(85, 22);
+            this.TxtPackProfit.Size = new System.Drawing.Size(72, 22);
             this.TxtPackProfit.TabIndex = 9;
             this.TxtPackProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -471,37 +456,21 @@ namespace unt_bingoo.view.Product
             // 
             // Panel52
             // 
-            this.Panel52.Controls.Add(this.TxtCaseProfit);
-            this.Panel52.Controls.Add(this.Label44);
-            this.Panel52.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel52.Location = new System.Drawing.Point(3, 147);
+            this.Panel52.Location = new System.Drawing.Point(132, 29);
             this.Panel52.Name = "Panel52";
             this.Panel52.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel52.Size = new System.Drawing.Size(450, 26);
+            this.Panel52.Size = new System.Drawing.Size(179, 26);
             this.Panel52.TabIndex = 18;
             // 
             // TxtCaseProfit
             // 
-            this.TxtCaseProfit.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtCaseProfit.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtCaseProfit.Location = new System.Drawing.Point(278, 2);
+            this.TxtCaseProfit.Location = new System.Drawing.Point(378, 150);
             this.TxtCaseProfit.Name = "TxtCaseProfit";
             this.TxtCaseProfit.ReadOnly = true;
-            this.TxtCaseProfit.Size = new System.Drawing.Size(85, 22);
+            this.TxtCaseProfit.Size = new System.Drawing.Size(72, 22);
             this.TxtCaseProfit.TabIndex = 9;
             this.TxtCaseProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // Label44
-            // 
-            this.Label44.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label44.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.Label44.ForeColor = System.Drawing.Color.SteelBlue;
-            this.Label44.Location = new System.Drawing.Point(363, 2);
-            this.Label44.Name = "Label44";
-            this.Label44.Size = new System.Drawing.Size(85, 22);
-            this.Label44.TabIndex = 8;
-            this.Label44.Text = "Avg Profit (%)";
-            this.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Panel19
             // 
@@ -561,16 +530,6 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl11.Padding = new System.Windows.Forms.Padding(2);
             this.SeparatorControl11.Size = new System.Drawing.Size(8, 22);
             this.SeparatorControl11.TabIndex = 14;
-            // 
-            // Label39
-            // 
-            this.Label39.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label39.ForeColor = System.Drawing.Color.Black;
-            this.Label39.Location = new System.Drawing.Point(268, 2);
-            this.Label39.Name = "Label39";
-            this.Label39.Size = new System.Drawing.Size(10, 22);
-            this.Label39.TabIndex = 11;
-            this.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // GroupInventory
             // 
@@ -1111,65 +1070,27 @@ namespace unt_bingoo.view.Product
             this.SeparatorControl17.Size = new System.Drawing.Size(8, 22);
             this.SeparatorControl17.TabIndex = 21;
             // 
-            // Panel34
-            // 
-            this.Panel34.Controls.Add(this.TxtUnitPrice);
-            this.Panel34.Controls.Add(this.Label33);
-            this.Panel34.Controls.Add(this.TxtSuggest);
-            this.Panel34.Controls.Add(this.Label37);
-            this.Panel34.Controls.Add(this.Label36);
-            this.Panel34.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel34.Location = new System.Drawing.Point(3, 17);
-            this.Panel34.Name = "Panel34";
-            this.Panel34.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel34.Size = new System.Drawing.Size(450, 26);
-            this.Panel34.TabIndex = 13;
-            // 
             // TxtUnitPrice
             // 
-            this.TxtUnitPrice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtUnitPrice.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtUnitPrice.Location = new System.Drawing.Point(111, 2);
+            this.TxtUnitPrice.Location = new System.Drawing.Point(80, 46);
             this.TxtUnitPrice.Name = "TxtUnitPrice";
-            this.TxtUnitPrice.Size = new System.Drawing.Size(157, 22);
+            this.TxtUnitPrice.Size = new System.Drawing.Size(72, 22);
             this.TxtUnitPrice.TabIndex = 10;
             this.TxtUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtUnitPrice.TextChanged += new System.EventHandler(this.TxtUnitPrice_TextChanged);
             this.TxtUnitPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUnitPrice_KeyPress);
             // 
-            // Label33
-            // 
-            this.Label33.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label33.ForeColor = System.Drawing.Color.Black;
-            this.Label33.Location = new System.Drawing.Point(268, 2);
-            this.Label33.Name = "Label33";
-            this.Label33.Size = new System.Drawing.Size(10, 22);
-            this.Label33.TabIndex = 11;
-            this.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Label37
             // 
-            this.Label37.Dock = System.Windows.Forms.DockStyle.Left;
             this.Label37.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Label37.ForeColor = System.Drawing.Color.Black;
-            this.Label37.Location = new System.Drawing.Point(2, 2);
+            this.Label37.Location = new System.Drawing.Point(-30, 46);
             this.Label37.Name = "Label37";
             this.Label37.Size = new System.Drawing.Size(109, 22);
             this.Label37.TabIndex = 0;
             this.Label37.Text = "Unit Price";
             this.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label36
-            // 
-            this.Label36.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label36.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.Label36.ForeColor = System.Drawing.Color.Black;
-            this.Label36.Location = new System.Drawing.Point(363, 2);
-            this.Label36.Name = "Label36";
-            this.Label36.Size = new System.Drawing.Size(85, 22);
-            this.Label36.TabIndex = 8;
-            this.Label36.Text = "Suggest (%)";
-            this.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Panel48
             // 
@@ -1307,10 +1228,9 @@ namespace unt_bingoo.view.Product
             // 
             // Label40
             // 
-            this.Label40.Dock = System.Windows.Forms.DockStyle.Left;
             this.Label40.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Label40.ForeColor = System.Drawing.Color.Black;
-            this.Label40.Location = new System.Drawing.Point(2, 2);
+            this.Label40.Location = new System.Drawing.Point(-29, 99);
             this.Label40.Name = "Label40";
             this.Label40.Size = new System.Drawing.Size(109, 22);
             this.Label40.TabIndex = 0;
@@ -1377,10 +1297,9 @@ namespace unt_bingoo.view.Product
             // 
             // Label43
             // 
-            this.Label43.Dock = System.Windows.Forms.DockStyle.Left;
             this.Label43.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Label43.ForeColor = System.Drawing.Color.Black;
-            this.Label43.Location = new System.Drawing.Point(2, 2);
+            this.Label43.Location = new System.Drawing.Point(-30, 152);
             this.Label43.Name = "Label43";
             this.Label43.Size = new System.Drawing.Size(109, 22);
             this.Label43.TabIndex = 0;
@@ -1766,12 +1685,11 @@ namespace unt_bingoo.view.Product
             // 
             // Label38
             // 
-            this.Label38.Dock = System.Windows.Forms.DockStyle.Right;
             this.Label38.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Label38.ForeColor = System.Drawing.Color.SteelBlue;
-            this.Label38.Location = new System.Drawing.Point(363, 2);
+            this.Label38.Location = new System.Drawing.Point(167, 44);
             this.Label38.Name = "Label38";
-            this.Label38.Size = new System.Drawing.Size(85, 22);
+            this.Label38.Size = new System.Drawing.Size(61, 22);
             this.Label38.TabIndex = 8;
             this.Label38.Text = "Profit (%)";
             this.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1985,49 +1903,23 @@ namespace unt_bingoo.view.Product
             this.Label54.TabIndex = 0;
             this.Label54.Text = "Width (cm)";
             // 
-            // Panel36
-            // 
-            this.Panel36.Controls.Add(this.TxtQtyPerCase);
-            this.Panel36.Controls.Add(this.Label45);
-            this.Panel36.Controls.Add(this.TxtCasePriceDiscount);
-            this.Panel36.Controls.Add(this.Label46);
-            this.Panel36.Controls.Add(this.LblDiscountWS);
-            this.Panel36.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel36.Location = new System.Drawing.Point(3, 95);
-            this.Panel36.Name = "Panel36";
-            this.Panel36.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel36.Size = new System.Drawing.Size(450, 26);
-            this.Panel36.TabIndex = 16;
-            // 
             // TxtQtyPerCase
             // 
-            this.TxtQtyPerCase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtQtyPerCase.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtQtyPerCase.Location = new System.Drawing.Point(111, 2);
+            this.TxtQtyPerCase.Location = new System.Drawing.Point(80, 124);
             this.TxtQtyPerCase.Name = "TxtQtyPerCase";
             this.TxtQtyPerCase.ReadOnly = true;
-            this.TxtQtyPerCase.Size = new System.Drawing.Size(157, 22);
+            this.TxtQtyPerCase.Size = new System.Drawing.Size(72, 22);
             this.TxtQtyPerCase.TabIndex = 10;
             this.TxtQtyPerCase.Text = "1";
             this.TxtQtyPerCase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // Label45
-            // 
-            this.Label45.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label45.ForeColor = System.Drawing.Color.Black;
-            this.Label45.Location = new System.Drawing.Point(268, 2);
-            this.Label45.Name = "Label45";
-            this.Label45.Size = new System.Drawing.Size(10, 22);
-            this.Label45.TabIndex = 11;
-            this.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // TxtCasePriceDiscount
             // 
-            this.TxtCasePriceDiscount.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtCasePriceDiscount.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtCasePriceDiscount.Location = new System.Drawing.Point(278, 2);
+            this.TxtCasePriceDiscount.Location = new System.Drawing.Point(234, 124);
             this.TxtCasePriceDiscount.Name = "TxtCasePriceDiscount";
-            this.TxtCasePriceDiscount.Size = new System.Drawing.Size(85, 22);
+            this.TxtCasePriceDiscount.Size = new System.Drawing.Size(72, 22);
             this.TxtCasePriceDiscount.TabIndex = 9;
             this.TxtCasePriceDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtCasePriceDiscount.TextChanged += new System.EventHandler(this.TxtCasePriceDiscount_TextChanged);
@@ -2036,10 +1928,9 @@ namespace unt_bingoo.view.Product
             // 
             // Label46
             // 
-            this.Label46.Dock = System.Windows.Forms.DockStyle.Left;
             this.Label46.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Label46.ForeColor = System.Drawing.Color.Black;
-            this.Label46.Location = new System.Drawing.Point(2, 2);
+            this.Label46.Location = new System.Drawing.Point(-30, 124);
             this.Label46.Name = "Label46";
             this.Label46.Size = new System.Drawing.Size(109, 22);
             this.Label46.TabIndex = 0;
@@ -2049,12 +1940,11 @@ namespace unt_bingoo.view.Product
             // LblDiscountWS
             // 
             this.LblDiscountWS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblDiscountWS.Dock = System.Windows.Forms.DockStyle.Right;
             this.LblDiscountWS.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.LblDiscountWS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LblDiscountWS.Location = new System.Drawing.Point(363, 2);
+            this.LblDiscountWS.Location = new System.Drawing.Point(155, 122);
             this.LblDiscountWS.Name = "LblDiscountWS";
-            this.LblDiscountWS.Size = new System.Drawing.Size(85, 22);
+            this.LblDiscountWS.Size = new System.Drawing.Size(73, 22);
             this.LblDiscountWS.TabIndex = 8;
             this.LblDiscountWS.Text = "Discount (%)";
             this.LblDiscountWS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -2933,96 +2823,54 @@ namespace unt_bingoo.view.Product
             // 
             // TxtCaseProfitBuyin
             // 
-            this.TxtCaseProfitBuyin.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtCaseProfitBuyin.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.TxtCaseProfitBuyin.ForeColor = System.Drawing.Color.Red;
-            this.TxtCaseProfitBuyin.Location = new System.Drawing.Point(278, 2);
+            this.TxtCaseProfitBuyin.Location = new System.Drawing.Point(234, 150);
             this.TxtCaseProfitBuyin.Name = "TxtCaseProfitBuyin";
             this.TxtCaseProfitBuyin.ReadOnly = true;
-            this.TxtCaseProfitBuyin.Size = new System.Drawing.Size(85, 22);
+            this.TxtCaseProfitBuyin.Size = new System.Drawing.Size(72, 22);
             this.TxtCaseProfitBuyin.TabIndex = 12;
             this.TxtCaseProfitBuyin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtCaseProfitBuyin.TextChanged += new System.EventHandler(this.TxtCaseProfitBuyin_TextChanged);
             // 
-            // Panel33
-            // 
-            this.Panel33.Controls.Add(this.TxtPackPrice);
-            this.Panel33.Controls.Add(this.Label39);
-            this.Panel33.Controls.Add(this.TxtPackProfit);
-            this.Panel33.Controls.Add(this.Label40);
-            this.Panel33.Controls.Add(this.Label41);
-            this.Panel33.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel33.Location = new System.Drawing.Point(3, 69);
-            this.Panel33.Name = "Panel33";
-            this.Panel33.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel33.Size = new System.Drawing.Size(450, 26);
-            this.Panel33.TabIndex = 15;
-            // 
             // TxtPackPrice
             // 
-            this.TxtPackPrice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtPackPrice.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtPackPrice.Location = new System.Drawing.Point(111, 2);
+            this.TxtPackPrice.Location = new System.Drawing.Point(80, 99);
             this.TxtPackPrice.Name = "TxtPackPrice";
-            this.TxtPackPrice.Size = new System.Drawing.Size(157, 22);
+            this.TxtPackPrice.Size = new System.Drawing.Size(72, 22);
             this.TxtPackPrice.TabIndex = 10;
             this.TxtPackPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtPackPrice.TextChanged += new System.EventHandler(this.TxtPackPrice_TextChanged);
             this.TxtPackPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPackPrice_KeyPress);
             // 
-            // Label41
-            // 
-            this.Label41.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label41.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.Label41.ForeColor = System.Drawing.Color.SteelBlue;
-            this.Label41.Location = new System.Drawing.Point(363, 2);
-            this.Label41.Name = "Label41";
-            this.Label41.Size = new System.Drawing.Size(85, 22);
-            this.Label41.TabIndex = 8;
-            this.Label41.Text = "Profit (%)";
-            this.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // TxtUnitProfit
             // 
-            this.TxtUnitProfit.Dock = System.Windows.Forms.DockStyle.Right;
             this.TxtUnitProfit.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtUnitProfit.Location = new System.Drawing.Point(278, 2);
+            this.TxtUnitProfit.Location = new System.Drawing.Point(234, 47);
             this.TxtUnitProfit.Name = "TxtUnitProfit";
             this.TxtUnitProfit.ReadOnly = true;
-            this.TxtUnitProfit.Size = new System.Drawing.Size(85, 22);
+            this.TxtUnitProfit.Size = new System.Drawing.Size(72, 22);
             this.TxtUnitProfit.TabIndex = 9;
             this.TxtUnitProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtUnitProfit.TextChanged += new System.EventHandler(this.TxtUnitProfit_TextChanged);
             // 
             // TxtQtyPerPack
             // 
-            this.TxtQtyPerPack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtQtyPerPack.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtQtyPerPack.Location = new System.Drawing.Point(111, 2);
+            this.TxtQtyPerPack.Location = new System.Drawing.Point(80, 72);
             this.TxtQtyPerPack.Name = "TxtQtyPerPack";
-            this.TxtQtyPerPack.Size = new System.Drawing.Size(157, 22);
+            this.TxtQtyPerPack.Size = new System.Drawing.Size(72, 22);
             this.TxtQtyPerPack.TabIndex = 10;
             this.TxtQtyPerPack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtQtyPerPack.TextChanged += new System.EventHandler(this.TxtQtyPerPack_TextChanged);
             this.TxtQtyPerPack.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtQtyPerPack_KeyPress);
             // 
-            // Label50
-            // 
-            this.Label50.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label50.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.Label50.ForeColor = System.Drawing.Color.Red;
-            this.Label50.Location = new System.Drawing.Point(363, 2);
-            this.Label50.Name = "Label50";
-            this.Label50.Size = new System.Drawing.Size(85, 22);
-            this.Label50.TabIndex = 12;
-            this.Label50.Text = "Buyin Profit (%)";
-            this.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Label42
             // 
             this.Label42.Dock = System.Windows.Forms.DockStyle.Right;
             this.Label42.ForeColor = System.Drawing.Color.Black;
-            this.Label42.Location = new System.Drawing.Point(268, 2);
+            this.Label42.Location = new System.Drawing.Point(167, 2);
             this.Label42.Name = "Label42";
             this.Label42.Size = new System.Drawing.Size(10, 22);
             this.Label42.TabIndex = 11;
@@ -3072,13 +2920,22 @@ namespace unt_bingoo.view.Product
             // Panel1
             // 
             this.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.Panel1.Controls.Add(this.panel45);
             this.Panel1.Controls.Add(this.Panel4);
+            this.Panel1.Controls.Add(this.panel45);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel1.Location = new System.Drawing.Point(0, 0);
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(1233, 116);
             this.Panel1.TabIndex = 110;
+            // 
+            // Panel4
+            // 
+            this.Panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Panel4.Location = new System.Drawing.Point(0, 106);
+            this.Panel4.Name = "Panel4";
+            this.Panel4.Size = new System.Drawing.Size(1233, 10);
+            this.Panel4.TabIndex = 7;
             // 
             // panel45
             // 
@@ -3086,8 +2943,10 @@ namespace unt_bingoo.view.Product
             this.panel45.Controls.Add(this.lblSystemName);
             this.panel45.Controls.Add(this.PicProducts);
             this.panel45.Controls.Add(this.PicSectionIcon);
-            this.panel45.Controls.Add(this.LblCompanyName);
             this.panel45.Controls.Add(this.GroupInventory);
+            this.panel45.Controls.Add(this.Panel35);
+            this.panel45.Controls.Add(this.Panel52);
+            this.panel45.Controls.Add(this.LblCompanyName);
             this.panel45.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel45.Location = new System.Drawing.Point(0, 0);
             this.panel45.Name = "panel45";
@@ -3130,6 +2989,15 @@ namespace unt_bingoo.view.Product
             this.PicSectionIcon.TabIndex = 187;
             this.PicSectionIcon.TabStop = false;
             // 
+            // Panel35
+            // 
+            this.Panel35.Controls.Add(this.Label42);
+            this.Panel35.Location = new System.Drawing.Point(481, 34);
+            this.Panel35.Name = "Panel35";
+            this.Panel35.Padding = new System.Windows.Forms.Padding(2);
+            this.Panel35.Size = new System.Drawing.Size(179, 26);
+            this.Panel35.TabIndex = 17;
+            // 
             // LblCompanyName
             // 
             this.LblCompanyName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3139,15 +3007,6 @@ namespace unt_bingoo.view.Product
             this.LblCompanyName.Size = new System.Drawing.Size(272, 43);
             this.LblCompanyName.TabIndex = 186;
             this.LblCompanyName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // Panel4
-            // 
-            this.Panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Panel4.Location = new System.Drawing.Point(0, 106);
-            this.Panel4.Name = "Panel4";
-            this.Panel4.Size = new System.Drawing.Size(1233, 10);
-            this.Panel4.TabIndex = 7;
             // 
             // GroupBox3
             // 
@@ -3224,28 +3083,13 @@ namespace unt_bingoo.view.Product
             this.PanelAccept.Size = new System.Drawing.Size(96, 33);
             this.PanelAccept.TabIndex = 130;
             // 
-            // Panel35
-            // 
-            this.Panel35.Controls.Add(this.TxtCasePrice);
-            this.Panel35.Controls.Add(this.Label42);
-            this.Panel35.Controls.Add(this.Label43);
-            this.Panel35.Controls.Add(this.TxtCaseProfitBuyin);
-            this.Panel35.Controls.Add(this.Label50);
-            this.Panel35.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel35.Location = new System.Drawing.Point(3, 121);
-            this.Panel35.Name = "Panel35";
-            this.Panel35.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel35.Size = new System.Drawing.Size(450, 26);
-            this.Panel35.TabIndex = 17;
-            // 
             // TxtCasePrice
             // 
-            this.TxtCasePrice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtCasePrice.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.TxtCasePrice.Location = new System.Drawing.Point(111, 2);
+            this.TxtCasePrice.Location = new System.Drawing.Point(80, 152);
             this.TxtCasePrice.Name = "TxtCasePrice";
             this.TxtCasePrice.ReadOnly = true;
-            this.TxtCasePrice.Size = new System.Drawing.Size(157, 22);
+            this.TxtCasePrice.Size = new System.Drawing.Size(72, 22);
             this.TxtCasePrice.TabIndex = 10;
             this.TxtCasePrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtCasePrice.TextChanged += new System.EventHandler(this.TxtCasePrice_TextChanged);
@@ -3278,12 +3122,28 @@ namespace unt_bingoo.view.Product
             // 
             // GroupBox4
             // 
-            this.GroupBox4.Controls.Add(this.Panel52);
-            this.GroupBox4.Controls.Add(this.Panel35);
-            this.GroupBox4.Controls.Add(this.Panel36);
-            this.GroupBox4.Controls.Add(this.Panel33);
-            this.GroupBox4.Controls.Add(this.Panel32);
-            this.GroupBox4.Controls.Add(this.Panel34);
+            this.GroupBox4.Controls.Add(this.TxtCaseProfit);
+            this.GroupBox4.Controls.Add(this.Label44);
+            this.GroupBox4.Controls.Add(this.Label50);
+            this.GroupBox4.Controls.Add(this.TxtCaseProfitBuyin);
+            this.GroupBox4.Controls.Add(this.label1);
+            this.GroupBox4.Controls.Add(this.TxtCasePrice);
+            this.GroupBox4.Controls.Add(this.TxtPackProfit);
+            this.GroupBox4.Controls.Add(this.LblDiscountWS);
+            this.GroupBox4.Controls.Add(this.TxtCasePriceDiscount);
+            this.GroupBox4.Controls.Add(this.Label38);
+            this.GroupBox4.Controls.Add(this.TxtUnitProfit);
+            this.GroupBox4.Controls.Add(this.Label36);
+            this.GroupBox4.Controls.Add(this.TxtSuggest);
+            this.GroupBox4.Controls.Add(this.Label43);
+            this.GroupBox4.Controls.Add(this.TxtQtyPerCase);
+            this.GroupBox4.Controls.Add(this.Label46);
+            this.GroupBox4.Controls.Add(this.TxtPackPrice);
+            this.GroupBox4.Controls.Add(this.Label40);
+            this.GroupBox4.Controls.Add(this.TxtQtyPerPack);
+            this.GroupBox4.Controls.Add(this.TxtUnitPrice);
+            this.GroupBox4.Controls.Add(this.Label35);
+            this.GroupBox4.Controls.Add(this.Label37);
             this.GroupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.GroupBox4.ForeColor = System.Drawing.Color.SteelBlue;
             this.GroupBox4.Location = new System.Drawing.Point(2, 236);
@@ -3292,37 +3152,57 @@ namespace unt_bingoo.view.Product
             this.GroupBox4.TabIndex = 10;
             this.GroupBox4.TabStop = false;
             this.GroupBox4.Text = "Selling Price";
+            this.GroupBox4.Enter += new System.EventHandler(this.GroupBox4_Enter);
             // 
-            // Panel32
+            // Label44
             // 
-            this.Panel32.Controls.Add(this.TxtQtyPerPack);
-            this.Panel32.Controls.Add(this.Label34);
-            this.Panel32.Controls.Add(this.TxtUnitProfit);
-            this.Panel32.Controls.Add(this.Label35);
-            this.Panel32.Controls.Add(this.Label38);
-            this.Panel32.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel32.Location = new System.Drawing.Point(3, 43);
-            this.Panel32.Name = "Panel32";
-            this.Panel32.Padding = new System.Windows.Forms.Padding(2);
-            this.Panel32.Size = new System.Drawing.Size(450, 26);
-            this.Panel32.TabIndex = 14;
+            this.Label44.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.Label44.ForeColor = System.Drawing.Color.SteelBlue;
+            this.Label44.Location = new System.Drawing.Point(310, 150);
+            this.Label44.Name = "Label44";
+            this.Label44.Size = new System.Drawing.Size(57, 22);
+            this.Label44.TabIndex = 21;
+            this.Label44.Text = "Avg P(%)";
+            this.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // Label34
+            // Label50
             // 
-            this.Label34.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Label34.ForeColor = System.Drawing.Color.Black;
-            this.Label34.Location = new System.Drawing.Point(268, 2);
-            this.Label34.Name = "Label34";
-            this.Label34.Size = new System.Drawing.Size(10, 22);
-            this.Label34.TabIndex = 11;
-            this.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label50.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.Label50.ForeColor = System.Drawing.Color.Red;
+            this.Label50.Location = new System.Drawing.Point(156, 150);
+            this.Label50.Name = "Label50";
+            this.Label50.Size = new System.Drawing.Size(72, 22);
+            this.Label50.TabIndex = 20;
+            this.Label50.Text = "Buyin P (%)";
+            this.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.label1.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label1.Location = new System.Drawing.Point(167, 97);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 22);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Profit (%)";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Label36
+            // 
+            this.Label36.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.Label36.ForeColor = System.Drawing.Color.Black;
+            this.Label36.Location = new System.Drawing.Point(-6, 18);
+            this.Label36.Name = "Label36";
+            this.Label36.Size = new System.Drawing.Size(85, 22);
+            this.Label36.TabIndex = 8;
+            this.Label36.Text = "Suggest (%)";
+            this.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Label35
             // 
-            this.Label35.Dock = System.Windows.Forms.DockStyle.Left;
             this.Label35.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Label35.ForeColor = System.Drawing.Color.Black;
-            this.Label35.Location = new System.Drawing.Point(2, 2);
+            this.Label35.Location = new System.Drawing.Point(-30, 72);
             this.Label35.Name = "Label35";
             this.Label35.Size = new System.Drawing.Size(109, 22);
             this.Label35.TabIndex = 0;
@@ -3401,8 +3281,6 @@ namespace unt_bingoo.view.Product
             this.Text = "PRODUCT MANAGEMENT";
             this.Load += new System.EventHandler(this.guiProductOutlet_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl14)).EndInit();
-            this.Panel52.ResumeLayout(false);
-            this.Panel52.PerformLayout();
             this.Panel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl11)).EndInit();
             this.GroupInventory.ResumeLayout(false);
@@ -3429,8 +3307,6 @@ namespace unt_bingoo.view.Product
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl12)).EndInit();
             this.Panel46.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SeparatorControl17)).EndInit();
-            this.Panel34.ResumeLayout(false);
-            this.Panel34.PerformLayout();
             this.Panel48.ResumeLayout(false);
             this.Panel48.PerformLayout();
             this.Panel29.ResumeLayout(false);
@@ -3472,8 +3348,6 @@ namespace unt_bingoo.view.Product
             this.Panel44.PerformLayout();
             this.Panel47.ResumeLayout(false);
             this.Panel47.PerformLayout();
-            this.Panel36.ResumeLayout(false);
-            this.Panel36.PerformLayout();
             this.Panel2.ResumeLayout(false);
             this.GroupEvent1.ResumeLayout(false);
             this.Panel42.ResumeLayout(false);
@@ -3517,25 +3391,21 @@ namespace unt_bingoo.view.Product
             this.panel58.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl21)).EndInit();
             this.panelcueency.ResumeLayout(false);
-            this.Panel33.ResumeLayout(false);
-            this.Panel33.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDeliveryLogistic)).EndInit();
             this.Panel1.ResumeLayout(false);
             this.panel45.ResumeLayout(false);
             this.panel45.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).EndInit();
+            this.Panel35.ResumeLayout(false);
             this.GroupBox3.ResumeLayout(false);
             this.Panel22.ResumeLayout(false);
             this.Panel22.PerformLayout();
             this.GroupEvent2.ResumeLayout(false);
             this.PanelAccept.ResumeLayout(false);
-            this.Panel35.ResumeLayout(false);
-            this.Panel35.PerformLayout();
             this.Panel3.ResumeLayout(false);
             this.GroupEvent3.ResumeLayout(false);
             this.GroupBox4.ResumeLayout(false);
-            this.Panel32.ResumeLayout(false);
-            this.Panel32.PerformLayout();
+            this.GroupBox4.PerformLayout();
             this.panel57.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -3551,13 +3421,11 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Label Label24;
         internal System.Windows.Forms.Panel Panel52;
         internal System.Windows.Forms.TextBox TxtCaseProfit;
-        internal System.Windows.Forms.Label Label44;
         internal System.Windows.Forms.Panel Panel19;
         internal System.Windows.Forms.DateTimePicker DTPBirthDate;
         internal System.Windows.Forms.Label Label18;
         internal System.Windows.Forms.Button btnAddDimension;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl11;
-        internal System.Windows.Forms.Label Label39;
         internal System.Windows.Forms.GroupBox GroupInventory;
         internal System.Windows.Forms.Panel Panel21;
         internal System.Windows.Forms.Label LblStatus;
@@ -3604,11 +3472,8 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.ComboBox CmbUOM;
         internal System.Windows.Forms.Label Label53;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl17;
-        internal System.Windows.Forms.Panel Panel34;
         internal System.Windows.Forms.TextBox TxtUnitPrice;
-        internal System.Windows.Forms.Label Label33;
         internal System.Windows.Forms.Label Label37;
-        internal System.Windows.Forms.Label Label36;
         internal System.Windows.Forms.Panel Panel48;
         internal System.Windows.Forms.TextBox TxtHeight;
         internal System.Windows.Forms.Label Label55;
@@ -3672,9 +3537,7 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Panel Panel47;
         internal System.Windows.Forms.TextBox TxtWidth;
         internal System.Windows.Forms.Label Label54;
-        internal System.Windows.Forms.Panel Panel36;
         internal System.Windows.Forms.TextBox TxtQtyPerCase;
-        internal System.Windows.Forms.Label Label45;
         internal System.Windows.Forms.TextBox TxtCasePriceDiscount;
         internal System.Windows.Forms.Label Label46;
         internal System.Windows.Forms.Label LblDiscountWS;
@@ -3704,12 +3567,9 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.ComboBox CmbFOBCIF;
         internal DevExpress.XtraEditors.SeparatorControl SeparatorControl3;
         internal System.Windows.Forms.TextBox TxtCaseProfitBuyin;
-        internal System.Windows.Forms.Panel Panel33;
         internal System.Windows.Forms.TextBox TxtPackPrice;
-        internal System.Windows.Forms.Label Label41;
         internal System.Windows.Forms.TextBox TxtUnitProfit;
         internal System.Windows.Forms.TextBox TxtQtyPerPack;
-        internal System.Windows.Forms.Label Label50;
         internal System.Windows.Forms.Label Label42;
         internal System.Windows.Forms.DataGridViewTextBoxColumn ProId;
         internal System.Windows.Forms.Timer TimerLoading;
@@ -3728,8 +3588,6 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Panel Panel3;
         internal System.Windows.Forms.GroupBox GroupEvent3;
         internal System.Windows.Forms.GroupBox GroupBox4;
-        internal System.Windows.Forms.Panel Panel32;
-        internal System.Windows.Forms.Label Label34;
         internal System.Windows.Forms.Label Label35;
         internal System.Windows.Forms.Timer TimerUOMLoading;
         internal System.Windows.Forms.DataGridViewTextBoxColumn CreatedDate;
@@ -3800,5 +3658,9 @@ namespace unt_bingoo.view.Product
         private System.Windows.Forms.Panel panel63;
         private System.Windows.Forms.Panel panel62;
         private System.Windows.Forms.Panel panel61;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Label Label36;
+        internal System.Windows.Forms.Label Label50;
+        internal System.Windows.Forms.Label Label44;
     }
 }

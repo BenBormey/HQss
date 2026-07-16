@@ -13,5 +13,7 @@ namespace unt_bingoo.Class
         public bool IsActive { get; set; }
         public int ShelfLifeValue { get; set; }
         public string ShelfLifeUnit { get; set; }
+
+        public string ShelfLifeText => $"{ShelfLifeValue} {ShelfLifeUnit}";
     }
 }

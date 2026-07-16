@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -29,19 +28,14 @@ namespace unt_bingoo.view.Product
 
         public string RWord_Searching;
         private bool lIsMainProducts;
-        private DatabaseFramework Data = new DatabaseFramework();
         private ApplicationFramework App = new ApplicationFramework();
-        private string DatabaseName;
         private BindingSource DataBindingSource;
-
-        private ProductLookupRepository _lookupRepo;
 
         private bool _suspendCalc;
 
         public guiProductOutlet(mainForm mdi, bool lIsMainProducts)
         {
             InitializeComponent();
-            LoadingInitialized();
             this.mdi = mdi;
             this.lIsMainProducts = lIsMainProducts;
 
@@ -49,15 +43,6 @@ namespace unt_bingoo.view.Product
 
             this.AutoValidate = AutoValidate.EnableAllowFocusChange;
         }
-
-        private void LoadingInitialized()
-        {
-            Initialized.LoadingInitialized(Data, App);
-            DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
-
-        }
-
-
 
         private static double ParseDouble(string s)
             => double.TryParse((s ?? "").Trim(), out double v) ? v : 0;
@@ -77,9 +62,6 @@ namespace unt_bingoo.view.Product
         /// </summary>
         private static int ParseWholeNumber(string s)
             => (int)Math.Round(ParseDecimal(s), MidpointRounding.AwayFromZero);
-
-        private string CurrentConnectionString()
-            => Data.ConnectionString(Initialized.GetConnectionType(Data, App));
 
         // ------------------------------------------------------------------------
 
@@ -258,8 +240,6 @@ namespace unt_bingoo.view.Product
 
         private void RefreshItems()
         {
-            LoadingInitialized();
-
             DeliveryLogisticLoading.Enabled = true;
             disDimensionLoading.Enabled = true;
 
@@ -308,8 +288,8 @@ namespace unt_bingoo.view.Product
             TxtFactoryCost.Text = (product.FOBCIFCost ?? 0).ToString("0.00");
             TxtBuyin.Text = (product.ProImpPri ?? 0).ToString("N2");
             TxtBuyinDiscount.Text = (product.ProDis ?? 0).ToString("0.00");
-            TxtBuyinVAT.Text = (product.ProVAT ?? 0).ToString("0.00");
-            txtexcisetax.Text = (product.ExciseTax ?? 0).ToString("0.00");
+            TxtBuyinVAT.Text = (product.ProVAT ?? 0).ToString("0");
+            txtexcisetax.Text = (product.ExciseTax ?? 0).ToString("0");
             txtpubliclightingtax.Text = (product.PublicLightingTax ?? 0).ToString("0.00");
             TxtTotalBuyin.Text = (product.ProFinBuyin ?? 0).ToString("N2");
             TxtPackPrice.Text = decimal.TryParse(product.ProPckPri, out var packPrice)
@@ -466,17 +446,15 @@ namespace unt_bingoo.view.Product
             }
            
 
-            _lookupRepo = new ProductLookupRepository(CurrentConnectionString());
-
             DataBindingSource = new BindingSource();
 
             await LoadingSupplier();
             await LoadingCategory();
 
-            this.shelife();
+            await ShelifeAsync();
 
             this.DataLoading();
-            this.LodingUOM();
+            await LodingUOMAsync();
             if (DataBindingSource.Current is ProductItem product)
             {
                 CmbCategory.SelectedValue = Convert.ToInt32(product.ProCat);
@@ -495,23 +473,6 @@ namespace unt_bingoo.view.Product
             if (TxtId.Text == "")
                 TxtUnitNumber_Click(TxtUnitNumber, EventArgs.Empty);
    
-        }
-
-        private void LoadingShelfLifeOfProductLoading()
-        {
-            try
-            {
-                DataTable dt = _lookupRepo.GetActiveShelfLife();
-
-                CmbShelfLifeOfProduct.DataSource = dt;
-                CmbShelfLifeOfProduct.DisplayMember = "ShelfLifeText";
-                CmbShelfLifeOfProduct.ValueMember = "ShelfLifeId";
-                CmbShelfLifeOfProduct.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
@@ -1537,7 +1498,7 @@ namespace unt_bingoo.view.Product
             return true;
         }
 
-        private void LoadCurrency()
+        private async Task LoadCurrency()
         {
 
             try
@@ -1555,32 +1516,35 @@ namespace unt_bingoo.view.Product
                 }
 
                 // Load Currency
-                DataTable dt = _lookupRepo.GetCurrencies(supplierId);
+                var all = await _api.GetAsync<List<CurrencyItem>>("api/currency") ?? new List<CurrencyItem>();
 
-                CmbCurrency.DataSource = dt;
+                var list = all
+                    .Where(c => c.Active && (supplierId == null || c.SupplierId == supplierId))
+                    .OrderBy(c => c.CurrencyCode)
+                    .ToList();
+
+                CmbCurrency.DataSource = list;
                 CmbCurrency.DisplayMember = "Display";
                 CmbCurrency.ValueMember = "CurNumber";
 
                 // Load Factory Currency
-                CmbFactoryCurrency.DataSource = dt.Copy();
+                CmbFactoryCurrency.DataSource = list.ToList();
                 CmbFactoryCurrency.DisplayMember = "Display";
                 CmbFactoryCurrency.ValueMember = "CurNumber";
 
 
-                DataRow usdRow = dt.AsEnumerable()
-                                   .FirstOrDefault(r =>
-                                       r["Currency"].ToString()
-                                        .Equals("USD", StringComparison.OrdinalIgnoreCase));
+                var usdRow = list.FirstOrDefault(c =>
+                    c.CurrencyCode.Equals("USD", StringComparison.OrdinalIgnoreCase));
 
                 if (usdRow != null)
                 {
-                    CmbCurrency.SelectedValue = usdRow["CurNumber"];
-                    CmbFactoryCurrency.SelectedValue = usdRow["CurNumber"];
+                    CmbCurrency.SelectedValue = usdRow.CurNumber;
+                    CmbFactoryCurrency.SelectedValue = usdRow.CurNumber;
                 }
                 else
                 {
 
-                    if (dt.Rows.Count > 0)
+                    if (list.Count > 0)
                     {
                         CmbCurrency.SelectedIndex = 0;
                         CmbFactoryCurrency.SelectedIndex = 0;
@@ -1597,10 +1561,10 @@ namespace unt_bingoo.view.Product
 
         }
 
-        private void TimerCurrencyLoading_Tick_1(object sender, EventArgs e)
+        private async void TimerCurrencyLoading_Tick_1(object sender, EventArgs e)
         {
             this.TimerCurrencyLoading.Enabled = false;
-            this.LoadCurrency();
+            await this.LoadCurrency();
         }
 
         private void CmbCurrency_SelectedIndexChanged(object sender, EventArgs e)
@@ -1778,22 +1742,22 @@ namespace unt_bingoo.view.Product
         {
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private async void button1_Click_1(object sender, EventArgs e)
         {
             ShelfLife gui = new ShelfLife();
             gui.ShowDialog();
-            this.shelife();
+            await ShelifeAsync();
         }
 
-        public void shelife()
+        public async Task ShelifeAsync()
         {
             try
             {
-                DataTable dt = _lookupRepo.GetAllShelfLife();
+                var list = await _api.GetAsync<List<ShelfLifeClass>>("api/shelflife") ?? new List<ShelfLifeClass>();
 
-                CmbShelfLifeOfProduct.DataSource = dt;
+                CmbShelfLifeOfProduct.DataSource = list;
                 CmbShelfLifeOfProduct.DisplayMember = "ShelfLifeText";
-                CmbShelfLifeOfProduct.ValueMember = "ShelfLifeId";
+                CmbShelfLifeOfProduct.ValueMember = "Id";
                 CmbShelfLifeOfProduct.SelectedIndex = -1;
             }
             catch (Exception ex)
@@ -1828,27 +1792,20 @@ namespace unt_bingoo.view.Product
         {
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             guiUOM gui = new guiUOM();
             gui.ShowDialog();
-            this.LodingUOM();
+            await LodingUOMAsync();
         }
 
-        public void LodingUOM()
+        public async Task LodingUOMAsync()
         {
             try
             {
-                DataTable dt = _lookupRepo.GetActiveUom();
+                var all = await _api.GetAsync<List<UOMClas>>("api/uom") ?? new List<UOMClas>();
 
-                List<UOMClas> list = dt.AsEnumerable()
-                    .Select(r => new UOMClas
-                    {
-                        UOMId = Convert.ToInt32(r["UOMId"]),
-                        UOMCode = r["UOMCode"].ToString(),
-                        UOMName = r["UOMName"].ToString()
-                    })
-                    .ToList();
+                var list = all.Where(u => u.IsActive).ToList();
 
                 CmbUOM.DataSource = list;
                 CmbUOM.DisplayMember = "UOMName";
@@ -1998,6 +1955,7 @@ namespace unt_bingoo.view.Product
                 StartPosition = FormStartPosition.Manual
             };
 
+
         
             var wa = Screen.FromControl(this).WorkingArea;
             int x = this.Location.X + (this.Width - vFrm.Width) / 2 + 550;
@@ -2007,7 +1965,6 @@ namespace unt_bingoo.view.Product
             y = Math.Max(wa.Top, Math.Min(y, wa.Bottom - vFrm.Height));
 
             vFrm.Location = new Point(x, y);
-
             if (vFrm.ShowDialog(this) == DialogResult.Cancel)
                 return;
 
@@ -2021,7 +1978,7 @@ namespace unt_bingoo.view.Product
                         "Invalid Change", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
+                
                 double vTotalAvg = (double)((decimal)vAvg / vQtyPCase * vFrm.vQtyPerCase);
                 TxtAveragePrice.Text = vTotalAvg.ToString("N2");
             }
@@ -2037,8 +1994,7 @@ namespace unt_bingoo.view.Product
 
         private void TxtBuyin_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
-                return;
+       
 
 
 
@@ -2164,6 +2120,11 @@ namespace unt_bingoo.view.Product
         private void txtpubliclightingtax_TextChanged(object sender, EventArgs e)
         {
             CalculatedTotalBuyin();
+        }
+
+        private void GroupBox4_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

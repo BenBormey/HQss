@@ -1,30 +1,13 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
 using unt_bingoo.Frameworks;
-using unt_bingoo.Declares;
 
 namespace unt_bingoo.view.Product
 {
     public partial class FrmProductsBuyinNQtyPCase : DevExpress.XtraEditors.XtraForm
     {
-        private DatabaseFramework Data = new DatabaseFramework();
         private ApplicationFramework App = new ApplicationFramework();
-        private DateTime Todate;
-        private PrintToPrinter Printer = new PrintToPrinter();
-        private SqlConnection RCon;
-        private SqlCommand RCom = new SqlCommand();
-        private SqlTransaction RTran;
-        private LocalReport Report;
-        private ReportParameter RParameter;
-        private BindingSource DataBindingSource = new BindingSource();
-        private string DatabaseName;
-        private long RJournalNumber;
-        private DataTable vList;
-        private string vQuery;
 
         public double vBuyin { get; set; }
         public decimal vQtyPerCase { get; set; }
@@ -35,25 +18,15 @@ namespace unt_bingoo.view.Product
             InitializeComponent();
         }
 
-        private void LoadingInitialized()
+        private void FrmProductsBuyinNQtyPCase_Load(object sender, EventArgs e)
         {
-            Initialized.LoadingInitialized(Data, App);
-            DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
             TxtBuyin.Text = vBuyin.ToString("N2");
             TxtQtyPerCase.Text = vQtyPerCase.ToString("N0");
         }
 
-        private void FrmProductsBuyinNQtyPCase_Load(object sender, EventArgs e)
-        {
-            LoadingInitialized();
-        }
-
         private void FrmProductsBuyinNQtyPCase_Activated(object sender, EventArgs e)
         {
-            if (vDefaultBuyinFocus)
-                TxtNewBuyin.Focus();
-            else
-                TxtNewQtyPerCase.Focus();
+            TxtNewBuyin.Focus();
         }
 
         private void TxtNewBuyin_KeyDown(object sender, KeyEventArgs e)

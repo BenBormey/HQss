@@ -26,8 +26,8 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.chkShow = new System.Windows.Forms.CheckBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnExit = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicSectionIcon)).BeginInit();
             this.panelMain.SuspendLayout();
@@ -41,15 +41,16 @@
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(440, 90);
+            this.panelHeader.Size = new System.Drawing.Size(379, 90);
             this.panelHeader.TabIndex = 0;
             // 
             // PicSectionIcon
             // 
+            this.PicSectionIcon.Dock = System.Windows.Forms.DockStyle.Left;
             this.PicSectionIcon.Image = global::unt_bingoo.Properties.Resources.ChatGPT_Image_Jun_3__2026__04_25_20_PM;
-            this.PicSectionIcon.Location = new System.Drawing.Point(27, 6);
+            this.PicSectionIcon.Location = new System.Drawing.Point(0, 0);
             this.PicSectionIcon.Name = "PicSectionIcon";
-            this.PicSectionIcon.Size = new System.Drawing.Size(89, 78);
+            this.PicSectionIcon.Size = new System.Drawing.Size(89, 90);
             this.PicSectionIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PicSectionIcon.TabIndex = 164;
             this.PicSectionIcon.TabStop = false;
@@ -60,7 +61,7 @@
             this.lblSystemName.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblSystemName.Appearance.Options.UseFont = true;
             this.lblSystemName.Appearance.Options.UseForeColor = true;
-            this.lblSystemName.Location = new System.Drawing.Point(122, 42);
+            this.lblSystemName.Location = new System.Drawing.Point(85, 58);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(291, 26);
             this.lblSystemName.TabIndex = 163;
@@ -68,105 +69,109 @@
             // 
             // panelMain
             // 
-            this.panelMain.BackColor = System.Drawing.Color.White;
+            this.panelMain.BackColor = System.Drawing.SystemColors.Control;
+            this.panelMain.Controls.Add(this.button1);
+            this.panelMain.Controls.Add(this.BtnExit);
             this.panelMain.Controls.Add(this.lblNew);
             this.panelMain.Controls.Add(this.txtNewPassword);
             this.panelMain.Controls.Add(this.lblConfirm);
             this.panelMain.Controls.Add(this.txtConfirmPassword);
             this.panelMain.Controls.Add(this.chkShow);
-            this.panelMain.Controls.Add(this.btnSave);
-            this.panelMain.Controls.Add(this.btnCancel);
-            this.panelMain.Location = new System.Drawing.Point(30, 115);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMain.Location = new System.Drawing.Point(0, 90);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(380, 215);
+            this.panelMain.Size = new System.Drawing.Size(379, 222);
             this.panelMain.TabIndex = 1;
             // 
             // lblNew
             // 
             this.lblNew.AutoSize = true;
-            this.lblNew.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lblNew.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.lblNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(95)))));
             this.lblNew.Location = new System.Drawing.Point(12, 18);
             this.lblNew.Name = "lblNew";
-            this.lblNew.Size = new System.Drawing.Size(94, 17);
+            this.lblNew.Size = new System.Drawing.Size(89, 13);
             this.lblNew.TabIndex = 0;
             this.lblNew.Text = "New Password";
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtNewPassword.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.txtNewPassword.Location = new System.Drawing.Point(15, 40);
+            this.txtNewPassword.MaxLength = 20;
             this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Size = new System.Drawing.Size(350, 25);
+            this.txtNewPassword.Size = new System.Drawing.Size(350, 21);
             this.txtNewPassword.TabIndex = 0;
             // 
             // lblConfirm
             // 
             this.lblConfirm.AutoSize = true;
-            this.lblConfirm.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lblConfirm.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.lblConfirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(95)))));
             this.lblConfirm.Location = new System.Drawing.Point(12, 78);
             this.lblConfirm.Name = "lblConfirm";
-            this.lblConfirm.Size = new System.Drawing.Size(114, 17);
+            this.lblConfirm.Size = new System.Drawing.Size(111, 13);
             this.lblConfirm.TabIndex = 1;
             this.lblConfirm.Text = "Confirm Password";
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtConfirmPassword.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.txtConfirmPassword.Location = new System.Drawing.Point(15, 100);
+            this.txtConfirmPassword.MaxLength = 20;
             this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(350, 25);
+            this.txtConfirmPassword.Size = new System.Drawing.Size(350, 21);
             this.txtConfirmPassword.TabIndex = 1;
             // 
             // chkShow
             // 
             this.chkShow.AutoSize = true;
-            this.chkShow.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkShow.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.chkShow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
             this.chkShow.Location = new System.Drawing.Point(15, 135);
             this.chkShow.Name = "chkShow";
-            this.chkShow.Size = new System.Drawing.Size(108, 19);
+            this.chkShow.Size = new System.Drawing.Size(115, 17);
             this.chkShow.TabIndex = 2;
             this.chkShow.Text = "Show password";
             this.chkShow.UseVisualStyleBackColor = true;
             this.chkShow.CheckedChanged += new System.EventHandler(this.chkShow_CheckedChanged);
             // 
-            // btnSave
+            // BtnExit
             // 
-            this.btnSave.BackColor = System.Drawing.Color.White;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.btnSave.ForeColor = System.Drawing.Color.Black;
-            this.btnSave.Location = new System.Drawing.Point(15, 168);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(170, 36);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.BtnExit.BackColor = System.Drawing.Color.Transparent;
+            this.BtnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnExit.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnExit.Location = new System.Drawing.Point(67, 170);
+            this.BtnExit.Name = "BtnExit";
+            this.BtnExit.Size = new System.Drawing.Size(122, 34);
+            this.BtnExit.TabIndex = 112;
+            this.BtnExit.Text = "&Save";
+            this.BtnExit.UseVisualStyleBackColor = false;
+            this.BtnExit.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnCancel
+            // button1
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(80)))), ((int)(((byte)(87)))));
-            this.btnCancel.Location = new System.Drawing.Point(195, 168);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(170, 36);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.Location = new System.Drawing.Point(206, 170);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 34);
+            this.button1.TabIndex = 113;
+            this.button1.Text = "&CanCel";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // guiChangePassword
             // 
+            this.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 360);
+            this.ClientSize = new System.Drawing.Size(379, 312);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -195,9 +200,9 @@
         private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.CheckBox chkShow;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.PictureBox PicSectionIcon;
         private DevExpress.XtraEditors.LabelControl lblSystemName;
+        internal System.Windows.Forms.Button BtnExit;
+        internal System.Windows.Forms.Button button1;
     }
 }

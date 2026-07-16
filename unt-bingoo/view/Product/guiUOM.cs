@@ -1,68 +1,53 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using unt_bingoo.Class;
-using unt_bingoo.Declares;
-using unt_bingoo.Frameworks;
+using unt_bingoo.Controller;
 
 namespace unt_bingoo.view.Product
 {
     public partial class guiUOM : DevExpress.XtraEditors.XtraForm
     {
-        private string DatabaseName;
-        private DatabaseFramework Data = new DatabaseFramework();
-        private ApplicationFramework App = new ApplicationFramework();
+        private APIsController _api;
         public string editid = null;
 
         public guiUOM()
         {
             InitializeComponent();
-            this.LoadingInitialized();
         }
 
-        private void LoadingInitialized()
-        {
-            Initialized.LoadingInitialized(Data, App);
-            DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
-        }
-
-        private void LoadData()
+        private async void guiUOM_Load(object sender, EventArgs e)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Data.ConnectionString(Initialized.GetConnectionType(Data, App))))
+                _api = APIGlobals.Api;
+
+                if (_api == null || !_api.HasToken())
                 {
-                    conn.Open();
-                    string query = @"
-                        SELECT UOMId, UOMCode, UOMName, IsActive
-                        FROM [DBJuJuBi].[dbo].[UOM]
-                        ORDER BY UOMCode ASC;";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            List<UOMClas> list = new List<UOMClas>();
-                            while (reader.Read())
-                            {
-                                list.Add(new UOMClas
-                                {
-                                    UOMId = Convert.ToInt32(reader["UOMId"]),
-                                    UOMCode = reader["UOMCode"].ToString(),
-                                    UOMName = reader["UOMName"].ToString(),
-                                    IsActive = Convert.ToBoolean(reader["IsActive"])
-                                });
-                            }
-
-                            grdUOM.DataSource = list;
-                            lblCount.Text = "Total Records: " + list.Count;
-                        }
-                    }
+                    XtraMessageBox.Show("Please login again!");
+                    Close();
+                    return;
                 }
+
+                await LoadData();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        private async System.Threading.Tasks.Task LoadData()
+        {
+            try
+            {
+                var list = await _api.GetAsync<List<UOMClas>>("api/uom") ?? new List<UOMClas>();
+
+                grdUOM.DataSource = list;
+                lblCount.Text = "Total Records: " + list.Count;
             }
             catch (Exception ex)
             {
@@ -70,7 +55,7 @@ namespace unt_bingoo.view.Product
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUOMCode.Text))
             {
@@ -114,120 +99,75 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
+            var existing = await _api.GetAsync<List<UOMClas>>("api/uom") ?? new List<UOMClas>();
 
+            bool duplicate = existing.Any(u =>
+                string.Equals(u.UOMCode, finalUOMCode, StringComparison.OrdinalIgnoreCase) &&
+                (string.IsNullOrEmpty(editid) || u.UOMId != Convert.ToInt32(editid)));
 
-
-            using (SqlConnection conn = new SqlConnection(
-                Data.ConnectionString(Initialized.GetConnectionType(Data, App))))
+            if (duplicate)
             {
-                conn.Open();
+                XtraMessageBox.Show(
+                    "UOM Code already exists!",
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
-                string checkQuery;
+                txtUOMCode.Focus();
+                return;
+            }
 
+            var uom = new UOMClas
+            {
+                UOMId = string.IsNullOrEmpty(editid) ? 0 : Convert.ToInt32(editid),
+                UOMCode = finalUOMCode,
+                UOMName = finalUOMName,
+                IsActive = isActive
+            };
+
+            try
+            {
                 if (string.IsNullOrEmpty(editid))
                 {
-                    // Add New
-                    checkQuery = @"
-                        SELECT COUNT(*)
-                        FROM [DBJuJuBi].[dbo].[UOM]
-                        WHERE UPPER(UOMCode) = UPPER(@UOMCode)";
+                    var ok = await _api.PostAsync("api/uom", uom);
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Save failed.");
+                        return;
+                    }
+
+                    XtraMessageBox.Show(
+                        "Saved successfully!",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 else
                 {
-                    // Edit
-                    checkQuery = @"
-                        SELECT COUNT(*)
-                        FROM [DBJuJuBi].[dbo].[UOM]
-                        WHERE UPPER(UOMCode) = UPPER(@UOMCode)
-                        AND UOMId <> @Id";
-                }
+                    await _api.PutAsync($"api/uom/{editid}", uom);
 
-                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@UOMCode", finalUOMCode);
+                    XtraMessageBox.Show(
+                        "Record updated successfully!",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
-                    if (!string.IsNullOrEmpty(editid))
-                    {
-                        cmd.Parameters.AddWithValue("@Id", Convert.ToInt32(editid));
-                    }
-
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    if (count > 0)
-                    {
-                        XtraMessageBox.Show(
-                            "UOM Code already exists!",
-                            "Warning",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-
-                        txtUOMCode.Focus();
-                        return;
-                    }
+                    editid = null;
+                    btnSave.Text = "SAVE";
                 }
             }
-
-            if (string.IsNullOrEmpty(editid))
+            catch (Exception ex)
             {
-                string insertQuery = @"
-                    INSERT INTO [DBJuJuBi].[dbo].[UOM]
-                    (
-                        UOMCode,
-                        UOMName,
-                        IsActive
-                    )
-                    VALUES
-                    (
-                        @UOMCode,
-                        @UOMName,
-                        @IsActive
-                    )";
-
-                ExecuteNonQuery(insertQuery, new Dictionary<string, object>
-                {
-                    { "@UOMCode", finalUOMCode },
-                    { "@UOMName", finalUOMName },
-                    { "@IsActive", isActive }
-                });
-
-                XtraMessageBox.Show(
-                    "Saved successfully!",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-            else
-            {
-                string updateQuery = @"
-                    UPDATE [DBJuJuBi].[dbo].[UOM]
-                    SET UOMCode = @UOMCode,
-                        UOMName = @UOMName,
-                        IsActive = @IsActive
-                    WHERE UOMId = @Id";
-
-                ExecuteNonQuery(updateQuery, new Dictionary<string, object>
-                {
-                    { "@UOMCode", finalUOMCode },
-                    { "@UOMName", finalUOMName },
-                    { "@IsActive", isActive },
-                    { "@Id", Convert.ToInt32(editid) }
-                });
-
-                XtraMessageBox.Show(
-                    "Record updated successfully!",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                editid = null;
-                btnSave.Text = "SAVE";
+                XtraMessageBox.Show("Error: " + ex.Message);
+                return;
             }
 
             txtUOMCode.Text = string.Empty;
             txtUOMName.Text = string.Empty;
             chkstatus.Checked = true;
 
-            LoadData();
+            await LoadData();
             txtUOMCode.Focus();
         }
 
@@ -253,7 +193,7 @@ namespace unt_bingoo.view.Product
             }
         }
 
-        private void btnmainDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private async void btnmainDelete_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             var view = grdUOM.FocusedView as DevExpress.XtraGrid.Views.Grid.GridView;
 
@@ -273,10 +213,15 @@ namespace unt_bingoo.view.Product
             {
                 try
                 {
-                    string query = "DELETE FROM [DBJuJuBi].[dbo].[UOM] WHERE UOMId = @Id";
-                    ExecuteNonQuery(query, new Dictionary<string, object> { { "@Id", editid } });
+                    var ok = await _api.DeleteAsync($"api/uom/{editid}");
 
-                    LoadData();
+                    if (!ok)
+                    {
+                        MessageBox.Show("Delete failed.");
+                        return;
+                    }
+
+                    await LoadData();
                     txtUOMCode.Text = string.Empty;
                     txtUOMName.Text = string.Empty;
                     chkstatus.Checked = true;
@@ -291,33 +236,6 @@ namespace unt_bingoo.view.Product
                     MessageBox.Show("Error deleting record: " + ex.Message);
                 }
             }
-        }
-
-        private void ExecuteNonQuery(string query, Dictionary<string, object> parameters)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(Data.ConnectionString(Initialized.GetConnectionType(Data, App))))
-                {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        foreach (var param in parameters)
-                            cmd.Parameters.AddWithValue(param.Key, param.Value);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void guiUOM_Load(object sender, EventArgs e)
-        {
-            this.LoadData();
         }
 
         private void btnClear_Click(object sender, EventArgs e)

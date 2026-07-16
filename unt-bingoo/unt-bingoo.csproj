@@ -283,7 +283,6 @@
     <Compile Include="Class\ProductPosDto.cs" />
     <Compile Include="Class\ProductScaleDto.cs" />
     <Compile Include="Class\ProductScal\CreateProductScaleDto.cs" />
-    <Compile Include="Class\ProductScal\ProductLookupRepository.cs" />
     <Compile Include="Class\ProductScal\ProductPricingCalculator.cs" />
     <Compile Include="Class\ProductScal\ProductScal.cs" />
     <Compile Include="Class\ProductStockModel.cs" />
@@ -303,6 +302,7 @@
     <Compile Include="Class\UOMClas.cs" />
     <Compile Include="Class\UploadResult.cs" />
     <Compile Include="Class\UserItem.cs" />
+    <Compile Include="Class\TermDayItem.cs" />
     <Compile Include="Controller\APIGlobals.cs" />
     <Compile Include="Controller\APIsController.cs" />
     <Compile Include="Declares\Initialized.cs" />
@@ -553,6 +553,12 @@
     </Compile>
     <Compile Include="view\User\guiChangePassword.Designer.cs">
       <DependentUpon>guiChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\User\guiUserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\User\guiUserProfile.Designer.cs">
+      <DependentUpon>guiUserProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="view\User\guiUser.cs">
       <SubType>Form</SubType>

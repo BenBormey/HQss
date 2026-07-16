@@ -262,7 +262,7 @@ namespace unt_bingoo.view.User
                 txtaddress.Text = user.address;
 
                 cboRole.SelectedValue = user.RoleId;
-                cboOutlet.SelectedValue = user.outLetId;
+                cboOutlet.SelectedValue = user.OutletId;
 
                 chkActive.Checked = user.IsActive;
                 checkBox2.Checked = user.HasSystemAccess;

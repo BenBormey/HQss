@@ -1,35 +1,22 @@
 ﻿using DevExpress.XtraEditors;
-using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using unt_bingoo.Class;
+using unt_bingoo.Controller;
 using unt_bingoo.Declares;
-using unt_bingoo.Frameworks;
 
 namespace unt_bingoo.view.Product
 {
     public partial class FrmProductsCaseNumber : DevExpress.XtraEditors.XtraForm
     {
-        private DatabaseFramework Data = new DatabaseFramework();
-        private ApplicationFramework App = new ApplicationFramework();
-        private DateTime Todate;
-        private PrintToPrinter Printer = new PrintToPrinter();
-        private SqlConnection RCon;
-        private SqlCommand RCom = new SqlCommand();
-        private SqlTransaction RTran;
-        private LocalReport Report;
-        private ReportParameter RParameter;
-        private BindingSource DataBindingSource = new BindingSource();
-        private string DatabaseName;
-        private DataTable DTable;
-        private long RJournalNumber;
+        private readonly APIsController _api = new APIsController();
 
         public string RWord_Searching;
         public DataTable RProductList;
@@ -53,23 +40,6 @@ namespace unt_bingoo.view.Product
 
         private void FrmProductsCaseNumber_Load(object sender, EventArgs e)
         {
-            LoadingInitialized();
-           
-
-            //App.SetEnableController(
-            //    !string.IsNullOrWhiteSpace(RCurrentBarcode),
-            //    BtnSetAsOldCode);
-        }
-        private void LoadingInitialized()
-        {
-            Initialized.LoadingInitialized(Data, App);
-
-            DatabaseName = string.Format(
-                "{0}{1}",
-                Data.PrefixDatabase,
-                Data.DatabaseName);
-
-     
         }
 
         private void DataSources(
@@ -85,7 +55,7 @@ namespace unt_bingoo.view.Product
         }
 
 
-        private void BtnChange_Click(object sender, EventArgs e)
+        private async void BtnChange_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
 
@@ -107,26 +77,9 @@ namespace unt_bingoo.view.Product
                 Convert.ToInt64(TxtBarcode.Text.Trim())
             );
 
-            string searchQuery = $@"
-SELECT ProID
-FROM [DBJuJuBi].[dbo].[TPRProducts]
-WHERE ProNumY = '{barcode}'
-   OR ProNumYP = '{barcode}'
-   OR ProNumYC = '{barcode}'";
+            var existing = await _api.GetAsync<ProductItem>($"api/product/barcode/{barcode}");
 
-            DataTable lists = new DataTable();
-
-            using (SqlConnection con = new SqlConnection(Data.strConnection))
-            {
-                con.Open();
-
-                using (SqlCommand cmd = new SqlCommand(searchQuery, con))
-                {
-                    lists.Load(cmd.ExecuteReader());
-                }
-            }
-
-            if (lists.Rows.Count > 0)
+            if (existing != null)
             {
                 MessageBox.Show(
                     $"Barcode [{barcode}] already exists!",
@@ -168,59 +121,36 @@ WHERE ProNumY = '{barcode}'
             if (result == DialogResult.No)
                 return;
 
-            string updateQuery = $@"
-        UPDATE [DBJuJuBi].[dbo].[TPRProducts]
-        SET ProNumYC = '{barcode}'
-        WHERE ProID = {RProId}";
-
-            using (SqlConnection con = new SqlConnection(Data.strConnection))
+            try
             {
-                con.Open();
+                await _api.PutAsync(
+                    $"api/product/{RProId}/case-number",
+                    new { CaseNumber = barcode });
 
-                SqlTransaction tran = con.BeginTransaction();
+                MessageBox.Show(
+                    "Changing barcode completed!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-                try
-                {
-                    using (SqlCommand cmd = new SqlCommand(updateQuery, con, tran))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                Initialized.R_Barcode = barcode;
 
-                    tran.Commit();
-
-                    MessageBox.Show(
-                        "Changing barcode completed!",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-
-                    Initialized.R_Barcode = barcode;
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-
-                    MessageBox.Show(
-                        ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
-        private void BtnClearPackNumber_Click(object sender, EventArgs e)
+        private async void BtnClearPackNumber_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
-
-            string barcode = string.Format(
-                "{0}{1:0000000000000}",
-                SpecialCode,
-                Convert.ToInt64(string.IsNullOrWhiteSpace(TxtBarcode.Text) ? "0" : TxtBarcode.Text.Trim())
-            );
 
             if (MessageBox.Show(
                     $"Are you sure, you want to clear the case number <{RCurrentBarcode}> ?",
@@ -231,58 +161,30 @@ WHERE ProNumY = '{barcode}'
                 return;
             }
 
-            string query = $@"
-        UPDATE [DBJuJuBi].[dbo].[TPRProducts]
-        SET ProNumYC = NULL
-        WHERE ProID = {RProId};
-    ";
-
-            using (SqlConnection con = new SqlConnection(Data.strConnection))
+            try
             {
-                con.Open();
+                await _api.PutAsync(
+                    $"api/product/{RProId}/case-number",
+                    new { CaseNumber = (string)null });
 
-                SqlTransaction tran = con.BeginTransaction();
+                MessageBox.Show(
+                    "Clearance case number have been completed!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-                try
-                {
-                    using (SqlCommand cmd = new SqlCommand(query, con, tran))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                Initialized.R_Barcode = "";
 
-                    tran.Commit();
-
-                    MessageBox.Show(
-                        "Clearance case number have been completed!",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-
-                    Initialized.R_Barcode = "";
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                catch (SqlException ex)
-                {
-                    tran.Rollback();
-
-                    MessageBox.Show(
-                        ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-
-                    MessageBox.Show(
-                        ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

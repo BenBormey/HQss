@@ -3,8 +3,6 @@ using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
@@ -23,15 +21,10 @@ namespace unt_bingoo.view.Supplier
 
         private APIsController _api;
         private ApplicationFramework app = new ApplicationFramework();
-        private DatabaseFramework Data = new DatabaseFramework();
 
         private BindingList<SupplierItem> _supplierList =
             new BindingList<SupplierItem>();
         private BindingSource DataBindingSource;
-
-
-        public string DatabaseName;
-
 
 
         private int? _editingId = null;
@@ -41,9 +34,6 @@ namespace unt_bingoo.view.Supplier
         {
             InitializeComponent();
             DataBindingSource = new BindingSource();
-            this.LoadingInitialized();
-
-
 
             gridViewSuppliers.OptionsView.ColumnAutoWidth = true;
 
@@ -59,64 +49,29 @@ namespace unt_bingoo.view.Supplier
 
 
         }
-        private void LoadingInitialized()
-        {
-            Initialized.LoadingInitialized(Data, app);
-            DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
-        }
-
-        public void autoSupcode()
+        public async Task autoSupcode()
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Data.ConnectionString(Initialized.GetConnectionType(Data, app))))
-                {
-                    conn.Open();
-
-                    string query = "SELECT ISNULL(MAX([SupplierID]), 0) + 1 FROM [DBJuJuBi].[dbo].[Suppliers]";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        int nextId = Convert.ToInt32(cmd.ExecuteScalar());
-
-                        TxtSupId.Text = string.Format("SUP-{0:0000}", nextId);
-                    }
-                }
+                string code = await _api.GetNextSupplierCodeAsync();
+                TxtSupId.Text = code ?? string.Empty;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error generating Supplier Code: " + ex.Message);
             }
         }
-        public void loadingTerm()
+        public async Task loadingTerm()
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(
-                    Data.ConnectionString(
-                    Initialized.GetConnectionType(Data, app))))
-                {
-                    conn.Open();
+                var terms = await _api.GetAsync<List<TermDayItem>>("api/TermDay")
+                            ?? new List<TermDayItem>();
 
-                    string query = @"
-            SELECT 
-                Id,
-                CAST(CountDay AS VARCHAR(10)) + ' Day' AS TermDay
-            FROM [DBJuJuBi].[dbo].[tblTermDay]
-            ORDER BY CountDay";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-
-                        CmbTerms.DataSource = dt;
-                        CmbTerms.DisplayMember = "TermDay";
-                        CmbTerms.ValueMember = "Id";
-                        CmbTerms.SelectedIndex = -1;
-                    }
-                }
+                CmbTerms.DataSource = terms.OrderBy(t => t.CountDay).ToList();
+                CmbTerms.DisplayMember = "TermDay";
+                CmbTerms.ValueMember = "Id";
+                CmbTerms.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -162,9 +117,9 @@ namespace unt_bingoo.view.Supplier
                 }
 
                 await LoadData();
-     
-                this.autoSupcode();
-                this.loadingTerm();
+
+                await this.autoSupcode();
+                await this.loadingTerm();
             }
             catch (Exception ex)
             {
@@ -670,11 +625,11 @@ namespace unt_bingoo.view.Supplier
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             guiTerm gui = new guiTerm();
             gui.ShowDialog();
-            this.loadingTerm();
+            await this.loadingTerm();
         }
 
         private void txtkhmername_KeyPress(object sender, KeyPressEventArgs e)

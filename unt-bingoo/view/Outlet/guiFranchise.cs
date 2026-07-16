@@ -4,10 +4,6 @@ using System.Windows.Forms;
 using unt_bingoo.Controller;
 using unt_bingoo.Class;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using unt_bingoo.Declares;
-using unt_bingoo.Frameworks;
 using DevExpress.XtraEditors;
 using System.Linq;
 using System.Drawing;
@@ -16,13 +12,10 @@ namespace unt_bingoo.view.Outlet
     public partial class guiFranchise : DevExpress.XtraEditors.XtraForm
     {
         private readonly APIsController _api;
-        private DatabaseFramework Data = new DatabaseFramework();
-        private ApplicationFramework App = new ApplicationFramework();
         private bool _suspendDateRules = false;
         public guiFranchise()
         {
             InitializeComponent();
-            this.LoadingInitialized();
             _api = new APIsController();
        
 
@@ -84,7 +77,7 @@ namespace unt_bingoo.view.Outlet
             finally
             {
                 btnSave.Enabled = true;
-                loadingOutletcode();
+                await LoadOutletCodeAsync();
             }
         }
         private async Task SaveFranchise()
@@ -205,16 +198,10 @@ namespace unt_bingoo.view.Outlet
                 ClearForm();
             }
         }
-        private string DatabaseName;
-        private void LoadingInitialized()
-    {
-        Initialized.LoadingInitialized(Data, App);
-        DatabaseName = string.Format("{0}{1}", Data.PrefixDatabase, Data.DatabaseName);
-    }
-    private async void guiFranchise_Load_1(object sender, EventArgs e)
+        private async void guiFranchise_Load_1(object sender, EventArgs e)
         {
             await LoadFranchises();
-            this.loadingOutletcode();
+            await LoadOutletCodeAsync();
             this.LoadingFranchiseType();
         }
         public async Task LoadingFranchiseType() // ប្តូរទៅជា async Task ដើម្បីប្រើប្រាស់ await បានរលូន
@@ -306,41 +293,35 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             guiOutletCode gui = new guiOutletCode();
 
-  
+
             gui.ShowDialog();
-            this.loadingOutletcode();
+            await LoadOutletCodeAsync();
         }
-        public void loadingOutletcode()
+        public async Task LoadOutletCodeAsync()
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Data.ConnectionString(Initialized.GetConnectionType(Data, App))))
-                {
-                    conn.Open();
+                var outletCodes = await _api.GetAsync<List<OutletcodeClas>>("api/outletcode") ?? new List<OutletcodeClas>();
+                var franchises = await _api.GetAsync<List<Franchise>>("api/Franchise") ?? new List<Franchise>();
 
-                    string query = @"SELECT Id, OutletCode
-                             FROM [DBJuJuBi].[dbo].[OutletCode]
-							 where OutletCode  not in (select outlet from DBJuJuBi.dbo.franchise)
-                             ORDER BY Id DESC
-";
+                var usedOutlets = new HashSet<string>(
+                    franchises.Where(f => !string.IsNullOrEmpty(f.outlet)).Select(f => f.outlet),
+                    StringComparer.OrdinalIgnoreCase);
 
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
+                var available = outletCodes
+                    .Where(o => !usedOutlets.Contains(o.OutletCode))
+                    .OrderByDescending(o => o.Id)
+                    .ToList();
 
-             
-                    da.Fill(dt);
+                cbooutletCode.DataSource = available;
+                cbooutletCode.DisplayMember = "OutletCode";
+                cbooutletCode.ValueMember = "Id";
 
-                    cbooutletCode.DataSource = dt;
-                    cbooutletCode.DisplayMember = "OutletCode";
-                    cbooutletCode.ValueMember = "Id";
-
-
-                    cbooutletCode.SelectedIndex = -1;
-                }
+                cbooutletCode.SelectedIndex = -1;
             }
             catch (Exception ex)
             {

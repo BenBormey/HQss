@@ -1,43 +1,14 @@
 ﻿using DevExpress.XtraEditors;
-using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 using unt_bingoo.Class;
 using unt_bingoo.Controller;
-using unt_bingoo.Declares;
-using unt_bingoo.Frameworks;
 
 namespace unt_bingoo.view.Product
 {
     public partial class FrmProductsSearch : DevExpress.XtraEditors.XtraForm
     {
-        private DatabaseFramework Data = new DatabaseFramework();
-
-        private ApplicationFramework App = new ApplicationFramework();
-
-        private DateTime Todate;
-
-        private PrintToPrinter Printer = new PrintToPrinter();
-
-        private SqlConnection RCon;
-
-        private SqlCommand RCom = new SqlCommand();
-
-        private SqlTransaction RTran;
-
-        private LocalReport Report;
-
-        private ReportParameter RParameter;
-
-        private string DatabaseName;
-
-        private DataTable DTable;
-
-        private long RJournalNumber;
-
         private APIsController _api;
         public mainForm mdi_ { get; set; }
 
@@ -45,28 +16,7 @@ namespace unt_bingoo.view.Product
         {
             InitializeComponent();
             this.mdi_ = mdi;
-            this.LoadingInitialized();
             _api = APIGlobals.Api;
-        }
-
-        private void DataSources(
-            System.Windows.Forms.ComboBox comboBoxName,
-            DataTable dTable,
-            string displayMember,
-            string valueMember)
-        {
-            comboBoxName.DataSource = dTable;
-            comboBoxName.DisplayMember = displayMember;
-            comboBoxName.ValueMember = valueMember;
-            comboBoxName.SelectedIndex = -1;
-        }
-
-        private void LoadingInitialized()
-        {
-            Initialized.LoadingInitialized(Data, App);
-            DatabaseName = string.Format("{0}{1}",
-                Data.PrefixDatabase,
-                Data.DatabaseName);
         }
 
         private void BtnAddNew_Click(object sender, EventArgs e)

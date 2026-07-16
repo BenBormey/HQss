@@ -189,7 +189,7 @@ namespace unt_bingoo.view
         private void mnuchangepassword_Click(object sender, EventArgs e)
         {
        
-            var frm = new guiChangePassword() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new guiChangePassword() { StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
 
         }
@@ -265,7 +265,8 @@ namespace unt_bingoo.view
 
         private void createUserProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var frm = new unt_bingoo.view.User.guiUserProfile() { StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
         }
 
         private void toolStripSeparator2_Click(object sender, EventArgs e)

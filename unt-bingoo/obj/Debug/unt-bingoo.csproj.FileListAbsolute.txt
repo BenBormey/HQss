@@ -117,4 +117,4 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.application
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.pdb
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplierSetup.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete
+e:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete

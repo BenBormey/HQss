@@ -738,7 +738,7 @@ namespace unt_bingoo.view.User
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Outlet";
-            this.gridColumn4.FieldName = "outLetName";
+            this.gridColumn4.FieldName = "OutletName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 5;

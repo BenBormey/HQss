@@ -15,5 +15,8 @@ namespace unt_bingoo.Class
         public bool Active { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime? UpdatedAt { get; set; }  // nullable
+
+        public string CurNumber => CurrencyNo;
+        public string Display => $"{CurrencyNo}   {CurrencyCode}   {BuyRate}";
     }
 }

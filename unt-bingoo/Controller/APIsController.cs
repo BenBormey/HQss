@@ -17,16 +17,10 @@ namespace unt_bingoo.Controller
     public class APIsController
     {
  
-        private const string ApiBaseUrl = "http://192.168.1.99:8099/";
-         //private const string ApiBaseUrl = "http://localhost:5189/"; 
-
-
-     
-
+             private const string ApiBaseUrl = "http://192.168.1.99:8099/";
+        // private const string ApiBaseUrl = "http://localhost:5189/"; 
    
         private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(30);
-   
-      
         private readonly HttpClient _client;
         private readonly HttpClient _externalClient;
 
@@ -163,6 +157,17 @@ namespace unt_bingoo.Controller
                 MessageBox.Show("Login Error:\n" + ex.Message);
                 return false;
             }
+        }
+
+        public Task<UserItem> GetMeAsync()
+        {
+            return GetAsync<UserItem>("api/users/me");
+        }
+
+        public async Task<string> GetNextSupplierCodeAsync()
+        {
+            var res = await GetAsync<JObject>("api/Supplier/next-code");
+            return res?["supplierCode"]?.ToString();
         }
 
         // The md-login/login response doesn't include HasSystemAccess, so

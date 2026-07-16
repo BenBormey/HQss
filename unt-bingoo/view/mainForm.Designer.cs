@@ -110,7 +110,7 @@ namespace unt_bingoo.view
             this.createUserProfileToolStripMenuItem.Name = "createUserProfileToolStripMenuItem";
             this.createUserProfileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.createUserProfileToolStripMenuItem.Text = "Create User Profile";
-            this.createUserProfileToolStripMenuItem.Visible = false;
+            this.createUserProfileToolStripMenuItem.Visible = true;
             this.createUserProfileToolStripMenuItem.Click += new System.EventHandler(this.createUserProfileToolStripMenuItem_Click);
             // 
             // mnuexit

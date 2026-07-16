@@ -32,7 +32,6 @@ namespace unt_bingoo.Frameworks
             if (RSplitAmount.Length > Digit.ToString().Length)
             {
                 RSplitAmount = RSplitAmount.Substring(RSplitAmount.Length - (Digit - 1), RSplitAmount.Length - (RSplitAmount.Length - (Digit - 1)));
-                int RNumber = 0;
                 if (Convert.ToInt32(RSplitAmount) == 0)
                 {
                     RSplitAmount = "0";
@@ -446,7 +445,13 @@ namespace unt_bingoo.Frameworks
         }
         public void KeyPress(object sender, KeyPressEventArgs e, TypeKeyPress type = TypeKeyPress.Format_Number, string allowCharacter = "", int length = 100)
         {
+            if (allowCharacter == null)
+                allowCharacter = "";
+
             var control = sender as TextBox;
+            if (control == null)
+                return;
+
             if (control.Text.Length >= length && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
@@ -601,7 +606,7 @@ namespace unt_bingoo.Frameworks
                 KP = false;
                 ((TextBox)sender).SelectionStart = (int)Index;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Handle exception if needed
             }

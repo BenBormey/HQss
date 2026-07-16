@@ -255,6 +255,7 @@ namespace unt_bingoo.view.Product
             this.Name = "FrmProductsBuyinNQtyPCase";
             this.Text = "Set Buyin";
             this.Load += new System.EventHandler(this.FrmProductsBuyinNQtyPCase_Load);
+            this.Activated += new System.EventHandler(this.FrmProductsBuyinNQtyPCase_Activated);
             this.Panel2.ResumeLayout(false);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
@@ -278,11 +279,11 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.TextBox TxtNewQtyPerCase;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label43;
-        internal System.Windows.Forms.TextBox TxtNewBuyin;
         internal System.Windows.Forms.Label Label42;
         internal System.Windows.Forms.TextBox TxtBuyin;
         internal System.Windows.Forms.Panel Panel35;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        public System.Windows.Forms.TextBox TxtNewBuyin;
     }
 }

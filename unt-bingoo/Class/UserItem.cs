@@ -23,8 +23,8 @@ namespace unt_bingoo.Class
         public bool IsActive { get; set; } = true;
         public bool HasSystemAccess { get; set; } = true;
 
-        public int? outLetId { get; set; }
-        public string outLetName { get; set; }
+        public int? OutletId { get; set; }
+        public string OutletName { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? LastLoginAt { get; set; }
     }
