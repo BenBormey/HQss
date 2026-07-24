@@ -25,7 +25,6 @@ namespace unt_bingoo.view.User
         private TextEdit txtRoleName;
         private MemoEdit txtDescription;
 
-        private CheckEdit chkSystemRole;
         private CheckEdit chkIsActive;
 
         private SimpleButton btnAdd;
@@ -57,20 +56,21 @@ namespace unt_bingoo.view.User
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelHeader = new DevExpress.XtraEditors.PanelControl();
             this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.lblSystemName = new DevExpress.XtraEditors.LabelControl();
             this.panelDetail = new DevExpress.XtraEditors.PanelControl();
+            this.chkDeactive = new DevExpress.XtraEditors.CheckEdit();
             this.txtId = new DevExpress.XtraEditors.TextEdit();
             this.lblRoleCode = new DevExpress.XtraEditors.LabelControl();
             this.lblRoleName = new DevExpress.XtraEditors.LabelControl();
@@ -78,7 +78,6 @@ namespace unt_bingoo.view.User
             this.txtRoleCode = new DevExpress.XtraEditors.TextEdit();
             this.txtRoleName = new DevExpress.XtraEditors.TextEdit();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
-            this.chkSystemRole = new DevExpress.XtraEditors.CheckEdit();
             this.chkIsActive = new DevExpress.XtraEditors.CheckEdit();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
@@ -89,7 +88,6 @@ namespace unt_bingoo.view.User
             this.RoleCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Edit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnmainEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -107,11 +105,11 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).BeginInit();
             this.panelDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDeactive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSystemRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
             this.panelGrid.SuspendLayout();
@@ -156,6 +154,7 @@ namespace unt_bingoo.view.User
             // 
             // panelDetail
             // 
+            this.panelDetail.Controls.Add(this.chkDeactive);
             this.panelDetail.Controls.Add(this.txtId);
             this.panelDetail.Controls.Add(this.lblRoleCode);
             this.panelDetail.Controls.Add(this.lblRoleName);
@@ -163,19 +162,29 @@ namespace unt_bingoo.view.User
             this.panelDetail.Controls.Add(this.txtRoleCode);
             this.panelDetail.Controls.Add(this.txtRoleName);
             this.panelDetail.Controls.Add(this.txtDescription);
-            this.panelDetail.Controls.Add(this.chkSystemRole);
             this.panelDetail.Controls.Add(this.chkIsActive);
             this.panelDetail.Controls.Add(this.btnAdd);
             this.panelDetail.Controls.Add(this.btnCancel);
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDetail.Location = new System.Drawing.Point(0, 80);
             this.panelDetail.Name = "panelDetail";
-            this.panelDetail.Size = new System.Drawing.Size(900, 180);
+            this.panelDetail.Size = new System.Drawing.Size(900, 208);
             this.panelDetail.TabIndex = 2;
+            // 
+            // chkDeactive
+            // 
+            this.chkDeactive.Location = new System.Drawing.Point(172, 23);
+            this.chkDeactive.Name = "chkDeactive";
+            this.chkDeactive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDeactive.Properties.Appearance.Options.UseFont = true;
+            this.chkDeactive.Properties.Caption = "Deactive";
+            this.chkDeactive.Size = new System.Drawing.Size(75, 19);
+            this.chkDeactive.TabIndex = 11;
+            this.chkDeactive.CheckedChanged += new System.EventHandler(this.chkDeactive_CheckedChanged);
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(562, 73);
+            this.txtId.Location = new System.Drawing.Point(563, 108);
             this.txtId.Name = "txtId";
             this.txtId.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtId.Properties.Appearance.Options.UseFont = true;
@@ -187,7 +196,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblRoleCode.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRoleCode.Appearance.Options.UseFont = true;
-            this.lblRoleCode.Location = new System.Drawing.Point(20, 25);
+            this.lblRoleCode.Location = new System.Drawing.Point(21, 60);
             this.lblRoleCode.Name = "lblRoleCode";
             this.lblRoleCode.Size = new System.Drawing.Size(59, 14);
             this.lblRoleCode.TabIndex = 0;
@@ -197,7 +206,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblRoleName.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRoleName.Appearance.Options.UseFont = true;
-            this.lblRoleName.Location = new System.Drawing.Point(20, 60);
+            this.lblRoleName.Location = new System.Drawing.Point(21, 95);
             this.lblRoleName.Name = "lblRoleName";
             this.lblRoleName.Size = new System.Drawing.Size(62, 14);
             this.lblRoleName.TabIndex = 1;
@@ -207,7 +216,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblDescription.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.Appearance.Options.UseFont = true;
-            this.lblDescription.Location = new System.Drawing.Point(20, 95);
+            this.lblDescription.Location = new System.Drawing.Point(21, 130);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(64, 14);
             this.lblDescription.TabIndex = 2;
@@ -215,16 +224,17 @@ namespace unt_bingoo.view.User
             // 
             // txtRoleCode
             // 
-            this.txtRoleCode.Location = new System.Drawing.Point(100, 22);
+            this.txtRoleCode.Location = new System.Drawing.Point(101, 57);
             this.txtRoleCode.Name = "txtRoleCode";
             this.txtRoleCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRoleCode.Properties.Appearance.Options.UseFont = true;
+            this.txtRoleCode.Properties.ReadOnly = true;
             this.txtRoleCode.Size = new System.Drawing.Size(431, 20);
             this.txtRoleCode.TabIndex = 3;
             // 
             // txtRoleName
             // 
-            this.txtRoleName.Location = new System.Drawing.Point(100, 57);
+            this.txtRoleName.Location = new System.Drawing.Point(101, 92);
             this.txtRoleName.Name = "txtRoleName";
             this.txtRoleName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRoleName.Properties.Appearance.Options.UseFont = true;
@@ -233,39 +243,30 @@ namespace unt_bingoo.view.User
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(100, 92);
+            this.txtDescription.Location = new System.Drawing.Point(101, 127);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescription.Properties.Appearance.Options.UseFont = true;
             this.txtDescription.Size = new System.Drawing.Size(431, 60);
             this.txtDescription.TabIndex = 5;
             // 
-            // chkSystemRole
-            // 
-            this.chkSystemRole.Location = new System.Drawing.Point(562, 23);
-            this.chkSystemRole.Name = "chkSystemRole";
-            this.chkSystemRole.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSystemRole.Properties.Appearance.Options.UseFont = true;
-            this.chkSystemRole.Properties.Caption = "System Role (built-in)";
-            this.chkSystemRole.Size = new System.Drawing.Size(146, 19);
-            this.chkSystemRole.TabIndex = 6;
-            // 
             // chkIsActive
             // 
             this.chkIsActive.EditValue = true;
-            this.chkIsActive.Location = new System.Drawing.Point(562, 48);
+            this.chkIsActive.Location = new System.Drawing.Point(101, 23);
             this.chkIsActive.Name = "chkIsActive";
             this.chkIsActive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkIsActive.Properties.Appearance.Options.UseFont = true;
             this.chkIsActive.Properties.Caption = "Active";
             this.chkIsActive.Size = new System.Drawing.Size(75, 19);
             this.chkIsActive.TabIndex = 7;
+            this.chkIsActive.CheckedChanged += new System.EventHandler(this.chkIsActive_CheckedChanged);
             // 
             // btnAdd
             // 
             this.btnAdd.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Appearance.Options.UseFont = true;
-            this.btnAdd.Location = new System.Drawing.Point(700, 135);
+            this.btnAdd.Location = new System.Drawing.Point(700, 177);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 25);
             this.btnAdd.TabIndex = 8;
@@ -276,20 +277,21 @@ namespace unt_bingoo.view.User
             // 
             this.btnCancel.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Location = new System.Drawing.Point(790, 135);
+            this.btnCancel.Location = new System.Drawing.Point(790, 177);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 25);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Visible = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // panelGrid
             // 
             this.panelGrid.Controls.Add(this.gridControlRole);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 260);
+            this.panelGrid.Location = new System.Drawing.Point(0, 288);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(900, 250);
+            this.panelGrid.Size = new System.Drawing.Size(900, 222);
             this.panelGrid.TabIndex = 0;
             // 
             // gridControlRole
@@ -301,7 +303,7 @@ namespace unt_bingoo.view.User
             this.gridControlRole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnmainEdit,
             this.btnmainDelete});
-            this.gridControlRole.Size = new System.Drawing.Size(896, 246);
+            this.gridControlRole.Size = new System.Drawing.Size(896, 218);
             this.gridControlRole.TabIndex = 0;
             this.gridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRole});
@@ -313,7 +315,6 @@ namespace unt_bingoo.view.User
             this.RoleCode,
             this.gridColumn2,
             this.gridColumn3,
-            this.gridColumn4,
             this.gridColumn5,
             this.Edit,
             this.Delete});
@@ -350,21 +351,13 @@ namespace unt_bingoo.view.User
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
             // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "System Role";
-            this.gridColumn4.FieldName = "IsSystemRole";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "Active";
             this.gridColumn5.FieldName = "IsActive";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             // 
             // Edit
             // 
@@ -372,14 +365,14 @@ namespace unt_bingoo.view.User
             this.Edit.ColumnEdit = this.btnmainEdit;
             this.Edit.Name = "Edit";
             this.Edit.Visible = true;
-            this.Edit.VisibleIndex = 5;
+            this.Edit.VisibleIndex = 4;
             // 
             // btnmainEdit
             // 
             this.btnmainEdit.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_16;
+            editorButtonImageOptions3.Image = global::unt_bingoo.Properties.Resources.update_16;
             this.btnmainEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainEdit.Name = "btnmainEdit";
             this.btnmainEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainEdit_ButtonClick);
@@ -390,14 +383,14 @@ namespace unt_bingoo.view.User
             this.Delete.ColumnEdit = this.btnmainDelete;
             this.Delete.Name = "Delete";
             this.Delete.Visible = true;
-            this.Delete.VisibleIndex = 6;
+            this.Delete.VisibleIndex = 5;
             // 
             // btnmainDelete
             // 
             this.btnmainDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            editorButtonImageOptions4.Image = global::unt_bingoo.Properties.Resources.Delete_User;
             this.btnmainDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainDelete.Name = "btnmainDelete";
             this.btnmainDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnmainDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnmainDelete_ButtonClick);
@@ -437,6 +430,7 @@ namespace unt_bingoo.view.User
             this.btnClose.Size = new System.Drawing.Size(80, 25);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // guiUserrole
             // 
@@ -458,11 +452,11 @@ namespace unt_bingoo.view.User
             ((System.ComponentModel.ISupportInitialize)(this.panelDetail)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDeactive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoleName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSystemRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
             this.panelGrid.ResumeLayout(false);
@@ -488,11 +482,11 @@ namespace unt_bingoo.view.User
         private DevExpress.XtraGrid.Columns.GridColumn RoleCode;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn Edit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainEdit;
         private DevExpress.XtraGrid.Columns.GridColumn Delete;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnmainDelete;
+        private CheckEdit chkDeactive;
     }
 }

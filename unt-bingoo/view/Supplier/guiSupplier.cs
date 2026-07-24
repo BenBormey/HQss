@@ -14,7 +14,7 @@ namespace unt_bingoo.view.Supplier
 {
     public partial class guiSupplier : XtraForm
     {
-        private readonly APIsController _api = new APIsController();
+        private APIsController _api;
         private List<SupplierLookup> _suppliers = new List<SupplierLookup>();
         private List<SupplierReportItem> _rows = new List<SupplierReportItem>();
         private bool _loading;   // stop events firing while we set values in code
@@ -26,7 +26,24 @@ namespace unt_bingoo.view.Supplier
 
         private async void guiSupplier_Load(object sender, EventArgs e)
         {
-            await LoadSuppliersAsync();
+            try
+            {
+                _api = APIGlobals.Api;
+
+                if (_api == null || !_api.HasToken())
+                {
+                    XtraMessageBox.Show("Please login again!");
+                    Close();
+                    return;
+                }
+
+                await LoadSuppliersAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -63,35 +80,56 @@ namespace unt_bingoo.view.Supplier
 
         private async Task LoadReportAsync()
         {
-            bool showAll = chkShowAll.Checked;
-
-            string url;
-            if (showAll)
+            try
             {
-                url = "api/reports/SupplierReport";
+                bool showAll = chkShowAll.Checked;
+
+                string url;
+                if (showAll)
+                {
+                    url = "api/reports/SupplierReport";
+                }
+                else
+                {
+                    if (searchSupplier.EditValue == null)
+                    {
+                        ClearReport();
+                        return;
+                    }
+
+                    int supplierId = Convert.ToInt32(searchSupplier.EditValue);
+
+                    var supplier = _suppliers.FirstOrDefault(x => x.SupplierID == supplierId);
+
+                    if (supplier == null)
+                    {
+                        ClearReport();
+                        return;
+                    }
+
+                    string supplierCode = supplier.SupplierCode;
+
+                    url = $"api/reports/SupplierReport?Search={Uri.EscapeDataString(supplierCode)}";
+                }
+
+                var data = await _api.GetAsync<List<SupplierReportItem>>(url);
+                _rows = data ?? new List<SupplierReportItem>();
+
+                gridControl1.DataSource = _rows;
+                lblCountRow.Text = _rows.Count.ToString("N0");
             }
-            else
+            catch (Exception ex)
             {
-                if (searchSupplier.EditValue == null)
-                    return;
-
-                int supplierId = Convert.ToInt32(searchSupplier.EditValue);
-
-                var supplier = _suppliers.FirstOrDefault(x => x.SupplierID == supplierId);
-
-                if (supplier == null)
-                    return;
-
-                string supplierCode = supplier.SupplierCode;
-
-                url = $"api/reports/SupplierReport?Search={Uri.EscapeDataString(supplierCode)}";
+                XtraMessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-            var data = await _api.GetAsync<List<SupplierReportItem>>(url);
-            _rows = data ?? new List<SupplierReportItem>();
-
+        private void ClearReport()
+        {
+            _rows = new List<SupplierReportItem>();
             gridControl1.DataSource = _rows;
-            lblCountRow.Text = _rows.Count.ToString("N2");
+            lblCountRow.Text = "0";
         }
 
         // ---------------------------------------------------------

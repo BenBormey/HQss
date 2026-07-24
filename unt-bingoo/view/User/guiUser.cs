@@ -44,6 +44,15 @@ namespace unt_bingoo.view.User
                     return;
                 }
 
+                // GET api/users is ADMIN-only on the server.
+                if (APIGlobals.RoleCode != "ADMIN")
+                {
+                    XtraMessageBox.Show(APIGlobals.NoPermissionMessage, "Access Denied",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                    return;
+                }
+
                 await LoadData();
             }
             catch (Exception ex)
@@ -58,6 +67,12 @@ namespace unt_bingoo.view.User
             var list =
               await _api.GetAsync<System.Collections.Generic.List<UserItem>>(
                   "api/users");
+
+            if (list == null)
+            {
+                XtraMessageBox.Show("Could not load users. Please check your connection or log in again.");
+                return;
+            }
 
             _user = new BindingList<UserItem>(list);
 
@@ -232,7 +247,6 @@ namespace unt_bingoo.view.User
 
         private void btnmainChangepassword_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-
         }
 
         private void btnmainUpdate_ButtonClick(
@@ -262,9 +276,21 @@ namespace unt_bingoo.view.User
                 txtaddress.Text = user.address;
 
                 cboRole.SelectedValue = user.RoleId;
-                cboOutlet.SelectedValue = user.OutletId;
 
-                chkActive.Checked = user.IsActive;
+                if (user.OutletId.HasValue)
+                    cboOutlet.SelectedValue = user.OutletId.Value;
+                else
+                    cboOutlet.SelectedIndex = -1;
+                bool statususer = user.IsActive;
+                if (statususer)
+                {
+                    chkActive.Checked = true;
+                }
+                else
+                {
+                    chkDeactive.Checked = true;
+                }
+              
                 checkBox2.Checked = user.HasSystemAccess;
 
                 txtPassword.Text = "";
@@ -461,5 +487,85 @@ namespace unt_bingoo.view.User
         {
             XtraMessageBox.Show($"{context} error: {ex.Message}");
         }
+
+        private async void btnResetPassword_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                var row = gridViewUser.GetFocusedRow();
+
+                if (row == null)
+                {
+                    XtraMessageBox.Show("Please select a user first.");
+                    return;
+                }
+
+                var user = (UserItem)row;
+
+                using (var dlg = new guiResetPassword())
+                {
+                    if (dlg.ShowDialog(this) != DialogResult.OK)
+                        return;
+
+                    var ok = await _api.PutAsync(
+                        $"api/users/{user.Id}/reset-password",
+                        new { NewPassword = dlg.NewPassword });
+
+                    if (!ok)
+                    {
+                        XtraMessageBox.Show("Reset password failed.");
+                        return;
+                    }
+
+                    XtraMessageBox.Show($"Password reset for user '{user.Username}'.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError("Reset Password", ex);
+            }
+        }
+        private bool _suppressStatusEvents;
+        private void chkActive_CheckedChanged(object sender, EventArgs e)
+        {
+                  
+
+  
+            if (_suppressStatusEvents) return;
+            _suppressStatusEvents = true;
+            try
+            {
+                if (chkActive.Checked)
+                {
+                    chkDeactive.Checked = false;
+                }
+                else if (!chkDeactive.Checked)
+                {
+                    // Don't allow both to end up unchecked.
+                    chkActive.Checked = true;
+                }
+            }
+            finally { _suppressStatusEvents = false; }
+        }
+
+        private void chkDeactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_suppressStatusEvents) return;
+            _suppressStatusEvents = true;
+            try
+            {
+                if (chkDeactive.Checked)
+                {
+                    chkActive.Checked = false;
+                }
+                else if (!chkActive.Checked)
+                {
+                 
+                    chkDeactive.Checked = true;
+                }
+            }
+            finally { _suppressStatusEvents = false; }
+        }
     }
+    
 }

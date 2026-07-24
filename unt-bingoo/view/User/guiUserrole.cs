@@ -16,6 +16,7 @@ namespace unt_bingoo.view.User
             new BindingList<RoleItem>();
 
         private int? _editingId = null;
+        private bool _editingIsSystemRole = false;
 
         public guiUserrole()
         {
@@ -36,11 +37,33 @@ namespace unt_bingoo.view.User
                     return;
                 }
 
+                // Role management is part of the User screen permission.
+                if (!APIGlobals.HasPermission("USER"))
+                {
+                    XtraMessageBox.Show(APIGlobals.NoPermissionMessage, "Access Denied",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                    return;
+                }
+
                 await LoadData();
+                await AutoRoleCode();
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        private async Task AutoRoleCode()
+        {
+            try
+            {
+                txtRoleCode.Text = await _api.GetNextRoleCodeAsync() ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Error generating Role Code: " + ex.Message);
             }
         }
 
@@ -174,14 +197,24 @@ namespace unt_bingoo.view.User
             txtId.Text = row.Id.ToString();
             txtRoleCode.Text = row.RoleCode;
             txtRoleName.Text = row.RoleName;
+            bool rolestatus = row.IsActive;
+            if (rolestatus)
+            {
+                chkIsActive.Checked = true;
+            }
+            else
+            {
+                chkDeactive.Checked = true;
+            }
             txtDescription.Text = row.Description;
 
-            chkSystemRole.Checked = row.IsSystemRole;
-            chkIsActive.Checked = row.IsActive;
+            _editingIsSystemRole = row.IsSystemRole;
+ 
 
             _editingId = row.Id;
-
+            btnCancel.Visible = true;
             btnAdd.Text = "Update";
+          
         }
 
         // ================= HELPER =================
@@ -213,19 +246,18 @@ namespace unt_bingoo.view.User
                 RoleName = txtRoleName.Text.Trim(),
                 Description = txtDescription.Text.Trim(),
 
-                IsSystemRole = chkSystemRole.Checked,
+                IsSystemRole = _editingIsSystemRole,
                 IsActive = chkIsActive.Checked
             };
         }
 
-        private void ClearForm()
+        private async void ClearForm()
         {
             txtId.Text = "";
-            txtRoleCode.Text = "";
             txtRoleName.Text = "";
             txtDescription.Text = "";
 
-            chkSystemRole.Checked = false;
+            _editingIsSystemRole = false;
             chkIsActive.Checked = true;
 
             _editingId = null;
@@ -233,6 +265,8 @@ namespace unt_bingoo.view.User
             btnAdd.Text = "Add";
 
             gridViewRole.ClearSelection();
+
+            await AutoRoleCode();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -244,16 +278,14 @@ namespace unt_bingoo.view.User
         {
             try
             {
-                SaveFileDialog save = new SaveFileDialog();
-                save.Filter = "Excel File (*.xlsx)|*.xlsx";
-                save.FileName = "Roles.xlsx";
+                string tempPath = System.IO.Path.Combine(
+                    System.IO.Path.GetTempPath(),
+                    $"Roles_{DateTime.Now:yyyyMMddHHmmss}.xlsx");
 
-                if (save.ShowDialog() == DialogResult.OK)
-                {
-                    gridViewRole.ExportToXlsx(save.FileName);
+                gridViewRole.ExportToXlsx(tempPath);
 
-                    XtraMessageBox.Show("Export successful!");
-                }
+                System.Diagnostics.Process.Start(
+                    new System.Diagnostics.ProcessStartInfo(tempPath) { UseShellExecute = true });
             }
             catch (Exception ex)
             {
@@ -265,6 +297,52 @@ namespace unt_bingoo.view.User
         {
 
             SaveFileDialog save = new SaveFileDialog();
+        }
+
+        private void chkIsActive_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (_suppressStatusEvents) return;
+            _suppressStatusEvents = true;
+            try
+            {
+                if (chkIsActive.Checked)
+                {
+                    chkDeactive.Checked = false;
+                }
+                else if (!chkDeactive.Checked)
+                {
+                    // Don't allow both to end up unchecked.
+                    chkIsActive.Checked = true;
+                }
+            }
+            finally { _suppressStatusEvents = false; }
+        }
+        private bool _suppressStatusEvents;
+    
+
+        private void chkDeactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_suppressStatusEvents) return;
+            _suppressStatusEvents = true;
+            try
+            {
+                if (chkDeactive.Checked)
+                {
+                    chkIsActive.Checked = false;
+                }
+                else if (!chkIsActive.Checked)
+                {
+
+                    chkDeactive.Checked = true;
+                }
+            }
+            finally { _suppressStatusEvents = false; }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

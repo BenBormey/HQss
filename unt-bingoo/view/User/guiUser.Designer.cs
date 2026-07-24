@@ -81,6 +81,7 @@ namespace unt_bingoo.view.User
             this.panel5 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkDeactive = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtaddress = new DevExpress.XtraEditors.MemoEdit();
             this.btnaddOutlet = new System.Windows.Forms.Button();
@@ -138,6 +139,7 @@ namespace unt_bingoo.view.User
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDeactive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtaddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
             this.panelBottom.SuspendLayout();
@@ -215,17 +217,19 @@ namespace unt_bingoo.view.User
             this.chkLocked.Properties.Caption = "Locked";
             this.chkLocked.Size = new System.Drawing.Size(75, 19);
             this.chkLocked.TabIndex = 17;
+            this.chkLocked.Visible = false;
             // 
             // chkActive
             // 
             this.chkActive.EditValue = true;
-            this.chkActive.Location = new System.Drawing.Point(543, 207);
+            this.chkActive.Location = new System.Drawing.Point(127, 23);
             this.chkActive.Name = "chkActive";
             this.chkActive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.chkActive.Properties.Appearance.Options.UseFont = true;
             this.chkActive.Properties.Caption = "Active";
             this.chkActive.Size = new System.Drawing.Size(75, 19);
             this.chkActive.TabIndex = 16;
+            this.chkActive.CheckedChanged += new System.EventHandler(this.chkActive_CheckedChanged);
             // 
             // txtAddressKh
             // 
@@ -256,7 +260,7 @@ namespace unt_bingoo.view.User
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(123, 139);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(127, 164);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtConfirmPassword.Properties.Appearance.Options.UseFont = true;
@@ -266,7 +270,7 @@ namespace unt_bingoo.view.User
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(123, 106);
+            this.txtPassword.Location = new System.Drawing.Point(127, 131);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtPassword.Properties.Appearance.Options.UseFont = true;
@@ -276,7 +280,7 @@ namespace unt_bingoo.view.User
             // 
             // txtFullNameKh
             // 
-            this.txtFullNameKh.Location = new System.Drawing.Point(123, 82);
+            this.txtFullNameKh.Location = new System.Drawing.Point(127, 107);
             this.txtFullNameKh.Name = "txtFullNameKh";
             this.txtFullNameKh.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtFullNameKh.Properties.Appearance.Options.UseFont = true;
@@ -286,7 +290,7 @@ namespace unt_bingoo.view.User
             // 
             // txtFullName
             // 
-            this.txtFullName.Location = new System.Drawing.Point(123, 56);
+            this.txtFullName.Location = new System.Drawing.Point(127, 81);
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtFullName.Properties.Appearance.Options.UseFont = true;
@@ -295,7 +299,7 @@ namespace unt_bingoo.view.User
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(123, 28);
+            this.txtUserName.Location = new System.Drawing.Point(127, 53);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtUserName.Properties.Appearance.Options.UseFont = true;
@@ -346,7 +350,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblRole.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblRole.Appearance.Options.UseFont = true;
-            this.lblRole.Location = new System.Drawing.Point(13, 171);
+            this.lblRole.Location = new System.Drawing.Point(17, 196);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(27, 14);
             this.lblRole.TabIndex = 4;
@@ -356,7 +360,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblConfirmPassword.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblConfirmPassword.Appearance.Options.UseFont = true;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(13, 142);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(17, 167);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(100, 14);
             this.lblConfirmPassword.TabIndex = 3;
@@ -366,7 +370,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblPassword.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblPassword.Appearance.Options.UseFont = true;
-            this.lblPassword.Location = new System.Drawing.Point(13, 112);
+            this.lblPassword.Location = new System.Drawing.Point(17, 137);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(55, 14);
             this.lblPassword.TabIndex = 2;
@@ -376,7 +380,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblFullNameKh.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblFullNameKh.Appearance.Options.UseFont = true;
-            this.lblFullNameKh.Location = new System.Drawing.Point(13, 85);
+            this.lblFullNameKh.Location = new System.Drawing.Point(17, 110);
             this.lblFullNameKh.Name = "lblFullNameKh";
             this.lblFullNameKh.Size = new System.Drawing.Size(84, 14);
             this.lblFullNameKh.TabIndex = 21;
@@ -386,7 +390,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblFullName.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblFullName.Appearance.Options.UseFont = true;
-            this.lblFullName.Location = new System.Drawing.Point(13, 59);
+            this.lblFullName.Location = new System.Drawing.Point(17, 84);
             this.lblFullName.Name = "lblFullName";
             this.lblFullName.Size = new System.Drawing.Size(56, 14);
             this.lblFullName.TabIndex = 1;
@@ -396,7 +400,7 @@ namespace unt_bingoo.view.User
             // 
             this.lblUserName.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblUserName.Appearance.Options.UseFont = true;
-            this.lblUserName.Location = new System.Drawing.Point(13, 31);
+            this.lblUserName.Location = new System.Drawing.Point(17, 56);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(63, 14);
             this.lblUserName.TabIndex = 0;
@@ -406,7 +410,7 @@ namespace unt_bingoo.view.User
             // 
             this.cboRole.Font = new System.Drawing.Font("Tahoma", 9F);
             this.cboRole.FormattingEnabled = true;
-            this.cboRole.Location = new System.Drawing.Point(123, 171);
+            this.cboRole.Location = new System.Drawing.Point(127, 196);
             this.cboRole.Name = "cboRole";
             this.cboRole.Size = new System.Drawing.Size(267, 22);
             this.cboRole.TabIndex = 20;
@@ -522,6 +526,7 @@ namespace unt_bingoo.view.User
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkDeactive);
             this.panel1.Controls.Add(this.txtUserName);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.labelControl1);
@@ -555,6 +560,17 @@ namespace unt_bingoo.view.User
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1030, 269);
             this.panel1.TabIndex = 173;
+            // 
+            // chkDeactive
+            // 
+            this.chkDeactive.Location = new System.Drawing.Point(208, 23);
+            this.chkDeactive.Name = "chkDeactive";
+            this.chkDeactive.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.chkDeactive.Properties.Appearance.Options.UseFont = true;
+            this.chkDeactive.Properties.Caption = "Deactive";
+            this.chkDeactive.Size = new System.Drawing.Size(75, 19);
+            this.chkDeactive.TabIndex = 172;
+            this.chkDeactive.CheckedChanged += new System.EventHandler(this.chkDeactive_CheckedChanged);
             // 
             // labelControl1
             // 
@@ -590,7 +606,7 @@ namespace unt_bingoo.view.User
             // 
             this.btnaddRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnaddRole.Image = global::unt_bingoo.Properties.Resources.add16;
-            this.btnaddRole.Location = new System.Drawing.Point(399, 168);
+            this.btnaddRole.Location = new System.Drawing.Point(403, 193);
             this.btnaddRole.Name = "btnaddRole";
             this.btnaddRole.Size = new System.Drawing.Size(27, 26);
             this.btnaddRole.TabIndex = 168;
@@ -794,7 +810,7 @@ namespace unt_bingoo.view.User
             // btnmainUpdate
             // 
             this.btnmainUpdate.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.update_blue;
+            editorButtonImageOptions1.Image = global::unt_bingoo.Properties.Resources.edit__1_;
             this.btnmainUpdate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmainUpdate.Name = "btnmainUpdate";
@@ -817,6 +833,7 @@ namespace unt_bingoo.view.User
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnResetPassword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnResetPassword_ButtonClick);
             // 
             // gridColumn14
             // 
@@ -829,7 +846,7 @@ namespace unt_bingoo.view.User
             // btnmaindelete
             // 
             this.btnmaindelete.AutoHeight = false;
-            editorButtonImageOptions3.Image = global::unt_bingoo.Properties.Resources.Delete_User;
+            editorButtonImageOptions3.Image = global::unt_bingoo.Properties.Resources.Deleted16;
             this.btnmaindelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnmaindelete.Name = "btnmaindelete";
@@ -909,6 +926,7 @@ namespace unt_bingoo.view.User
             this.panel5.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDeactive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtaddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
             this.panelBottom.ResumeLayout(false);
@@ -998,5 +1016,6 @@ namespace unt_bingoo.view.User
         private Panel panel4;
         private Panel panel5;
         private CheckBox checkBox1;
+        private CheckEdit chkDeactive;
     }
 }

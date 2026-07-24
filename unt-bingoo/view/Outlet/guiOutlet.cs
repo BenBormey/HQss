@@ -191,6 +191,14 @@ namespace unt_bingoo.view.Outlet
                     return;
                 }
 
+                if (!APIGlobals.HasPermission("OUTLET"))
+                {
+                    XtraMessageBox.Show(APIGlobals.NoPermissionMessage, "Access Denied",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                    return;
+                }
+
                 //// Setup Grid Image Column
                 //gridViewOutlet.RowHeight = 70;
 
@@ -349,6 +357,24 @@ namespace unt_bingoo.view.Outlet
         {
             if (!ValidateForm()) return;
 
+            // Only one outlet can be the warehouse (Head Office) — purchase/outlet
+            // orders pull stock from the single HeadOffice = 1 outlet.
+            if (chkHeadOffice.Checked)
+            {
+                var existingWarehouse = _outletList.FirstOrDefault(o =>
+                    o.HeadOffice && (_editingId == null || o.Id != _editingId));
+
+                if (existingWarehouse != null)
+                {
+                    XtraMessageBox.Show(
+                        $"'{existingWarehouse.OutletName}' is already set as the Warehouse (Head Office).\n" +
+                        "Please uncheck it from that outlet first — only one warehouse is allowed.",
+                        "Warehouse Already Set",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             var model = GetFormData();
 
             try
@@ -418,13 +444,19 @@ namespace unt_bingoo.view.Outlet
         {
             try
             {
+                // Get token after login
+                string token = APIGlobals.Token; // or wherever you store the JWT
+
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
                 using (var form = new MultipartFormDataContent())
                 {
                     byte[] data = File.ReadAllBytes(filePath);
                     var content = new ByteArrayContent(data);
 
                     string ext = Path.GetExtension(filePath).ToLowerInvariant();
-                    string mime = (ext == ".png") ? "image/png" : "image/jpeg";
+                    string mime = ext == ".png" ? "image/png" : "image/jpeg";
                     content.Headers.ContentType =
                         new System.Net.Http.Headers.MediaTypeHeaderValue(mime);
 
@@ -435,32 +467,17 @@ namespace unt_bingoo.view.Outlet
 
                     if (!res.IsSuccessStatusCode)
                     {
-                        XtraMessageBox.Show(
-                            $"Server error: {(int)res.StatusCode} {res.StatusCode}\n\n{json}",
-                            "Upload Failed",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                        MessageBox.Show(json);
                         return null;
                     }
 
                     var obj = JsonConvert.DeserializeObject<UploadResult>(json);
-
-                    if (obj == null || string.IsNullOrEmpty(obj.imageUrl))
-                    {
-                        XtraMessageBox.Show(
-                            $"No imageUrl in response.\nRaw JSON:\n{json}",
-                            "Parse Problem",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-                        return null;
-                    }
-
-                    return obj.imageUrl;
+                    return obj?.imageUrl;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Connection Error");
+                MessageBox.Show(ex.Message);
                 return null;
             }
         }
@@ -1567,6 +1584,11 @@ namespace unt_bingoo.view.Outlet
         }
 
         private void button3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flpPhotos_Paint_1(object sender, PaintEventArgs e)
         {
 
         }

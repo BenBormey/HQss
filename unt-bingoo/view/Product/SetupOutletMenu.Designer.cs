@@ -30,6 +30,8 @@
             this.PicSectionIcon = new System.Windows.Forms.PictureBox();
             this.Panel4 = new System.Windows.Forms.Panel();
             this.groupEntry = new System.Windows.Forms.GroupBox();
+            this.txtunitprice = new System.Windows.Forms.TextBox();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.btncancel = new System.Windows.Forms.Button();
             this.txtRemark = new System.Windows.Forms.TextBox();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -149,6 +151,8 @@
             // 
             // groupEntry
             // 
+            this.groupEntry.Controls.Add(this.txtunitprice);
+            this.groupEntry.Controls.Add(this.labelControl2);
             this.groupEntry.Controls.Add(this.btncancel);
             this.groupEntry.Controls.Add(this.txtRemark);
             this.groupEntry.Controls.Add(this.labelControl1);
@@ -182,9 +186,25 @@
             this.groupEntry.TabStop = false;
             this.groupEntry.Text = "Entry Menu Item :";
             // 
+            // txtunitprice
+            // 
+            this.txtunitprice.Location = new System.Drawing.Point(730, 77);
+            this.txtunitprice.Name = "txtunitprice";
+            this.txtunitprice.ReadOnly = true;
+            this.txtunitprice.Size = new System.Drawing.Size(103, 22);
+            this.txtunitprice.TabIndex = 194;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(650, 81);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(52, 13);
+            this.labelControl2.TabIndex = 193;
+            this.labelControl2.Text = "Unit Price :";
+            // 
             // btncancel
             // 
-            this.btncancel.Location = new System.Drawing.Point(785, 231);
+            this.btncancel.Location = new System.Drawing.Point(947, 231);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(75, 23);
             this.btncancel.TabIndex = 192;
@@ -195,14 +215,14 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(363, 200);
+            this.txtRemark.Location = new System.Drawing.Point(362, 212);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(416, 22);
             this.txtRemark.TabIndex = 191;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(304, 200);
+            this.labelControl1.Location = new System.Drawing.Point(303, 212);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(43, 13);
             this.labelControl1.TabIndex = 190;
@@ -210,7 +230,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(704, 231);
+            this.btnAdd.Location = new System.Drawing.Point(866, 231);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 189;
@@ -223,7 +243,7 @@
             this.dtpOpening.CustomFormat = "dd-MM-yyyy";
             this.dtpOpening.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpOpening.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpOpening.Location = new System.Drawing.Point(167, 167);
+            this.dtpOpening.Location = new System.Drawing.Point(166, 179);
             this.dtpOpening.Name = "dtpOpening";
             this.dtpOpening.Size = new System.Drawing.Size(103, 21);
             this.dtpOpening.TabIndex = 180;
@@ -231,7 +251,7 @@
             // 
             // lblEndDate
             // 
-            this.lblEndDate.Location = new System.Drawing.Point(296, 171);
+            this.lblEndDate.Location = new System.Drawing.Point(295, 183);
             this.lblEndDate.Name = "lblEndDate";
             this.lblEndDate.Size = new System.Drawing.Size(51, 13);
             this.lblEndDate.TabIndex = 31;
@@ -239,7 +259,7 @@
             // 
             // txtPromotionPrice
             // 
-            this.txtPromotionPrice.Location = new System.Drawing.Point(167, 227);
+            this.txtPromotionPrice.Location = new System.Drawing.Point(166, 239);
             this.txtPromotionPrice.Name = "txtPromotionPrice";
             this.txtPromotionPrice.Size = new System.Drawing.Size(103, 22);
             this.txtPromotionPrice.TabIndex = 188;
@@ -247,7 +267,7 @@
             // 
             // lblStartDate
             // 
-            this.lblStartDate.Location = new System.Drawing.Point(21, 171);
+            this.lblStartDate.Location = new System.Drawing.Point(21, 183);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(57, 13);
             this.lblStartDate.TabIndex = 29;
@@ -256,7 +276,7 @@
             // cboCurrency
             // 
             this.cboCurrency.FormattingEnabled = true;
-            this.cboCurrency.Location = new System.Drawing.Point(168, 109);
+            this.cboCurrency.Location = new System.Drawing.Point(167, 127);
             this.cboCurrency.Name = "cboCurrency";
             this.cboCurrency.Size = new System.Drawing.Size(102, 22);
             this.cboCurrency.TabIndex = 186;
@@ -266,14 +286,14 @@
             this.dateTimePicker1.CustomFormat = "dd-MM-yyyy";
             this.dateTimePicker1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(363, 165);
+            this.dateTimePicker1.Location = new System.Drawing.Point(362, 177);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(103, 21);
             this.dateTimePicker1.TabIndex = 181;
             // 
             // txtsellingPrice
             // 
-            this.txtsellingPrice.Location = new System.Drawing.Point(363, 110);
+            this.txtsellingPrice.Location = new System.Drawing.Point(362, 128);
             this.txtsellingPrice.Name = "txtsellingPrice";
             this.txtsellingPrice.Size = new System.Drawing.Size(103, 22);
             this.txtsellingPrice.TabIndex = 185;
@@ -281,7 +301,7 @@
             // 
             // txtDiscount
             // 
-            this.txtDiscount.Location = new System.Drawing.Point(167, 199);
+            this.txtDiscount.Location = new System.Drawing.Point(166, 211);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(103, 22);
             this.txtDiscount.TabIndex = 184;
@@ -291,9 +311,9 @@
             // 
             this.cboOutlets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboOutlets.FormattingEnabled = true;
-            this.cboOutlets.Location = new System.Drawing.Point(167, 81);
+            this.cboOutlets.Location = new System.Drawing.Point(167, 77);
             this.cboOutlets.Name = "cboOutlets";
-            this.cboOutlets.Size = new System.Drawing.Size(666, 22);
+            this.cboOutlets.Size = new System.Drawing.Size(477, 22);
             this.cboOutlets.TabIndex = 183;
             this.cboOutlets.SelectedIndexChanged += new System.EventHandler(this.cboOutlets_SelectedIndexChanged);
             this.cboOutlets.SelectedValueChanged += new System.EventHandler(this.cboOutlets_SelectedValueChanged);
@@ -302,7 +322,7 @@
             // cboProducts
             // 
             this.cboProducts.FormattingEnabled = true;
-            this.cboProducts.Location = new System.Drawing.Point(167, 55);
+            this.cboProducts.Location = new System.Drawing.Point(167, 51);
             this.cboProducts.Name = "cboProducts";
             this.cboProducts.Size = new System.Drawing.Size(666, 22);
             this.cboProducts.TabIndex = 182;
@@ -310,7 +330,7 @@
             // 
             // chkActive
             // 
-            this.chkActive.Location = new System.Drawing.Point(167, 30);
+            this.chkActive.Location = new System.Drawing.Point(167, 24);
             this.chkActive.Name = "chkActive";
             this.chkActive.Properties.Caption = "Active";
             this.chkActive.Size = new System.Drawing.Size(61, 19);
@@ -319,7 +339,7 @@
             // 
             // chkDeactive
             // 
-            this.chkDeactive.Location = new System.Drawing.Point(233, 30);
+            this.chkDeactive.Location = new System.Drawing.Point(233, 24);
             this.chkDeactive.Name = "chkDeactive";
             this.chkDeactive.Properties.Caption = "Deactive";
             this.chkDeactive.Size = new System.Drawing.Size(85, 19);
@@ -328,7 +348,7 @@
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(21, 27);
+            this.lblStatus.Location = new System.Drawing.Point(21, 21);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(38, 13);
             this.lblStatus.TabIndex = 21;
@@ -336,7 +356,7 @@
             // 
             // lblOutlet
             // 
-            this.lblOutlet.Location = new System.Drawing.Point(21, 59);
+            this.lblOutlet.Location = new System.Drawing.Point(21, 55);
             this.lblOutlet.Name = "lblOutlet";
             this.lblOutlet.Size = new System.Drawing.Size(67, 13);
             this.lblOutlet.TabIndex = 23;
@@ -344,7 +364,7 @@
             // 
             // lblProduct
             // 
-            this.lblProduct.Location = new System.Drawing.Point(19, 85);
+            this.lblProduct.Location = new System.Drawing.Point(21, 81);
             this.lblProduct.Name = "lblProduct";
             this.lblProduct.Size = new System.Drawing.Size(44, 13);
             this.lblProduct.TabIndex = 25;
@@ -352,7 +372,7 @@
             // 
             // chkPromotion
             // 
-            this.chkPromotion.Location = new System.Drawing.Point(167, 142);
+            this.chkPromotion.Location = new System.Drawing.Point(166, 154);
             this.chkPromotion.Name = "chkPromotion";
             this.chkPromotion.Properties.Caption = "Enable Promotion";
             this.chkPromotion.Size = new System.Drawing.Size(160, 19);
@@ -361,7 +381,7 @@
             // 
             // lblPromoPrice
             // 
-            this.lblPromoPrice.Location = new System.Drawing.Point(26, 231);
+            this.lblPromoPrice.Location = new System.Drawing.Point(21, 243);
             this.lblPromoPrice.Name = "lblPromoPrice";
             this.lblPromoPrice.Size = new System.Drawing.Size(120, 13);
             this.lblPromoPrice.TabIndex = 33;
@@ -369,7 +389,7 @@
             // 
             // lblDiscount
             // 
-            this.lblDiscount.Location = new System.Drawing.Point(37, 204);
+            this.lblDiscount.Location = new System.Drawing.Point(21, 216);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(126, 13);
             this.lblDiscount.TabIndex = 35;
@@ -377,7 +397,7 @@
             // 
             // lblCurrency
             // 
-            this.lblCurrency.Location = new System.Drawing.Point(24, 114);
+            this.lblCurrency.Location = new System.Drawing.Point(21, 132);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(84, 13);
             this.lblCurrency.TabIndex = 37;
@@ -385,7 +405,7 @@
             // 
             // lblSellingPrice
             // 
-            this.lblSellingPrice.Location = new System.Drawing.Point(284, 114);
+            this.lblSellingPrice.Location = new System.Drawing.Point(283, 132);
             this.lblSellingPrice.Name = "lblSellingPrice";
             this.lblSellingPrice.Size = new System.Drawing.Size(60, 13);
             this.lblSellingPrice.TabIndex = 39;
@@ -678,6 +698,7 @@
             this.lblSearch.Size = new System.Drawing.Size(40, 13);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Search :";
+            this.lblSearch.Visible = false;
             // 
             // txtSearch
             // 
@@ -685,6 +706,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(190, 21);
             this.txtSearch.TabIndex = 1;
+            this.txtSearch.Visible = false;
             this.txtSearch.TextChanged += new System.EventHandler(this.SearchOrFilter_Changed);
             // 
             // lblFilterOutlet
@@ -694,6 +716,7 @@
             this.lblFilterOutlet.Size = new System.Drawing.Size(37, 13);
             this.lblFilterOutlet.TabIndex = 2;
             this.lblFilterOutlet.Text = "Outlet :";
+            this.lblFilterOutlet.Visible = false;
             // 
             // cboFilterOutlet
             // 
@@ -703,6 +726,7 @@
             this.cboFilterOutlet.Name = "cboFilterOutlet";
             this.cboFilterOutlet.Size = new System.Drawing.Size(160, 21);
             this.cboFilterOutlet.TabIndex = 3;
+            this.cboFilterOutlet.Visible = false;
             this.cboFilterOutlet.SelectedIndexChanged += new System.EventHandler(this.SearchOrFilter_Changed);
             // 
             // lblFilterStatus
@@ -712,6 +736,7 @@
             this.lblFilterStatus.Size = new System.Drawing.Size(38, 13);
             this.lblFilterStatus.TabIndex = 4;
             this.lblFilterStatus.Text = "Status :";
+            this.lblFilterStatus.Visible = false;
             // 
             // cboFilterStatus
             // 
@@ -725,6 +750,7 @@
             this.cboFilterStatus.Name = "cboFilterStatus";
             this.cboFilterStatus.Size = new System.Drawing.Size(110, 21);
             this.cboFilterStatus.TabIndex = 5;
+            this.cboFilterStatus.Visible = false;
             this.cboFilterStatus.SelectedIndexChanged += new System.EventHandler(this.SearchOrFilter_Changed);
             // 
             // btnRefresh
@@ -847,5 +873,7 @@
         private System.Windows.Forms.ComboBox cboFilterStatus;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private System.Windows.Forms.TextBox txtunitprice;
     }
 }

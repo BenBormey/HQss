@@ -184,6 +184,14 @@
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.Gainsboro;
+            this.gridView1.Appearance.EvenRow.Options.UseBackColor = true;
+            this.gridView1.Appearance.HeaderPanel.BackColor = System.Drawing.Color.DimGray;
+            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.gridView1.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gridView1.Appearance.HeaderPanel.Options.UseBackColor = true;
+            this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.BirthDate,
             this.colUnitNumber,
@@ -211,6 +219,7 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
+            this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView1_CustomDrawRowIndicator);
             // 
@@ -272,6 +281,8 @@
             // 
             // colKhmerName
             // 
+            this.colKhmerName.AppearanceCell.Font = new System.Drawing.Font("Khmer OS Battambang", 8.25F);
+            this.colKhmerName.AppearanceCell.Options.UseFont = true;
             this.colKhmerName.Caption = "Khmer Name";
             this.colKhmerName.FieldName = "KhmerName";
             this.colKhmerName.Name = "colKhmerName";
@@ -445,9 +456,9 @@
             this.lblCountRow.Appearance.Options.UseFont = true;
             this.lblCountRow.Location = new System.Drawing.Point(90, 16);
             this.lblCountRow.Name = "lblCountRow";
-            this.lblCountRow.Size = new System.Drawing.Size(28, 14);
+            this.lblCountRow.Size = new System.Drawing.Size(8, 14);
             this.lblCountRow.TabIndex = 1;
-            this.lblCountRow.Text = "0.00";
+            this.lblCountRow.Text = "0";
             // 
             // btnExport
             // 

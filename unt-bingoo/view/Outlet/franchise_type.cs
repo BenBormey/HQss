@@ -9,7 +9,7 @@ namespace unt_bingoo.view.Outlet
 {
     public partial class franchise_type : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api;
+        private  APIsController _api;
         private int _editingId = 0; // 0 = Add New, > 0 = Update
 
         public franchise_type()
@@ -20,6 +20,8 @@ namespace unt_bingoo.view.Outlet
 
         private async void franchise_type_Load(object sender, EventArgs e)
         {
+
+            _api  = APIGlobals.Api; ;
             ClearForm();
             await LoadFranchiseTypes();
         }

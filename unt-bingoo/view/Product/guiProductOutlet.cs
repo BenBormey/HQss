@@ -53,12 +53,7 @@ namespace unt_bingoo.view.Product
         private static decimal ParseDecimal(string s)
             => decimal.TryParse((s ?? "").Trim(), out decimal v) ? v : 0;
 
-        /// <summary>
-        /// Parses text like "0", "0.0000" or "12.00" into a whole int.
-        /// Needed because the API declares some fields (e.g. proTotQty) as
-        /// Nullable&lt;Int32&gt; — sending 0.0 as a decimal makes ASP.NET model
-        /// binding fail with "The JSON value could not be converted to
-        /// System.Nullable`1[System.Int32]" and then "The dto field is required."
+   
         /// </summary>
         private static int ParseWholeNumber(string s)
             => (int)Math.Round(ParseDecimal(s), MidpointRounding.AwayFromZero);
@@ -152,8 +147,8 @@ namespace unt_bingoo.view.Product
            
                 BindEditable(TxtQtyPerPack, "Text", DataBindingSource, "ProQtyPPack");
                 BindEditable(TxtQtyPerCase, "Text", DataBindingSource, "ProQtyPCase");
+                BindEditable(TxtSuggest,"Text", DataBindingSource, "proRecPer");
 
-         
                 BindEditable(CmbFactoryCurrency, "Text", DataBindingSource, "FactoryCurrency");
                 BindEditable(CmbFOBCIF, "Text", DataBindingSource, "FOB_CIF");
                 BindEditable(CmbCurrency, "Text", DataBindingSource, "ProCurr");
@@ -175,6 +170,9 @@ namespace unt_bingoo.view.Product
 
                 DataBindingSource.CurrentChanged -= DataBindingSource_CurrentChanged;
                 DataBindingSource.CurrentChanged += DataBindingSource_CurrentChanged;
+
+                DataBindingSource.PositionChanged -= DataBindingSource_PositionChanged;
+                DataBindingSource.PositionChanged += DataBindingSource_PositionChanged;
 
                 if (Navigator.BindingSource.Count > 0)
                     RefreshItems();
@@ -274,6 +272,17 @@ namespace unt_bingoo.view.Product
             TxtStockGRNTemp.Text = "0";
 
             PopulateCalculatedFieldsFromCurrent();
+            UpdateItemCounts();
+        }
+
+        private void UpdateItemCounts()
+        {
+            int total = RProductList?.Count ?? 0;
+            int available = RProductList?.Count(p =>
+                p.Status != "Deactivated" && p.Status != "Old_Deactivated") ?? 0;
+
+            LblNumberOfItems.Text = $"Numbers of Items : {total}";
+            LblAvailabelItems.Text = $"Available Items : {available}";
         }
 
         // One-time display of the buy-in/pricing fields from the current record.
@@ -308,6 +317,11 @@ namespace unt_bingoo.view.Product
             LoadProductImage();
             LoadScaleGridFromCurrentProduct();
             SyncCategoryCombo();
+        }
+
+        private void DataBindingSource_PositionChanged(object sender, EventArgs e)
+        {
+            RefreshItems();
         }
         public void SyncCategoryCombo()
         {
@@ -557,6 +571,9 @@ namespace unt_bingoo.view.Product
             CmbShelfLifeOfProduct.Text = product.ShelfLifeOfProduct;
         }
 
+        private List<ProvinceItem> _allProvinces = new List<ProvinceItem>();
+        private List<int> _usedProvinceIds = new List<int>();
+
         private async void CityLoading_Tick(object sender, EventArgs e)
         {
             try
@@ -564,21 +581,10 @@ namespace unt_bingoo.view.Product
                 CityLoading.Enabled = false;
                 this.Cursor = Cursors.WaitCursor;
 
-                var list = await _api.GetAsync<List<ProvinceItem>>("api/Province");
+                _allProvinces = await _api.GetAsync<List<ProvinceItem>>("api/Province")
+                    ?? new List<ProvinceItem>();
 
-                cmbProvince.Properties.Items.Clear();
-
-                if (list != null && list.Count > 0)
-                {
-                    foreach (var item in list)
-                    {
-                        cmbProvince.Properties.Items.Add(
-                            item.provinceId,
-                            item.provinceNameEN,
-                            CheckState.Unchecked,
-                            true);
-                    }
-                }
+                PopulateProvinceChecklist(_usedProvinceIds);
             }
             catch (Exception ex)
             {
@@ -590,8 +596,140 @@ namespace unt_bingoo.view.Product
             }
         }
 
-        private void BtnAddDel_Click_1(object sender, EventArgs e)
+        // Rebuilds the City checklist from the cached province list, leaving out any
+        // province that already has a delivery cost row for the current product —
+        // so an already-added city can't be selected/added again.
+        private void PopulateProvinceChecklist(IEnumerable<int> excludeProvinceIds)
         {
+            var exclude = excludeProvinceIds != null
+                ? new HashSet<int>(excludeProvinceIds)
+                : new HashSet<int>();
+
+            cmbProvince.Properties.Items.Clear();
+
+            foreach (var item in _allProvinces)
+            {
+                if (exclude.Contains(item.provinceId))
+                    continue;
+
+                cmbProvince.Properties.Items.Add(
+                    item.provinceId,
+                    item.provinceNameEN,
+                    CheckState.Unchecked,
+                    true);
+            }
+
+            cmbProvince.Refresh();
+        }
+
+        private async void BtnAddDel_Click_1(object sender, EventArgs e)
+        {
+            string proNumY = TxtUnitNumber.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(proNumY))
+            {
+                XtraMessageBox.Show("Please save the product first before adding delivery logistic costs.");
+                return;
+            }
+
+            var checkedProvinceIds = new List<int>();
+
+            foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in cmbProvince.Properties.Items)
+            {
+                if (item.CheckState == CheckState.Checked)
+                    checkedProvinceIds.Add(Convert.ToInt32(item.Value));
+            }
+
+            if (checkedProvinceIds.Count == 0)
+            {
+                XtraMessageBox.Show("Please select at least one city.");
+                return;
+            }
+
+            if (!decimal.TryParse(TxtDeliveryCost.Text.Trim(), out decimal additionalCost) || additionalCost < 0)
+            {
+                XtraMessageBox.Show("Please enter a valid additional cost.");
+                return;
+            }
+
+            foreach (var provinceId in checkedProvinceIds)
+            {
+                await _api.PostAsync("api/ProductDeliveryLogistic", new
+                {
+                    ProNumY = proNumY,
+                    ProvinceId = provinceId,
+                    AdditionalCost = additionalCost
+                });
+            }
+
+            TxtDeliveryCost.Text = "";
+
+            await LoadDeliveryLogisticAsync(proNumY);
+        }
+
+        private async Task LoadDeliveryLogisticAsync(string proNumY)
+        {
+            try
+            {
+                var list = await _api.GetAsync<List<ProductDeliveryLogisticItem>>(
+                    $"api/ProductDeliveryLogistic/product/{proNumY}") ?? new List<ProductDeliveryLogisticItem>();
+
+                DgvDeliveryLogistic.DataSource = list;
+
+                _usedProvinceIds = list.Select(x => x.ProvinceId).ToList();
+                PopulateProvinceChecklist(_usedProvinceIds);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void DgvDeliveryLogistic_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex != colRemoveDeliveryLogistic.Index)
+                return;
+
+            var row = DgvDeliveryLogistic.Rows[e.RowIndex].DataBoundItem as ProductDeliveryLogisticItem;
+
+            if (row == null)
+                return;
+
+            if (MessageBox.Show(
+                    $"Remove delivery cost for {row.ProvinceNameEN}?",
+                    "Confirm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            var ok = await _api.DeleteAsync($"api/ProductDeliveryLogistic/{row.Id}");
+
+            if (!ok)
+            {
+                MessageBox.Show("Delete failed.");
+                return;
+            }
+
+            await LoadDeliveryLogisticAsync(row.ProNumY);
+        }
+
+        private async void DeliveryLogisticLoading_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                DeliveryLogisticLoading.Enabled = false;
+
+                string proNumY = TxtUnitNumber.Text.Trim();
+
+                if (!string.IsNullOrWhiteSpace(proNumY))
+                    await LoadDeliveryLogisticAsync(proNumY);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static void DataSources(
@@ -1056,6 +1194,58 @@ namespace unt_bingoo.view.Product
 
         private void BtnAddNew_Click(object sender, EventArgs e)
         {
+            ClearAllBindings();
+
+            Control[] toClear =
+            {
+                TxtId, TxtUnitNumber, TxtPackNumber, TxtCaseNumber, TxtSKU, TxtSupplierCode,
+                TxtKhmerName, TxtProductsName, TxtSize, TxtDescription, TxtMadeIn,
+                TxtCurrentStock, TxtQtySold, TxtOrderLevel, TxtOrderAmount, TxtRemark,
+                TxtFactoryCost, txtFormDLanded, TxtBuyin, TxtBuyinDiscount, TxtBuyinVAT,
+                txtexcisetax, txtpubliclightingtax, TxtTotalBuyin, TxtAveragePrice,
+                TxtUnitPrice, TxtSuggest, TxtQtyPerPack, TxtUnitProfit, TxtPackPrice,
+                TxtPackProfit, TxtQtyPerCase, TxtCasePriceDiscount, TxtCasePrice,
+                TxtCaseProfit, txtvop,
+                TxtWidth, TxtLength, TxtHeight, TxtCBMPerCTN, TxtNetWeight, TxtGrossWeight,
+                TxtDeliveryCost
+            };
+
+            _suspendCalc = true;
+            try
+            {
+                foreach (Control c in toClear)
+                    c.Text = "";
+
+                CmbSupplier.SelectedIndex = -1;
+                CmbCategory.SelectedIndex = -1;
+                CmbCurrency.SelectedIndex = -1;
+                CmbFactoryCurrency.SelectedIndex = -1;
+                CmbFOBCIF.SelectedIndex = -1;
+                CmbShelfLifeOfProduct.SelectedIndex = -1;
+                CmbUOM.SelectedIndex = -1;
+
+                DTPBirthDate.Value = DateTime.Now;
+            }
+            finally
+            {
+                _suspendCalc = false;
+            }
+
+            PicProducts.Image = null;
+            _productImageBytes = null;
+            _productImageFileName = null;
+
+            _scaleList.Clear();
+            gvScale.RefreshData();
+
+            DgvDeliveryLogistic.DataSource = null;
+
+            LblStatus.Visible = false;
+            BtnMoveToDeactivated.Text = "&Move To Deactivated";
+            TxtStockOldCode.Text = "0";
+            TxtStockGRNTemp.Text = "0";
+
+            TxtUnitNumber.Focus();
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
@@ -1136,7 +1326,7 @@ namespace unt_bingoo.view.Product
                 }
             }
 
-            // Confirm with the user which action is about to happen.
+
         
 
             this.Cursor = Cursors.WaitCursor;
@@ -1175,8 +1365,11 @@ namespace unt_bingoo.view.Product
                         "Information",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                    await ReloadCurrentProduct();
 
+                    if (isUpdate)
+                        await ReloadCurrentProduct();
+                    else
+                        await LoadCreatedProductAsync(TxtUnitNumber.Text.Trim());
                 }
                 else
                 {
@@ -1205,6 +1398,67 @@ namespace unt_bingoo.view.Product
            await this.UpdateProductAsync();
 
 
+        }
+
+        private async void BtnMoveToDeactivated_Click(object sender, EventArgs e)
+        {
+            if (!(DataBindingSource.Current is ProductItem current) || current.ProID <= 0)
+            {
+                XtraMessageBox.Show("Please select a product first.");
+                return;
+            }
+
+            bool isDeactivated = current.Status == "Deactivated" || current.Status == "Old_Deactivated";
+            string newStatus = isDeactivated ? "" : "Deactivated";
+
+            string confirmMessage = isDeactivated
+                ? $"Move \"{current.ProNumY}\" back to products?"
+                : $"Move \"{current.ProNumY}\" to deactivated?";
+
+            if (XtraMessageBox.Show(confirmMessage, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            var ok = await _api.PutAsync($"api/Product/{current.ProID}/status", new { Value = newStatus });
+
+            if (!ok)
+            {
+                XtraMessageBox.Show("Update failed.");
+                return;
+            }
+
+            await ReloadCurrentProduct();
+            RefreshItems();
+        }
+
+        private async void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (!(DataBindingSource.Current is ProductItem current) || current.ProID <= 0)
+            {
+                XtraMessageBox.Show("Please select a product first.");
+                return;
+            }
+
+            if (XtraMessageBox.Show($"Delete \"{current.ProName}\" permanently?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                return;
+
+            var ok = await _api.DeleteAsync($"api/Product/{current.ProID}");
+
+            if (!ok)
+            {
+                XtraMessageBox.Show("Delete failed.");
+                return;
+            }
+
+            int index = DataBindingSource.Position;
+            RProductList.RemoveAt(index);
+            DataBindingSource.ResetBindings(false);
+
+            if (RProductList.Count == 0)
+                BtnAddNew_Click(BtnAddNew, EventArgs.Empty);
+            else
+                DataBindingSource.Position = Math.Min(index, RProductList.Count - 1);
+
+            UpdateItemCounts();
         }
 
         /// <summary>
@@ -1468,7 +1722,7 @@ namespace unt_bingoo.view.Product
 
             if (!decimal.TryParse(TxtQtyPerCase.Text, out decimal qtyPerCase) || qtyPerCase <= 0)
             {
-                XtraMessageBox.Show("Qty Per Case cannot be 0. Please enter a valid quantity.", "Enter Qty Per Case",
+                XtraMessageBox.Show("The QPpack, can be zero ", "Enter Qty Per Case",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtQtyPerCase.Focus();
                 return false;
@@ -1727,6 +1981,37 @@ namespace unt_bingoo.view.Product
             }
         }
 
+        private async void btnDeleteScale_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var row = gvScale.GetFocusedRow() as ProductScal;
+
+            if (row == null)
+                return;
+
+            if (XtraMessageBox.Show(
+                    $"Remove this {row.UOMCode} scale row?",
+                    "Confirm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            if (row.Id > 0)
+            {
+                var ok = await _api.DeleteAsync($"api/ProductScale/{row.Id}");
+
+                if (!ok)
+                {
+                    XtraMessageBox.Show("Delete failed.");
+                    return;
+                }
+            }
+
+            _scaleList.Remove(row);
+            gvScale.RefreshData();
+        }
+
         private BindingList<ProductScal> _scaleList = new BindingList<ProductScal>();
 
         private void PicProducts_Click(object sender, EventArgs e)
@@ -1888,6 +2173,23 @@ namespace unt_bingoo.view.Product
         private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        // After saving a NEW product, fetch it back (by its barcode) and bind it as the
+        // current record so TxtId gets the generated ID — the next Update click then
+        // updates this product instead of trying to create it again.
+        private async Task LoadCreatedProductAsync(string proNumY)
+        {
+            if (string.IsNullOrWhiteSpace(proNumY))
+                return;
+
+            var product = await _api.GetAsync<ProductItem>($"api/Product/barcode/{proNumY}");
+
+            if (product == null)
+                return;
+
+            RProductList = new List<ProductItem> { product };
+            DataLoading();
         }
 
         private async Task ReloadCurrentProduct()

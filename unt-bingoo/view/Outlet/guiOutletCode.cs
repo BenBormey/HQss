@@ -11,7 +11,7 @@ namespace unt_bingoo.view.Outlet
 {
     public partial class guiOutletCode : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api = new APIsController();
+        private  APIsController _api = new APIsController();
 
         public string editid = null;
 
@@ -165,6 +165,7 @@ namespace unt_bingoo.view.Outlet
         // ================= events =================
         private async void guiOutletCode_Load(object sender, EventArgs e)
         {
+            _api = APIGlobals.Api;
             await LoadDataAsync();
             // await LoadNextIdAsync();
         }

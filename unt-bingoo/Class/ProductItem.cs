@@ -108,6 +108,7 @@ namespace unt_bingoo.Class
             public string ShelfLifeOfProduct { get; set; }
 
             public decimal? VOP { get; set; }
+        public string Status { get; set; }
         public ProductScaleDto ProductScale { get; set; }
 
         public string desiplyname

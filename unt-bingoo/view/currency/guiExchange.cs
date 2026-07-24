@@ -253,6 +253,14 @@ namespace unt_bingoo.view.currency
 
         private async void guiExchange_Load(object sender, EventArgs e)
         {
+            _api = APIGlobals.Api;
+
+            if (_api == null || !_api.HasToken())
+            {
+                XtraMessageBox.Show("Please login again!");
+                Close();
+                return;
+            }
             DateTime now_ = DateTime.Now;
             await LoadGrid();
             this.LoadRateByDate(now_);

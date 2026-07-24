@@ -15,7 +15,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>C:\Users\HQ\OneDrive\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\HQ\OneDrive\Desktop\WebSite\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -201,6 +201,7 @@
       <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
@@ -269,6 +270,8 @@
     <Compile Include="Class\LoginResponse.cs" />
     <Compile Include="Class\CurrencyItem.cs" />
     <Compile Include="Class\CustomerItem.cs" />
+    <Compile Include="Class\PurchaseOrderModel.cs" />
+    <Compile Include="Class\ProductDeliveryLogisticItem.cs" />
     <Compile Include="Class\MefExchangeResponse.cs" />
     <Compile Include="Class\MenuItem.cs" />
     <Compile Include="Class\MenuItemVM.cs" />
@@ -277,6 +280,7 @@
     <Compile Include="Class\OrderItemVM.cs" />
     <Compile Include="Class\OutletItem.cs" />
     <Compile Include="Class\OutletItemCreate.cs" />
+    <Compile Include="Class\OutletOrderModel.cs" />
     <Compile Include="Class\OutletResponse.cs" />
     <Compile Include="Class\Photo.cs" />
     <Compile Include="Class\PnLDto.cs" />
@@ -304,6 +308,7 @@
     <Compile Include="Class\UploadResult.cs" />
     <Compile Include="Class\UserItem.cs" />
     <Compile Include="Class\TermDayItem.cs" />
+    <Compile Include="Class\PermissionItem.cs" />
     <Compile Include="Controller\APIGlobals.cs" />
     <Compile Include="Controller\APIsController.cs" />
     <Compile Include="Declares\Initialized.cs" />
@@ -325,6 +330,18 @@
     </Compile>
     <Compile Include="view\Bank\BankSetup.Designer.cs">
       <DependentUpon>BankSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Vat\guiVateSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\OutletOrder\guiOutletOrderApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Dashboard\guiDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Vat\guiVateSetting.Designer.cs">
+      <DependentUpon>guiVateSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Branch\guiBranch.cs">
       <SubType>Form</SubType>
@@ -355,6 +372,12 @@
     </Compile>
     <Compile Include="view\currency\guiListExchange.Designer.cs">
       <DependentUpon>guiListExchange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PurchaseOrder\guiPurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PurchaseOrder\guiPurchaseOrder.Designer.cs">
+      <DependentUpon>guiPurchaseOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Customer\guiCustomer.cs">
       <SubType>Form</SubType>
@@ -537,11 +560,35 @@
     <Compile Include="view\User\guiUserProfile.Designer.cs">
       <DependentUpon>guiUserProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\User\guiPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\User\guiPermission.Designer.cs">
+      <DependentUpon>guiPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Report\guiSaleReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Report\guiSaleReport.Designer.cs">
+      <DependentUpon>guiSaleReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Outlet\guiOutletOrderApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiOutletOrderApproval.Designer.cs">
+      <DependentUpon>guiOutletOrderApproval.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\User\guiUser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\User\guiUser.Designer.cs">
       <DependentUpon>guiUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\User\guiResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\User\guiResetPassword.Designer.cs">
+      <DependentUpon>guiResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="view\User\guiUserrole.cs">
       <SubType>Form</SubType>
@@ -562,6 +609,12 @@
     </Compile>
     <EmbeddedResource Include="view\Bank\BankSetup.resx">
       <DependentUpon>BankSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Dashboard\guiDashboard.resx">
+      <DependentUpon>guiDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Vat\guiVateSetting.resx">
+      <DependentUpon>guiVateSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Branch\guiBranch.resx">
       <DependentUpon>guiBranch.cs</DependentUpon>
@@ -634,6 +687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Product\ShelfLife.resx">
       <DependentUpon>ShelfLife.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PurchaseOrder\guiPurchaseOrder.resx">
+      <DependentUpon>guiPurchaseOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Supplier\guiSupplierSetup.resx">
       <DependentUpon>guiSupplierSetup.cs</DependentUpon>

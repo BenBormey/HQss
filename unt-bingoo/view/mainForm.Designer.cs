@@ -42,10 +42,11 @@ namespace unt_bingoo.view
             this.mnufile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.vatSittingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.supplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,15 +57,22 @@ namespace unt_bingoo.view
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuchangepassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPermission = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaleReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOutletOrderApproval = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.supplierReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupOutletMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.setupBankMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.outLetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createPurchaseOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supplierReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.customerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.status.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -131,10 +139,11 @@ namespace unt_bingoo.view
             this.mnufile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem6,
             this.toolStripSeparator2,
+            this.toolStripSeparator5,
+            this.vatSittingToolStripMenuItem,
+            this.toolStripSeparator9,
             this.paymentToolStripMenuItem,
             this.toolStripSeparator8,
-            this.toolStripMenuItem5,
-            this.toolStripSeparator7,
             this.supplierToolStripMenuItem,
             this.toolStripSeparator1,
             this.toolStripMenuItem2,
@@ -145,6 +154,7 @@ namespace unt_bingoo.view
             this.toolStripMenuItem8,
             this.toolStripMenuItem9,
             this.toolStripMenuItem1,
+            this.mnuPermission,
             this.mnuchangepassword,
             this.mnuexit,
             this.createUserProfileToolStripMenuItem});
@@ -168,6 +178,23 @@ namespace unt_bingoo.view
             this.toolStripSeparator2.Text = "Create Currency";
             this.toolStripSeparator2.Click += new System.EventHandler(this.toolStripSeparator2_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(199, 6);
+            // 
+            // vatSittingToolStripMenuItem
+            // 
+            this.vatSittingToolStripMenuItem.Name = "vatSittingToolStripMenuItem";
+            this.vatSittingToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.vatSittingToolStripMenuItem.Text = "VatSetting";
+            this.vatSittingToolStripMenuItem.Click += new System.EventHandler(this.vatSittingToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(199, 6);
+            // 
             // paymentToolStripMenuItem
             // 
             this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
@@ -179,19 +206,6 @@ namespace unt_bingoo.view
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(199, 6);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Image = global::unt_bingoo.Properties.Resources.retail;
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItem5.Text = "&Create OutLet";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.outLetToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(199, 6);
             // 
             // supplierToolStripMenuItem
             // 
@@ -258,9 +272,16 @@ namespace unt_bingoo.view
             this.toolStripMenuItem9.Text = "StockProduct";
             this.toolStripMenuItem9.Visible = false;
             this.toolStripMenuItem9.Click += new System.EventHandler(this.stockProductToolStripMenuItem_Click);
-            // 
+            //
+            // mnuPermission
+            //
+            this.mnuPermission.Name = "mnuPermission";
+            this.mnuPermission.Size = new System.Drawing.Size(202, 22);
+            this.mnuPermission.Text = "&Permission";
+            this.mnuPermission.Click += new System.EventHandler(this.mnuPermission_Click);
+            //
             // mnuchangepassword
-            // 
+            //
             this.mnuchangepassword.Image = ((System.Drawing.Image)(resources.GetObject("mnuchangepassword.Image")));
             this.mnuchangepassword.Name = "mnuchangepassword";
             this.mnuchangepassword.Size = new System.Drawing.Size(202, 22);
@@ -272,72 +293,116 @@ namespace unt_bingoo.view
             this.menuStrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnufile,
-            this.reportToolStripMenuItem,
             this.menuItemToolStripMenuItem,
-            this.customerToolStripMenuItem});
+            this.purchaseOrderToolStripMenuItem,
+            this.reportToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(632, 26);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "MenuStrip";
             // 
-            // reportToolStripMenuItem
-            // 
-            this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supplierReportToolStripMenuItem});
-            this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
-            this.reportToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
-            this.reportToolStripMenuItem.Text = "Report";
-            // 
-            // supplierReportToolStripMenuItem
-            // 
-            this.supplierReportToolStripMenuItem.Name = "supplierReportToolStripMenuItem";
-            this.supplierReportToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.supplierReportToolStripMenuItem.Text = "Supplier Report";
-            this.supplierReportToolStripMenuItem.Click += new System.EventHandler(this.supplierReportToolStripMenuItem_Click);
-            // 
             // menuItemToolStripMenuItem
             // 
             this.menuItemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setupOutletMenuToolStripMenuItem,
-            this.setupBankMenuToolStripMenuItem});
+            this.toolStripSeparator7,
+            this.setupBankMenuToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.outLetToolStripMenuItem,
+            this.customerToolStripMenuItem1});
             this.menuItemToolStripMenuItem.Name = "menuItemToolStripMenuItem";
-            this.menuItemToolStripMenuItem.Size = new System.Drawing.Size(57, 22);
-            this.menuItemToolStripMenuItem.Text = "Menu";
+            this.menuItemToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
+            this.menuItemToolStripMenuItem.Text = "Setup";
             this.menuItemToolStripMenuItem.Click += new System.EventHandler(this.menuItemToolStripMenuItem_Click);
             // 
             // setupOutletMenuToolStripMenuItem
             // 
             this.setupOutletMenuToolStripMenuItem.Name = "setupOutletMenuToolStripMenuItem";
-            this.setupOutletMenuToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.setupOutletMenuToolStripMenuItem.Text = "Setup Outlet Menu";
+            this.setupOutletMenuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setupOutletMenuToolStripMenuItem.Text = "Outlet Menu";
             this.setupOutletMenuToolStripMenuItem.Click += new System.EventHandler(this.setupOutletMenuToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
             // 
             // setupBankMenuToolStripMenuItem
             // 
             this.setupBankMenuToolStripMenuItem.Name = "setupBankMenuToolStripMenuItem";
-            this.setupBankMenuToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.setupBankMenuToolStripMenuItem.Text = "Setup Bank Menu";
+            this.setupBankMenuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setupBankMenuToolStripMenuItem.Text = "Bank Menu";
             this.setupBankMenuToolStripMenuItem.Click += new System.EventHandler(this.setupBankMenuToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // outLetToolStripMenuItem
+            // 
+            this.outLetToolStripMenuItem.Name = "outLetToolStripMenuItem";
+            this.outLetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.outLetToolStripMenuItem.Text = "OutLet";
+            this.outLetToolStripMenuItem.Click += new System.EventHandler(this.outLetToolStripMenuItem_Click);
+            // 
+            // purchaseOrderToolStripMenuItem
+            // 
+            this.purchaseOrderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createPurchaseOrderToolStripMenuItem,
+            this.mnuOutletOrderApproval});
+            this.purchaseOrderToolStripMenuItem.Name = "purchaseOrderToolStripMenuItem";
+            this.purchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.purchaseOrderToolStripMenuItem.Text = "Purchase Order";
+            // 
+            // createPurchaseOrderToolStripMenuItem
+            // 
+            this.createPurchaseOrderToolStripMenuItem.Name = "createPurchaseOrderToolStripMenuItem";
+            this.createPurchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.createPurchaseOrderToolStripMenuItem.Text = "Purchase Order";
+            this.createPurchaseOrderToolStripMenuItem.Click += new System.EventHandler(this.createPurchaseOrderToolStripMenuItem_Click);
+            //
+            // mnuOutletOrderApproval
+            //
+            this.mnuOutletOrderApproval.Name = "mnuOutletOrderApproval";
+            this.mnuOutletOrderApproval.Size = new System.Drawing.Size(181, 22);
+            this.mnuOutletOrderApproval.Text = "Outlet Order Approval";
+            this.mnuOutletOrderApproval.Click += new System.EventHandler(this.mnuOutletOrderApproval_Click);
+            // 
+            // reportToolStripMenuItem
+            // 
+            this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supplierReportToolStripMenuItem,
+            this.mnuSaleReport});
+            this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
+            this.reportToolStripMenuItem.Text = "Report";
+            // 
+            // supplierReportToolStripMenuItem
+            //
+            this.supplierReportToolStripMenuItem.Name = "supplierReportToolStripMenuItem";
+            this.supplierReportToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.supplierReportToolStripMenuItem.Text = "Supplier Report";
+            this.supplierReportToolStripMenuItem.Click += new System.EventHandler(this.supplierReportToolStripMenuItem_Click);
+            //
+            // mnuSaleReport
+            //
+            this.mnuSaleReport.Name = "mnuSaleReport";
+            this.mnuSaleReport.Size = new System.Drawing.Size(178, 22);
+            this.mnuSaleReport.Text = "Sale Report";
+            this.mnuSaleReport.Click += new System.EventHandler(this.mnuSaleReport_Click);
             // 
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
             // 
-            // customerToolStripMenuItem
+            // customerToolStripMenuItem1
             // 
-            this.customerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createCustomerToolStripMenuItem});
-            this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
-            this.customerToolStripMenuItem.Size = new System.Drawing.Size(86, 22);
-            this.customerToolStripMenuItem.Text = "Customer";
-            // 
-            // createCustomerToolStripMenuItem
-            // 
-            this.createCustomerToolStripMenuItem.Name = "createCustomerToolStripMenuItem";
-            this.createCustomerToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.createCustomerToolStripMenuItem.Text = "CreateCustomer";
-            this.createCustomerToolStripMenuItem.Click += new System.EventHandler(this.createCustomerToolStripMenuItem_Click);
+            this.customerToolStripMenuItem1.Name = "customerToolStripMenuItem1";
+            this.customerToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.customerToolStripMenuItem1.Text = "Customer";
+            this.customerToolStripMenuItem1.Click += new System.EventHandler(this.createCustomerToolStripMenuItem_Click);
             // 
             // mainForm
             // 
@@ -374,6 +439,9 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem mnuexit;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuchangepassword;
+        private System.Windows.Forms.ToolStripMenuItem mnuPermission;
+        private System.Windows.Forms.ToolStripMenuItem mnuSaleReport;
+        private System.Windows.Forms.ToolStripMenuItem mnuOutletOrderApproval;
         private System.Windows.Forms.ToolStripMenuItem mnufile;
         private System.Windows.Forms.MenuStrip menuStrip;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
@@ -381,8 +449,6 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
@@ -397,8 +463,15 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem setupOutletMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setupBankMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supplierReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createCustomerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createPurchaseOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outLetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem vatSittingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem customerToolStripMenuItem1;
     }
 }
 

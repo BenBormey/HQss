@@ -19,6 +19,7 @@ using unt_bingoo.view.Supplier;
 using unt_bingoo.Controller;
 using DevExpress.XtraEditors;
 using unt_bingoo.Class;
+using unt_bingoo.view.Vat;
 
 namespace unt_bingoo.view
 {
@@ -30,6 +31,22 @@ namespace unt_bingoo.view
         {
             InitializeComponent();
             this._api = APIGlobals.Api ?? new APIsController();
+
+            // Dashboard menu — added in code so the Designer stays untouched.
+            // Visible to any logged-in user; the api/Report/dashboard endpoint
+            // itself requires a valid token.
+            //var mnuDashboard = new ToolStripMenuItem("Dashboard");
+            //mnuDashboard.Click += (s, e) =>
+            //{
+            //    var frm = new Dashboard.guiDashboard()
+            //    {
+            //        MdiParent = this,
+            //        WindowState = FormWindowState.Maximized,
+            //        StartPosition = FormStartPosition.CenterScreen
+            //    };
+            //    frm.Show();
+            //};
+            //menuStrip.Items.Insert(1, mnuDashboard);
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -231,8 +248,82 @@ namespace unt_bingoo.view
 
         }
 
-        private void mainForm_Load(object sender, EventArgs e)
+        private async void mainForm_Load(object sender, EventArgs e)
         {
+            await ApplyPermissionsAsync();
+        }
+
+        // Hide menu items the logged-in user's role has no permission for.
+        // MD (ADMIN) always sees everything.
+        private async Task ApplyPermissionsAsync()
+        {
+            try
+            {
+                if (APIGlobals.RoleCode == "ADMIN")
+                    return;
+
+                var permissions = await _api.GetMyPermissionsAsync();
+                APIGlobals.Permissions = permissions;
+
+                bool Has(string code) => permissions.Contains(code);
+
+                // File menu
+                toolStripMenuItem6.Visible = Has("EXCHANGE_RATE");
+                toolStripSeparator2.Visible = Has("CURRENCY");      // "Create Currency" item
+                vatSittingToolStripMenuItem.Visible = Has("VAT_SETTING");
+                paymentToolStripMenuItem.Visible = Has("CATEGORY"); // "Create Category" item
+                supplierToolStripMenuItem.Visible = Has("SUPPLIER");
+                toolStripMenuItem2.Visible = Has("PRODUCT");        // "Create Product" item
+                toolStripMenuItem3.Visible = Has("USER");           // "Create User" item
+                mnuPermission.Visible = Has("PERMISSION");
+
+                // Setup menu
+                setupOutletMenuToolStripMenuItem.Visible = Has("OUTLET_MENU");
+                setupBankMenuToolStripMenuItem.Visible = Has("BANK_MENU");
+                outLetToolStripMenuItem.Visible = Has("OUTLET");
+                customerToolStripMenuItem1.Visible = Has("CUSTOMER");
+                menuItemToolStripMenuItem.Visible =
+                    Has("OUTLET_MENU") || Has("BANK_MENU") || Has("OUTLET") || Has("CUSTOMER");
+
+                // Purchase Order menu
+                createPurchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER");
+                mnuOutletOrderApproval.Visible = Has("OUTLET_ORDER");
+                purchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER") || Has("OUTLET_ORDER");
+
+                // Report menu
+                supplierReportToolStripMenuItem.Visible = Has("SUPPLIER_REPORT");
+                mnuSaleReport.Visible = Has("SALE_REPORT");
+                reportToolStripMenuItem.Visible = Has("SUPPLIER_REPORT") || Has("SALE_REPORT");
+            }
+            catch
+            {
+                // If permissions can't load, leave menus as-is rather than locking the user out.
+            }
+        }
+
+        private void mnuOutletOrderApproval_Click(object sender, EventArgs e)
+        {
+            var frm = new Outlet.guiOutletOrderApproval() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void mnuSaleReport_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.Report.guiSaleReport() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void mnuPermission_Click(object sender, EventArgs e)
+        {
+            if (APIGlobals.RoleCode != "ADMIN")
+            {
+                XtraMessageBox.Show(APIGlobals.NoPermissionMessage, "Access Denied",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var frm = new guiPermission() { StartPosition = FormStartPosition.CenterScreen };
+            frm.ShowDialog(this);
         }
 
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -307,6 +398,19 @@ namespace unt_bingoo.view
             var frm = new guiCustomer { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
 
+        }
+
+        private void createPurchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.PurchaseOrder.guiPurchaseOrder { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void vatSittingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new guiVateSetting { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+            
         }
     }
 }

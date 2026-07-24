@@ -806,7 +806,7 @@ namespace unt_bingoo.view.Product
                 var detail = await api_.GetAsync<ProductItem>($"api/Product/{product.ProID}");
                 if (myToken != _imagePreviewToken)
                     return; // a newer selection has started; discard this stale result
-
+                txtunitprice.Text = detail.ProImpPri.ToString();
                 if (detail == null)
                 {
                     picPreview.Image?.Dispose();
@@ -840,6 +840,10 @@ namespace unt_bingoo.view.Product
                     picPreview.Image?.Dispose();
                     picPreview.Image = null;
                 }
+
+
+
+
             }
             catch (Exception ex)
             {

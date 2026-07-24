@@ -11,7 +11,7 @@ namespace unt_bingoo.view.Outlet
 {
     public partial class guiFranchise : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api;
+        private  APIsController _api;
         private bool _suspendDateRules = false;
         public guiFranchise()
         {
@@ -200,6 +200,17 @@ namespace unt_bingoo.view.Outlet
         }
         private async void guiFranchise_Load_1(object sender, EventArgs e)
         {
+            _api = APIGlobals.Api;
+
+            if (_api == null || !_api.HasToken())
+            {
+                XtraMessageBox.Show("Please login again!");
+                Close();
+                return;
+            }
+
+
+
             await LoadFranchises();
             await LoadOutletCodeAsync();
             this.LoadingFranchiseType();

@@ -16,9 +16,8 @@ namespace unt_bingoo.Controller
 {
     public class APIsController
     {
- 
-       private const string ApiBaseUrl = "http://192.168.1.99:8099/";
-        /// private const string ApiBaseUrl = "http://localhost:5189/"; 
+     private const string ApiBaseUrl = "http://localhost:5189/";
+   ///private const string ApiBaseUrl = "http://192.168.1.99:8099/";
    
         private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(30);
         private readonly HttpClient _client;
@@ -62,6 +61,8 @@ namespace unt_bingoo.Controller
             APIGlobals.UserId = 0;
             APIGlobals.OutletId = 0;
             APIGlobals.Token = null;
+            APIGlobals.RoleCode = null;
+            APIGlobals.Permissions = new List<string>();
         }
 
         public bool HasToken()
@@ -94,6 +95,7 @@ namespace unt_bingoo.Controller
             public string username { get; set; }
             public string fullName { get; set; }
             public string roleName { get; set; }
+            public string roleCode { get; set; }
         }
 
         public async Task<bool> LoginAsync(string user, string pass)
@@ -118,6 +120,7 @@ namespace unt_bingoo.Controller
                 APIGlobals.UserName = res.user.username;
                 APIGlobals.FullName = res.user.fullName;
                 APIGlobals.RoleName = res.user.roleName;
+                APIGlobals.RoleCode = res.user.roleCode;
 
                 return true;
             }
@@ -149,6 +152,7 @@ namespace unt_bingoo.Controller
                 APIGlobals.UserName = res.user.username;
                 APIGlobals.FullName = res.user.fullName;
                 APIGlobals.RoleName = res.user.roleName;
+                APIGlobals.RoleCode = res.user.roleCode;
 
                 return true;
             }
@@ -168,6 +172,35 @@ namespace unt_bingoo.Controller
         {
             var res = await GetAsync<JObject>("api/Supplier/next-code");
             return res?["supplierCode"]?.ToString();
+        }
+
+        public async Task<string> GetNextRoleCodeAsync()
+        {
+            var res = await GetAsync<JObject>("api/role/next-code");
+            return res?["roleCode"]?.ToString();
+        }
+
+        // ---------------------------------------------------------
+        //  PERMISSIONS
+        // ---------------------------------------------------------
+        public Task<List<PermissionItem>> GetPermissionsAsync()
+        {
+            return GetAsync<List<PermissionItem>>("api/permission");
+        }
+
+        public Task<List<int>> GetRolePermissionIdsAsync(int roleId)
+        {
+            return GetAsync<List<int>>($"api/permission/role/{roleId}");
+        }
+
+        public Task<bool> SaveRolePermissionsAsync(int roleId, List<int> permissionIds)
+        {
+            return PutAsync($"api/permission/role/{roleId}", permissionIds);
+        }
+
+        public async Task<List<string>> GetMyPermissionsAsync()
+        {
+            return await GetAsync<List<string>>("api/permission/my") ?? new List<string>();
         }
 
         // The md-login/login response doesn't include HasSystemAccess, so

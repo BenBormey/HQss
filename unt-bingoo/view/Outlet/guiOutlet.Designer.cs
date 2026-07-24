@@ -685,6 +685,7 @@ namespace unt_bingoo.view.Outlet
             this.flpPhotos.Name = "flpPhotos";
             this.flpPhotos.Size = new System.Drawing.Size(212, 193);
             this.flpPhotos.TabIndex = 144;
+            this.flpPhotos.Paint += new System.Windows.Forms.PaintEventHandler(this.flpPhotos_Paint_1);
             // 
             // btnAddPhoto
             // 
@@ -1274,7 +1275,6 @@ namespace unt_bingoo.view.Outlet
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(125, 22);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Position:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // simpleButton1
@@ -1357,10 +1357,9 @@ namespace unt_bingoo.view.Outlet
             // 
             this.chkHeadOffice.Location = new System.Drawing.Point(1196, 30);
             this.chkHeadOffice.Name = "chkHeadOffice";
-            this.chkHeadOffice.Properties.Caption = "Head Office";
-            this.chkHeadOffice.Size = new System.Drawing.Size(75, 19);
+            this.chkHeadOffice.Properties.Caption = "Warehouse (Head Office)";
+            this.chkHeadOffice.Size = new System.Drawing.Size(160, 19);
             this.chkHeadOffice.TabIndex = 1;
-            this.chkHeadOffice.Visible = false;
             // 
             // picLogo
             // 
