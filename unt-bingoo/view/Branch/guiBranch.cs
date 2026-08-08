@@ -62,7 +62,7 @@ namespace unt_bingoo.view.Branch
         private async Task LoadData()
         {
             var list = await _api.GetAsync<
-                System.Collections.Generic.List<BranchItem>>("api/Brand");
+                System.Collections.Generic.List<BranchItem>>("api/Branch");
 
             _branchList = new BindingList<BranchItem>(list);
 
@@ -142,7 +142,7 @@ namespace unt_bingoo.view.Branch
         
                 if (_editingId == null)
                 {
-                    ok = await _api.PostAsync("api/Brand", model);
+                    ok = await _api.PostAsync("api/Branch", model);
 
                     if (!ok)
                     {
@@ -155,7 +155,7 @@ namespace unt_bingoo.view.Branch
               
                 else
                 {
-                    ok = await _api.PutAsync($"api/Brand/{_editingId}", model);
+                    ok = await _api.PutAsync($"api/Branch/{_editingId}", model);
 
                     if (!ok)
                     {
@@ -217,7 +217,7 @@ namespace unt_bingoo.view.Branch
             {
                 Cursor = Cursors.WaitCursor;
 
-                bool ok = await _api.DeleteAsync($"api/Brand/{row.Id}");
+                bool ok = await _api.DeleteAsync($"api/Branch/{row.Id}");
 
                 if (!ok)
                 {
@@ -271,7 +271,7 @@ namespace unt_bingoo.view.Branch
                     Cursor = Cursors.WaitCursor;
 
                     
-                    bool ok = await _api.DeleteAsync($"api/Brand/{row.Id}");
+                    bool ok = await _api.DeleteAsync($"api/Branch/{row.Id}");
 
                     if (!ok)
                     {

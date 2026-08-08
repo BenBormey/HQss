@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo.Tests\\unt-bingoo.Tests.csproj": {}
+  },
+  "projects": {
+    "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo.Tests\\unt-bingoo.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo.Tests\\unt-bingoo.Tests.csproj",
+        "projectName": "unt-bingoo.Tests",
+        "projectPath": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo.Tests\\unt-bingoo.Tests.csproj",
+        "packagesPath": "C:\\Users\\HQ\\.nuget\\packages\\",
+        "outputPath": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net481"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net481": {
+            "targetAlias": "net481",
+            "projectReferences": {
+              "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\unt-bingoo.csproj": {
+                "projectPath": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\unt-bingoo.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net481": {
+          "targetAlias": "net481",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.12.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.8.2, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.426\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\unt-bingoo.csproj": {
+      "restore": {
+        "projectUniqueName": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\unt-bingoo.csproj",
+        "projectName": "unt-bingoo",
+        "projectPath": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\unt-bingoo.csproj",
+        "frameworks": {
+          "net481": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net481": {}
+      }
+    }
+  }
+}

@@ -109,6 +109,15 @@ namespace unt_bingoo.Class
 
             public decimal? VOP { get; set; }
         public string Status { get; set; }
+
+        // True for raw materials consumed via a Recipe (e.g. Milk, Sugar) —
+        // these shouldn't get a MenuItem or be sold directly at POS.
+        public bool IsIngredient { get; set; }
+
+        // Stocking unit (e.g. "kg", "L", "pcs") that Recipe.Qty, OutletStock.StockQty,
+        // and IngredientStockTransfer.Qty are all expressed in for this product.
+        public string ProUnit { get; set; }
+
         public ProductScaleDto ProductScale { get; set; }
 
         public string desiplyname
@@ -116,6 +125,19 @@ namespace unt_bingoo.Class
             get
             {
                 return $"{ProNumY}  {ProName}";
+            }
+        }
+
+        // Name first (unlike desiplyname, which leads with the barcode) so a
+        // DropDownList combo's built-in type-to-find still matches what the
+        // buyer actually types; the code trails behind just for identification.
+        public string ProductPickerName
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(ProNumY)
+                    ? ProName
+                    : $"{ProName}   [{ProNumY}]";
             }
         }
         }

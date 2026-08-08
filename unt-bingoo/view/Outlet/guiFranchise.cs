@@ -16,7 +16,7 @@ namespace unt_bingoo.view.Outlet
         public guiFranchise()
         {
             InitializeComponent();
-            _api = new APIsController();
+            _api = APIGlobals.Api ?? new APIsController();
        
 
             gridView1.Appearance.HeaderPanel.BackColor = Color.Silver;

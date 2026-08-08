@@ -16,7 +16,7 @@ namespace unt_bingoo.view.Product
 {
     public partial class FrmProductsCaseNumber : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api = new APIsController();
+        private readonly APIsController _api = APIGlobals.Api ?? new APIsController();
 
         public string RWord_Searching;
         public DataTable RProductList;
@@ -90,62 +90,16 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
-            // If no UnitNumber => Return Barcode Only
-            if (string.IsNullOrWhiteSpace(RUnitNumber))
-            {
-                Initialized.R_Barcode = barcode;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                return;
-            }
-
-            DialogResult result;
-
-            if (string.IsNullOrWhiteSpace(RCurrentBarcode))
-            {
-                result = MessageBox.Show(
-                    $"Are you sure you want to set barcode [{barcode}] ?",
-                    "Confirm",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-            }
-            else
-            {
-                result = MessageBox.Show(
-                    $"Are you sure you want to change barcode [{RCurrentBarcode}] to [{barcode}] ?",
-                    "Confirm",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-            }
-
-            if (result == DialogResult.No)
-                return;
-
-            try
-            {
-                await _api.PutAsync(
-                    $"api/product/{RProId}/case-number",
-                    new { CaseNumber = barcode });
-
-                MessageBox.Show(
-                    "Changing barcode completed!",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                Initialized.R_Barcode = barcode;
-
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            // This dialog only verifies the barcode isn't already taken and
+            // hands the value back to the caller (guiProductOutlet reads
+            // Initialized.R_Barcode into TxtCaseNumber). Persisting happens
+            // when the parent product form saves the whole record — RUnitNumber
+            // being non-blank doesn't mean the product has actually been saved
+            // yet (RProId), so calling the case-number PUT endpoint here failed
+            // with "Product not found" for a still-unsaved product.
+            Initialized.R_Barcode = barcode;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private async void BtnClearPackNumber_Click(object sender, EventArgs e)

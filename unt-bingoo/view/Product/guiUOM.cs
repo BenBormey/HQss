@@ -207,13 +207,17 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
-            editid = idObj.ToString();
+            // Deletes the row directly — the form is left exactly as it is
+            // (no loading into txtUOMCode/txtUOMName first). deleteId is a
+            // local, not the shared editid, so deleting one row can't clobber
+            // an edit already in progress on a different one.
+            string deleteId = idObj.ToString();
 
             if (MessageBox.Show("Are you sure you want to delete this record?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    var ok = await _api.DeleteAsync($"api/uom/{editid}");
+                    var ok = await _api.DeleteAsync($"api/uom/{deleteId}");
 
                     if (!ok)
                     {
@@ -222,12 +226,19 @@ namespace unt_bingoo.view.Product
                     }
 
                     await LoadData();
-                    txtUOMCode.Text = string.Empty;
-                    txtUOMName.Text = string.Empty;
-                    chkstatus.Checked = true;
-                    editid = null;
-                    btnSave.Text = "SAVE";
-                    btnClear.Visible = false;
+
+                    // Only reset the form if the deleted row is the one
+                    // currently loaded for editing — deleting an unrelated
+                    // row shouldn't wipe an in-progress edit.
+                    if (editid == deleteId)
+                    {
+                        txtUOMCode.Text = string.Empty;
+                        txtUOMName.Text = string.Empty;
+                        chkstatus.Checked = true;
+                        editid = null;
+                        btnSave.Text = "SAVE";
+                        btnClear.Visible = false;
+                    }
 
                     MessageBox.Show("Record deleted successfully!");
                 }

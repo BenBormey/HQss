@@ -19,6 +19,11 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
+// Lets the test project call internal static methods (ResolveApiBaseUrl,
+// CrashLogger.FormatEntry) directly instead of duplicating their logic
+// or making them public just for testing.
+[assembly: InternalsVisibleTo("unt-bingoo.Tests")]
+
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("df6a9013-e4d0-4d4f-8e14-958330659330")]
 

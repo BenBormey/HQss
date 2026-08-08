@@ -1,4 +1,5 @@
 ﻿using System;
+using unt_bingoo.Diagnostics;
 
 namespace unt_bingoo.Class.ProductScal
 {
@@ -80,8 +81,10 @@ namespace unt_bingoo.Class.ProductScal
             }
             catch (Exception ex)
             {
-                // log បើ​អ្នក​មាន logger ស្រាប់
-                System.Diagnostics.Debug.WriteLine($"TotalBuyin error: {ex.Message}");
+                // Debug.WriteLine only reaches a debugger, never a real deployment -
+                // now that CrashLogger exists, use it so a bad TotalBuyin result
+                // (silently returned as 0) is actually traceable after the fact.
+                CrashLogger.Log(ex, CrashSource.UiThread, CrashSeverity.Recoverable, "Recoverable - TotalBuyin returned 0");
                 return 0;
             }
         }

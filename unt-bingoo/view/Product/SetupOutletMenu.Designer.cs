@@ -1,6 +1,6 @@
 ﻿namespace unt_bingoo.view.Product
 {
-    partial class cboProduct
+    partial class SetupOutletMenu
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -113,7 +113,7 @@
             this.cboOutlet.Dock = System.Windows.Forms.DockStyle.Top;
             this.cboOutlet.Location = new System.Drawing.Point(0, 0);
             this.cboOutlet.Name = "cboOutlet";
-            this.cboOutlet.Size = new System.Drawing.Size(1080, 79);
+            this.cboOutlet.Size = new System.Drawing.Size(1178, 79);
             this.cboOutlet.TabIndex = 0;
             // 
             // lblSystemName
@@ -146,7 +146,7 @@
             this.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Panel4.Location = new System.Drawing.Point(0, 60);
             this.Panel4.Name = "Panel4";
-            this.Panel4.Size = new System.Drawing.Size(1080, 19);
+            this.Panel4.Size = new System.Drawing.Size(1178, 19);
             this.Panel4.TabIndex = 0;
             // 
             // groupEntry
@@ -181,14 +181,14 @@
             this.groupEntry.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             this.groupEntry.Location = new System.Drawing.Point(13, 88);
             this.groupEntry.Name = "groupEntry";
-            this.groupEntry.Size = new System.Drawing.Size(1055, 263);
+            this.groupEntry.Size = new System.Drawing.Size(1153, 263);
             this.groupEntry.TabIndex = 1;
             this.groupEntry.TabStop = false;
             this.groupEntry.Text = "Entry Menu Item :";
             // 
             // txtunitprice
             // 
-            this.txtunitprice.Location = new System.Drawing.Point(730, 77);
+            this.txtunitprice.Location = new System.Drawing.Point(781, 77);
             this.txtunitprice.Name = "txtunitprice";
             this.txtunitprice.ReadOnly = true;
             this.txtunitprice.Size = new System.Drawing.Size(103, 22);
@@ -204,7 +204,7 @@
             // 
             // btncancel
             // 
-            this.btncancel.Location = new System.Drawing.Point(947, 231);
+            this.btncancel.Location = new System.Drawing.Point(981, 227);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(75, 23);
             this.btncancel.TabIndex = 192;
@@ -230,7 +230,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(866, 231);
+            this.btnAdd.Location = new System.Drawing.Point(900, 227);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 189;
@@ -324,7 +324,7 @@
             this.cboProducts.FormattingEnabled = true;
             this.cboProducts.Location = new System.Drawing.Point(167, 51);
             this.cboProducts.Name = "cboProducts";
-            this.cboProducts.Size = new System.Drawing.Size(666, 22);
+            this.cboProducts.Size = new System.Drawing.Size(717, 22);
             this.cboProducts.TabIndex = 182;
             this.cboProducts.SelectedIndexChanged += new System.EventHandler(this.cboProducts_SelectedIndexChanged);
             // 
@@ -415,7 +415,7 @@
             // 
             this.picPreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
             this.picPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picPreview.Location = new System.Drawing.Point(865, 55);
+            this.picPreview.Location = new System.Drawing.Point(899, 51);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(184, 162);
             this.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -433,7 +433,7 @@
             this.gridControlMenu.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnMainEdit,
             this.btnMainDelete});
-            this.gridControlMenu.Size = new System.Drawing.Size(1054, 409);
+            this.gridControlMenu.Size = new System.Drawing.Size(1152, 409);
             this.gridControlMenu.TabIndex = 2;
             this.gridControlMenu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewMenu});
@@ -688,7 +688,7 @@
             this.panelToolbar.Controls.Add(this.btnExport);
             this.panelToolbar.Location = new System.Drawing.Point(12, 354);
             this.panelToolbar.Name = "panelToolbar";
-            this.panelToolbar.Size = new System.Drawing.Size(1054, 34);
+            this.panelToolbar.Size = new System.Drawing.Size(1152, 34);
             this.panelToolbar.TabIndex = 4;
             // 
             // lblSearch
@@ -755,7 +755,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(869, 5);
+            this.btnRefresh.Location = new System.Drawing.Point(959, 5);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(85, 25);
             this.btnRefresh.TabIndex = 6;
@@ -765,7 +765,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(960, 5);
+            this.btnExport.Location = new System.Drawing.Point(1050, 5);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(94, 25);
             this.btnExport.TabIndex = 7;
@@ -773,17 +773,17 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // cboProduct
+            // SetupOutletMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 833);
+            this.ClientSize = new System.Drawing.Size(1178, 833);
             this.Controls.Add(this.lblCountRow);
             this.Controls.Add(this.panelToolbar);
             this.Controls.Add(this.groupEntry);
             this.Controls.Add(this.cboOutlet);
             this.Controls.Add(this.gridControlMenu);
-            this.Name = "cboProduct";
+            this.Name = "SetupOutletMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MENU ITEM MANAGEMENT";
             this.Load += new System.EventHandler(this.MenuItem_Load);

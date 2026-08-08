@@ -15,6 +15,7 @@ using unt_bingoo.Class;
 using unt_bingoo.Class.ProductScal;
 using unt_bingoo.Controller;
 using unt_bingoo.Declares;
+using unt_bingoo.Diagnostics;
 using unt_bingoo.Frameworks;
 
 namespace unt_bingoo.view.Product
@@ -23,7 +24,6 @@ namespace unt_bingoo.view.Product
     {
         private APIsController _api;
         private mainForm mdi;
-        private const string UPLOAD_URL = "http://192.168.1.99:8099/api/Product/upload";
         public List<ProductItem> RProductList;
 
         public string RWord_Searching;
@@ -63,19 +63,15 @@ namespace unt_bingoo.view.Product
         private void BtnAddDel_Click(object sender, EventArgs e)
         {
         }
-        // Numeric two-way binding: commit immediately, show 2 decimals,
-        // but keep raw text while typing so the caret doesn't jump.
+
         private void BindEditableNumeric(Control control, string dataMember, string formatString = "0.00")
         {
-            // Never push back to the data source: every read of these fields (calc + save)
-            // already goes straight to the control's Text, so a live two-way push only
-            // causes a reformat-while-typing fight that can revert what was just typed.
+          
             var binding = new Binding("Text", DataBindingSource, dataMember, true,
                                       DataSourceUpdateMode.Never);
 
             binding.Format += (s, e) =>
             {
-                // កំពុងវាយ -> ទុក text ដដែល (កុំ reformat)
                 if (control.Focused)
                 {
                     e.Value = control.Text;
@@ -374,7 +370,7 @@ namespace unt_bingoo.view.Product
                 if (myToken == _imageLoadToken && !PicProducts.IsDisposed)
                     PicProducts.Image = null;
 
-                System.Diagnostics.Debug.WriteLine("LoadProductImage error: " + ex.Message);
+                CrashLogger.Log(ex, CrashSource.BackgroundTask, CrashSeverity.Recoverable, "Recoverable - product image left blank");
             }
         }
 
@@ -469,9 +465,9 @@ namespace unt_bingoo.view.Product
 
             this.DataLoading();
             await LodingUOMAsync();
-            if (DataBindingSource.Current is ProductItem product)
+            if (DataBindingSource.Current is ProductItem product && int.TryParse(product.ProCat, out int catId))
             {
-                CmbCategory.SelectedValue = Convert.ToInt32(product.ProCat);
+                CmbCategory.SelectedValue = catId;
             }
             else
             {
@@ -569,6 +565,13 @@ namespace unt_bingoo.view.Product
 
             CmbFOBCIF.Text = product.FOB_CIF;
             CmbShelfLifeOfProduct.Text = product.ShelfLifeOfProduct;
+
+            ChkIsIngredient.Checked = product.IsIngredient;
+
+            if (!string.IsNullOrWhiteSpace(product.ProUnit))
+                CmbProductUnit.SelectedValue = product.ProUnit;
+            else
+                CmbProductUnit.SelectedIndex = -1;
         }
 
         private List<ProvinceItem> _allProvinces = new List<ProvinceItem>();
@@ -749,6 +752,26 @@ namespace unt_bingoo.view.Product
 
         private void TxtUnitNumber_Click(object sender, EventArgs e)
         {
+            // ProNumY is the key MenuItem, Recipes, OutletStock and order
+            // history all join on, and most of those tables have no foreign
+            // key to enforce it. Changing it on a product that already
+            // exists silently orphans every one of those rows — a recipe
+            // keeps pointing at an ingredient code that no longer resolves,
+            // and its stock becomes unreachable. Only allow the barcode to
+            // be set while the product is still new (unsaved).
+            if (ParseIntDefault(TxtId.Text, 0) > 0)
+            {
+                XtraMessageBox.Show(
+                    "This product is already saved, so its barcode can no longer be changed.\r\n\r\n" +
+                    "The barcode links it to outlet menus, recipes and stock. Changing it " +
+                    "would leave those pointing at a code that no longer exists.\r\n\r\n" +
+                    "If the barcode is genuinely wrong, create a new product and delete this one.",
+                    "Barcode Locked",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             bool isVisible = false;
 
             if (!string.IsNullOrWhiteSpace(TxtPackNumber.Text))
@@ -1223,8 +1246,11 @@ namespace unt_bingoo.view.Product
                 CmbFOBCIF.SelectedIndex = -1;
                 CmbShelfLifeOfProduct.SelectedIndex = -1;
                 CmbUOM.SelectedIndex = -1;
+                CmbProductUnit.SelectedIndex = -1;
 
                 DTPBirthDate.Value = DateTime.Now;
+
+                ChkIsIngredient.Checked = true;
             }
             finally
             {
@@ -1558,6 +1584,8 @@ namespace unt_bingoo.view.Product
                 shelfLifeOfProduct = shelfLifeId,          // number in POST schema
                 vop = ParseDecimal(txtvop.Text),
                 proImage = imagePath ?? "",
+                isIngredient = ChkIsIngredient.Checked,
+                proUnit = CmbProductUnit.SelectedValue?.ToString() ?? "",
                 productScale = BuildProductScalePayload()
             };
         }
@@ -1657,6 +1685,9 @@ namespace unt_bingoo.view.Product
 
                 vop = ParseDecimal(txtvop.Text),
 
+                isIngredient = ChkIsIngredient.Checked,
+                proUnit = CmbProductUnit.SelectedValue?.ToString() ?? "",
+
                 productScale = BuildProductScalePayload()
             };
         }
@@ -1746,6 +1777,18 @@ namespace unt_bingoo.view.Product
                 XtraMessageBox.Show("Cannot allow Pack Price bigger than Case Price.", "Check Price",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TxtPackPrice.Focus();
+                return false;
+            }
+
+            // Recipe.Qty, OutletStock.StockQty and IngredientStockTransfer.Qty are all
+            // plain decimals with no unit attached — Product.ProUnit is the only place
+            // that unit gets recorded, so an ingredient without one leaves every number
+            // downstream ambiguous (kg? g? pcs?).
+            if (ChkIsIngredient.Checked && CmbProductUnit.SelectedValue == null)
+            {
+                XtraMessageBox.Show("Please select a Stock Unit for this ingredient (used by Recipe, Outlet Stock, and Stock Transfer).",
+                    "Select Stock Unit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CmbProductUnit.Focus();
                 return false;
             }
 
@@ -2096,6 +2139,16 @@ namespace unt_bingoo.view.Product
                 CmbUOM.DisplayMember = "UOMName";
                 CmbUOM.ValueMember = "UOMCode";
                 CmbUOM.SelectedIndex = -1;
+
+                // Separate from CmbUOM: CmbUOM is the packaging/logistics unit stored on
+                // ProductScale (CTN, PLT...); CmbProductUnit is Product.ProUnit, the
+                // stocking unit Recipe/OutletStock/IngredientStockTransfer quantities are
+                // expressed in. A product can legitimately have different values for each
+                // (e.g. milk arrives by CTN but is stocked/consumed by L).
+                CmbProductUnit.DataSource = list.ToList();
+                CmbProductUnit.DisplayMember = "UOMName";
+                CmbProductUnit.ValueMember = "UOMCode";
+                CmbProductUnit.SelectedIndex = -1;
             }
             catch (Exception ex)
             {

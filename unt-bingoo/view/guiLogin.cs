@@ -5,9 +5,7 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using unt_bingoo.Controller;
-using unt_bingoo.Declares;
 using unt_bingoo.Frameworks;
-using static unt_bingoo.Frameworks.DatabaseFramework;
 
 namespace unt_bingoo.view
 {
@@ -15,7 +13,6 @@ namespace unt_bingoo.view
     {
         // ONE API INSTANCE ONLY
         private readonly APIsController _api;
-        private DatabaseFramework Data = new DatabaseFramework();
         private ApplicationFramework App = new ApplicationFramework();
 
         public guiLogin()
@@ -120,21 +117,7 @@ namespace unt_bingoo.view
 
         private void guiLogin_Load(object sender, EventArgs e)
         {
-            Initialized initialized = new Initialized();
-            Initialized.LoadingInitialized(Data, App);
-
-            if (initialized.CheckCompaniesExistOrNot(Data, App) == true)
-            {
-                App.ClearController(this.TxtPassword);
-            }
-            else
-            {
-                XtraMessageBox.Show("Cannot find company name!\nPlease contact IT Assistant to create a company name!",
-                                    "Invalid",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                Environment.Exit(0);
-            }
+            App.ClearController(this.TxtPassword);
         }
 
         private void BtnExit_Click(object sender, EventArgs e)

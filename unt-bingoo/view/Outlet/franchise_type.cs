@@ -15,7 +15,7 @@ namespace unt_bingoo.view.Outlet
         public franchise_type()
         {
             InitializeComponent();
-            _api = new APIsController();
+            _api = APIGlobals.Api ?? new APIsController();
         }
 
         private async void franchise_type_Load(object sender, EventArgs e)

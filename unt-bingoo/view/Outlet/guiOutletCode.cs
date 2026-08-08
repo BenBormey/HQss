@@ -11,7 +11,7 @@ namespace unt_bingoo.view.Outlet
 {
     public partial class guiOutletCode : DevExpress.XtraEditors.XtraForm
     {
-        private  APIsController _api = new APIsController();
+        private  APIsController _api = APIGlobals.Api ?? new APIsController();
 
         public string editid = null;
 

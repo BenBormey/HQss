@@ -67,10 +67,11 @@ namespace unt_bingoo.view.Bank
         {
             try
             {
-                var list = await _api.GetAsync<List<BankModel>>("api/BankSetup");
+                var list = await _api.GetAsync<List<BankModel>>("api/BankSetup") ?? new List<BankModel>();
 
                 gridControlBank.DataSource = list;
                 gridViewBank.RefreshData();
+                lblCount.Text = $"Total Records: {list.Count}";
             }
             catch (Exception ex)
             {

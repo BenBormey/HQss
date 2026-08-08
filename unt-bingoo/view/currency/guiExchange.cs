@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using DevExpress.XtraEditors;
 using Excel = Microsoft.Office.Interop.Excel;
+using unt_bingoo.Diagnostics;
 namespace unt_bingoo.view.currency
 {
     public partial class guiExchange : Form
@@ -24,7 +25,7 @@ namespace unt_bingoo.view.currency
         {
             InitializeComponent();
 
-            _api = new APIsController();
+            _api = APIGlobals.Api ?? new APIsController();
 
 
             gridControl1.DataSource = _list;
@@ -190,10 +191,11 @@ namespace unt_bingoo.view.currency
                 {
                     dtpDate.Value = selectedDate.AddDays(1);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                  
-
+                    // Only realistic cause is DateTime overflow past year 9999 - the date
+                    // picker just stays on the current value, nothing else to do here.
+                    CrashLogger.Log(ex, CrashSource.UiThread, CrashSeverity.Recoverable, "Recoverable - date field left unchanged");
                 }
 
             }
@@ -233,16 +235,45 @@ namespace unt_bingoo.view.currency
             try
             {
                 var result = await _api.GetNBCExchange();
+
+                // GetNBCExchange goes out to nbc.gov.kh, so it returns null on
+                // any network failure (no internet, site down) — and SafeCall
+                // has already shown the user what went wrong. Returning quietly
+                // here avoids a second, more confusing NullReferenceException
+                // popup on top of it. The rate can still be entered by hand.
+                if (result?.Items == null)
+                    return;
+
                 var usdKhr = result.Items
                 .FirstOrDefault(x => x.Key == "USD/KHR");
+
+                if (usdKhr == null)
+                {
+                    MessageBox.Show(
+                        "The NBC feed did not include a USD/KHR rate today. Please enter the rate manually.",
+                        "Rate Unavailable",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    return;
+                }
 
                 txtBid.Text = usdKhr.Bid.ToString();
                 txtAsk.Text = usdKhr.Ask.ToString();
                 txtAvg.Text = usdKhr.Average.ToString();
-                DateTime dt = DateTime.ParseExact(usdKhr.Date, "MM/dd/yyyy",
-                                  System.Globalization.CultureInfo.InvariantCulture);
-                dtpDate.Text = dt.ToString("dd-MM-yyyy");
-                dtpDate.Value = dt;
+
+                // The rates above are the point of this call, so don't let an
+                // unexpected date format throw them away — just leave the date
+                // picker on whatever it already showed.
+                DateTime dt;
+
+                if (DateTime.TryParseExact(usdKhr.Date, "MM/dd/yyyy",
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None, out dt))
+                {
+                    dtpDate.Text = dt.ToString("dd-MM-yyyy");
+                    dtpDate.Value = dt;
+                }
            //     txtDate.Text = usdKhr.Key;
             }
             catch (Exception ex)
@@ -467,11 +498,19 @@ namespace unt_bingoo.view.currency
             {
         
 
-                APIsController api = new APIsController();
+                APIsController api = APIGlobals.Api ?? new APIsController();
 
                 var result = await api.GetListByDate(selectedDate);
 
-                if (result?.data != null)
+                // Same split as LoadExchangerate: a null result means the call
+                // to data.mef.gov.kh itself failed and SafeCall already said so,
+                // whereas a null .data means the feed answered but has nothing
+                // for that date. Reporting the first as "no data" blamed the
+                // date when the real cause was the connection.
+                if (result == null)
+                    return;
+
+                if (result.data != null)
                 {
                
                

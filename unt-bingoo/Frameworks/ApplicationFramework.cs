@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using unt_bingoo.Diagnostics;
 
 namespace unt_bingoo.Frameworks
 {
@@ -606,9 +607,11 @@ namespace unt_bingoo.Frameworks
                 KP = false;
                 ((TextBox)sender).SelectionStart = (int)Index;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Handle exception if needed
+                // Malformed intermediate text while typing (Convert.ToDecimal) is the
+                // expected case; the textbox just keeps whatever it already had.
+                CrashLogger.Log(ex, CrashSource.UiThread, CrashSeverity.Recoverable, "Recoverable - amount formatting skipped for this keystroke");
             }
         }
         public byte[] ImagetoByte(Image img)
@@ -856,107 +859,6 @@ namespace unt_bingoo.Frameworks
             }
         }
 
-        public enum LocationRegistry
-        {
-            CurrentConfig,
-            CurrentUser,
-            ClassesRoot
-        }
-
-        public enum RegistryKeyName
-        {
-            PublicIPAddress,
-            PortNumber,
-            IPAddress,
-            UserConnection,
-            PasswordConnection,
-            DatabaseName
-        }
-
-
-
-        public void SetRegistry(RegistryKeyName name, string value, string folderName = "", LocationRegistry location = LocationRegistry.CurrentUser)
-        {
-            if (string.IsNullOrWhiteSpace(folderName))
-            {
-                folderName = Configurations.FolderName;  // Assuming this is a predefined static property or variable
-            }
-
-            string keyName = "";
-            string masterKey = "HKEY_";
-
-            if (location == LocationRegistry.CurrentConfig)
-            {
-                if (!string.IsNullOrWhiteSpace(folderName))
-                {
-                    Microsoft.Win32.Registry.CurrentConfig.CreateSubKey(folderName);
-                    keyName = Microsoft.Win32.Registry.CurrentConfig.ToString() + "\\" + folderName;
-                }
-                else
-                {
-                    keyName = Microsoft.Win32.Registry.CurrentConfig.ToString();
-                }
-            }
-            else if (location == LocationRegistry.CurrentUser)
-            {
-                if (!string.IsNullOrWhiteSpace(folderName))
-                {
-                    Microsoft.Win32.Registry.CurrentUser.CreateSubKey(folderName);
-                    keyName = Microsoft.Win32.Registry.CurrentUser.ToString() + "\\" + folderName;
-                }
-                else
-                {
-                    keyName = Microsoft.Win32.Registry.CurrentUser.ToString();
-                }
-            }
-            else if (location == LocationRegistry.ClassesRoot)
-            {
-                if (!string.IsNullOrWhiteSpace(folderName))
-                {
-                    Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(folderName);
-                    keyName = Microsoft.Win32.Registry.ClassesRoot.ToString() + "\\" + folderName;
-                }
-                else
-                {
-                    keyName = Microsoft.Win32.Registry.ClassesRoot.ToString();
-                }
-            }
-
-            Microsoft.Win32.Registry.SetValue(keyName, masterKey + name.ToString(), value);
-        }
-
-
-        public static string GetRegistry(RegistryKeyName name, string folderName = "", LocationRegistry location = LocationRegistry.CurrentUser)
-        {
-            if (string.IsNullOrWhiteSpace(folderName))
-            {
-                folderName = Configurations.FolderName;  // Assuming this is a predefined static property or variable
-            }
-
-            string keyName = "";
-            string masterKey = "HKEY_";
-
-            // Build the registry key based on the location
-            if (location == LocationRegistry.CurrentConfig)
-            {
-                keyName = Microsoft.Win32.Registry.CurrentConfig.ToString() + "\\" + (string.IsNullOrWhiteSpace(folderName) ? "" : folderName);
-            }
-            else if (location == LocationRegistry.CurrentUser)
-            {
-                keyName = Microsoft.Win32.Registry.CurrentUser.ToString() + "\\" + (string.IsNullOrWhiteSpace(folderName) ? "" : folderName);
-            }
-            else if (location == LocationRegistry.ClassesRoot)
-            {
-                keyName = Microsoft.Win32.Registry.ClassesRoot.ToString() + "\\" + (string.IsNullOrWhiteSpace(folderName) ? "" : folderName);
-            }
-
-            // Get the registry value
-            var registryValue = Microsoft.Win32.Registry.GetValue(keyName, masterKey + name.ToString(), null);
-
-            // Return the value, if null return an empty string
-            return registryValue?.ToString() ?? string.Empty;
-        }
-
         public static bool CheckInternetConnection()
         {
             try
@@ -975,44 +877,6 @@ namespace unt_bingoo.Frameworks
                 return false;
             }
         }
-
-        public bool CheckConnectionByPing(string ipAddress)
-        {
-            try
-            {
-                using (var ping = new System.Net.NetworkInformation.Ping())
-                {
-                    var reply = ping.Send(ipAddress);
-                    return reply.Status == System.Net.NetworkInformation.IPStatus.Success;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public string MergeObject(string data)
-        {
-            string remove = ".,;/\\|'{}[]-+*&^%$#@!`~_=?<>(): ";
-            foreach (char c in remove.ToCharArray())
-            {
-                if (data == null)
-                {
-
-                }
-                else
-                {
-
-                    data = data.Replace(c.ToString(), string.Empty);
-                }
-
-            }
-            return data;
-        }
-
-
-
 
     }
 

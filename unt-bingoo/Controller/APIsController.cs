@@ -16,9 +16,8 @@ namespace unt_bingoo.Controller
 {
     public class APIsController
     {
-     private const string ApiBaseUrl = "http://localhost:5189/";
-   ///private const string ApiBaseUrl = "http://192.168.1.99:8099/";
-   
+        private const string ConfigFileName = "appsettings.json";
+
         private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(30);
         private readonly HttpClient _client;
         private readonly HttpClient _externalClient;
@@ -27,9 +26,18 @@ namespace unt_bingoo.Controller
 
         public APIsController()
         {
+            var apiBaseUrl = ResolveApiBaseUrl(GetConfigPath());
+
+            if (apiBaseUrl == null)
+            {
+                throw new InvalidOperationException(
+                    "The API server address is not configured.\n\n" +
+                    "Set \"ApiBaseUrl\" in appsettings.json (next to the application .exe) to a valid http:// or https:// address, then restart.");
+            }
+
             _client = new HttpClient
             {
-                BaseAddress = new Uri(ApiBaseUrl),
+                BaseAddress = new Uri(apiBaseUrl),
                 Timeout = RequestTimeout
             };
 
@@ -38,6 +46,52 @@ namespace unt_bingoo.Controller
                 Timeout = RequestTimeout
             };
             _externalClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
+        }
+
+        private static string GetConfigPath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigFileName);
+        }
+
+        /// <summary>
+        /// Reads ApiBaseUrl from appsettings.json. Pure function (no HttpClient/UI
+        /// side effects) so it can be exercised directly by tests. Returns null for
+        /// every failure mode (missing file, malformed JSON, missing/blank key,
+        /// unusable value) rather than guessing a host - deliberately no hardcoded
+        /// production IP or localhost fallback here; the caller decides what an
+        /// unconfigured server means for the app.
+        /// </summary>
+        internal static string ResolveApiBaseUrl(string configPath)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(configPath) || !File.Exists(configPath))
+                    return null;
+
+                var json = File.ReadAllText(configPath);
+                var root = JObject.Parse(json);
+                var value = root["ApiBaseUrl"]?.ToString();
+
+                if (string.IsNullOrWhiteSpace(value))
+                    return null;
+
+                value = value.Trim();
+
+                if (!Uri.TryCreate(value, UriKind.Absolute, out var uri))
+                    return null;
+
+                if (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
+                    return null;
+
+                if (!value.EndsWith("/"))
+                    value += "/";
+
+                return value;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 
@@ -227,12 +281,12 @@ namespace unt_bingoo.Controller
             }
             catch (HttpRequestException ex)
             {
-           
+                MessageBox.Show(ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return default;
             }
             catch (Exception ex)
             {
-         
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return default;
             }
         }
@@ -266,6 +320,14 @@ namespace unt_bingoo.Controller
             return SafeCall(async () =>
             {
                 var res = await _client.GetAsync(url);
+
+                // 404 on a GET-by-key lookup means "doesn't exist yet", which
+                // every caller of this method already treats as a normal,
+                // valid outcome (e.g. "if (existing != null)" duplicate
+                // checks) — not an error worth popping a MessageBox for.
+                if (res.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    return default;
+
                 var json = await res.Content.ReadAsStringAsync();
 
                 if (!res.IsSuccessStatusCode)
@@ -333,6 +395,40 @@ namespace unt_bingoo.Controller
 
                     return true;
                 }
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception("Request timeout or canceled. Please check API server.", ex);
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Network error while calling API.", ex);
+            }
+        }
+
+        public async Task<bool> PatchAsync(string url, object body = null)
+        {
+            try
+            {
+                HttpResponseMessage res;
+
+                var request = new HttpRequestMessage(new HttpMethod("PATCH"), url);
+
+                if (body != null)
+                {
+                    var json = JsonConvert.SerializeObject(body);
+                    request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                }
+
+                res = await _client.SendAsync(request);
+
+                if (!res.IsSuccessStatusCode)
+                {
+                    var error = await res.Content.ReadAsStringAsync();
+                    throw new Exception($"API Error: {error}");
+                }
+
+                return true;
             }
             catch (TaskCanceledException ex)
             {
@@ -501,6 +597,71 @@ namespace unt_bingoo.Controller
                     ? await res.Content.ReadAsByteArrayAsync()
                     : null;
             });
+        }
+
+        // The same fetch, but silent: returns null instead of putting a modal
+        // "Connection Error" box in front of the user.
+        //
+        // GetBytesAsync goes through SafeCall, which shows a MessageBox on
+        // every failure. That is right for something the user just asked for
+        // and wrong for a picture loading in the background — a product whose
+        // image URL no longer resolves produced one dialog per attempt, and
+        // opening a few products in a row buried the form under a stack of
+        // them, none of which said which product it was about.
+        //
+        // A picture that will not load is a blank frame, not an interruption.
+        public async Task<byte[]> TryGetBytesAsync(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+                return null;
+
+            try
+            {
+                using (var res = await _client.GetAsync(url))
+                {
+                    return res.IsSuccessStatusCode
+                        ? await res.Content.ReadAsByteArrayAsync()
+                        : null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        // Turns whatever TPRProducts.ProImage happens to hold into a URL on the
+        // API this client is actually pointed at.
+        //
+        // That column stores ABSOLUTE urls, so the host that was running when
+        // the file was uploaded gets baked into the row. Ten of the eleven
+        // products in this database still say http://localhost:5189/... — a
+        // development server that is not running and is not reachable from any
+        // other machine — so their images can never load as stored.
+        //
+        // Only the file name is durable. Re-basing it against ApiBaseUrl means
+        // the images resolve wherever the client happens to point.
+        public string ResolveImageUrl(string stored)
+        {
+            if (string.IsNullOrWhiteSpace(stored))
+                return null;
+
+            stored = stored.Trim();
+
+            // Strip a query string before anything else: it is never part of
+            // the stored file name and would break the lookup.
+            int q = stored.IndexOf('?');
+            if (q >= 0)
+                stored = stored.Substring(0, q);
+
+            // Keep only the last segment, which covers a bare file name (the
+            // shape this column should hold), a stored relative path, and an
+            // absolute URL pointing at a host that no longer exists.
+            string name = stored.Split('/', '\\').LastOrDefault();
+
+            return string.IsNullOrWhiteSpace(name)
+                ? null
+                : _client.BaseAddress.AbsoluteUri + "uploads/products/" + name;
         }
 
     }

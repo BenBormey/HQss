@@ -476,13 +476,24 @@ namespace unt_bingoo.view.Dashboard
             return (pct >= 0 ? "▲ " : "▼ ") + Math.Abs(pct).ToString("0") + "%";
         }
 
+        // "Fulfilled" (bare, no "Partially") is never actually produced by
+        // OutletOrderRepository — the real post-ship status is "Delivering" —
+        // so that case was silently dead before the pipeline below grew past
+        // Requested/Rejected/Delivering/PartiallyFulfilled/Received/PartiallyReceived.
         private static Color StatusColor(string status)
         {
             switch (status)
             {
-                case "Fulfilled": return Color.FromArgb(22, 163, 74);
-                case "PartiallyFulfilled": return Color.FromArgb(217, 119, 6);
-                case "Rejected": return Color.FromArgb(220, 38, 38);
+                case "Rejected": return Color.FromArgb(220, 38, 38);   // red
+                case "Approved": return Color.FromArgb(13, 148, 136);  // teal — HQ said yes
+                case "Picking":
+                case "Packing":
+                case "ReadyToShip":
+                case "PartiallyFulfilled": return Color.FromArgb(217, 119, 6); // amber — warehouse working it
+                case "Delivering": return Color.FromArgb(109, 40, 217); // purple — in transit
+                case "PartiallyReceived": return Color.FromArgb(217, 119, 6); // amber — still settling up
+                case "Received":
+                case "Completed": return Color.FromArgb(22, 163, 74);  // green — done
                 default: return Color.FromArgb(37, 99, 235); // Requested etc.
             }
         }

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Matches unt-bingoo's own TargetFrameworkVersion (v4.8.1) so the
+         ProjectReference below targets the same runtime the app ships on. -->
+    <TargetFramework>net481</TargetFramework>
+    <RootNamespace>unt_bingoo.Tests</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\unt-bingoo\unt-bingoo.csproj" />
+  </ItemGroup>
+
+</Project>

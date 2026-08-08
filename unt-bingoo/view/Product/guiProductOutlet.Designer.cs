@@ -145,6 +145,7 @@ namespace unt_bingoo.view.Product
             this.TxtGrossWeight = new System.Windows.Forms.TextBox();
             this.Label38 = new System.Windows.Forms.Label();
             this.BtnMoveToDeactivated = new System.Windows.Forms.Button();
+            this.ChkIsIngredient = new System.Windows.Forms.CheckBox();
             this.TimerSupplierLoading = new System.Windows.Forms.Timer(this.components);
             this.Label49 = new System.Windows.Forms.Label();
             this.GroupBox6 = new System.Windows.Forms.GroupBox();
@@ -219,6 +220,9 @@ namespace unt_bingoo.view.Product
             this.Label15 = new System.Windows.Forms.Label();
             this.TxtMadeIn = new System.Windows.Forms.TextBox();
             this.Label13 = new System.Windows.Forms.Label();
+            this.PanelProductUnit = new System.Windows.Forms.Panel();
+            this.CmbProductUnit = new System.Windows.Forms.ComboBox();
+            this.LabelProductUnit = new System.Windows.Forms.Label();
             this.Panel11 = new System.Windows.Forms.Panel();
             this.CmbShelfLifeOfProduct = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -362,6 +366,7 @@ namespace unt_bingoo.view.Product
             this.Panel13.SuspendLayout();
             this.Panel12.SuspendLayout();
             this.Panel15.SuspendLayout();
+            this.PanelProductUnit.SuspendLayout();
             this.Panel11.SuspendLayout();
             this.Panel9.SuspendLayout();
             this.Panel10.SuspendLayout();
@@ -1721,6 +1726,18 @@ namespace unt_bingoo.view.Product
             this.BtnMoveToDeactivated.UseVisualStyleBackColor = false;
             this.BtnMoveToDeactivated.Click += new System.EventHandler(this.BtnMoveToDeactivated_Click);
             // 
+            // ChkIsIngredient
+            // 
+            this.ChkIsIngredient.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ChkIsIngredient.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkIsIngredient.Location = new System.Drawing.Point(546, 2);
+            this.ChkIsIngredient.Name = "ChkIsIngredient";
+            this.ChkIsIngredient.Size = new System.Drawing.Size(85, 39);
+            this.ChkIsIngredient.TabIndex = 133;
+            this.ChkIsIngredient.Text = "Ingredient";
+            this.ChkIsIngredient.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ChkIsIngredient.UseVisualStyleBackColor = true;
+            // 
             // TimerSupplierLoading
             // 
             this.TimerSupplierLoading.Interval = 5;
@@ -1742,9 +1759,9 @@ namespace unt_bingoo.view.Product
             this.GroupBox6.Controls.Add(this.Panel43);
             this.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GroupBox6.ForeColor = System.Drawing.Color.SteelBlue;
-            this.GroupBox6.Location = new System.Drawing.Point(2, 335);
+            this.GroupBox6.Location = new System.Drawing.Point(2, 361);
             this.GroupBox6.Name = "GroupBox6";
-            this.GroupBox6.Size = new System.Drawing.Size(750, 134);
+            this.GroupBox6.Size = new System.Drawing.Size(750, 108);
             this.GroupBox6.TabIndex = 9;
             this.GroupBox6.TabStop = false;
             this.GroupBox6.Text = "Scale";
@@ -1757,7 +1774,7 @@ namespace unt_bingoo.view.Product
             this.gcScale.Name = "gcScale";
             this.gcScale.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDeleteScale});
-            this.gcScale.Size = new System.Drawing.Size(744, 72);
+            this.gcScale.Size = new System.Drawing.Size(744, 46);
             this.gcScale.TabIndex = 2;
             this.gcScale.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvScale});
@@ -2307,6 +2324,7 @@ namespace unt_bingoo.view.Product
             // 
             // Panel38
             // 
+            this.Panel38.Controls.Add(this.ChkIsIngredient);
             this.Panel38.Controls.Add(this.BtnClose);
             this.Panel38.Controls.Add(this.BtnDelete);
             this.Panel38.Controls.Add(this.BtnMoveToDeactivated);
@@ -2372,6 +2390,7 @@ namespace unt_bingoo.view.Product
             this.GroupBox1.Controls.Add(this.Panel13);
             this.GroupBox1.Controls.Add(this.Panel12);
             this.GroupBox1.Controls.Add(this.Panel15);
+            this.GroupBox1.Controls.Add(this.PanelProductUnit);
             this.GroupBox1.Controls.Add(this.Panel11);
             this.GroupBox1.Controls.Add(this.Panel9);
             this.GroupBox1.Controls.Add(this.Panel10);
@@ -2380,7 +2399,7 @@ namespace unt_bingoo.view.Product
             this.GroupBox1.ForeColor = System.Drawing.Color.SteelBlue;
             this.GroupBox1.Location = new System.Drawing.Point(2, 2);
             this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(750, 333);
+            this.GroupBox1.Size = new System.Drawing.Size(750, 359);
             this.GroupBox1.TabIndex = 0;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Detail";
@@ -2390,7 +2409,7 @@ namespace unt_bingoo.view.Product
             this.Panel14.Controls.Add(this.TxtDescription);
             this.Panel14.Controls.Add(this.Label14);
             this.Panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel14.Location = new System.Drawing.Point(3, 196);
+            this.Panel14.Location = new System.Drawing.Point(3, 222);
             this.Panel14.Name = "Panel14";
             this.Panel14.Padding = new System.Windows.Forms.Padding(2);
             this.Panel14.Size = new System.Drawing.Size(744, 108);
@@ -2427,7 +2446,7 @@ namespace unt_bingoo.view.Product
             this.Panel13.Controls.Add(this.TxtSize);
             this.Panel13.Controls.Add(this.Label11);
             this.Panel13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel13.Location = new System.Drawing.Point(3, 170);
+            this.Panel13.Location = new System.Drawing.Point(3, 196);
             this.Panel13.Name = "Panel13";
             this.Panel13.Padding = new System.Windows.Forms.Padding(2);
             this.Panel13.Size = new System.Drawing.Size(744, 26);
@@ -2482,7 +2501,7 @@ namespace unt_bingoo.view.Product
             this.Panel12.Controls.Add(this.TxtKhmerName);
             this.Panel12.Controls.Add(this.Label10);
             this.Panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel12.Location = new System.Drawing.Point(3, 137);
+            this.Panel12.Location = new System.Drawing.Point(3, 163);
             this.Panel12.Name = "Panel12";
             this.Panel12.Padding = new System.Windows.Forms.Padding(2);
             this.Panel12.Size = new System.Drawing.Size(744, 33);
@@ -2520,7 +2539,7 @@ namespace unt_bingoo.view.Product
             this.Panel15.Controls.Add(this.TxtMadeIn);
             this.Panel15.Controls.Add(this.Label13);
             this.Panel15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Panel15.Location = new System.Drawing.Point(3, 304);
+            this.Panel15.Location = new System.Drawing.Point(3, 330);
             this.Panel15.Name = "Panel15";
             this.Panel15.Padding = new System.Windows.Forms.Padding(2);
             this.Panel15.Size = new System.Drawing.Size(744, 26);
@@ -2571,6 +2590,41 @@ namespace unt_bingoo.view.Product
             this.Label13.TabIndex = 0;
             this.Label13.Text = "Category";
             this.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // PanelProductUnit
+            // 
+            this.PanelProductUnit.Controls.Add(this.CmbProductUnit);
+            this.PanelProductUnit.Controls.Add(this.LabelProductUnit);
+            this.PanelProductUnit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelProductUnit.Location = new System.Drawing.Point(3, 137);
+            this.PanelProductUnit.Name = "PanelProductUnit";
+            this.PanelProductUnit.Padding = new System.Windows.Forms.Padding(2);
+            this.PanelProductUnit.Size = new System.Drawing.Size(744, 26);
+            this.PanelProductUnit.TabIndex = 10;
+            // 
+            // CmbProductUnit
+            // 
+            this.CmbProductUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.CmbProductUnit.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CmbProductUnit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CmbProductUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CmbProductUnit.FormattingEnabled = true;
+            this.CmbProductUnit.Location = new System.Drawing.Point(127, 2);
+            this.CmbProductUnit.Name = "CmbProductUnit";
+            this.CmbProductUnit.Size = new System.Drawing.Size(615, 21);
+            this.CmbProductUnit.TabIndex = 1;
+            // 
+            // LabelProductUnit
+            // 
+            this.LabelProductUnit.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LabelProductUnit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelProductUnit.ForeColor = System.Drawing.Color.Black;
+            this.LabelProductUnit.Location = new System.Drawing.Point(2, 2);
+            this.LabelProductUnit.Name = "LabelProductUnit";
+            this.LabelProductUnit.Size = new System.Drawing.Size(125, 22);
+            this.LabelProductUnit.TabIndex = 0;
+            this.LabelProductUnit.Text = "Stock Unit";
+            this.LabelProductUnit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Panel11
             // 
@@ -3507,6 +3561,7 @@ namespace unt_bingoo.view.Product
             this.Panel12.PerformLayout();
             this.Panel15.ResumeLayout(false);
             this.Panel15.PerformLayout();
+            this.PanelProductUnit.ResumeLayout(false);
             this.Panel11.ResumeLayout(false);
             this.Panel9.ResumeLayout(false);
             this.Panel10.ResumeLayout(false);
@@ -3658,6 +3713,7 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.TextBox TxtGrossWeight;
         internal System.Windows.Forms.Label Label38;
         internal System.Windows.Forms.Button BtnMoveToDeactivated;
+        internal System.Windows.Forms.CheckBox ChkIsIngredient;
         internal System.Windows.Forms.Timer TimerSupplierLoading;
         internal System.Windows.Forms.Label Label49;
         internal System.Windows.Forms.GroupBox GroupBox6;
@@ -3750,6 +3806,9 @@ namespace unt_bingoo.view.Product
         internal System.Windows.Forms.Label Label15;
         internal System.Windows.Forms.TextBox TxtMadeIn;
         internal System.Windows.Forms.Label Label13;
+        internal System.Windows.Forms.Panel PanelProductUnit;
+        internal System.Windows.Forms.ComboBox CmbProductUnit;
+        internal System.Windows.Forms.Label LabelProductUnit;
         internal System.Windows.Forms.Panel Panel11;
         internal System.Windows.Forms.ComboBox CmbShelfLifeOfProduct;
         private System.Windows.Forms.Button button1;

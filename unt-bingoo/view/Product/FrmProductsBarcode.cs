@@ -17,7 +17,7 @@ namespace unt_bingoo.view.Product
 {
     public partial class FrmProductsBarcode : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api = new APIsController();
+        private readonly APIsController _api = APIGlobals.Api ?? new APIsController();
 
         private ApplicationFramework App = new ApplicationFramework();
 
@@ -106,6 +106,23 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
+            // Unlike the primary barcode/pack/case number, an "old code"
+            // alias has no staged equivalent on the parent form to save
+            // later — it only makes sense against a product that's already
+            // been saved. RCurrentBarcode alone (TxtUnitNumber.Text) doesn't
+            // guarantee that, so check RProId directly instead of hitting a
+            // confusing "Product not found" from the API.
+            if (RProId <= 0)
+            {
+                MessageBox.Show(
+                    "Save this product first before setting an old code for it.",
+                    "Product Not Saved",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
             if (MessageBox.Show(
                   $"Are you sure, you want to add the old barcode <{barcode}> for the new barcode <{RCurrentBarcode.Trim()}>?(Yes/No)",
                   "Confirm Set As Old Code",
@@ -171,47 +188,18 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(RCurrentBarcode))
-            {
-                Initialized.R_Barcode = barcode;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                return;
-            }
-
-            if (MessageBox.Show(
-                    $"Are you sure you want to change barcode <{RCurrentBarcode}> to <{barcode}> ?",
-                    "Confirm Change Barcode",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
-            }
-
-            try
-            {
-                await _api.PutAsync(
-                    $"api/product/{RProId}/barcode",
-                    new { Value = barcode });
-
-                MessageBox.Show(
-                    "Changing barcode completed!",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                Initialized.R_Barcode = barcode;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            // This dialog only verifies the barcode isn't already taken and
+            // hands the value back to the caller (guiProductOutlet reads
+            // Initialized.R_Barcode into TxtUnitNumber/TxtSKU). Persisting
+            // happens when the parent product form saves the whole record —
+            // RCurrentBarcode here is TxtUnitNumber.Text, which is non-blank
+            // as soon as anything is typed regardless of whether the product
+            // has actually been saved (RProId), so calling the barcode PUT
+            // endpoint here failed with "Product not found" for a still-unsaved
+            // product.
+            Initialized.R_Barcode = barcode;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void TxtBarcode_Leave(object sender, EventArgs e)

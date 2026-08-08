@@ -18,7 +18,7 @@ namespace unt_bingoo.view.User
         public guiChangePassword()
         {
             InitializeComponent();
-            this._api = new APIsController();
+            this._api = APIGlobals.Api ?? new APIsController();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

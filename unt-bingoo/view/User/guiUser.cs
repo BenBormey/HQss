@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using unt_bingoo.Class;
 using unt_bingoo.Controller;
+using unt_bingoo.Diagnostics;
 using unt_bingoo.view.Outlet;
 
 namespace unt_bingoo.view.User
@@ -485,6 +486,10 @@ namespace unt_bingoo.view.User
 
         private void ShowError(string context, Exception ex)
         {
+            // Single choke point for every catch in this form (Load/Save/Delete/Edit/
+            // Export/Reset Password) - logging here covers all of them without
+            // touching each call site, and without changing the message shown.
+            CrashLogger.Log(ex, CrashSource.UiThread, CrashSeverity.Recoverable, $"Recoverable - {context} failed, handled locally");
             XtraMessageBox.Show($"{context} error: {ex.Message}");
         }
 

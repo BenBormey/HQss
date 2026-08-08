@@ -20,7 +20,7 @@ namespace unt_bingoo.view.Product
 {
  
  
-    public partial class cboProduct : DevExpress.XtraEditors.XtraForm
+    public partial class SetupOutletMenu : DevExpress.XtraEditors.XtraForm
     {
         private APIsController api_;
 
@@ -48,7 +48,7 @@ namespace unt_bingoo.view.Product
             public string Name { get; set; }
         }
 
-        public cboProduct()
+        public SetupOutletMenu()
         {
             InitializeComponent();
 
@@ -96,10 +96,15 @@ namespace unt_bingoo.view.Product
                 var products = await api_.GetAsync<List<ProductItem>>("api/Product")
                                ?? new List<ProductItem>();
 
+                // Ingredients (Milk, Sugar, Ice...) are raw materials consumed
+                // via a Recipe, not sellable items — keep them out of the menu
+                // product picker so they can't get a MenuItem by mistake.
+                var sellableProducts = products.Where(p => !p.IsIngredient).ToList();
+
                 cboOutlets.DataSource = null;
                 cboOutlets.DisplayMember = "desiplyname";
                 cboOutlets.ValueMember = "ProNumY";
-                cboOutlets.DataSource = products;
+                cboOutlets.DataSource = sellableProducts;
 
                 cboOutlets.SelectedIndex = -1;
             }
@@ -498,6 +503,7 @@ namespace unt_bingoo.view.Product
             // Restore edit-mode UI state.
             btncancel.Visible = false;
             cboProducts.Enabled = true;
+            cboOutlets.Enabled = true;
             gridControlMenu.Enabled = true;
         }
 
@@ -609,9 +615,14 @@ namespace unt_bingoo.view.Product
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToHashSet();
 
+            // Ingredients are raw materials consumed via a Recipe, not sellable
+            // items — excluded like any other unavailable product, except when
+            // we're editing an existing row that already points at one (so a
+            // pre-existing bad row can still be seen/corrected instead of
+            // vanishing from its own edit screen).
             var availableProducts = products
-                .Where(p => !existingProducts.Contains(p.ProNumY)
-                         || p.ProNumY == includeProNumY)    
+                .Where(p => (!p.IsIngredient && !existingProducts.Contains(p.ProNumY))
+                         || p.ProNumY == includeProNumY)
                 .ToList();
 
             _loadingProduct = true;
@@ -690,6 +701,12 @@ namespace unt_bingoo.view.Product
             gridControlMenu.Enabled = false;
             btncancel.Visible = true;
             cboProducts.Enabled = false;
+
+            // The product picker looked editable during Edit, but the
+            // backend's UPDATE never touches ProNumY/OutletId — any change
+            // here was silently discarded. Lock it so the UI stops implying
+            // something it can't actually do.
+            cboOutlets.Enabled = false;
             btnAdd.Text = "Update";
         }
 
@@ -786,6 +803,52 @@ namespace unt_bingoo.view.Product
             }
         }
 
+        // The cost this menu price is being set against. A purchased product
+        // (Coca, Pepsi) has a buy-in; a recipe drink (Ice Latte, Iced Americano)
+        // never does — it is assembled at the outlet and is never bought — so
+        // its cost has to be rolled up from its ingredients instead. Showing
+        // ProImpPri alone left every recipe drink reading 0.0000, which meant
+        // pricing a menu item against no cost basis at all.
+        private async Task ShowCostReferenceAsync(ProductItem detail)
+        {
+            var buyin = detail.ProFinBuyin ?? 0m;
+            if (buyin == 0m) buyin = detail.ProImpPri ?? 0m;
+
+            if (buyin > 0m)
+            {
+                txtunitprice.Text = buyin.ToString("0.0000");
+
+                // Buy-in is per ONE ProUnit (see seed_demo_products.sql). A bare
+                // 10.0000 can't say whether that buys a can or a carton of them,
+                // and the two readings differ by the case quantity — so name the
+                // unit right on the label instead of leaving it to be assumed.
+                labelControl2.Text = string.IsNullOrWhiteSpace(detail.ProUnit)
+                    ? "Unit Price :"
+                    : "Buy-in (per " + detail.ProUnit + ") :";
+                return;
+            }
+
+            var recipeCost = await api_.GetAsync<RecipeCostResult>(
+                $"api/recipe/product/{Uri.EscapeDataString(detail.ProNumY ?? "")}/cost");
+
+            if (recipeCost == null || !recipeCost.HasRecipe)
+            {
+                txtunitprice.Text = "0.0000";
+                labelControl2.Text = "Unit Price :";
+                return;
+            }
+
+            // A recipe product is costed per finished serving, never per pack.
+            labelControl2.Text = "Recipe Cost (per 1) :";
+
+            // Flagged rather than presented as fact: ingredients with no buy-in
+            // of their own contribute 0, so the roll-up is a floor, not the
+            // real cost, and pricing off it would overstate the margin.
+            txtunitprice.Text = recipeCost.IngredientsMissingCost > 0
+                ? recipeCost.TotalCost.ToString("0.0000") + "  (partial)"
+                : recipeCost.TotalCost.ToString("0.0000");
+        }
+
         // When a PRODUCT is selected (this combo holds products), show its image.
         private async void cboOutlets_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -806,13 +869,15 @@ namespace unt_bingoo.view.Product
                 var detail = await api_.GetAsync<ProductItem>($"api/Product/{product.ProID}");
                 if (myToken != _imagePreviewToken)
                     return; // a newer selection has started; discard this stale result
-                txtunitprice.Text = detail.ProImpPri.ToString();
+
                 if (detail == null)
                 {
                     picPreview.Image?.Dispose();
                     picPreview.Image = null;
                     return;
                 }
+
+                await ShowCostReferenceAsync(detail);
 
                 if (!string.IsNullOrWhiteSpace(detail.ProImage))
                 {
@@ -903,5 +968,14 @@ namespace unt_bingoo.view.Product
 
             await LoadMenuItems(outletId);
         }
+    }
+
+    // Shape of GET api/recipe/product/{proNumY}/cost — only the fields this
+    // screen needs to show a cost reference for a made-not-bought product.
+    public class RecipeCostResult
+    {
+        public bool HasRecipe { get; set; }
+        public decimal TotalCost { get; set; }
+        public int IngredientsMissingCost { get; set; }
     }
 }

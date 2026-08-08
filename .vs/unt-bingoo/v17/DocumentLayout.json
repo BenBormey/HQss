@@ -1,7 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\unt-bingoo\\unt-bingoo\\",
-  "Documents": [],
+  "WorkspaceRootPath": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DF6A9013-E4D0-4D4F-8E14-958330659330}|unt-bingoo\\unt-bingoo.csproj|e:\\setec\\mvc\\unt-bingoo\\unt-bingoo\\unt-bingoo\\view\\bank\\banksetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DF6A9013-E4D0-4D4F-8E14-958330659330}|unt-bingoo\\unt-bingoo.csproj|solutionrelative:unt-bingoo\\view\\bank\\banksetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +23,18 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BankSetup.cs [Design]",
+              "DocumentMoniker": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\view\\Bank\\BankSetup.cs",
+              "RelativeDocumentMoniker": "unt-bingoo\\view\\Bank\\BankSetup.cs",
+              "ToolTip": "E:\\Setec\\MVC\\unt-bingoo\\unt-bingoo\\unt-bingoo\\view\\Bank\\BankSetup.cs [Design]",
+              "RelativeToolTip": "unt-bingoo\\view\\Bank\\BankSetup.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-07T01:35:20.73Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

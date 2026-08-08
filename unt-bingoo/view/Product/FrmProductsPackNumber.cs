@@ -16,7 +16,7 @@ namespace unt_bingoo.view.Product
 {
     public partial class FrmProductsPackNumber : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api = new APIsController();
+        private readonly APIsController _api = APIGlobals.Api ?? new APIsController();
 
         public string RWord_Searching;
         public DataTable RProductList;
@@ -88,62 +88,17 @@ namespace unt_bingoo.view.Product
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(RUnitNumber))
-            {
-                Initialized.R_Barcode = barcode;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(RCurrentBarcode))
-            {
-                if (MessageBox.Show(
-                    $"Are you sure, you want to set the barcode <{barcode}>?(Yes/No)",
-                    "Confirm Change Barcode",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.No)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                if (MessageBox.Show(
-                    $"Are you sure, you want to change the barcode <{RCurrentBarcode}> to <{barcode}>?(Yes/No)",
-                    "Confirm Change Barcode",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
-            try
-            {
-                await _api.PutAsync(
-                    $"api/product/{RProId}/pack-number",
-                    new { Value = barcode });
-
-                MessageBox.Show(
-                    "Changing barcode has been completed!",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                Initialized.R_Barcode = barcode;
-
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            // This dialog only verifies the barcode isn't already taken and
+            // hands the value back to the caller (guiProductOutlet reads
+            // Initialized.R_Barcode and puts it straight into TxtPackNumber).
+            // Persisting it happens when the parent product form saves the
+            // whole record — calling the pack-number PUT endpoint here
+            // assumed RProId already existed as a saved product, which fails
+            // with "Product not found" while a new product is still being
+            // drafted and hasn't been saved yet.
+            Initialized.R_Barcode = barcode;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
         private void TxtBarcode_KeyPress(object sender, KeyPressEventArgs e)
         {

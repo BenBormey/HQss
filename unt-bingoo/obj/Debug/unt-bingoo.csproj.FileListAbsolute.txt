@@ -72,7 +72,6 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProduct
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiHourOpration.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiUOM.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.cboProduct.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.ShelfLife.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplierSetup.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
@@ -91,6 +90,11 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.pdb
 e:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
 E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.PurchaseOrder.guiPurchaseOrder.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Vat.guiVateSetting.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Dashboard.guiDashboard.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiRecipes.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.SetupOutletMenu.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiStockTransfer.resources
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Charts.v19.1.Core.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Data.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.DataAccess.v19.1.dll
@@ -113,6 +117,130 @@ E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraLayout.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraPrinting.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraReports.v19.1.dll
 E:\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraReports.v19.1.Extensions.dll
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Vat.guiVateSetting.resources
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CopyComplete
-E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Dashboard.guiDashboard.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiCreateProduct.resources
+E:\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.Up2Date
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe.config
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe.manifest
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.application
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.exe
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\MD_ JuJuBi.pdb
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.Parser.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ExcelNumberFormat.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.HashCode.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.ReportViewer.Common.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.ReportViewer.WinForms.DLL
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.SqlServer.Types.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Newtonsoft.Json.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\RBush.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\SixLabors.Fonts.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Buffers.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.IO.Pipelines.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Memory.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Numerics.Vectors.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Encodings.Web.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Json.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.presentation.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.pdb
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ClosedXML.Parser.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\ExcelNumberFormat.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Microsoft.Bcl.HashCode.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\Newtonsoft.Json.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\RBush.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\SixLabors.Fonts.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Buffers.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.IO.Pipelines.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Memory.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Numerics.Vectors.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Encodings.Web.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Text.Json.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\zxing.presentation.xml
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.Properties.Resources.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Bank.BankSetup.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Dashboard.guiDashboard.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiStockTransfer.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiCreateProduct.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiRecipes.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Vat.guiVateSetting.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Branch.guiBranch.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Category.guiCategory.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiCurencys.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.currency.guiExchange.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Customer.guiCustomer.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.guiLogin.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.guiProvince.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.gui_loading.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.mainForm.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.franchise_type.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiFranchise.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiListoutLet.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutlet.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiOutletCode.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBarcode.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsBuyinNQtyPCase.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsCaseNumber.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsPackNumber.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.FrmProductsSearch.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiHourOpration.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiProductOutlet.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.guiUOM.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.SetupOutletMenu.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Product.ShelfLife.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.PurchaseOrder.guiPurchaseOrder.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplierSetup.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSupplier.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiSuppliers.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.guiTerm.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Supplier.XtraForm1.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiChangePassword.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUser.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.User.guiUserrole.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.GenerateResource.cache
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe.licenses
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.CoreCompileInputs.cache
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe.manifest
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.application
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.pdb
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiStockTransferHistory.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.AssemblyReference.cache
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Outlet.guiFranchisePriceList.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Charts.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Data.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.DataAccess.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Images.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Office.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Pdf.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.PivotGrid.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Printing.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.RichEdit.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.RichEdit.v19.1.Export.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Sparkline.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Utils.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.Utils.v19.1.UI.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraBars.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraCharts.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraEditors.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraGauges.v19.1.Core.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraGrid.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraLayout.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraPrinting.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraReports.v19.1.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\bin\Debug\DevExpress.XtraReports.v19.1.Extensions.dll
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\MD_ JuJuBi.exe.config
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt_bingoo.view.Purchase.guiSupplierPayments.resources
+E:\Setec\MVC\unt-bingoo\unt-bingoo\unt-bingoo\obj\Debug\unt-bingoo.csproj.Up2Date

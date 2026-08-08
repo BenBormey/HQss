@@ -69,6 +69,7 @@ namespace unt_bingoo.view.Customer
 
             gridCustomer.DataSource = list;
             gvCustomer.BestFitColumns();
+            lblCount.Text = $"Total Records: {list.Count}";
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -363,11 +364,6 @@ namespace unt_bingoo.view.Customer
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-        }
-
-        private void guiCustomer_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

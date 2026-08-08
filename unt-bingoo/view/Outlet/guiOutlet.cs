@@ -18,13 +18,13 @@ using unt_bingoo.Frameworks;
 using ClosedXML.Excel;
 using unt_bingoo.view.Product;
 using System.Net.Mail;
+using unt_bingoo.Diagnostics;
 
 namespace unt_bingoo.view.Outlet
 {
     public partial class guiOutlet : XtraForm
     {
         private const int MAX_PHOTOS = 8;
-        private const string UPLOAD_URL = "http://192.168.1.99:8099/api/Product/upload";
 
         private APIsController _api;
         private BindingList<OutletItem> _outletList = new BindingList<OutletItem>();
@@ -284,7 +284,11 @@ namespace unt_bingoo.view.Outlet
                     imageTasks.Add(Task.Run(async () =>
                     {
                         try { captured.ProductImage = await LoadImageFromUrl(captured.PhotoPath); }
-                        catch { captured.ProductImage = null; }
+                        catch (Exception ex)
+                        {
+                            captured.ProductImage = null;
+                            CrashLogger.Log(ex, CrashSource.BackgroundTask, CrashSeverity.Recoverable, "Recoverable - thumbnail left blank, grid continues");
+                        }
                     }));
                 }
 
@@ -298,7 +302,11 @@ namespace unt_bingoo.view.Outlet
                             imageTasks.Add(Task.Run(async () =>
                             {
                                 try { capturedPhoto.DetailImage = await LoadImageFromUrl(capturedPhoto.Url); }
-                                catch { capturedPhoto.DetailImage = null; }
+                                catch (Exception ex)
+                                {
+                                    capturedPhoto.DetailImage = null;
+                                    CrashLogger.Log(ex, CrashSource.BackgroundTask, CrashSeverity.Recoverable, "Recoverable - thumbnail left blank, grid continues");
+                                }
                             }));
                         }
                     }
@@ -315,7 +323,11 @@ namespace unt_bingoo.view.Outlet
                             imageTasks.Add(Task.Run(async () =>
                             {
                                 try { capturedCp.CitizenshipImage = await LoadImageFromUrl(capturedCp.ImageUrl); }
-                                catch { capturedCp.CitizenshipImage = null; }
+                                catch (Exception ex)
+                                {
+                                    capturedCp.CitizenshipImage = null;
+                                    CrashLogger.Log(ex, CrashSource.BackgroundTask, CrashSeverity.Recoverable, "Recoverable - thumbnail left blank, grid continues");
+                                }
                             }));
                         }
                     }
@@ -347,8 +359,9 @@ namespace unt_bingoo.view.Outlet
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                CrashLogger.Log(ex, CrashSource.BackgroundTask, CrashSeverity.Recoverable, "Recoverable - image load failed, caller shows a blank image");
                 return null;
             }
         }
@@ -440,40 +453,22 @@ namespace unt_bingoo.view.Outlet
             }
         }
 
+        // Goes through APIsController like every other upload in this app
+        // (guiCreateProduct, guiProductOutlet, SetupOutletMenu all call
+        // UploadFileAsync). This used to post to a hard-coded
+        // http://192.168.1.99:8099 with its own HttpClient and its own copy
+        // of the bearer-token handling, so it kept talking to that one
+        // machine no matter what ApiBaseUrl the rest of the app was pointed
+        // at — and silently missed any auth/serialization change made in
+        // APIsController.
         private async Task<string> UploadImage(string filePath)
         {
             try
             {
-                // Get token after login
-                string token = APIGlobals.Token; // or wherever you store the JWT
+                byte[] data = File.ReadAllBytes(filePath);
 
-                _httpClient.DefaultRequestHeaders.Authorization =
-                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
-                using (var form = new MultipartFormDataContent())
-                {
-                    byte[] data = File.ReadAllBytes(filePath);
-                    var content = new ByteArrayContent(data);
-
-                    string ext = Path.GetExtension(filePath).ToLowerInvariant();
-                    string mime = ext == ".png" ? "image/png" : "image/jpeg";
-                    content.Headers.ContentType =
-                        new System.Net.Http.Headers.MediaTypeHeaderValue(mime);
-
-                    form.Add(content, "file", Path.GetFileName(filePath));
-
-                    var res = await _httpClient.PostAsync(UPLOAD_URL, form);
-                    var json = await res.Content.ReadAsStringAsync();
-
-                    if (!res.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show(json);
-                        return null;
-                    }
-
-                    var obj = JsonConvert.DeserializeObject<UploadResult>(json);
-                    return obj?.imageUrl;
-                }
+                return await _api.UploadFileAsync(
+                    "api/Product/upload", data, Path.GetFileName(filePath), "file");
             }
             catch (Exception ex)
             {

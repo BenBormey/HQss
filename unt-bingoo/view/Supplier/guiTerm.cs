@@ -10,7 +10,7 @@ namespace unt_bingoo.view.Supplier
 {
     public partial class guiTerm : DevExpress.XtraEditors.XtraForm
     {
-        private readonly APIsController _api = new APIsController();
+        private readonly APIsController _api = APIGlobals.Api ?? new APIsController();
         private ApplicationFramework App = new ApplicationFramework();
 
         private int _id = 0;
