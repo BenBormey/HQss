@@ -262,6 +262,7 @@
     <Compile Include="Class\ExchangeRateModel.cs" />
     <Compile Include="Class\ExchangeRateResponse.cs" />
     <Compile Include="Class\Franchise.cs" />
+    <Compile Include="Class\FranchisePriceItem.cs" />
     <Compile Include="Class\FranchiseTypeItem.cs" />
     <Compile Include="Class\HourOperation\CreateHourOperationDto.cs" />
     <Compile Include="Class\HourOperation\UpdateHourOperationDto.cs" />
@@ -271,6 +272,11 @@
     <Compile Include="Class\CurrencyItem.cs" />
     <Compile Include="Class\CustomerItem.cs" />
     <Compile Include="Class\PurchaseOrderModel.cs" />
+    <Compile Include="Class\PurchaseUomModel.cs" />
+    <Compile Include="view\PurchaseOrder\rptPurchaseOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Class\RecipeModel.cs" />
     <Compile Include="Class\ProductDeliveryLogisticItem.cs" />
     <Compile Include="Class\MefExchangeResponse.cs" />
     <Compile Include="Class\MenuItem.cs" />
@@ -295,6 +301,7 @@
     <Compile Include="Class\ProvinceResponse.cs" />
     <Compile Include="Class\QrConfirmDto.cs" />
     <Compile Include="Class\QrResponse.cs" />
+    <Compile Include="Class\MenuIcons.cs" />
     <Compile Include="Class\Report\SalesReportDto.cs" />
     <Compile Include="Class\RoleItem.cs" />
     <Compile Include="Class\SaleItem.cs" />
@@ -302,6 +309,7 @@
     <Compile Include="Class\Session.cs" />
     <Compile Include="Class\ShelfLifeClass.cs" />
     <Compile Include="Class\SupplierItem.cs" />
+    <Compile Include="Class\SupplierPaymentItem.cs" />
     <Compile Include="Class\SupplierLookup.cs" />
     <Compile Include="Class\SupplierReportItem.cs" />
     <Compile Include="Class\UOMClass.cs" />
@@ -312,6 +320,9 @@
     <Compile Include="Controller\APIGlobals.cs" />
     <Compile Include="Controller\APIsController.cs" />
     <Compile Include="Declares\Initialized.cs" />
+    <Compile Include="Diagnostics\CrashLogger.cs" />
+    <Compile Include="Diagnostics\ExceptionClassifier.cs" />
+    <Compile Include="Diagnostics\GlobalExceptionHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,8 +330,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Frameworks\ApplicationFramework.cs" />
-    <Compile Include="Frameworks\Configuration.cs" />
-    <Compile Include="Frameworks\DatabaseFramework.cs" />
     <Compile Include="Interface\IBankSetupRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -332,9 +341,6 @@
       <DependentUpon>BankSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Vat\guiVateSetting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\OutletOrder\guiOutletOrderApproval.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\Dashboard\guiDashboard.cs">
@@ -378,6 +384,18 @@
     </Compile>
     <Compile Include="view\PurchaseOrder\guiPurchaseOrder.Designer.cs">
       <DependentUpon>guiPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Purchase\guiSupplierPayments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Purchase\guiSupplierPayments.Designer.cs">
+      <DependentUpon>guiSupplierPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Product\guiRecipes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\guiRecipes.Designer.cs">
+      <DependentUpon>guiRecipes.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Customer\guiCustomer.cs">
       <SubType>Form</SubType>
@@ -578,6 +596,42 @@
     <Compile Include="view\Outlet\guiOutletOrderApproval.Designer.cs">
       <DependentUpon>guiOutletOrderApproval.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\Outlet\guiFranchisePriceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiFranchisePriceList.Designer.cs">
+      <DependentUpon>guiFranchisePriceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Outlet\guiAssignStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiAssignStock.Designer.cs">
+      <DependentUpon>guiAssignStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Outlet\guiStockTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiStockTransfer.Designer.cs">
+      <DependentUpon>guiStockTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Outlet\guiStockTransferHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiStockTransferHistory.Designer.cs">
+      <DependentUpon>guiStockTransferHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Outlet\guiOutletReadiness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Outlet\guiOutletReadiness.Designer.cs">
+      <DependentUpon>guiOutletReadiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Product\guiCreateProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Product\guiCreateProduct.Designer.cs">
+      <DependentUpon>guiCreateProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\User\guiUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -612,6 +666,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Dashboard\guiDashboard.resx">
       <DependentUpon>guiDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Outlet\guiFranchisePriceList.resx">
+      <DependentUpon>guiFranchisePriceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Outlet\guiStockTransfer.resx">
+      <DependentUpon>guiStockTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Outlet\guiStockTransferHistory.resx">
+      <DependentUpon>guiStockTransferHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\guiCreateProduct.resx">
+      <DependentUpon>guiCreateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Product\guiRecipes.resx">
+      <DependentUpon>guiRecipes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Vat\guiVateSetting.resx">
       <DependentUpon>guiVateSetting.cs</DependentUpon>
@@ -690,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PurchaseOrder\guiPurchaseOrder.resx">
       <DependentUpon>guiPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Purchase\guiSupplierPayments.resx">
+      <DependentUpon>guiSupplierPayments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Supplier\guiSupplierSetup.resx">
       <DependentUpon>guiSupplierSetup.cs</DependentUpon>
@@ -947,6 +1019,7 @@
   <ItemGroup>
     <Folder Include="Class\NewFolder1\" />
     <Folder Include="NewFolder1\" />
+    <Folder Include="view\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">

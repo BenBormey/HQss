@@ -31,11 +31,17 @@ namespace unt_bingoo.view
         {
             InitializeComponent();
             this._api = APIGlobals.Api ?? new APIsController();
+            ApplyMenuIcons();
 
             // Dashboard menu — added in code so the Designer stays untouched.
-            // Visible to any logged-in user; the api/Report/dashboard endpoint
-            // itself requires a valid token.
+            //
+            // Left disabled on purpose: the dashboard screen is not in use yet.
+            // Note before enabling it — api/Report/dashboard only requires
+            // [Authorize], while api/Report/sales requires the SALE_REPORT
+            // permission, so any logged-in user could read the revenue figures
+            // this screen shows. Gate the endpoint first, then uncomment.
             //var mnuDashboard = new ToolStripMenuItem("Dashboard");
+            //mnuDashboard.Image = MenuIcons.BarChart(Color.FromArgb(39, 174, 96));
             //mnuDashboard.Click += (s, e) =>
             //{
             //    var frm = new Dashboard.guiDashboard()
@@ -47,6 +53,78 @@ namespace unt_bingoo.view
             //    frm.Show();
             //};
             //menuStrip.Items.Insert(1, mnuDashboard);
+        }
+
+        // Added in code so the Designer stays untouched — assigns a small
+        // GDI+-drawn icon (Class/MenuIcons.cs) to every top-level and
+        // sub-menu item. Drawn shapes rather than an icon-font glyph:
+        // a wrong/guessed font codepoint renders as an empty box on a
+        // machine without that exact font, shapes always render the same.
+        private void ApplyMenuIcons()
+        {
+            var blue = Color.FromArgb(0, 120, 215);
+            var gray = Color.FromArgb(108, 117, 125);
+            var orange = Color.FromArgb(230, 126, 34);
+            var green = Color.FromArgb(39, 174, 96);
+            var brown = Color.FromArgb(139, 94, 52);
+            var gold = Color.FromArgb(200, 155, 15);
+            var purple = Color.FromArgb(142, 68, 173);
+            var steelBlue = Color.FromArgb(52, 152, 219);
+            var indigo = Color.FromArgb(94, 66, 204);
+            var red = Color.FromArgb(192, 57, 43);
+            var amber = Color.FromArgb(211, 146, 0);
+            var teal = Color.FromArgb(22, 160, 133);
+            var magenta = Color.FromArgb(194, 24, 91);
+            var navy = Color.FromArgb(44, 62, 80);
+            var cyan = Color.FromArgb(0, 151, 167);
+            var slate = Color.FromArgb(96, 125, 139);
+            var darkRed = Color.FromArgb(211, 47, 47);
+            var cocoa = Color.FromArgb(121, 85, 72);
+
+            // Top-level menu bar
+            mnufile.Image = MenuIcons.Folder(blue);
+            menuItemToolStripMenuItem.Image = MenuIcons.Gear(gray);
+            purchaseOrderToolStripMenuItem.Image = MenuIcons.Cart(orange);
+            reportToolStripMenuItem.Image = MenuIcons.BarChart(green);
+            stockTransferToolStripMenuItem.Image = MenuIcons.Box(brown);
+
+            // File
+            toolStripMenuItem6.Image = MenuIcons.Coin(gold);          // Exchange Rate
+            toolStripSeparator2.Image = MenuIcons.Coin(gold);         // Create Currency (misnamed field — it's a menu item, not a separator)
+            vatSittingToolStripMenuItem.Image = MenuIcons.Coin(gold); // VatSetting
+            paymentToolStripMenuItem.Image = MenuIcons.Tag(purple);   // Create Category
+            supplierToolStripMenuItem.Image = MenuIcons.Truck(steelBlue); // Create Supplier
+            toolStripMenuItem2.Image = MenuIcons.Box(brown);          // Create Product
+            toolStripMenuItem3.Image = MenuIcons.Person(indigo);      // Create User
+            toolStripMenuItem7.Image = MenuIcons.Tag(purple);         // Brand
+            toolStripMenuItem8.Image = MenuIcons.Truck(steelBlue);    // Suppliers
+            mnuPermission.Image = MenuIcons.Shield(red);              // Permission
+            mnuchangepassword.Image = MenuIcons.Key(amber);           // Change Password
+            reciptToolStripMenuItem.Image = MenuIcons.Box(brown);     // Create Product (Sell)
+            mnuSaleReport.Image = MenuIcons.BarChart(green);          // Sale Report
+            mnuOutletOrderApproval.Image = MenuIcons.Store(teal);     // Outlet Order Approval
+            mnuFranchisePriceList.Image = MenuIcons.Tag(purple);      // Franchise Price List
+            createUserProfileToolStripMenuItem.Image = MenuIcons.Person(indigo); // Create User Profile
+            mnuexit.Image = MenuIcons.ExitDoor(darkRed);              // Exit
+
+            // Setup
+            setupOutletMenuToolStripMenuItem.Image = MenuIcons.Store(teal); // Outlet Menu
+            setupBankMenuToolStripMenuItem.Image = MenuIcons.Bank(navy);    // Bank Menu
+            outLetToolStripMenuItem.Image = MenuIcons.Store(teal);         // OutLet
+            customerToolStripMenuItem1.Image = MenuIcons.PeopleGroup(magenta); // Customer
+
+            // Purchase Order
+            createPurchaseOrderToolStripMenuItem.Image = MenuIcons.Cart(orange); // Purchase Order
+            createRecipeToolStripMenuItem.Image = MenuIcons.Recipe(cocoa);       // Recipe / BOM
+
+            // Report
+            supplierReportToolStripMenuItem.Image = MenuIcons.BarChart(green); // Supplier Report
+
+            // Stock
+            setProductToOutletToolStripMenuItem1.Image = MenuIcons.ArrowsExchange(cyan); // SetProductTo_Outlet
+            stockTransferToolStripMenuItem1.Image = MenuIcons.ArrowsExchange(cyan);      // Stock Transfer
+            stockTransferHistoryToolStripMenuItem.Image = MenuIcons.Clock(slate);        // Stock Transfer History
+            readinessCheckToolStripMenuItem.Image = MenuIcons.Check(green);              // Readiness Check
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -242,10 +320,17 @@ namespace unt_bingoo.view
 
         private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
                   var frm = new guiSuppliers() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
 
+        }
+
+        private void mnuSupplierPayment_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.Purchase.guiSupplierPayments
+            { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
         }
 
         private async void mainForm_Load(object sender, EventArgs e)
@@ -273,8 +358,12 @@ namespace unt_bingoo.view
                 vatSittingToolStripMenuItem.Visible = Has("VAT_SETTING");
                 paymentToolStripMenuItem.Visible = Has("CATEGORY"); // "Create Category" item
                 supplierToolStripMenuItem.Visible = Has("SUPPLIER");
-                toolStripMenuItem2.Visible = Has("PRODUCT");        // "Create Product" item
-                toolStripMenuItem3.Visible = Has("USER");           // "Create User" item
+                // Both product screens sit behind the same PRODUCT permission.
+                // "Products" was ungated while "Products (Advanced Details)"
+                // was, so a user without PRODUCT still saw a way in.
+                toolStripMenuItem2.Visible = Has("PRODUCT");        // "Products (Advanced Details)"
+                reciptToolStripMenuItem.Visible = Has("PRODUCT");   // "Products"
+                toolStripMenuItem3.Visible = Has("USER");           // "Users" item
                 mnuPermission.Visible = Has("PERMISSION");
 
                 // Setup menu
@@ -288,7 +377,16 @@ namespace unt_bingoo.view
                 // Purchase Order menu
                 createPurchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER");
                 mnuOutletOrderApproval.Visible = Has("OUTLET_ORDER");
-                purchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER") || Has("OUTLET_ORDER");
+                mnuFranchisePriceList.Visible = Has("OUTLET_ORDER");
+                // The RECIPE permission has existed since add_recipe_permission.sql
+                // but nothing was ever wired to it, so "Recipes (BOM)" showed for
+                // everyone regardless.
+                createRecipeToolStripMenuItem.Visible = Has("RECIPE");
+                //setProductToOutletToolStripMenuItem.Visible = Has("OUTLET_STOCK");
+                // RECIPE included, or a user granted only that would have the
+                // item hidden behind a parent menu they can't see.
+                purchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER") || Has("OUTLET_ORDER")
+                                                      || Has("OUTLET_STOCK") || Has("RECIPE");
 
                 // Report menu
                 supplierReportToolStripMenuItem.Visible = Has("SUPPLIER_REPORT");
@@ -304,6 +402,36 @@ namespace unt_bingoo.view
         private void mnuOutletOrderApproval_Click(object sender, EventArgs e)
         {
             var frm = new Outlet.guiOutletOrderApproval() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void mnuFranchisePriceList_Click(object sender, EventArgs e)
+        {
+            var frm = new Outlet.guiFranchisePriceList() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void setProductToOutletToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new Outlet.guiAssignStock() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new Outlet.guiStockTransfer() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void stockTransferHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new Outlet.guiStockTransferHistory() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void outletReadinessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new Outlet.guiOutletReadiness() { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
         }
 
@@ -375,7 +503,13 @@ namespace unt_bingoo.view
 
         private void setupOutletMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new unt_bingoo.view.Product.cboProduct { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            var frm = new unt_bingoo.view.Product.SetupOutletMenu { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
+        private void createSellProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.Product.guiCreateProduct { MdiParent = this };
             frm.Show();
         }
 
@@ -406,11 +540,22 @@ namespace unt_bingoo.view
             frm.Show();
         }
 
+        private void createRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new unt_bingoo.view.Product.guiRecipes { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
+            frm.Show();
+        }
+
         private void vatSittingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frm = new guiVateSetting { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
             frm.Show();
             
+        }
+
+        private void reciptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
