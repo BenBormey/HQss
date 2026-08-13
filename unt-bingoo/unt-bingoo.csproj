@@ -273,6 +273,7 @@
     <Compile Include="Class\CustomerItem.cs" />
     <Compile Include="Class\PurchaseOrderModel.cs" />
     <Compile Include="Class\PurchaseUomModel.cs" />
+    <Compile Include="Class\GoodsReceiptNoteModel.cs" />
     <Compile Include="view\PurchaseOrder\rptPurchaseOrder.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -384,6 +385,9 @@
     </Compile>
     <Compile Include="view\PurchaseOrder\guiPurchaseOrder.Designer.cs">
       <DependentUpon>guiPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PurchaseOrder\FrmReceivePurchaseOrder.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\Purchase\guiSupplierPayments.cs">
       <SubType>Form</SubType>

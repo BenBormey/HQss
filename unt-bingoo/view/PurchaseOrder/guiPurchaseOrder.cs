@@ -710,49 +710,20 @@ namespace unt_bingoo.view.PurchaseOrder
                 return;
             }
 
-            var remainingItems = po.PurchaseOrderItems
-                .Where(i => i.Quantity - i.ReceivedQty > 0)
-                .Select(i => new { PurchaseOrderItemID = i.PurchaseOrderItemID, ReceivedQty = i.Quantity - i.ReceivedQty })
-                .ToList();
-
-            if (remainingItems.Count == 0)
+            if (!po.PurchaseOrderItems.Any(i => i.Quantity - i.ReceivedQty > 0))
             {
                 XtraMessageBox.Show("There is no remaining quantity to receive.");
                 return;
             }
 
-            if (MessageBox.Show(
-                    $"Receive the full remaining quantity for PO {po.PurchaseOrderNo}?",
-                    "Confirm Receive",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) != DialogResult.Yes)
+            // Per-line receive screen, not a single "receive everything"
+            // confirm: lets the buyer receive less than the full remaining
+            // quantity, and record a lot number / expiry date per line. The
+            // dialog itself posts to the server and reports success/failure.
+            using (var dlg = new FrmReceivePurchaseOrder(po, _api))
             {
-                return;
-            }
-
-            try
-            {
-                var dto = new { Items = remainingItems };
-
-                var ok = await _api.PostAsync($"api/purchaseorder/receive/{po.PurchaseOrderID}", dto);
-
-                if (!ok)
-                {
-                    XtraMessageBox.Show("Receive failed.");
-                    return;
-                }
-
-                XtraMessageBox.Show(
-                    "Purchase order received successfully!",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                await LoadPOList();
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show("Error: " + ex.Message);
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                    await LoadPOList();
             }
         }
 
