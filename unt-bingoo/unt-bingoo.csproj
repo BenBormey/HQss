@@ -395,12 +395,6 @@
     <Compile Include="view\Purchase\guiSupplierPayments.Designer.cs">
       <DependentUpon>guiSupplierPayments.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\Product\guiRecipes.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\Product\guiRecipes.Designer.cs">
-      <DependentUpon>guiRecipes.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\Customer\guiCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -682,9 +676,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Product\guiCreateProduct.resx">
       <DependentUpon>guiCreateProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\Product\guiRecipes.resx">
-      <DependentUpon>guiRecipes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Vat\guiVateSetting.resx">
       <DependentUpon>guiVateSetting.cs</DependentUpon>

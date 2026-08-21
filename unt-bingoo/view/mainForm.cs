@@ -79,7 +79,6 @@ namespace unt_bingoo.view
             var cyan = Color.FromArgb(0, 151, 167);
             var slate = Color.FromArgb(96, 125, 139);
             var darkRed = Color.FromArgb(211, 47, 47);
-            var cocoa = Color.FromArgb(121, 85, 72);
 
             // Top-level menu bar
             mnufile.Image = MenuIcons.Folder(blue);
@@ -115,7 +114,6 @@ namespace unt_bingoo.view
 
             // Purchase Order
             createPurchaseOrderToolStripMenuItem.Image = MenuIcons.Cart(orange); // Purchase Order
-            createRecipeToolStripMenuItem.Image = MenuIcons.Recipe(cocoa);       // Recipe / BOM
 
             // Report
             supplierReportToolStripMenuItem.Image = MenuIcons.BarChart(green); // Supplier Report
@@ -378,15 +376,9 @@ namespace unt_bingoo.view
                 createPurchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER");
                 mnuOutletOrderApproval.Visible = Has("OUTLET_ORDER");
                 mnuFranchisePriceList.Visible = Has("OUTLET_ORDER");
-                // The RECIPE permission has existed since add_recipe_permission.sql
-                // but nothing was ever wired to it, so "Recipes (BOM)" showed for
-                // everyone regardless.
-                createRecipeToolStripMenuItem.Visible = Has("RECIPE");
                 //setProductToOutletToolStripMenuItem.Visible = Has("OUTLET_STOCK");
-                // RECIPE included, or a user granted only that would have the
-                // item hidden behind a parent menu they can't see.
                 purchaseOrderToolStripMenuItem.Visible = Has("PURCHASE_ORDER") || Has("OUTLET_ORDER")
-                                                      || Has("OUTLET_STOCK") || Has("RECIPE");
+                                                      || Has("OUTLET_STOCK");
 
                 // Report menu
                 supplierReportToolStripMenuItem.Visible = Has("SUPPLIER_REPORT");
@@ -540,12 +532,6 @@ namespace unt_bingoo.view
             frm.Show();
         }
 
-        private void createRecipeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new unt_bingoo.view.Product.guiRecipes { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
-            frm.Show();
-        }
-
         private void vatSittingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frm = new guiVateSetting { MdiParent = this, WindowState = FormWindowState.Maximized, StartPosition = FormStartPosition.CenterScreen };
@@ -554,6 +540,11 @@ namespace unt_bingoo.view
         }
 
         private void reciptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void purchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

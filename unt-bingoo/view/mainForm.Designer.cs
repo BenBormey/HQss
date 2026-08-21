@@ -72,7 +72,6 @@ namespace unt_bingoo.view
             this.customerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPurchaseOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSupplierPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supplierReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -396,33 +395,26 @@ namespace unt_bingoo.view
             this.createPurchaseOrderToolStripMenuItem,
             this.mnuOutletOrderApproval,
             this.mnuFranchisePriceList,
-            this.createRecipeToolStripMenuItem,
             this.mnuSupplierPayment});
             this.purchaseOrderToolStripMenuItem.Name = "purchaseOrderToolStripMenuItem";
             this.purchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.purchaseOrderToolStripMenuItem.Text = "Purchasing";
-            //
+            this.purchaseOrderToolStripMenuItem.Click += new System.EventHandler(this.purchaseOrderToolStripMenuItem_Click);
+            // 
             // createPurchaseOrderToolStripMenuItem
-            //
+            // 
             this.createPurchaseOrderToolStripMenuItem.Name = "createPurchaseOrderToolStripMenuItem";
             this.createPurchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.createPurchaseOrderToolStripMenuItem.Text = "Purchase Orders";
             this.createPurchaseOrderToolStripMenuItem.Click += new System.EventHandler(this.createPurchaseOrderToolStripMenuItem_Click);
             //
-            // createRecipeToolStripMenuItem
-            // 
-            this.createRecipeToolStripMenuItem.Name = "createRecipeToolStripMenuItem";
-            this.createRecipeToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.createRecipeToolStripMenuItem.Text = "Recipes (BOM)";
-            this.createRecipeToolStripMenuItem.Click += new System.EventHandler(this.createRecipeToolStripMenuItem_Click);
-            //
             // mnuSupplierPayment
-            //
+            // 
             this.mnuSupplierPayment.Name = "mnuSupplierPayment";
             this.mnuSupplierPayment.Size = new System.Drawing.Size(218, 22);
             this.mnuSupplierPayment.Text = "Supplier Payments";
             this.mnuSupplierPayment.Click += new System.EventHandler(this.mnuSupplierPayment_Click);
-            //
+            // 
             // reportToolStripMenuItem
             // 
             this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -544,7 +536,6 @@ namespace unt_bingoo.view
         private System.Windows.Forms.ToolStripMenuItem purchaseOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createPurchaseOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuSupplierPayment;
-        private System.Windows.Forms.ToolStripMenuItem createRecipeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem outLetToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
